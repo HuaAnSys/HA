@@ -1,0 +1,21 @@
+
+
+
+
+.clear{
+  float:none;
+  clear:both;
+}
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-color-active-positive .tab-item.activated{
+  color: #FC5E5E;
+}
+.ion-ios-home-outline:before,
+.ion-ios-person-outline:before {
+  font-weight: bold;
+}
+.ion-ios-person-outline:before{
+  font-size: 40px;
+  margin-top: -3px;
+}
+
+
