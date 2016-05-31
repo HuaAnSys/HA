@@ -25,4 +25,39 @@ angular.module('starter.controllers', [])
   $scope.settings = {
     enableFriends: true
   };
+})
+
+.controller('HomeCtrl',function($scope,$state){
+        console.log("HomeCtrl");
+
+        $scope.slides = [
+            {url:"img/adam.jpg"},
+            {url:"img/ben.png"},
+            {url:"img/perry.png"}
+        ];
+        var slideHeight = document.body.scrollHeight-47;
+        $scope.slideHeight = slideHeight*0.4+"px";
+        var slideWidth = document.body.scrollWidth;
+        $scope.slideWidth = slideWidth+"px";
+
+
+
+
+
+
+        $scope.goAdvertise = function(arg){
+            if(arg==='a'){
+                $state.go();
+            }else if(arg==='b'){
+                $state.go();
+            }else if(arg==='c'){
+                $state.go();
+            }else if(arg==='d'){
+                $state.go();
+            }
+        }
+
+
+
+
 });
