@@ -41,23 +41,29 @@ angular.module('starter.controllers', [])
         $scope.slideWidth = slideWidth+"px";
 
 
-
-
-
-
         $scope.goAdvertise = function(arg){
             if(arg==='a'){
-                $state.go();
+                $state.go('community');
             }else if(arg==='b'){
-                $state.go();
+                $state.go('community');
             }else if(arg==='c'){
-                $state.go();
+                $state.go('community');
             }else if(arg==='d'){
-                $state.go();
+                $state.go('community');
             }
         }
 
 
 
+
+
+
+})
+
+.controller('CommunityNews',function($scope,$state){
+        console.log("11");
+        $scope.back = function(){
+            $state.go('tab.Home');
+        }
 
 });

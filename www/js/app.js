@@ -78,7 +78,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-
   .state('tab.AboutMe', {
     url: '/AboutMe',
     views: {
@@ -87,6 +86,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'AboutMeCtrl'
       }
     }
+  })
+
+  .state('community', {
+      url: '/community',
+      templateUrl: 'templates/community.html',
+      controller: 'CommunityNews',
+          cache:false
   });
 
   // if none of the above states are matched, use this as the fallback

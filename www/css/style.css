@@ -179,6 +179,7 @@ ion-view[id="homeView"] .advertisements{
     line-height: 18px;
     padding-top: 11px;
     padding-left: 6%;
+    margin-bottom: 1%;
 }
 
 .more{
@@ -193,4 +194,40 @@ ion-view[id="homeView"] .advertisements{
     margin-left: 2%;
 }
 
+.community_leftArrow{
+    padding-left: 8px;
+    padding-top: 8px;
+}
+
+.product_div{
+    height:200px;
+    width: 50%;
+    float: left;
+}
+
+.product_div>div{
+    width: 90%;
+    height: 15px;
+    font-size: 15px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.product_div>p{
+    font-size: 12px;
+    color: #FC5E5E;
+    margin-top: 5%;
+}
+
+.productItem_img{
+    height: 64%;
+    width: 80%;
+    margin: 10% 10% 5% 10%;
+}
+
+.item{
+    padding: 5px;
+}
 
