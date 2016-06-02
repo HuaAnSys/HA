@@ -40,7 +40,6 @@ angular.module('starter.controllers', [])
         var slideWidth = document.body.scrollWidth;
         $scope.slideWidth = slideWidth+"px";
 
-
         $scope.goAdvertise = function(arg){
             if(arg==='a'){
                 $state.go('community');
@@ -53,11 +52,6 @@ angular.module('starter.controllers', [])
             }
         }
 
-
-
-
-
-
 })
 
 .controller('CommunityNews',function($scope,$state){
@@ -65,5 +59,10 @@ angular.module('starter.controllers', [])
         $scope.back = function(){
             $state.go('tab.Home');
         }
+        var scrollHeight = document.body.scrollHeight-44-49+"px";
+        $scope.scrollHeight = {
+            "height":scrollHeight
+        }
+        $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
 });
