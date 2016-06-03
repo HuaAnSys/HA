@@ -1,0 +1,107 @@
+<ion-tabs id="Domestic" class=" tabs-striped tabs-top" >
+    <ion-tab title="家居保洁" on-select="on_select(1)">
+        <ion-view >
+            <ion-content>
+               <ion-list class="list ">
+                   <ion-item class="item" ng-repeat="domestic in domesticList">
+                       <div class="dem">
+                           <div class="domImg">
+                               <img class="changeImg" src="img/baojiep.jpg">
+                               <img class="fixImg" src="img/baojie.png">
+                           </div>
+                           <div class="domText">
+                               <div class="domTextLine">
+                                   <div><span>{{domestic.comName}}</span></div>
+                                   <div><p><span>地址：</span>{{domestic.comAddress}}</p></div>
+                                   <div><span>联系电话：</span><span>{{domestic.comTel}}</span></div>
+                               </div>
+                           </div>
+                           <div class="clear"></div>
+                       </div>
+                   </ion-item>
+               </ion-list>
+                <div class="domesticBottom"></div>
+            </ion-content>
+        </ion-view>
+    </ion-tab>
+    <ion-tab title="家庭维修" on-select="on_select(2)">
+        <ion-view>
+            <ion-content>
+                <ion-list class="list ">
+                    <ion-item class="item" ng-repeat="domestic in domesticList">
+                        <div class="dem">
+                            <div class="domImg">
+                                <img class="changeImg" src="img/weixiup.jpg">
+                                <img class="fixImg" src="img/weixiu.png">
+                            </div>
+                            <div class="domText">
+                                <div class="domTextLine">
+                                    <div><span>{{domestic.comName}}</span></div>
+                                    <div><p><span>地址：</span>{{domestic.comAddress}}</p></div>
+                                    <div><span>联系电话：</span><span>{{domestic.comTel}}</span></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+                <div class="domesticBottom"></div>
+            </ion-content>
+        </ion-view>
+    </ion-tab>
+    <ion-tab title="家庭代洗" on-select="on_select(3)">
+        <ion-view>
+            <ion-content>
+                <ion-list class="list ">
+                    <ion-item class="item" ng-repeat="domestic in domesticList">
+                        <div class="dem">
+                            <div class="domImg">
+                                <img class="changeImg" src="img/daixip.png">
+                                <img class="fixImg" src="img/daixi.png">
+                            </div>
+                            <div class="domText">
+                                <div class="domTextLine">
+                                    <div><span>{{domestic.comName}}</span></div>
+                                    <div><p><span>地址：</span>{{domestic.comAddress}}</p></div>
+                                    <div><span>联系电话：</span><span>{{domestic.comTel}}</span></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+                <div class="domesticBottom"></div>
+            </ion-content>
+        </ion-view>
+    </ion-tab>
+     <ion-tab title="家庭搬运" on-select="on_select(4)">
+         <ion-view>
+             <ion-content>
+                 <ion-list class="list ">
+                     <ion-item class="item" ng-repeat="domestic in domesticList">
+                         <div class="dem">
+                             <div class="domImg">
+                                 <img class="changeImg" src="img/baojiep.jpg">
+                                 <img class="fixImg" src="img/banyun.png">
+                             </div>
+                             <div class="domText">
+                                 <div class="domTextLine">
+                                     <div><span>{{domestic.comName}}</span></div>
+                                     <div><p><span>地址：</span>{{domestic.comAddress}}</p></div>
+                                     <div><span>联系电话：</span><span>{{domestic.comTel}}</span></div>
+                                 </div>
+                             </div>
+                             <div class="clear"></div>
+                         </div>
+                     </ion-item>
+                 </ion-list>
+                 <div class="domesticBottom"></div>
+             </ion-content>
+         </ion-view>
+     </ion-tab>
+     <a class="tab-item tabRight" data-ng-click="moveToNextPage()">
+         <i class="icon ion-chevron-right"></i>
+     </a>
+ </ion-tabs>
+
+

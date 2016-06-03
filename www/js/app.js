@@ -69,16 +69,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
-  .state('tab.DomesticService', {
-      url: '/DomesticService',
+  .state('tab.Domestic', {
+      cache: false,
+      url: '/Domestic',
       views: {
-        'tab-DomesticService': {
-          templateUrl: 'templates/DomesticService.html',
-          controller: 'DomesticServiceCtrl'
+        'tab-Domestic': {
+          templateUrl: 'templates/Domestic.html',
+          controller: 'DomesticCtrl'
         }
       }
     })
-
 
   .state('tab.AboutMe', {
     url: '/AboutMe',
@@ -88,7 +88,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'AboutMeCtrl'
       }
     }
+
+  })
+
+  .state('Domestic1', {
+    url: '/Domestic1',
+    templateUrl: 'templates/Domestic1.html',
+    controller: 'Domestic1Ctrl',
+    cache:false
   });
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/Home');

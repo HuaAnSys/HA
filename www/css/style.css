@@ -13,7 +13,8 @@ article, aside, details, figcaption, figure, footer, header, menu, nav, section 
   display: block; }
 
 body {
-  line-height: 1; }
+  line-height: 1;
+  min-width: 320px;}
 
 ol, ul {
   list-style: none; }
@@ -84,5 +85,129 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
   margin-top: -3px;
 }
 
+ion-tabs.tabs-color-active-positive .tab-item {
+  color: #777;
+}
+/*===DomesticCtrl===*/
+#Domestic a.tabRight{
+  position: absolute;
+  right: 0px;
+  color: #f40;
+}
+
+#Domestic1 .installTab span{
+margin-left: 16px;
+}
+
+#Domestic1 a.tabLeft{
+  position: absolute;
+  left: 6px;
+  color: #f40;
+}
 
 
+#Domestic a.tabRight i, #Domestic1 a.tabLeft i{
+font-size: 24px;
+}
+
+.tabs-top > .tabs, .tabs.tabs-top{
+  top: 0px;
+}
+
+#Domestic a.tab-item.tab-item-active, #Domestic a.tab-item.active, #Domestic a.tab-item.activated,#Domestic1 a.tab-item.tab-item-active, #Domestic1 a.tab-item.active, #Domestic1 a.tab-item.activated{
+  color: #4E4C4C;
+  border-bottom-color: #FC5E5E;
+}
+
+#Domestic .has-tabs-top,#Domestic1 .has-tabs-top {
+  top: 53px;
+}
+
+#Domestic .tab-item{
+  font-size: 18px;
+}
+
+#Domestic1 .tab-item{
+  font-size: 18px;
+  max-width: 162px;
+}
+
+#Domestic .item, #Domestic1 .item {
+  margin: -3px;
+  padding: 0px;
+  height: 165px;
+  border-style: none;
+}
+
+#Domestic .item-thumbnail-left, #Domestic .item-thumbnail-left .item-content, #Domestic1 .item-thumbnail-left, #Domestic1 .item-thumbnail-left .item-content{
+  min-height: 160px;
+
+}
+
+#Domestic .dem, #Domestic1 .dem{
+  width: 100%;
+  min-width: 320px;
+  position: relative;
+}
+
+#Domestic .domImg, #Domestic1 .domImg{
+  /*padding:25px 16px;*/
+  /*float: left;*/
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+#Domestic .domImg .changeImg, #Domestic1 .domImg .changeImg{
+  width: 160px;
+  height: 120px;
+}
+
+#Domestic .domImg .fixImg, #Domestic1 .domImg .fixImg{
+  position: absolute;
+  left: -15px;
+  width: 75px;
+  top: 48px;
+
+}
+
+#Domestic .domText, #Domestic1 .domText{
+  padding-top: 10px;
+  padding-left: 190px;
+
+}
+
+#Domestic .domTextLine, #Domestic1 .domTextLine{
+  height: 140px;
+  border-bottom-style: solid;
+  border-width: 2px;
+  border-color: #ddd;
+
+
+}
+
+#Domestic .domText span, #Domestic1 .domText span{
+  line-height: 35px;
+  font-size: 18px;
+}
+
+#Domestic .domText p, #Domestic1 .domText p{
+  line-height: 35px;
+  font-size: 18px;
+  overflow: inherit;
+  text-overflow: clip;
+  white-space: initial;
+}
+
+#Domestic .domesticBottom, #Domestic1 .domesticBottom{
+  margin: 20px;
+  height: 20px;
+}
+
+/*===DomesticCtrl1===*/
+.domesticFooter .tab-item{
+  color: #777;
+}
+
+.domesticFooter .active{
+  color: #FC5E5E;
+}
