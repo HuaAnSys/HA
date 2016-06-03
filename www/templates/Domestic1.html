@@ -1,0 +1,108 @@
+
+<ion-tabs id="Domestic1" class=" tabs-striped tabs-top">
+    <a class="tab-item tabLeft" data-ng-click="moveToPrePage()">
+        <i class="icon ion-chevron-left"></i>
+    </a>
+    <ion-tab class="installTab" title="纱窗安装管道疏通" on-select="on_select(5)">
+        <ion-view>
+            <ion-content>
+                <ion-list class="list ">
+                    <ion-item class="item" ng-repeat="domestic in domesticList">
+                        <div class="dem">
+                            <div class="domImg">
+                                <img class="changeImg" src="img/anzhuangp.jpg">
+                                <img class="fixImg" src="img/anzhuang.png">
+                            </div>
+                            <div class="domText">
+                                <div class="domTextLine">
+                                    <div><span>{{domestic.comName}}</span></div>
+                                    <div><p><span>地址：</span>{{domestic.comAddress}}</p></div>
+                                    <div><span>联系电话：</span><span>{{domestic.comTel}}</span></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+                <div class="domesticBottom"></div>
+            </ion-content>
+        </ion-view>
+    </ion-tab>
+    <ion-tab title="开锁" on-select="on_select(6)">
+        <ion-view>
+            <ion-content>
+                <ion-list class="list ">
+                    <ion-item class="item" ng-repeat="domestic in domesticList">
+                        <div class="dem">
+                            <div class="domImg">
+                                <img class="changeImg" src="img/kaisuop.jpg">
+                                <img class="fixImg" src="img/kaisuo.png">
+                            </div>
+                            <div class="domText">
+                                <div class="domTextLine">
+                                    <div><span>{{domestic.comName}}</span></div>
+                                    <div><p><span>地址：</span>{{domestic.comAddress}}</p></div>
+                                    <div><span>联系电话：</span><span>{{domestic.comTel}}</span></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+                <div class="domesticBottom"></div>
+            </ion-content>
+        </ion-view>
+    </ion-tab>
+    <ion-tab title="绿化养护" on-select="on_select(7)">
+        <ion-view>
+            <ion-content>
+                <ion-list class="list ">
+                    <ion-item class="item" ng-repeat="domestic in domesticList">
+                        <div class="dem">
+                            <div class="domImg">
+                                <img class="changeImg" src="img/lvhuap.jpg">
+                                <img class="fixImg" src="img/lvhua.png">
+                            </div>
+                            <div class="domText">
+                                <div class="domTextLine">
+                                    <div><span>{{domestic.comName}}</span></div>
+                                    <div><p><span>地址：</span>{{domestic.comAddress}}</p></div>
+                                    <div><span>联系电话：</span><span>{{domestic.comTel}}</span></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+                <div class="domesticBottom"></div>
+            </ion-content>
+        </ion-view>
+    </ion-tab>
+</ion-tabs>
+<ion-footer-bar>
+    <div class="domesticFooter tabs-icon-top tabs-color-active-positive">
+        <div class="tabs">
+            <a class="tab-item" data-ng-click="moveToHomePage()">
+                <i class="icon ion-ios-home-outline"></i>
+                <span>首页</span>
+            </a>
+            <a class="tab-item" data-ng-click="moveToServicePage()">
+                <i class="icon ion-android-favorite-outline"></i>
+                <span>物业服务</span>
+            </a>
+            <a class="tab-item" data-ng-click=moveToShopPage()>
+                <!--<span>1</span>-->
+                <i class="icon ion-bag"></i>
+                <span>商城</span>
+            </a>
+            <a class="tab-item icon-truck active">
+                <i class="icon ion-tshirt-outline"></i>
+                <span>家政服务</span>
+            </a>
+            <a class="tab-item" data-ng-click="moveToAboutPage()">
+                <i class="icon ion-ios-person-outline"></i>
+                <span>我的</span>
+            </a>
+        </div>
+    </div>
+</ion-footer-bar>
