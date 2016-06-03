@@ -1,10 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-  <h1>Home</h1>
-</body>
-</html>
+<ion-view id="homeView">
+    <ion-content>
+        <ion-slide-box auto-play="true" slide-interval="2500">
+            <ion-slide ng-repeat="slide in slides">
+                <img src="{{slide.url}}" height="{{slideHeight}}" width="{{slideWidth}}"/>
+            </ion-slide>
+        </ion-slide-box>
+
+        <div class="advertisements">
+            <div class="community_advertise" ng-click="goAdvertise('a')">
+                <p class="pp1">社区公告</p>
+                <p class="pp2">社区大事第一时间公布</p>
+                <div class="ion-ios-glasses-outline glass"></div>
+            </div>
+            <div class="others">
+                <div class="collections" ng-click="goAdvertise('b')">
+                    <p class="pp1">活动召集令</p>
+                    <p class="pp2">提供各种活动</p>
+                </div>
+                <div class="discuss" ng-click="goAdvertise('c')">
+                    <p class="pp1">议事厅</p>
+                    <p class="pp2">各种生活乐事</p>
+                </div>
+                <div class="comprehensive" ng-click="goAdvertise('d')">
+                    <p class="pp1">社区综合信息</p>
+                    <p class="pp2">最新最全的社区信息</p>
+                    <div class="ion-clipboard iconPosition"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hotTitle">
+            <span>热门商品</span>
+            <span class="more">更多</span>
+            <span class="ion-chevron-right moreArrow"></span>
+        </div>
+
+        <ion-list>
+            <ion-item>
+               <div class="product_div">
+                   <img src="../img/adam.jpg" class="productItem_img"/>
+                   <div>波兰(Mleko)进口纯牛奶是个屁呀</div>
+                   <p>￥9.90</p>
+               </div>
+                <div class="product_div">
+                    <img src="../img/adam.jpg" class="productItem_img"/>
+                    <div>波兰(Mleko)进口纯牛奶是个屁呀</div>
+                    <p>￥9.90</p>
+                </div>
+                <div class="product_div">
+                    <img src="../img/adam.jpg" class="productItem_img"/>
+                    <div>波兰(Mleko)进口纯牛奶是个屁呀</div>
+                    <p>￥9.90</p>
+                </div>
+                <div class="product_div">
+                    <img src="../img/adam.jpg" class="productItem_img"/>
+                    <div>波兰(Mleko)进口纯牛奶是个屁呀</div>
+                    <p>￥9.90</p>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

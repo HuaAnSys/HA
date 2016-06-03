@@ -208,6 +208,206 @@ font-size: 24px;
   color: #777;
 }
 
-.domesticFooter .active{
+.domesticFooter .active {
   color: #FC5E5E;
+}
+ion-view[id="homeView"]{
+    background-color: #EFEFf4;
+}
+
+ion-view[id="homeView"] .advertisements{
+
+    width: 100%;
+    height: 150px;
+    margin: 1% 0% 2% 0%;
+}
+
+.advertisements .community_advertise{
+    width:42%;
+    height: 150px;
+    background-color: #FC5E5E;
+    padding-top: 4%;
+    padding-left: 5%;
+}
+
+.community_advertise .pp1,.collections .pp1,.discuss .pp1,.comprehensive .pp1{
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.community_advertise .pp2, .collections .pp2,.discuss .pp2,.comprehensive .pp2{
+    color: #FFFFFF;
+    font-size: 12px;
+    line-height: 12px;
+    margin-top: 6px;
+}
+
+.glass{
+    color: #ffffff;
+    font-size: 80px;
+    padding-top: 4px;
+}
+
+.advertisements .others{
+    position: relative;
+    top: -150px;
+    left: 42%;
+    padding-left: 1.5%;
+    width: 58%;
+    height: 100%;
+}
+
+.others .collections{
+    background-color: #FCCD1B;
+    width: 49%;
+    height: 49%;
+    margin-bottom: 1.5%;
+    margin-right: 1.5%;
+    padding-top: 6%;
+    text-align: center;
+}
+
+.others .discuss{
+    background-color: #40D3B7;
+    position: relative;
+    top: -51%;
+    left: 51%;
+    width: 49%;
+    height: 49%;
+    margin-bottom: 1.5%;
+    padding-top: 6%;
+    text-align: center;
+}
+
+.others .comprehensive{
+    background-color: #6cc1ed;
+    position: relative;
+    top: -50%;
+    width: 100%;
+    height: 48%;
+    padding-top: 6%;
+    padding-left: 4%;
+}
+
+.iconPosition{
+    color: #FFFFFF;
+    font-size: 40px;
+    position: relative;
+    top: -38px;
+    left: 70%;
+}
+
+.hotTitle{
+    background-color: #ffffff;
+    height: 40px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 18px;
+    padding-top: 11px;
+    padding-left: 6%;
+    margin-bottom: 1%;
+}
+
+.more{
+    color: #8E8E8E;
+    margin-left: 60%;
+    font-size: 16px;
+}
+
+.moreArrow{
+    color:#8E8E8E;
+    font-size: 10px;
+    margin-left: 2%;
+}
+
+.community_leftArrow{
+    padding-left: 8px;
+    padding-top: 8px;
+}
+
+.product_div{
+    height:200px;
+    width: 50%;
+    float: left;
+}
+
+.product_div>div{
+    width: 90%;
+    height: 15px;
+    font-size: 15px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.product_div>p{
+    font-size: 12px;
+    color: #FC5E5E;
+    margin-top: 5%;
+}
+
+.productItem_img{
+    height: 64%;
+    width: 80%;
+    margin: 10% 10% 5% 10%;
+}
+
+.item{
+    padding: 15px;
+}
+
+.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {
+    color: #4E4C4C;
+    border-bottom-color: #FC5E5E;
+}
+
+.ion_list_in_tabs{
+    top: 93px;
+}
+
+.message_icon{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}
+
+
+.message_people{
+    font-size: 15px;
+    line-height: 15px;
+    display: block;
+    position: relative;
+    top: -25px;
+    left: 50px;
+}
+
+.item{
+    white-space: normal;
+}
+
+.message_content{
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.message_picture{
+    height: 200px;
+    margin: 10px 0px;
+}
+
+.messgae_time{
+    font-size: 10px;
+}
+
+.message_leaveMessage{
+    float: right;
+    font-size: 23px;
+    margin-left: 10px;
+}
+
+.message_like{
+    float: right;
+    font-size: 23px;
 }
