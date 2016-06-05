@@ -1,0 +1,42 @@
+﻿{
+	"data":
+	[
+		{
+			"name" : "a",
+			"type" : "a",
+			"price" : "9.90",
+			"img" : "img/a.jpg",
+			"hot" : true
+		},
+		{
+			"name" : "aa",
+			"type" : "a",
+			"price" : "9.90",
+			"img" : "img/a.jpg",
+			"hot" : true
+		},
+		{
+			"name" : "aaa",
+			"type" : "a",
+			"price" : "9.90",
+			"img" : "img/a.jpg",
+			"hot" : true
+		},
+		{
+			"name" : "aaaa",
+			"type" : "a",
+			"price" : "9.90",
+			"img" : "img/a.jpg",
+			"hot" : true
+		},
+		{
+			"name" : "aaaaa",
+			"type" : "a",
+			"price" : "9.90",
+			"img" : "img/a.jpg",
+			"hot" : true
+		}
+	  
+
+	]
+}

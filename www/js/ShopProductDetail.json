@@ -1,0 +1,18 @@
+{
+	"data":
+	[
+		{
+			"name" : "波兰（Mleko）进口纯牛奶",
+			"type" : "a",
+			"price" : "9.90",
+			"img" : "img/a.jpg",
+			"hot" : true,
+			"inventory" : 999,
+			"subName" : "肉多核小，香甜回味无穷 顺丰包邮",
+			"kinds" : ["2.5kg(不含)-3.5kg(含)", "2.5kg及以下", "4.5kg以上", "3.5kg(不含)-4.5kg(含)"]
+		}
+
+	  
+
+	]
+}

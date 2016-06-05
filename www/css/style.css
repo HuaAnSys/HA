@@ -411,3 +411,111 @@ ion-view[id="homeView"] .advertisements{
     float: right;
     font-size: 23px;
 }
+
+/* Shop */
+#shopView{
+    position: relative;
+    background-color: #EFEFF4;
+}
+#shopLeftNav{
+    width: 76px;
+}
+#shopLeftNav .item.inactive{
+    background-color: #FFF;
+    color: #777777;
+}
+#shopLeftNav .item.active{
+    background-color: #EFEFF4;
+    color: #FC5E5E;
+}
+
+#shopLeftNav,
+.shopViewContent{
+    float: none;
+}
+#shopLeftNav .item{
+    font-size: 12px;
+    padding: 20px 14px;
+    margin: 0;
+    border: none;
+    border-bottom: #C8C7CC solid 1px;
+}
+#shopLeftNav .item:last-child{
+    border-bottom:none;
+}
+.shopViewContent{
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 10px 0 86px;
+
+}
+.shopViewContent div.list{
+    background-color: #FFF;
+}
+.shopViewContent .item{
+    width: 50%;
+    padding: 10px;
+    border: none;
+    float: left;
+}
+.item.active,
+.item.activated,
+.item-complex.active .item-content,
+.item-complex.activated .item-content,
+.item .item-content.active,
+.item .item-content.activated{
+    background-color: #EFEFF4;
+}
+#shopBanner{
+    padding: 10px 0;
+}
+#shopBanner img{
+    width: 100%;
+}
+.productItem{
+    margin: 0 auto;
+}
+.productItem span{
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    white-space:nowrap;
+
+}
+.productItem span.productPrice{
+    color: #FC5E5E;
+}
+.productItem img{
+    display: block;
+    height: 100px;
+    margin: 0 auto;
+}
+
+/* ShopProductDetail */
+#ShopProductDetail a.tabLeft{
+    position: absolute;
+    left: 20px;
+    color: #777;
+}
+
+
+
+
+
+#ShopProductDetail a.tabLeft i{
+    font-size: 24px;
+}
+
+#ShopProductDetail a.tab-item.tab-item-active, #ShopProductDetail a.tab-item.active, #ShopProductDetail a.tab-item.activated,#ShopProductDetail a.tab-item.tab-item-active, #ShopProductDetail a.tab-item.active, #ShopProductDetail a.tab-item.activated{
+    color: #000;
+    border-bottom-color: #000;
+}
+#ShopProductDetail .tab-item{
+    max-width: 60px;
+    font-size: 16px;
+}

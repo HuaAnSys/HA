@@ -96,6 +96,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     controller: 'Domestic1Ctrl',
     cache:false
   })
+      .state('ShopProductDetail', {
+        url: '/ShopProductDetail?name&type&price',
+        templateUrl: 'templates/ShopProductDetail.html',
+        controller: 'ShopProductDetailCtrl',
+        cache:false
+      })
 
   .state('community', {
       url: '/community',
