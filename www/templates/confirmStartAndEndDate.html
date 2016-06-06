@@ -1,0 +1,32 @@
+<ion-view view-title="物业费缴纳" ng-controller="confirmStartAndEndDateCtrl">
+    <ion-nav-bar align-title="center">
+        <ion-nav-buttons side="left" >
+            <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="confirmStartAndEndDateView">
+            <ion-list>
+                <ion-item class="bigBlankLine">
+                    缴费起始日期:
+                </ion-item>
+                <ion-item class="">
+                    2016年01月
+                </ion-item>
+                <ion-item class="mediumBlank">
+                    缴费终止日期:
+                </ion-item>
+                <ion-item>
+                    2016年01月
+                </ion-item>
+                <ion-item class="bigBlankLine">
+                    付款金额: &nbsp;<span style="color: #FC5E5E">2016 元</span>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div class="submitBtn">
+            <button type="submit" class="button button-block" ng-click="loginToMainPage()">去缴费</button>
+        </div>
+
+    </ion-content>
+</ion-view>

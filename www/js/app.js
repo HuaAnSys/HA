@@ -116,8 +116,79 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/communityDetail',
       templateUrl: 'templates/communityDetail.html',
       controller: 'CommunityDetail'
-  });
+  })
 
+/*
+  Login and property management routes
+*/
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'loginCtrl'
+  })
+
+  .state('firstRegistPage', {
+    url: '/firstRegistPage',
+    templateUrl: 'templates/firstRegistPage.html',
+    controller: 'firstRegistPageCtrl'
+  })
+  .state('secondRegistPage', {
+    url: '/secondRegistPage',
+    templateUrl: 'templates/secondRegistPage.html',
+    controller: 'secondRegistPageCtrl'
+  })
+  .state('thirdRegistPage', {
+    url: '/thirdRegistPage',
+    templateUrl: 'templates/thirdRegistPage.html',
+    controller: 'thirdRegistPageCtrl'
+  })
+
+
+  .state('firstRetrievePage', {
+    url: '/firstRetrievePage',
+    templateUrl: 'templates/firstRetrievePage.html',
+    controller: 'firstRetrievePageCtrl'
+  })
+  .state('secondRetrievePage', {
+    url: '/secondRetrievePage',
+    templateUrl: 'templates/secondRetrievePage.html',
+    controller: 'secondRetrievePageCtrl'
+  })
+  .state('thirdRetrievePage', {
+    url: '/thirdRetrievePage',
+    templateUrl: 'templates/thirdRetrievePage.html',
+    controller: 'thirdRetrievePageCtrl'
+  })
+
+  .state('selectLocationToPayProperty', {
+    url: '/selectLocationToPayProperty',
+    templateUrl: 'templates/selectLocationToPayProperty.html',
+    controller: 'selectLocationToPayPropertyCtrl'
+  })
+
+  .state('showBalanceInPayProperty', {
+    url: '/showBalanceInPayProperty',
+    templateUrl: 'templates/showBalanceInPayProperty.html',
+    controller: 'showBalanceInPayPropertyCtrl'
+  })
+
+  .state('confirmStartAndEndDate', {
+    url: '/confirmStartAndEndDate',
+    templateUrl: 'templates/confirmStartAndEndDate.html',
+    controller: 'confirmStartAndEndDateCtrl'
+  })
+
+//Related repairs
+  .state('relatedRepairs', {
+    url: '/relatedRepairs',
+    templateUrl: 'templates/relatedRepairs.html',
+    controller: 'relatedRepairsCtrl'
+  })
+  .state('newAskForRepair', {
+    url: '/newAskForRepair',
+    templateUrl: 'templates/newAskForRepair.html',
+    controller: 'newAskForRepairCtrl'
+  })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/Home');
