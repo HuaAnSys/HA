@@ -519,3 +519,41 @@ ion-view[id="homeView"] .advertisements{
     max-width: 60px;
     font-size: 16px;
 }
+
+ion-view[id="communityDetail"]{
+    background-color: #EFEFf4;
+}
+
+.bar-assertive{
+    height: 60px;
+}
+
+.bar.bar-assertive {
+    background-color: #ffffff;
+}
+
+.comment_input{
+    height: 40px;
+    margin: 10px 10px;
+    width: 70%;
+    border-radius: 10px;
+    border: solid 1px #c8c7cc;
+}
+
+.bar.bar-assertive.bar-footer {
+    background-image: linear-gradient(180deg, #FFFFFF, #c8c7cc 50%, transparent 50%);
+    padding: 0px;
+}
+
+.submit_comment{
+    background-color:#F23030 ;
+    width: 30%;
+    text-align: center;
+}
+
+.submit_comment span{
+    font-size: 23px;
+    line-height: 23px;
+    display: block;
+    margin-top: 13.5px;
+}

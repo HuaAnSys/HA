@@ -133,7 +133,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CommunityNews',function($scope,$state){
-        console.log("11");
         $scope.back = function(){
             $state.go('tab.Home');
         }
@@ -143,8 +142,31 @@ angular.module('starter.controllers', [])
         }
         $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
+        $scope.onTabSelect = function(index){
+            console.log(index);
+        }
+
+        $scope.goMessageDetail = function(){
+            $state.go('communityDetail');
+        }
+
 })
 
+.controller('CommunityDetail',function($scope,$state){
+
+    var width = document.body.scrollWidth;
+    $scope.message_picture_width = width-30;
+    $scope.divMain = {
+        "width":width,
+        "padding":"15px",
+        "background-color": "#FFFFFF",
+        "border-bottom": "1px solid #c8c7cc"
+    }
+    $scope.back = function(){
+        $state.go('community');
+    }
+})
+    
     .controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopTypeService, ShopBannerService, ShopProductDetailService, $timeout) {
 
 
