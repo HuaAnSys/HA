@@ -162,8 +162,26 @@ angular.module('starter.controllers', [])
         "background-color": "#FFFFFF",
         "border-bottom": "1px solid #c8c7cc"
     }
+
+    $scope.comments = [
+                    {name:'社区管理员',
+                     detail:'赞,支持!'},
+                    {name:'社区管理员',
+                    detail:'赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
+                    '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
+                    '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
+                    '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
+                    '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.'},
+                    {name:'社区管理员',
+                    detail:'赞,支持!'}];
+
     $scope.back = function(){
         $state.go('community');
+    }
+
+    $scope.submitComment = function(){
+        var a = $scope.homtComments;
+        console.log(a);
     }
 })
     

@@ -23,28 +23,20 @@
             <span class="goodNum">已有3人点赞</span>
             <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
         </div>
-        <ion-list>
+        <ion-list ng-repeat="comment in comments">
             <ion-item>
-                <img src="../img/adam.jpg" class="message_icon"/>
-                <span class="message_people community_detail_good_who">社区管理员</span>
-                <span class="community_detail_good_time">2016-05-05 00:00</span>
-                <div>赞,支持!</div>
-            </ion-item>
-            <ion-item>
-                <img src="../img/adam.jpg" class="message_icon"/>
-                <span class="message_people community_detail_good_who">社区管理员</span>
-                <span class="community_detail_good_time">2016-05-05 00:00</span>
-                <div>赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.
-                赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.
-                赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.
-                赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.
-                赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.</div>
+                <div>
+                    <img src="../img/adam.jpg" class="message_icon"/>
+                    <span class="message_people community_detail_good_who">{{comment.name}}</span>
+                    <span class="community_detail_good_time">2016-05-05 00:00</span>
+                    <div>{{comment.detail}}</div>
+                </div>
             </ion-item>
         </ion-list>
     </ion-content>
     <ion-footer-bar class="bar-assertive">
-        <textarea class="comment_input"></textarea>
-        <div class="submit_comment" ng-click="doSomething()"><span>评论</span></div>
+        <textarea class="comment_input" ng-model="homtComments"></textarea>
+        <div class="submit_comment" ng-click="submitComment()"><span>评论</span></div>
     </ion-footer-bar>
 
 
