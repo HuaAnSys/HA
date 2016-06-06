@@ -561,3 +561,44 @@ ion-view[id="communityDetail"]{
     display: block;
     margin-top: 13.5px;
 }
+
+.goodPart{
+    height: 40px;
+    margin-top: 15px;
+    background-color: #FFFFFF;
+    border-top: solid 1px #c8c7cc;
+    padding-top: 12px;
+    padding: 12px 15px;
+}
+
+.goodPart .goodNum{
+    font-size: 16px;
+    line-height: 16px;
+    color: #FD9090;
+}
+
+.community_detail_good_who{
+    top: -40px;
+    width: 45%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.community_detail_good_time{
+    font-size: 14px;
+    line-height: 14px;
+    position: relative;
+    top: -57px;
+    left: 65%;
+    color: #B6B6B6;
+}
+
+.community_detail_good_time+div{
+    position: relative;
+    top: -45px;
+    width: 80%;
+    left: 50px;
+    font-size: 15px;
+}
