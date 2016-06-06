@@ -562,6 +562,187 @@ ion-view[id="communityDetail"]{
     margin-top: 13.5px;
 }
 
+
+/*
+    Login and property management css
+*/
+
+/*Login page css*/
+ion-header-bar.bar.bar-header {
+    border-bottom: 1px solid #C8C7CC;
+}
+.registBtn{
+    padding: 0px;
+    border: none;
+    background: none;
+    color:#FC5E5E;
+}
+button.registBtn{
+    font-size: 17px;
+}
+.loginView .list, .registView .list, .propertyManagementView .list, .selectLocationToPayView .list{
+    padding:0px;
+}
+.loginView .item, .registView .item, .propertyManagementView .item,.selectLocationToPayView .item{
+    border:1px solid #C8C7CC;
+    border-left:none;
+    border-right:none;
+}
+.loginView .item:first-child, .registView .item:first-child, .propertyManagementView .item:first-child{
+    border-top: none;
+}
+.bigBlankLine{
+    background: #EFEFF4;
+    color:#777;
+    /*margin: 0px;*/
+    /*border: none;*/
+}
+.submitBtn{
+    margin-top: 5%;
+    padding-left:5% ;
+    padding-right:5% ;
+}
+.submitBtn .button{
+    background: #F23030;
+    color: #ffffff;
+}
+.retrievePassword{
+    float:right;
+    margin-right:5%;
+}
+.retrievePassword button{
+    color:#FC5E5E;
+    border: none;
+    background: none;
+}
+
+
+/*Regist and retrieve page css*/
+.arrowP{
+    font-size: 20px;
+    padding-left: 12px;
+    margin-right: 10px;
+    display: block;
+    padding-top: 8px;
+}
+.smallBlankLine{
+    background: #EFEFF4;
+    height:15px;
+}
+.progressBar span{
+    font-size: 12px;
+}
+/*.registView .list*/
+/*.registView .item*/
+.registView .item-radio input:checked + .radio-content .item-content{
+    background-color: #fff;
+    color:#FC5E5E;
+}
+.registView .item-radio input:checked + .radio-content .radio-icon{
+    color:#FC5E5E;
+    padding: 2px;
+}
+.registView .item.selectSex label{
+    border: none;
+}
+.registView label.item.item-radio {
+    padding: 0px;
+}
+.registView .item.selectSex{
+    border-left: none;
+    border-right: none;
+    width: 50%;
+    float: left;
+}
+.registView .item.selectSex .item-content.disable-pointer-events{
+    padding: 11px 49px 11px 4px;
+    font-size: 14px;
+}
+
+/*Property management page*/
+.propertyManagementView .ion-chevron-right, .selectLocationToPayView .ion-chevron-down, .selectLocationToPayView .ion-chevron-up{
+    position: absolute;
+    right: 20px;
+}
+
+/*Select Location to pay the property costs*/
+.selectLocationToPayView .list .item.item-accordion {
+    line-height: 38px;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: 0.09s all linear;
+    font-size: 14px;
+}
+.selectLocationToPayView .list .item.item-accordion.ng-hide {
+    line-height: 0px;
+}
+.selectLocationToPayView .list .item.item-accordion.ng-hide-add,
+.selectLocationToPayView .list .item.item-accordion.ng-hide-remove {
+    display: block !important;
+}
+.selectLocationToPayView .bigBlankLine{
+    padding-bottom: 15px;
+    padding-top: 40px;
+}
+
+/*show balance in the pay page*/
+.showBalanceInPayPropertyView .blackAreaShowBalance{
+    padding: 25px;
+    background: #393939;
+    color: #ffffff;
+    text-align: center;
+    border: none;
+}
+.showBalanceInPayPropertyView .blackAreaShowBalance div:nth-child(2){
+    font-size: 60px;
+    margin: 15px auto;
+}
+.showBalanceInPayPropertyView .payDateHistory, .relatedRepairsView .haveSolved{
+    position: absolute;
+    right: 5px;
+    bottom: 12px;
+    color: #1ECD1E;
+}
+.showBalanceInPayPropertyView .listInShowBalance,.relatedRepairsView .listInRelatedRepairs{
+    padding: 0px;
+}
+.showBalanceInPayPropertyView .listInShowBalance div:nth-child(2),.relatedRepairsView .listInRelatedRepairs div:nth-child(2){
+    font-size: 14px;
+    color: #777;
+}
+.showBalanceInPayPropertyView .listInShowBalance div,.relatedRepairsView .listInRelatedRepairs div{
+    margin: 10px;
+}
+
+/*Confirm start date and end date */
+.confirmStartAndEndDateView .bigBlankLine{
+    padding: 20px 16px;
+}
+.mediumBlank {
+    background: #EFEFF4;
+    color: #777;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+.confirmStartAndEndDateView .bigBlankLine:last-child{
+    padding-top: 10px;
+    padding-left: 16px;
+    border-bottom: none;
+}
+
+.relatedRepairsView .notSolved{
+    position: absolute;
+    right: 5px;
+    bottom: 12px;
+    color: #777;
+}
+
+.textAreaStyle{
+    padding: 15px;
+}
+.newAskForRepairView .bigBlankLine {
+    padding: 10px 15px;
+}
 .goodPart{
     height: 40px;
     margin-top: 15px;

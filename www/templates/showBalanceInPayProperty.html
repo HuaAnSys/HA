@@ -1,0 +1,35 @@
+<ion-view view-title="物业缴费" ng-controller="showBalanceInPayPropertyCtrl">
+    <ion-nav-bar align-title="center">
+        <ion-nav-buttons side="left" >
+            <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="showBalanceInPayPropertyView">
+            <ion-list>
+                <ion-item class="blackAreaShowBalance">
+                    <div>提交款余额总计</div>
+                    <div>0</div>
+                    <div>房屋： A小区二期2号楼2单元2楼202</div>
+                </ion-item>
+                <ion-item class="listInShowBalance" ng-click="selectLocation()">
+                    <div>
+                        <div>2016年1月 - 2016年5月</div>
+                        <div>本期费用合计:1234</div>
+                        <div class="payDateHistory">20160102</div>
+                    </div>
+                </ion-item>
+                <ion-item class="listInShowBalance" ng-click="selectLocation()">
+                    <div>
+                        <div>2015年6月 - 2016年1月</div>
+                        <div>本期费用合计:1234 </div>
+                        <div class="payDateHistory">20160102</div>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div class="submitBtn">
+            <button type="submit" class="button button-block" ng-click="goConfirmStartAndEndDate()">缴纳物业费</button>
+        </div>
+    </ion-content>
+</ion-view>

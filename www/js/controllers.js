@@ -309,3 +309,207 @@ angular.module('starter.controllers', [])
         $scope.productDetail($stateParams);
 
     })
+
+/*
+    Login and property mangement controllers
+ */
+    .controller('loginCtrl', function($scope,$state) {
+        $scope.regist=function(){
+            $state.go('firstRegistPage');
+        }
+        $scope.retrievePassword=function(){
+            $state.go('firstRetrievePage');
+        }
+        $scope.loginToMainPage=function(){
+            $state.go('tab.Home');
+        }
+    })
+
+//Regist account page controllers
+    .controller('firstRegistPageCtrl', function($scope,$state,$ionicHistory) {
+        $scope.goSecondRegistPage=function(){
+            $state.go('secondRegistPage');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+
+    .controller('secondRegistPageCtrl', function($scope,$state,$ionicHistory) {
+        $scope.goThirdRegistPage=function(){
+            $state.go('thirdRegistPage');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('thirdRegistPageCtrl', function($scope,$state,$ionicHistory,$ionicPopup) {
+        $scope.registAccount = function() {
+
+            //if($scope.inputPassword && $scope.confirmPassword && $scope.inputName && $scope.inputIdentifyId && $scope.inputNickName !=null){
+            var alertPopup = $ionicPopup.alert({
+                title: '注册成功'
+                //template: '注册成功！'
+            });
+            alertPopup.then(function(res) {
+                $state.go('login');
+            });
+            //}
+        };
+
+        //$scope.selectMale=function(){
+        //    $('.selectMale').css('color','#FC5E5E');
+        //    $('.selectFemale').css('color','none');
+        //}
+        //$scope.selectFemale=function(){
+        //    $('.selectMale').css('color','none');
+        //    $('.selectFemale').css('color','#FC5E5E');
+        //}
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+
+//Retrieve password page controllers
+    .controller('firstRetrievePageCtrl', function($scope,$state,$ionicHistory) {
+        $scope.goSecondRetrievePage=function(){
+            $state.go('secondRetrievePage');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('secondRetrievePageCtrl', function($scope,$state,$ionicHistory) {
+        $scope.goThirdRetrievePage=function(){
+            $state.go('thirdRetrievePage');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('thirdRetrievePageCtrl', function($scope,$state,$ionicHistory,$ionicPopup) {
+        $scope.changePassword = function() {
+            var alertPopup = $ionicPopup.alert({
+                title: '设置成功!'
+                //template: '注册成功！'
+            });
+            alertPopup.then(function(res) {
+                $state.go('login');
+            });
+            $scope.back=function(){
+                $ionicHistory.goBack();
+            }
+        };
+
+
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+
+//Property management sub page controllers
+    .controller('PropertyManagementCtrl', function($scope,$state,$ionicHistory) {
+        var screenWidth = document.body.scrollWidth;
+        var picHeight=Math.ceil((screenWidth * 164)/375);
+        $scope.picHeight=picHeight+'px';
+
+        $scope.gotoPayPropertyFirstPage=function(){
+            $state.go('selectLocationToPayProperty');
+        }
+        $scope.gotoRelatedRepairs=function(){
+            $state.go('relatedRepairs');
+        }
+    })
+    .controller('selectLocationToPayPropertyCtrl', function($scope,$state,$ionicHistory) {
+        //$scope.groups = [];
+        for(i=0;i<1;i++){
+            var firstList = [];
+
+        };
+        $scope.groups = [{name:'A',
+            childs: [{period: '一',
+                building: 1,
+                unit:1,
+                floor:1,
+                number:101},
+                {period: '二',
+                    building: 2,
+                    unit:2,
+                    floor:2,
+                    number:202} ]},
+            {name:'B',
+                childs:[{period: '一',
+                    building: 1,
+                    unit:1,
+                    floor:1,
+                    number:101},
+                    {period: '二',
+                        building: 2,
+                        unit:2,
+                        floor:2,
+                        number:202}]}
+        ];
+        //$scope.groups[i]push(i + '-' + j);
+        //for (var j=0; j<3; j++) {
+        //    $scope.groups[i].items.push(i + '-' + j);
+        //}
+
+
+        /*
+         * if given group is the selected group, deselect it
+         * else, select the given group
+         */
+        $scope.toggleGroup = function(group) {
+            if ($scope.isGroupShown(group)) {
+                $scope.shownGroup = null;
+            } else {
+                $scope.shownGroup = group;
+            }
+        };
+        $scope.isGroupShown = function(group) {
+            return $scope.shownGroup === group;
+            console.log($scope.shownGroup );
+            console.log(group);
+        }
+
+        $scope.goShowBalancePage = function(){
+            $state.go('showBalanceInPayProperty');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+
+    .controller('showBalanceInPayPropertyCtrl', function($scope,$state,$ionicHistory) {
+        $scope.goConfirmStartAndEndDate=function(){
+            $state.go('confirmStartAndEndDate');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+
+    .controller('confirmStartAndEndDateCtrl', function($scope,$state,$ionicHistory) {
+
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+
+//Related repairs controllers
+    .controller('relatedRepairsCtrl', function($scope,$state,$ionicHistory) {
+        $scope.goNewAskForRepair= function () {
+            $state.go('newAskForRepair');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('newAskForRepairCtrl', function($scope,$state,$ionicHistory) {
+        var screenWidth = document.body.scrollWidth - 30;
+        $scope.textAreaCols=Math.floor(screenWidth/14)*2;
+
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
