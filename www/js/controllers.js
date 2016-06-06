@@ -145,6 +145,21 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('CommunityDetail',function($scope,$state){
+
+    var width = document.body.scrollWidth;
+    $scope.message_picture_width = width-30;
+    $scope.divMain = {
+        "width":width,
+        "padding":"15px",
+        "background-color": "#FFFFFF",
+        "border-bottom": "1px solid #c8c7cc"
+    }
+    $scope.back = function(){
+        $state.go('community');
+    }
+})
+    
     .controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopTypeService, ShopBannerService, ShopProductDetailService, $timeout) {
 
 

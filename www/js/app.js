@@ -109,7 +109,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       controller: 'CommunityNews',
           cache:false
   })
-      
+
   .state('communityDetail', {
       url: '/communityDetail',
       templateUrl: 'templates/communityDetail.html',
