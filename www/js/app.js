@@ -106,10 +106,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   .state('community', {
-      url: '/community',
+      url: '/community/:type',
       templateUrl: 'templates/community.html',
-      controller: 'CommunityNews',
-          cache:false
+      controller: 'CommunityNewsCtrl',
+      cache:false
   })
 
   .state('communityDetail', {

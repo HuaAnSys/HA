@@ -119,20 +119,21 @@ angular.module('starter.controllers', [])
         $scope.slideWidth = slideWidth+"px";
 
         $scope.goAdvertise = function(arg){
-            if(arg==='a'){
-                $state.go('community');
-            }else if(arg==='b'){
-                $state.go('community');
-            }else if(arg==='c'){
-                $state.go('community');
-            }else if(arg==='d'){
-                $state.go('community');
+            if(arg==='0'){
+                $state.go('community',{'type':arg});
+            }else if(arg==='1'){
+                $state.go('community',{'type':arg});
+            }else if(arg==='2'){
+                $state.go('community',{'type':arg});
+            }else if(arg==='3'){
+                $state.go('community',{'type':arg});
             }
         }
 
 })
 
-.controller('CommunityNews',function($scope,$state){
+.controller('CommunityNewsCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,$timeout){
+
         $scope.back = function(){
             $state.go('tab.Home');
         }
@@ -143,12 +144,25 @@ angular.module('starter.controllers', [])
         $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
         $scope.onTabSelect = function(index){
-            console.log(index);
+            selectTab();
         }
 
         $scope.goMessageDetail = function(){
             $state.go('communityDetail');
         }
+
+        function selectTab(){
+            var index = parseInt($stateParams.type);
+            if(index>-1){
+                $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(index);
+                $stateParams.type = -1;
+            }else{
+
+            }
+
+
+        }
+
 
 })
 
