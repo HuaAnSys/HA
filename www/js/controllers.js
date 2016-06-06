@@ -133,7 +133,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CommunityNews',function($scope,$state){
-        console.log("11");
         $scope.back = function(){
             $state.go('tab.Home');
         }
@@ -142,6 +141,14 @@ angular.module('starter.controllers', [])
             "height":scrollHeight
         }
         $scope.message_picture_width = document.body.scrollWidth-30+"px";
+
+        $scope.onTabSelect = function(index){
+            console.log(index);
+        }
+
+        $scope.goMessageDetail = function(){
+            $state.go('communityDetail');
+        }
 
 })
 
