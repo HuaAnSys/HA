@@ -110,7 +110,7 @@ margin-left: 16px;
 font-size: 24px;
 }
 
-.tabs-top > .tabs, .tabs.tabs-top{
+#domesticTab .tabs-top > .tabs,#domesticTab .tabs.tabs-top{
   top: 0px;
 }
 
