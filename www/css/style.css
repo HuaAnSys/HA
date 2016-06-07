@@ -830,3 +830,13 @@ button.registBtn{
     color:#DBD9CB;
     padding: 3%;
 }
+
+.submitNews_button{
+    height: 50px;
+    width: 90%;
+    margin: 10% 5%;
+    border: none;
+    background-color: #f23030;
+    color: #FFFFFF;
+    font-size: 20px;
+}
