@@ -215,7 +215,7 @@ font-size: 24px;
 .domesticFooter .active {
   color: #FC5E5E;
 }
-ion-view[id="homeView"]{
+ion-view[id="homeView"],ion-view[id="addCommunity"]{
     background-color: #EFEFf4;
 }
 
@@ -796,4 +796,37 @@ button.registBtn{
     left: 91%;
     position: absolute;
     z-index: 9;
+}
+
+.addCommunity_content{
+    margin-top: 20px;
+    height: 150px;
+    width: 100%;
+}
+
+.addCommunity_content+p{
+   margin-top: 10px;
+   margin-left: 2%;
+   font-size: 15px;
+    color: #777777;
+}
+
+.addNews_div{
+    margin-top: 10px;
+    padding: 5%;
+    width: 100%;
+    background-color: #ffffff;
+    height: 150px;
+}
+
+.addNews_box{
+    height: 100%;
+    border: solid 3px #DBD9CB;
+    width: 35%;
+}
+
+.addNews_box span{
+    font-size: 60px;
+    color:#DBD9CB;
+    padding: 3%;
 }

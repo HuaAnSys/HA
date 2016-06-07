@@ -132,7 +132,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('CommunityNewsCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,$timeout){
+.controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,$timeout){
 
         $scope.back = function(){
             $state.go('tab.Home');
@@ -168,9 +168,16 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,$timeout){
+.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate){
 
-        
+        $scope.back = function(){
+            $state.go("community",{type:"0"});
+        }
+
+        $scope.addImage = function(){
+            console.log("add image");
+        }
+
 
 })
 

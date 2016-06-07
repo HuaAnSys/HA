@@ -108,7 +108,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   .state('community', {
       url: '/community/:type',
       templateUrl: 'templates/community.html',
-      controller: 'CommunityNewsCtrl',
+      controller: 'CommunityMainCtrl',
       cache:false
   })
 
