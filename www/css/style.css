@@ -791,8 +791,9 @@ button.registBtn{
 .add_comment_icon{
     height: 30px;
     font-size: 25px;
-    position: relative;
     top: 3px;
     color: #FF5c5a;
-    left: 90%;
+    left: 91%;
+    position: absolute;
+    z-index: 9;
 }

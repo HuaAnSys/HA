@@ -163,6 +163,10 @@ angular.module('starter.controllers', [])
 
         }
 
+        $scope.addNews = function(){
+           
+        }
+
 
 })
 
