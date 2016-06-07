@@ -118,6 +118,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       controller: 'CommunityDetail'
   })
 
+  .state('addCommunity', {
+      url: '/addCommunity',
+      templateUrl: 'templates/addCommunity.html',
+      controller: 'addCommunityNewsCtrl'
+  })
+
 /*
   Login and property management routes
 */

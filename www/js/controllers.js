@@ -159,14 +159,18 @@ angular.module('starter.controllers', [])
             }else{
 
             }
-
-
         }
 
         $scope.addNews = function(){
-           
+            $state.go("addCommunity");
         }
 
+
+})
+
+.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,$timeout){
+
+        
 
 })
 
