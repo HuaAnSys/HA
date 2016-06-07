@@ -783,3 +783,16 @@ button.registBtn{
     left: 50px;
     font-size: 15px;
 }
+
+.noBorderTop{
+    border-top: none;
+}
+
+.add_comment_icon{
+    height: 30px;
+    font-size: 25px;
+    position: relative;
+    top: 3px;
+    color: #FF5c5a;
+    left: 90%;
+}
