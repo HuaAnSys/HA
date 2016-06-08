@@ -9,11 +9,18 @@
         <textarea class="addCommunity_content" placeholder="请在此处填写您的时间内容"></textarea>
         <p>添加图片</p>
         <div class="addNews_div">
-            <div class="addNews_box" ng-click="addImage()">
+            <div class="addNews_box" >
                 <span class="ion-ios-plus-empty"></span>
             </div>
         </div>
-        <button class="submitNews_button">发帖</button>
+        <button class="submitNews_button" ng-click="takePhoto()">发帖</button>
+<!--        <div class="row">
+            <div class="col padding" ng-click="takePicture(1)">
+                <img ng-src="data:image/jpeg;base64,{{data.IDCardImage1}}"
+                     style="border: 1px dashed gray;width: 100px;height: 100px;background-color: #f0f0f0"/>
+            </div>
+            <div class="col padding"></div>
+        </div>-->
     </ion-content>
 
 </ion-view>
