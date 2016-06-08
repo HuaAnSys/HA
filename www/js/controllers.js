@@ -113,6 +113,31 @@ angular.module('starter.controllers', [])
             {url:"img/ben.png"},
             {url:"img/perry.png"}
         ];
+
+        $scope.hotProducts = [
+            {
+             "productImg":"img/adam.jpg",
+             "description":"波兰(Mleko)进口纯牛奶",
+             "price":"9.9"
+            },
+            {
+                "productImg":"img/adam.jpg",
+                "description":"波兰(Mleko)进口纯牛奶",
+                "price":"9.9"
+            },
+            {
+                "productImg":"img/adam.jpg",
+                "description":"波兰(Mleko)进口纯牛奶",
+                "price":"9.9"
+            },
+            {
+                "productImg":"img/adam.jpg",
+                "description":"波兰(Mleko)进口纯牛奶",
+                "price":"9.9"
+            }
+        ];
+
+
         var slideHeight = document.body.scrollHeight-47;
         $scope.slideHeight = slideHeight*0.4+"px";
         var slideWidth = document.body.scrollWidth;
@@ -165,6 +190,36 @@ angular.module('starter.controllers', [])
             $state.go("addCommunity");
         }
 
+        $scope.communityNews = [
+            {
+                "personIcon":"img/adam.jpg",
+                "name":"社区管理员",
+                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                        "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+                        "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+                        "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+                "descriptionImg":"img/adam.jpg"
+            },
+            {
+                "personIcon":"img/adam.jpg",
+                "name":"社区管理员",
+                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+                "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+                "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+                "descriptionImg":"img/adam.jpg"
+            },
+            {
+                "personIcon":"img/adam.jpg",
+                "name":"社区管理员",
+                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+                "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+                "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+                "descriptionImg":"img/adam.jpg"
+            },
+        ];
+
 
 })
 
@@ -178,14 +233,14 @@ angular.module('starter.controllers', [])
 
         $scope.takePhoto=function(){
             var options = {
+                quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
                 targetWidth: 500,
                 targetHeight: 500,
-                quality: 75,
                 saveToPhotoAlbum: true,
                 encodingType:Camera.EncodingType.JPEG,
-                allowEdit: false,
+                allowEdit: true,
                 mediaType:0,
                 cameraDirection:0,
                 popoverOptions: CameraPopoverOptions
@@ -194,6 +249,7 @@ angular.module('starter.controllers', [])
             $cordovaCamera.getPicture(options).then(function(imageURI) {
                 $scope.showAddImgFlag = false;
                 $scope.imageSrc= imageURI;
+                //image.src = "data:image/jpeg;base64," + imageData;
             }, function(err) {
 
             });

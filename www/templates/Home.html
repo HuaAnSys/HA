@@ -37,26 +37,11 @@
 
         <ion-list>
             <ion-item>
-               <div class="product_div">
-                   <img src="../img/adam.jpg" class="productItem_img"/>
-                   <div>波兰(Mleko)进口纯牛奶是个屁呀</div>
-                   <p>￥9.90</p>
+               <div class="product_div" ng-repeat="pro in hotProducts">
+                   <img src="{{pro.productImg}}" class="productItem_img"/>
+                   <div>{{pro.description}}</div>
+                   <p>￥{{pro.price}}</p>
                </div>
-                <div class="product_div">
-                    <img src="../img/adam.jpg" class="productItem_img"/>
-                    <div>波兰(Mleko)进口纯牛奶是个屁呀</div>
-                    <p>￥9.90</p>
-                </div>
-                <div class="product_div">
-                    <img src="../img/adam.jpg" class="productItem_img"/>
-                    <div>波兰(Mleko)进口纯牛奶是个屁呀</div>
-                    <p>￥9.90</p>
-                </div>
-                <div class="product_div">
-                    <img src="../img/adam.jpg" class="productItem_img"/>
-                    <div>波兰(Mleko)进口纯牛奶是个屁呀</div>
-                    <p>￥9.90</p>
-                </div>
             </ion-item>
         </ion-list>
     </ion-content>
