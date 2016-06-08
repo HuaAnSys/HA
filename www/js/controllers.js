@@ -174,90 +174,30 @@ angular.module('starter.controllers', [])
             $state.go("community",{type:"0"});
         }
 
+        $scope.showAddImgFlag = true;
 
         $scope.takePhoto=function(){
-
             var options = {
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
                 targetWidth: 500,
                 targetHeight: 500,
-                quality: 75
-/*               destinationType: Camera.DestinationType.DATA_URL,
-                sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                allowEdit: true,
-                encodingType: Camera.EncodingType.JPEG,
-                popoverOptions: CameraPopoverOptions,
-                saveToPhotoAlbum: false*/
+                quality: 75,
+                saveToPhotoAlbum: true,
+                encodingType:Camera.EncodingType.JPEG,
+                allowEdit: false,
+                mediaType:0,
+                cameraDirection:0,
+                popoverOptions: CameraPopoverOptions
             };
 
             $cordovaCamera.getPicture(options).then(function(imageURI) {
-                alert(imageURI);
+                $scope.showAddImgFlag = false;
                 $scope.imageSrc= imageURI;
             }, function(err) {
-                // error
+
             });
         }
-
-/*        $scope.addImage = function(){
-            console.log("add image");
-            this.takePicture();
-        }*/
-
-        /*$scope.takePicture = function (img) {
-            var options = {
-                quality: 75,
-                destinationType: Camera.DestinationType.DATA_URL,
-                sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                allowEdit: true,
-                encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 500,
-                targetHeight: 500,
-                popoverOptions: CameraPopoverOptions,
-                saveToPhotoAlbum: false
-            };
-
-            $cordovaCamera.getPicture(options).then(function (imageData) {
-                    console.log(imageData);
-
-                    if (img == 1) {
-                        $scope.data.IDCardImage1 = imageData;
-                        $scope.imgURI1 = "data:image/jpeg;base64," + imageData;
-                    }
-                    if (img == 2) {
-                        $scope.data.IDCardImage2 = imageData;
-                        $scope.imgURI2 = "data:image/jpeg;base64," + imageData;
-                    }
-                    if (img == 3) {
-                        $scope.data.Qualified = imageData;
-                        $scope.imgURI3 = "data:image/jpeg;base64," + imageData;
-                    }
-                    if (img == 4) {
-                        $scope.data.CredentialImage = imageData;
-                        $scope.imgURI4 = "data:image/jpeg;base64," + imageData;
-                    }
-                    if (img == 5) {
-                        $scope.data.CarInfoImage1 = imageData;
-                        $scope.imgURI5 = "data:image/jpeg;base64," + imageData;
-                    }
-                    if (img == 6) {
-                        $scope.data.CarInfoImage2 = imageData;
-                        $scope.imgURI6 = "data:image/jpeg;base64," + imageData;
-                    }
-                    if (img == 7) {
-                        $scope.data.CarInfoImage3 = imageData;
-                        $scope.imgURI7 = "data:image/jpeg;base64," + imageData;
-                    } else {
-                        return "";
-                    }
-                }
-            );
-        };
-*//*        $scope.take = function () {
-            this.takePicture();
-        }*//*
-*/
-
     })
 
 .controller('CommunityDetail',function($scope,$state){

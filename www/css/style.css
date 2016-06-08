@@ -840,3 +840,10 @@ button.registBtn{
     color: #FFFFFF;
     font-size: 20px;
 }
+
+.img_part_style{
+    border: 1px dashed gray;
+    height: 100%;
+    width: 35%;
+    background-color: #f0f0f0;
+}
