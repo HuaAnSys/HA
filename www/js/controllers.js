@@ -155,9 +155,13 @@ angular.module('starter.controllers', [])
             }
         }
 
+        $scope.moreProduct = function(){
+            $state.go("tab.Shop");
+        }
+
 })
 
-.controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,$timeout){
+.controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate){
 
         $scope.back = function(){
             $state.go('tab.Home');
@@ -267,17 +271,34 @@ angular.module('starter.controllers', [])
         "border-bottom": "1px solid #c8c7cc"
     }
 
-    $scope.comments = [
-                    {name:'社区管理员',
-                     detail:'赞,支持!'},
-                    {name:'社区管理员',
+        $scope.commentsDetail = {
+            "name":"社区管理员",
+            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+                "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+                "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+            "descriptionImg":"img/adam.jpg",
+            "comments":[
+                {
+                    name:'社区管理员',
+                    detail:'赞,支持!'
+                },
+                {
+                    name:'社区管理员',
                     detail:'赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
                     '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
                     '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
                     '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
-                    '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.'},
-                    {name:'社区管理员',
-                    detail:'赞,支持!'}];
+                    '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.'
+                },
+                {
+                    name:'社区管理员',
+                    detail:'赞,支持!'
+                }
+            ]
+
+        };
+
 
     $scope.back = function(){
         $state.go('community');
