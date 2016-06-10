@@ -5,35 +5,17 @@
     <h1 class="title"></h1>
 </ion-header-bar>
 
-<ion-tabs class="tabs-striped tabs-top">
+<ion-tabs class="tabs-striped tabs-top" delegate-handle="communityTabs_handle">
     <ion-tab title="社区公告" on-select="onTabSelect('1')">
         <ion-scroll direction="y" class="ion_list_in_tabs" ng-style="{{scrollHeight}}">
             <ion-list>
-                <ion-item>
-                    <img src="../img/adam.jpg" class="message_icon"/>
-                    <span class="message_people">社区管理员</span>
-                    <div class="message_content">
-                        五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办
-                        邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；
-                        买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~
-                        想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~
-                    </div>
-                    <img src="../img/adam.jpg" class="message_picture" width="{{message_picture_width}}"/>
+                <ion-item ng-repeat="new in communityNews">
+                    <img src="{{new.descriptionImg}}" class="message_icon"/>
+                    <span class="message_people">{{new.name}}</span>
+                    <div class="message_content">{{new.detail}}</div>
+                    <img src="{{new.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
                     <span class="messgae_time">2016-05-05 00:00</span>
                     <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail()"></span>
-                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
-                </ion-item>
-                <ion-item>
-                    <img src="../img/adam.jpg" class="message_icon"/>
-                    <span class="message_people">社区管理员</span>
-                    <div class="message_content">
-                        五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办
-                        邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；
-                        买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~
-                        想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~</div>
-                    <img src="../img/adam.jpg" class="message_picture" width="{{message_picture_width}}"/>
-                    <span class="messgae_time">2016-05-05 00:00</span>
-                    <div class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail()"></div>
                     <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
                 </ion-item>
             </ion-list>
@@ -41,27 +23,54 @@
     </ion-tab>
 
     <ion-tab title="议事厅" on-select="onTabSelect('2')">
-        <ion-list class="ion_list_in_tabs">
-            <ion-item>
-                <div>Tell me </div>
-            </ion-item>
-        </ion-list>
+        <ion-scroll direction="y" class="ion_list_in_tabs" ng-style="{{scrollHeight}}">
+            <ion-list>
+                <ion-item ng-repeat="new in communityNews">
+                    <img src="{{new.descriptionImg}}" class="message_icon"/>
+                    <span class="message_people">{{new.name}}</span>
+                    <div class="message_content">{{new.detail}}</div>
+                    <img src="{{new.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
+                    <span class="messgae_time">2016-05-05 00:00</span>
+                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail()"></span>
+                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
+                </ion-item>
+            </ion-list>
+            <div class="ion-android-add-circle add_comment_icon" ng-click="addNews()"></div>
+        <ion-scroll>
     </ion-tab>
 
     <ion-tab title="征集令" on-select="onTabSelect('3')">
-        <ion-list class="ion_list_in_tabs">
-            <ion-item>
-                <div>Tell me </div>
-            </ion-item>
-        </ion-list>
+        <ion-scroll direction="y" class="ion_list_in_tabs" ng-style="{{scrollHeight}}">
+            <ion-list>
+                <ion-item ng-repeat="new in communityNews">
+                    <img src="{{new.descriptionImg}}" class="message_icon"/>
+                    <span class="message_people">{{new.name}}</span>
+                    <div class="message_content">{{new.detail}}</div>
+                    <img src="{{new.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
+                    <span class="messgae_time">2016-05-05 00:00</span>
+                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail()"></span>
+                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
+                </ion-item>
+            </ion-list>
+            <div class="ion-android-add-circle add_comment_icon" ng-click="addNews()"></div>
+        <ion-scroll>
     </ion-tab>
 
     <ion-tab title="精彩回顾" on-select="onTabSelect('4')">
-        <ion-list class="ion_list_in_tabs">
-            <ion-item>
-                <div>Tell me </div>
-            </ion-item>
-        </ion-list>
+        <ion-scroll direction="y" class="ion_list_in_tabs" ng-style="{{scrollHeight}}">
+            <ion-list>
+                <ion-item ng-repeat="new in communityNews">
+                    <img src="{{new.descriptionImg}}" class="message_icon"/>
+                    <span class="message_people">{{new.name}}</span>
+                    <div class="message_content">{{new.detail}}</div>
+                    <img src="{{new.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
+                    <span class="messgae_time">2016-05-05 00:00</span>
+                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail()"></span>
+                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
+                </ion-item>
+            </ion-list>
+            <div class="ion-android-add-circle add_comment_icon" ng-click="addNews()"></div>
+        <ion-scroll>
     </ion-tab>
 
 </ion-tabs>

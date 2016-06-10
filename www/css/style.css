@@ -215,7 +215,7 @@ font-size: 24px;
 .domesticFooter .active {
   color: #FC5E5E;
 }
-ion-view[id="homeView"]{
+ion-view[id="homeView"],ion-view[id="addCommunity"]{
     background-color: #EFEFf4;
 }
 
@@ -322,7 +322,7 @@ ion-view[id="homeView"] .advertisements{
 .moreArrow{
     color:#8E8E8E;
     font-size: 10px;
-    margin-left: 2%;
+    padding-left: 2%;
 }
 
 .community_leftArrow{
@@ -559,7 +559,7 @@ ion-view[id="communityDetail"]{
     font-size: 23px;
     line-height: 23px;
     display: block;
-    margin-top: 13.5px;
+    margin-top: 18.5px;
 }
 
 
@@ -1220,10 +1220,73 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单']{
     bottom: 7px;
 }
 
-#myOrder .payTrash{
+#myOrder .payTrash {
     color: #C8C7CC;
     position: absolute;
     top: 10px;
     right: 12px;
     font-size: 26px;
+}
+.noBorderTop{
+    border-top: none;
+}
+
+.add_comment_icon{
+    height: 30px;
+    font-size: 25px;
+    top: 3px;
+    color: #FF5c5a;
+    left: 91%;
+    position: absolute;
+    z-index: 9;
+}
+
+.addCommunity_content{
+    margin-top: 20px;
+    height: 150px;
+    width: 100%;
+}
+
+.addCommunity_content+p{
+   margin-top: 10px;
+   margin-left: 2%;
+   font-size: 15px;
+    color: #777777;
+}
+
+.addNews_div{
+    margin-top: 10px;
+    padding: 5%;
+    width: 100%;
+    background-color: #ffffff;
+    height: 150px;
+}
+
+.addNews_box{
+    height: 100%;
+    border: solid 3px #DBD9CB;
+    width: 35%;
+}
+
+.addNews_box span{
+    font-size: 60px;
+    color:#DBD9CB;
+    padding: 3%;
+}
+
+.submitNews_button{
+    height: 50px;
+    width: 90%;
+    margin: 10% 5%;
+    border: none;
+    background-color: #f23030;
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.img_part_style{
+    border: 1px dashed gray;
+    height: 100%;
+    width: 35%;
+    background-color: #f0f0f0;
 }
