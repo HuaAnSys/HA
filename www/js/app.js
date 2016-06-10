@@ -190,7 +190,41 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     controller: 'newAskForRepairCtrl'
   })
 
-  // if none of the above states are matched, use this as the fallback
+  .state('shoppingCar', {
+    url: '/shoppingCar',
+    templateUrl: 'templates/shoppingCar.html',
+    controller: 'shoppingCarCtrl',
+    cache:false
+  })
+
+  .state('paymentOrder', {
+    url: '/paymentOrder',
+    templateUrl: 'templates/paymentOrder.html',
+    controller: 'paymentOrderCtrl',
+    cache:false
+  })
+
+  .state('myOrder', {
+    url: '/myOrder',
+    templateUrl: 'templates/myOrder.html',
+    controller: 'myOrderCtrl',
+    cache:false
+  })
+
+  .state('personalInfo', {
+    url: '/personalInfo',
+    templateUrl: 'templates/personalInfo.html',
+    controller: 'personalInfoCtrl',
+    cache:false
+  })
+
+  .state('editNickname', {
+    url: '/editNickname',
+    templateUrl: 'templates/editNickName.html',
+    controller: 'editNicknameCtrl',
+    cache:false
+  })
+      // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/Home');
 
 });

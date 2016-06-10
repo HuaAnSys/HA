@@ -95,8 +95,8 @@ ion-tabs.tabs-color-active-positive .tab-item {
   color: #f40;
 }
 
-#Domestic1 .installTab span{
-margin-left: 16px;
+#Domestic .transport span{
+margin-right: 14px;
 }
 
 #Domestic1 a.tabLeft{
@@ -128,18 +128,18 @@ font-size: 24px;
 }
 
 #Domestic .tab-item{
-  font-size: 18px;
+  font-size: 13px;
 }
 
 #Domestic1 .tab-item{
-  font-size: 18px;
+  font-size: 13px;
   max-width: 162px;
 }
 
 #Domestic .item, #Domestic1 .item {
   margin: -3px;
   padding: 0px;
-  height: 165px;
+  height: 140px;
   border-style: none;
 }
 
@@ -158,30 +158,30 @@ font-size: 24px;
   /*padding:25px 16px;*/
   /*float: left;*/
   position: absolute;
-  top: 20px;
+  top: 16px;
   left: 20px;
 }
 #Domestic .domImg .changeImg, #Domestic1 .domImg .changeImg{
-  width: 160px;
-  height: 120px;
+  width: 120px;
+  /*height: 120px;*/
 }
 
 #Domestic .domImg .fixImg, #Domestic1 .domImg .fixImg{
-  position: absolute;
-  left: -15px;
-  width: 75px;
-  top: 48px;
-
+    position: absolute;
+    left: -22px;
+    width: 55px;
+    top: 36px;
 }
 
 #Domestic .domText, #Domestic1 .domText{
   padding-top: 10px;
-  padding-left: 190px;
+  padding-left: 150px;
 
 }
 
 #Domestic .domTextLine, #Domestic1 .domTextLine{
-  height: 140px;
+  height: 124px;
+  padding-right: 2px;
   border-bottom-style: solid;
   border-width: 2px;
   border-color: #ddd;
@@ -190,13 +190,13 @@ font-size: 24px;
 }
 
 #Domestic .domText span, #Domestic1 .domText span{
-  line-height: 35px;
-  font-size: 18px;
+  line-height: 25px;
+  font-size: 14px;
 }
 
 #Domestic .domText p, #Domestic1 .domText p{
-  line-height: 35px;
-  font-size: 18px;
+  line-height: 25px;
+  font-size: 14px;
   overflow: inherit;
   text-overflow: clip;
   white-space: initial;
@@ -782,4 +782,448 @@ button.registBtn{
     width: 80%;
     left: 50px;
     font-size: 15px;
+}
+
+/*===AboutMeCtrl===*/
+ion-view[view-title='AboutMe']{
+    background:url("../img/about.png")no-repeat;
+    background-size:100%;
+    background-color: #EFEFF4;
+}
+#AboutView .item{
+    margin: -3px;
+}
+
+#AboutView .icon-right, #personalInfo .icon-right{
+    font-size: 20px;
+    color: #C8C7CC;
+}
+
+#AboutView .aboutText, #personalInfo .aboutText{
+    color: #6B6A6D;
+}
+
+#AboutView .aboutImgW{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    height: 182px;
+
+}
+#AboutView .aboutImgL{
+    position: relative;
+    z-index: 100;
+}
+
+#AboutView .aboutBag .aboutPhoImg{
+    height: 142px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+    margin: 0 auto;
+    display: block;
+}
+
+#AboutView .aboutNameText{
+    width: 100%;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+    padding: 10px 0px;
+    font-size: 18px;
+    display: block;
+}
+/*===personalInfoCtrl===*/
+ion-view[view-title='个人信息']{
+    background:url("../img/perInfo.png")no-repeat;
+    background-size:100%;
+    background-color: #EFEFF4;
+}
+
+#personalInfo .perImgW{
+    position: relative;
+    padding: 1%;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+#personalInfo .perPhoImg{
+    height: 100px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+}
+
+#personalInfo .perNameText{
+    position: absolute;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    left: 110px;
+    top: 50%;
+    font-size: 18px;
+    color: #fff;
+}
+
+#personalInfo .text-right{
+    position: absolute;
+    right: 40px;
+    color: #FC5E5E;
+}
+
+/*===editNicknameCtrl===*/
+ion-view[view-title='修改昵称']{
+    background-color: #EFEFF4;
+}
+
+#editNickname .save{
+    padding-top: 8px;
+    /* top: 0px; */
+    padding-right: 2px;
+    color: #FC5E5E;
+}
+
+#editNickname .nickContent{
+    padding: 10px;
+}
+
+#editNickname .header_top{
+    width: 100%;
+    position: relative;
+
+}
+
+#editNickname .header_bar{
+    width: 100%;
+    border-radius: 4px;
+    padding: 0px 5px;
+    background: #fff;
+    display: flex;
+    border: 1px solid #FC5E5E;
+    height: 50px;
+
+}
+
+#editNickname .header_bar span{
+    line-height: 26px;
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 18px;
+    display: block;
+}
+
+#editNickname .header_bar input{
+    padding-left: 8px;
+    width: 70%;
+    background: inherit;
+    height: 46px;
+    line-height: 26px;
+    font-size: 18px;
+
+}
+
+#editNickname .header_bar i{
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    font-size: 18px;
+    color: #C8C7CC;
+}
+
+/*===shoppingCarCtrl===*/
+ion-view[view-title='购物车']{
+    background-color: #EFEFF4;
+}
+
+#shoppingCar .item{
+    margin: 10px 0px;
+    border-style: solid none;
+    padding: 10px;
+}
+
+#shoppingCar .item-content{
+    padding: 0px;
+    position: initial;
+}
+
+#shoppingCar .shoppingItem{
+    width:100%;
+    min-width:320px;
+    position:relative;
+    padding-left: 24px;
+
+}
+
+#shoppingCar .shoppingImg{
+    border: 2px solid #ddd;
+    left: 36px;
+    width: 106px;
+    float: left;
+}
+
+#shoppingCar .shopChangeImg{
+    width:100px;
+}
+
+#shoppingCar .shopText{
+    position: absolute;
+    left: 140px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+#shoppingCar .shopTextP p{
+    font-size: 13px;
+    overflow: inherit;
+    text-overflow: clip;
+    white-space: initial;
+    color: #000;
+}
+#shoppingCar .shopTextSpan{
+    padding-top: 10px;
+    color: #999;
+}
+
+#shoppingCar .shopTextSpan span{
+    font-size: 12px;
+}
+
+#shoppingCar .shopTextPrice{
+    padding-top: 20px;
+    font-size: 16px;
+    color: #FC5E5E;
+}
+
+#shoppingCar .shopAmount input{
+    border: 1px solid #999;
+    color: #999;
+    position: absolute;
+    bottom: 10px;
+    right: 43px;
+    width: 30px;
+    height: 20px;
+    text-align: center;
+}
+#shoppingCar .iconRight{
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    right: 20px;
+    color: #999;
+    border: 1px solid #999;
+    height: 20px;
+    width: 24px;
+    border-radius: 0px 3px 3px 0px;
+}
+
+#shoppingCar .iconLeft{
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    right: 72px;
+    color: #999;
+    border: 1px solid #999;
+    height: 20px;
+    width: 24px;
+    border-radius: 3px 0px 0px 3px;
+}
+
+#shoppingCar  .checkbox input, #shoppingCar  .checkbox-icon{
+    width: 24px;
+    height: 24px;
+}
+
+#shoppingCar .checkbox input:checked:before, #shoppingCar .checkbox input:checked + .checkbox-icon:before {
+    background: #FC5E5E;
+    border-color: #FC5E5E;
+}
+
+#shoppingCar .item-checkbox .checkbox {
+    width: 100px;
+    right: 2px;
+    left: 2px;
+}
+
+#shoppingCar .buttonSub{
+    position: absolute;
+    right: 0;
+    width: 30%;
+    top: 0px;
+    border-radius: 0;
+    height: 50px;
+    font-size: 16px;
+    border-color: #FF0000;
+    background-color: #FF0000;
+    color: #fff;
+}
+
+#shoppingCar .badge{
+    color: #fff;
+    padding: 3px 0px;
+}
+
+#shoppingCar .checkAll{
+    position: absolute;
+    top: 34%;
+    font-size: 16px;
+    /* border-width: inherit; */
+    font-weight: bolder;
+    left: 42px;
+}
+#shoppingCar .total{
+    position: absolute;
+    top: 35%;
+    right: 32%;
+    font-size: 14px;
+}
+
+#shoppingCar .totalPrice {
+    color: #FC5E5E;
+}
+
+/*===paymentOrderCtrl===*/
+ion-view[view-title='待付款订单'], ion-view[view-title='我的订单']{
+    background-color: #EFEFF4;
+}
+
+#paymentOrder .item, #myOrder .item{
+    padding: 10px;
+    border-color: #fff;
+    background-color: #F9F9F9;;
+    margin: 0px 0px 1px;
+}
+
+#paymentOrder .payContent, #myOrder .payContent{
+    background-color: #fff;
+    margin-top: 10px;
+    border: 1px solid #C8C7CC;
+}
+
+#paymentOrder .payTop, #myOrder .payTop{
+    height: 40px;
+}
+
+#paymentOrder .payBox, #myOrder .payBox{
+    color: #C8C7CC;
+    font-size: 34px;
+    padding-left: 10px;
+    position: absolute;
+    top: 4px;
+}
+
+#paymentOrder .payText, #myOrder .payText{
+    position: absolute;
+    left: 39px;
+    top: 16px;
+}
+
+#paymentOrder .payRight, #myOrder .payRight{
+    color: #C8C7CC;
+    position: absolute;
+    top: 16px;
+    left: 146px;
+}
+
+#paymentOrder .payTextRight{
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    color: #FC5E5E;
+    font-size: 14px;
+}
+
+#paymentOrder .shoppingItem, #myOrder .shoppingItem{
+    width:100%;
+    min-width:320px;
+}
+
+#paymentOrder .shoppingImg, #myOrder .shoppingImg{
+    border: 2px solid #ddd;
+    left: 36px;
+    width: 86px;
+    float: left;
+}
+
+#paymentOrder .shopChangeImg, #myOrder .shopChangeImg{
+    width:80px;
+}
+
+#paymentOrder .shopText, #myOrder .shopText{
+    position: absolute;
+    left: 110px;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+#paymentOrder .shopTextP p, #myOrder .shopTextP p{
+    font-size: 13px;
+    overflow: inherit;
+    text-overflow: clip;
+    white-space: initial;
+    color: #000;
+}
+#paymentOrder .shopTextSpan, #myOrder .shopTextSpan{
+    padding-top: 10px;
+}
+
+#paymentOrder .shopTextSpan span, #myOrder .shopTextSpan span{
+    font-size: 12px;
+}
+
+#paymentOrder .listBottom, #myOrder .listBottom{
+    height: 40px;
+}
+
+#paymentOrder .listBottomSpan ,#myOrder .listBottomSpan{
+    position: absolute;
+    right: 20px;
+    font-size: 14px;
+}
+
+#paymentOrder .listBottomSpan span ,#myOrder .listBottomSpan span{
+    line-height: 40px;
+}
+
+#paymentOrder .payBottom, #myOrder .payBottom{
+    height: 40px;
+    border-style: solid none;
+    border-width: 1px;
+    border-color: #C8C7CC;
+}
+
+#paymentOrder .button ,#myOrder .button{
+    min-height: 24px;
+    line-height: 24px;
+    border-color: #C8C7CC;
+    font-size: 14px;
+    background-color: #fff;
+    padding: 0px 4px;
+    position: absolute;
+}
+
+#paymentOrder .buttonLeft{
+    right: 78px;
+    bottom: 7px;
+}
+
+#paymentOrder .buttonRight, #myOrder .buttonRight{
+    right: 14px;
+    bottom: 7px;
+    color: #FC5E5E;
+    border-color: #F1A8A8;
+}
+
+#myOrder .buttonLeft{
+    right: 90px;
+    bottom: 7px;
+}
+
+#myOrder .payTrash{
+    color: #C8C7CC;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 26px;
 }

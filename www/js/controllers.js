@@ -17,7 +17,136 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AboutMeCtrl', function($scope, $rootScope, $stateParams) {
+.controller('AboutMeCtrl', function($scope, $state, $rootScope, $stateParams) {
+        var screenWidth = document.body.scrollWidth;
+        var picHeight=Math.ceil((screenWidth * 274)/375);
+        $scope.picHeight=picHeight+'px';
+
+        $scope.moveToShoppingCarPage =  function(){
+            $state.go('shoppingCar');
+        }
+
+        $scope.moveToPaymentOrderPage =  function(){
+            $state.go('paymentOrder');
+        }
+
+        $scope.moveToMyOrderPage =  function(){
+            $state.go('myOrder');
+        }
+
+        $scope.moveToInfoPage =  function(){
+            $state.go('personalInfo');
+        }
+
+        $scope.moveToLoginPage = function(){
+            $state.go('login');
+        }
+
+})
+
+.controller('shoppingCarCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+
+    $ionicLoading.show({
+        template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
+        noBackdrop: true
+    });
+        ShopTypeService.getShopByType('a').then(function(data){
+        $scope.shoppingCarList = data;
+        $ionicLoading.hide();
+        $rootScope.domesticTabTitle = '';
+    }, function(error){
+        $ionicLoading.hide();
+        //$scope.showAlert(error);
+    });
+
+    $scope.editNickname = function(){
+        $state.go('editNickname');
+    };
+
+    $scope.moveToAboutPage = function(){
+        $state.go('tab.AboutMe');
+    }
+
+})
+
+.controller('paymentOrderCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+
+    $ionicLoading.show({
+        template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
+        noBackdrop: true
+    });
+    ShopTypeService.getShopByType('a').then(function(data){
+        $scope.shoppingCarList = data;
+        $ionicLoading.hide();
+        $rootScope.domesticTabTitle = '';
+    }, function(error){
+        $ionicLoading.hide();
+        //$scope.showAlert(error);
+    });
+
+    $scope.editNickname = function(){
+        $state.go('editNickname');
+    };
+
+    $scope.moveToAboutPage = function(){
+        $state.go('tab.AboutMe');
+    }
+
+})
+
+.controller('myOrderCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+
+    $ionicLoading.show({
+        template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
+        noBackdrop: true
+    });
+    ShopTypeService.getShopByType('a').then(function(data){
+        $scope.shoppingCarList = data;
+        $ionicLoading.hide();
+        $rootScope.domesticTabTitle = '';
+    }, function(error){
+        $ionicLoading.hide();
+        //$scope.showAlert(error);
+    });
+
+    $scope.editNickname = function(){
+        $state.go('editNickname');
+    };
+
+    $scope.moveToAboutPage = function(){
+        $state.go('tab.AboutMe');
+    }
+
+})
+
+.controller('personalInfoCtrl', function($scope, $state, $rootScope, $stateParams) {
+    var screenWidth = document.body.scrollWidth;
+    var picHeight=Math.ceil((screenWidth * 100)/290);
+    $scope.picHeight=picHeight+'px';
+    console.log($scope.picHeight);
+
+    $scope.editNickname = function(){
+        $state.go('editNickname');
+    };
+
+    $scope.moveToAboutPage = function(){
+        $state.go('tab.AboutMe');
+    }
+
+})
+
+.controller('editNicknameCtrl', function($scope, $state, $rootScope, $stateParams) {
+
+    $scope.nickName = 'aaa';
+
+    $scope.clearInput = function(){
+        $('.nickName').val('');
+        $scope.nickName = '';
+    };
+
+    $scope.moveToPerInfoPage = function(){
+        $state.go('personalInfo');
+    }
 
 })
 
@@ -57,11 +186,11 @@ angular.module('starter.controllers', [])
 
       $scope.on_select = function(idx){
         if(idx == 5){
-          $rootScope.domesticTabTitle ="anzhuang";
-        }else if(idx == 6){
           $rootScope.domesticTabTitle ="kaisuo";
-        }else if(idx == 7){
+        }else if(idx == 6){
           $rootScope.domesticTabTitle ="lvhua";
+        }else if(idx == 7){
+          $rootScope.domesticTabTitle ="anzhuang";
         }
         console.log($rootScope.domesticTabTitle);
         $ionicLoading.show({
