@@ -177,7 +177,8 @@ angular.module('starter.controllers', [])
         }
 
         $scope.goMessageDetail = function(){
-            $state.go('communityDetail');
+            var index = $ionicTabsDelegate.selectedIndex();
+            $state.go('communityDetail',{"tabIndex":index});
         }
 
         function selectTab(){
@@ -260,8 +261,8 @@ angular.module('starter.controllers', [])
         }
     })
 
-.controller('CommunityDetail',function($scope,$state){
-
+.controller('CommunityDetail',function($scope,$state,$stateParams){
+        
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
     $scope.divMain = {
@@ -301,7 +302,7 @@ angular.module('starter.controllers', [])
 
 
     $scope.back = function(){
-        $state.go('community');
+        $state.go('community',{"type":$stateParams.tabIndex});
     }
 
     $scope.submitComment = function(){
