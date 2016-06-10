@@ -95,10 +95,6 @@ ion-tabs.tabs-color-active-positive .tab-item {
   color: #f40;
 }
 
-#Domestic .transport span{
-margin-right: 14px;
-}
-
 #Domestic1 a.tabLeft{
   position: absolute;
   left: 6px;
@@ -112,10 +108,12 @@ font-size: 24px;
 
 #domesticTab .tabs-top > .tabs,#domesticTab .tabs.tabs-top{
   top: 0px;
+  padding-right: 14px;
 }
 
 #Domestic1 .tabs{
   top: 0px;
+  padding-left: 22px;
 }
 
 #Domestic a.tab-item.tab-item-active, #Domestic a.tab-item.active, #Domestic a.tab-item.activated,#Domestic1 a.tab-item.tab-item-active, #Domestic1 a.tab-item.active, #Domestic1 a.tab-item.activated{
@@ -128,11 +126,11 @@ font-size: 24px;
 }
 
 #Domestic .tab-item{
-  font-size: 13px;
+  font-size: 12px;
 }
 
 #Domestic1 .tab-item{
-  font-size: 13px;
+  font-size: 12px;
   max-width: 162px;
 }
 
