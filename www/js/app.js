@@ -218,6 +218,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     cache:false
   })
 
+  .state('publishTheme', {
+    url: '/publishTheme',
+    templateUrl: 'templates/publishTheme.html',
+    controller: 'publishThemeCtrl',
+    cache:false
+  })
+
+  .state('joinTheme', {
+    url: '/joinTheme',
+    templateUrl: 'templates/joinTheme.html',
+    controller: 'joinThemeCtrl',
+    cache:false
+  })
+
   .state('personalInfo', {
     url: '/personalInfo',
     templateUrl: 'templates/personalInfo.html',
