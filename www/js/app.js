@@ -107,7 +107,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
 
   .state('community', {
-      url: '/community/:type',
+      url: '/community/:tabIndex',
       templateUrl: 'templates/community.html',
       controller: 'CommunityMainCtrl',
       cache:false
@@ -120,7 +120,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
 
   .state('addCommunity', {
-      url: '/addCommunity',
+      url: '/addCommunity:tabIndex',
       templateUrl: 'templates/addCommunity.html',
       controller: 'addCommunityNewsCtrl'
   })

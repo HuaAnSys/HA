@@ -145,13 +145,13 @@ angular.module('starter.controllers', [])
 
         $scope.goAdvertise = function(arg){
             if(arg==='0'){
-                $state.go('community',{'type':arg});
+                $state.go('community',{'tabIndex':arg});
             }else if(arg==='1'){
-                $state.go('community',{'type':arg});
+                $state.go('community',{'tabIndex':arg});
             }else if(arg==='2'){
-                $state.go('community',{'type':arg});
+                $state.go('community',{'tabIndex':arg});
             }else if(arg==='3'){
-                $state.go('community',{'type':arg});
+                $state.go('community',{'tabIndex':arg});
             }
         }
 
@@ -182,7 +182,7 @@ angular.module('starter.controllers', [])
         }
 
         function selectTab(){
-            var index = parseInt($stateParams.type);
+            var index = parseInt($stateParams.tabIndex);
             if(index>-1){
                 $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(index);
                 $stateParams.type = -1;
@@ -192,7 +192,8 @@ angular.module('starter.controllers', [])
         }
 
         $scope.addNews = function(){
-            $state.go("addCommunity");
+            var index = $ionicTabsDelegate.selectedIndex();
+            $state.go("addCommunity",{"tabIndex":index});
         }
 
         $scope.communityNews = [
@@ -231,7 +232,7 @@ angular.module('starter.controllers', [])
 .controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera){
 
         $scope.back = function(){
-            $state.go("community",{type:"0"});
+            $state.go("community",{"tabIndex":$stateParams.tabIndex});
         }
 
         $scope.showAddImgFlag = true;
@@ -262,7 +263,7 @@ angular.module('starter.controllers', [])
     })
 
 .controller('CommunityDetail',function($scope,$state,$stateParams){
-        
+
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
     $scope.divMain = {
@@ -302,7 +303,7 @@ angular.module('starter.controllers', [])
 
 
     $scope.back = function(){
-        $state.go('community',{"type":$stateParams.tabIndex});
+        $state.go('community',{"tabIndex":$stateParams.tabIndex});
     }
 
     $scope.submitComment = function(){
