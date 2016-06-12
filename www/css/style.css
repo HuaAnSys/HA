@@ -504,7 +504,10 @@ ion-view[id="homeView"] .advertisements{
     left: 20px;
     color: #777;
 }
-
+#ShopProductDetail.tabs-top > .tabs,
+#ShopProductDetail .tabs.tabs-top{
+    top: 0;
+}
 
 
 
@@ -521,6 +524,123 @@ ion-view[id="homeView"] .advertisements{
     max-width: 60px;
     font-size: 16px;
 }
+/* Tab1 */
+#productDetailTab1{
+    background-color: #EFEFF4;
+}
+#productDetailTab1 .productImg{
+    background-color: #fff;
+    padding: 0;
+}
+#productDetailTab1 .productImg img{ display: block; height: 368px; margin: 0 auto;}
+
+#ShopProductDetail .has-tabs-top{top: 48px;}
+.productNameAndPrice,
+.productType,
+.productNum,
+.productButtom{
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 5px;
+}
+.productNameAndPrice span{
+    display: block;
+    margin-bottom: 10px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    white-space:nowrap;
+
+}
+.productNameAndPrice span.productName{
+    font-size: 14px;
+    color: #000;
+}
+.productNameAndPrice span.productSubName{
+    font-size: 12px;
+    color: #FC5E5E;
+}
+.productNameAndPrice span.productPrice{
+    font-size: 20px;
+    color: #FC5E5E;
+    margin-bottom: 0;
+}
+.productButtom div.productButtomLeft,
+.productButtom div.productButtomRight{ width: 50%; height: 38px; float: left; padding: 0 0 0 5px;}
+.productButtom div.productButtomLeft{ padding: 0 5px 0 0;}
+.productButtom div button{ background-color: #FF4200; color: #fff; width: 100%; height: 100%; margin: 0; border: 0; font-size: 16px;}
+.productButtom div.productButtomLeft button{ background-color: #FFE4CF; color: #E5511D;}
+.productButtom div.productButtomRight i.ion-ios-cart{ font-size: 18px; margin-right: 5px;}
+
+.productType,
+.productNum{
+    position: relative;
+}
+.productTypeLable,
+.productNumLable{
+    position: absolute;
+}
+.productTypeList,
+.productNumList{
+    padding-left: 80px;
+}
+.productTypeList .item-radio.item{
+    float: left;
+    font-size: 12px;
+    padding: 4px;
+    margin: 0 5px 5px 0;
+}
+.productTypeList .item-radio.item.active{
+    background-color: #fff;
+    border: 1px solid #FF4400;
+    color: #FF4400;
+}
+.productNumDiv,
+.productNumSpan{
+    display: block;
+    float: left;
+}
+.productNum input{
+    float: left;
+    border: 1px solid #999;
+    color: #999;
+    width: 30px;
+    height: 20px;
+    text-align: center;
+}
+.productNum .iconRight{
+    float: left;
+    text-align: center;
+    color: #999;
+    border: 1px solid #999;
+    height: 20px;
+    width: 24px;
+    border-radius: 0px 3px 3px 0px;
+}
+
+.productNum .iconLeft{
+    float: left;
+    text-align: center;
+    color: #999;
+    border: 1px solid #999;
+    height: 20px;
+    width: 24px;
+    border-radius: 3px 0px 0px 3px;
+}
+.productNumList .productNumSpan{
+    margin-left: 5px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+
+
+
+
+
+
+
+
 
 ion-view[id="communityDetail"]{
     background-color: #EFEFf4;

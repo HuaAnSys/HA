@@ -634,7 +634,10 @@ angular.module('starter.controllers', [])
 
 
     })
-    .controller('ShopProductDetailCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout) {
+    .controller('ShopProductDetailCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
         console.log($stateParams);
         console.log($stateParams.name);
         console.log($stateParams.type);
@@ -652,6 +655,16 @@ angular.module('starter.controllers', [])
 
         }
         $scope.productDetail($stateParams);
+        $scope.productTypeRadio = "";
+        $scope.clicProductTypeRadio = function(item){
+            $scope.itemRadio = item;
+
+
+        };
+        $scope.productNumAmount = 1;
+        $scope.buyProduct = function(){
+
+        }
 
     })
 
