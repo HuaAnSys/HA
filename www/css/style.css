@@ -632,11 +632,112 @@ ion-view[id="homeView"] .advertisements{
     font-size: 14px;
     line-height: 20px;
 }
+.productDetailText {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #990000;
+}
+.productDetailText p{
+    margin-bottom: 10px;
+}
+.productDetailImg img{
+    width: 100%;
+}
 
+/* Tab 3 */
+.productComment{
+    position: relative;
+}
+.productCommentTitle{
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 44px;
+}
+.productCommentType{
+    padding: 10px 0;
+    width: 25%;
+    height: 44px;
+    float: left;
+}
+.productCommentType.active{
+    color: #FC5E5E;
+}
+.productCommentType span{
+    display: block;
+    text-align: center;
+    font-size: 12px;
 
+}
+.productCommentType span.type{
+    margin-bottom: 5px;
 
+}
+.productCommentType span.Num{
 
+}
 
+.productCommentMain{
+    background-color: #EFEFF4;
+    padding-top: 44px;
+}
+.itemTitle,
+.itemMain{
+    padding: 10px;
+}
+.productCommentItem{
+    background-color: #fff;
+    margin-top: 10px;
+    border-top: 1px solid #C8C7CC;
+    border-bottom: 1px solid #C8C7CC;
+}
+.productCommentItem .itemTitle{
+    border-bottom: 1px solid #C8C7CC;
+}
+.productCommentItem .itemTitleLeft{
+    float: left;
+}
+.productCommentItem .itemTitleRight{
+    float: right;
+}
+.productCommentItem .itemTitleLeft img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    float: left;
+    border-radius: 15px;
+
+}
+.productCommentItem .itemTitleLeft span{
+    font-size: 14px;
+    line-height: 30px;
+    float: left;
+
+}
+.productCommentItem .itemTitleRight{
+    font-size: 14px;
+    line-height: 30px;
+}
+.productCommentItem .itemMain .star{
+    color: #FC5E5E;
+    margin-bottom: 10px;
+}
+.productCommentItem .itemMain p{
+    color: #000;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+.productCommentItem .itemMain span{
+    display: block;
+    color: #777777;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.productCommentItem .itemMain span:last-child{
+    margin-bottom: 0;
+}
 
 
 

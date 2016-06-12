@@ -638,10 +638,18 @@ angular.module('starter.controllers', [])
         $scope.back=function(){
             $ionicHistory.goBack();
         }
+        $scope.submitOrder=function(product){
+            $state.go('submitOrder', {
+                name: product.name,
+                type: product.type,
+                price: product.price
+            });
+        }
         console.log($stateParams);
         console.log($stateParams.name);
         console.log($stateParams.type);
         console.log($stateParams.price);
+        $scope.product = $stateParams;
         $scope.productDetail = function(product){
             ShopProductDetailService.getShopProductDetail(product).then(function(data){
                 $scope.productDetailData = data;
@@ -665,6 +673,23 @@ angular.module('starter.controllers', [])
         $scope.buyProduct = function(){
 
         }
+
+        //Tab 3
+        $scope.clicProductCommentType = function(item){
+            $scope.ProductCommentType = item;
+
+
+        };
+
+    })
+    .controller('submitOrderCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        console.log($stateParams);
+        console.log($stateParams.name);
+        console.log($stateParams.type);
+        console.log($stateParams.price);
 
     })
 
