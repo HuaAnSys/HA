@@ -105,6 +105,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     controller: 'ShopProductDetailCtrl',
     cache:false
   })
+      .state('submitOrder', {
+        url: '/submitOrder?name&type&price',
+        templateUrl: 'templates/submitOrder.html',
+        controller: 'submitOrderCtrl',
+        cache:false
+      })
+
 
   .state('community', {
       url: '/community/:tabIndex',
