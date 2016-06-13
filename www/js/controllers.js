@@ -103,7 +103,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('myOrderCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
-
     $ionicLoading.show({
         template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
         noBackdrop: true
@@ -117,9 +116,6 @@ angular.module('starter.controllers', [])
         //$scope.showAlert(error);
     });
 
-    $scope.editNickname = function(){
-        $state.go('editNickname');
-    };
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');

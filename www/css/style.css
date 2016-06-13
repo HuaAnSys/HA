@@ -1191,7 +1191,7 @@ ion-view[view-title='个人信息']{
 }
 
 #personalInfo .perPhoImg{
-    height: 100px;
+    height: 80px;
     border-radius: 50%;
     border: 5px solid #ffffff;
 }
@@ -1200,9 +1200,9 @@ ion-view[view-title='个人信息']{
     position: absolute;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
-    left: 110px;
+    left: 90px;
     top: 50%;
-    font-size: 18px;
+    font-size: 16px;
     color: #fff;
 }
 
@@ -1346,7 +1346,7 @@ ion-view[view-title='购物车']{
     height: 20px;
     text-align: center;
 }
-.iconRight{
+#shoppingCar .iconRight{
     position: absolute;
     text-align: center;
     bottom: 10px;
@@ -1358,7 +1358,7 @@ ion-view[view-title='购物车']{
     border-radius: 0px 3px 3px 0px;
 }
 
-.iconLeft{
+#shoppingCar .iconLeft{
     position: absolute;
     text-align: center;
     bottom: 10px;
@@ -1505,6 +1505,7 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单']{
 }
 #paymentOrder .shopTextSpan, #myOrder .shopTextSpan{
     padding-top: 10px;
+    color: #444;
 }
 
 .listBottom{
