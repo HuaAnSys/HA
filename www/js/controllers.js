@@ -399,7 +399,7 @@ angular.module('starter.controllers', [])
             var index = parseInt($stateParams.tabIndex);
             if(index>-1){
                 $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(index);
-                $stateParams.type = -1;
+                $stateParams.tabIndex = -1;
             }else{
 
             }
