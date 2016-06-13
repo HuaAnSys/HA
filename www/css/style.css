@@ -568,6 +568,9 @@ ion-view[id="communityDetail"]{
 */
 
 /*Login page css*/
+ion-view[id="login"],ion-view[id="regist"],ion-view[id="retrieve"],ion-view[id="propertyManagement"],ion-view[id="relatedRepairs"],ion-view[id="houseSaleAndRent"],ion-view[id="visitorPassport"]{
+    background-color: #EFEFf4;
+}
 ion-header-bar.bar.bar-header {
     border-bottom: 1px solid #C8C7CC;
 }
@@ -666,6 +669,9 @@ button.registBtn{
 }
 
 /*Select Location to pay the property costs*/
+.selectLocationToPayView ion-item.bigBlankLine.item, .relatedRepairsView ion-item.mediumBlank.item, .houseSaleAndRentView ion-item.mediumBlank.item, .visitorPassportView ion-item.mediumBlank.item{
+    border-top: none;
+}
 .selectLocationToPayView .list .item.item-accordion {
     line-height: 38px;
     padding-top: 0;
@@ -697,20 +703,20 @@ button.registBtn{
     font-size: 60px;
     margin: 15px auto;
 }
-.showBalanceInPayPropertyView .payDateHistory, .relatedRepairsView .haveSolved{
+.showBalanceInPayPropertyView .payDateHistory, .relatedRepairsView .haveSolved, .houseSaleAndRentView .haveSolved, .visitorPassportView .haveSolved{
     position: absolute;
     right: 5px;
     bottom: 12px;
     color: #1ECD1E;
 }
-.showBalanceInPayPropertyView .listInShowBalance,.relatedRepairsView .listInRelatedRepairs{
+.showBalanceInPayPropertyView .listInShowBalance,.relatedRepairsView .listInRelatedRepairs, .houseSaleAndRentView .listInRelatedRepairs, .visitorPassportView .listInRelatedRepairs{
     padding: 0px;
 }
-.showBalanceInPayPropertyView .listInShowBalance div:nth-child(2),.relatedRepairsView .listInRelatedRepairs div:nth-child(2){
+.showBalanceInPayPropertyView .listInShowBalance div:nth-child(2),.relatedRepairsView .listInRelatedRepairs div:nth-child(2), .houseSaleAndRentView .listInRelatedRepairs div:nth-child(2), .visitorPassportView .listInRelatedRepairs div:nth-child(2){
     font-size: 14px;
     color: #777;
 }
-.showBalanceInPayPropertyView .listInShowBalance div,.relatedRepairsView .listInRelatedRepairs div{
+.showBalanceInPayPropertyView .listInShowBalance div,.relatedRepairsView .listInRelatedRepairs div, .houseSaleAndRentView .listInRelatedRepairs div, .houseSaleAndRentView .listInRelatedRepairs div, .visitorPassportView .listInRelatedRepairs div{
     margin: 10px;
 }
 
@@ -730,19 +736,118 @@ button.registBtn{
     border-bottom: none;
 }
 
-.relatedRepairsView .notSolved{
+.relatedRepairsView .notSolved, .houseSaleAndRentView .notSolved, .visitorPassportView .notSolved{
     position: absolute;
     right: 5px;
     bottom: 12px;
     color: #777;
 }
 
-.textAreaStyle{
+.newAskForRepairView .textAreaStyle, .newAskForSaleOrRentView .textAreaStyle{
     padding: 15px;
 }
-.newAskForRepairView .bigBlankLine {
+.newAskForRepairView .bigBlankLine, .newAskForSaleOrRentView .bigBlankLine{
     padding: 10px 15px;
 }
+.newAskForRepairView .selectPicOrOpenCamera, .newAskForSaleOrRentView .selectPicOrOpenCamera{
+    height: 120px;
+    padding: 10px 20px;
+}
+.newAskForRepairView .selectPicOrOpenCameraPic, .newAskForSaleOrRentView .selectPicOrOpenCameraPic{
+    background: url('../img/addp.jpg') no-repeat;
+    background-size: 100%;
+    height: 100px;
+    width: 100px;
+}
+.newAskForRepairView .submitBtn, .newAskForSaleOrRentView .submitBtn{
+    margin-top: 0%;
+    padding-top: 5%;
+}
+
+.repairDetailsView .taskID,.repairDetailsView .taskAcceptOrNot,.houseSaleAndRentDetailsView .taskID,.houseSaleAndRentDetailsView .taskAcceptOrNot{
+    padding: 15px;
+}
+.repairDetailsView .taskID span:last-child, .houseSaleAndRentDetailsView .taskID span:last-child{
+    float: right;
+    margin-right:0px;
+    color: #777;
+}
+.repairDetailsView .acceptOrNotBtn, .houseSaleAndRentDetailsView .acceptOrNotBtn{
+    padding: 5px 10px;
+    background-color: #00C600;
+    color: #FFFFFF;
+    border-radius: 7px;
+    border: none;
+}
+.repairDetailsView .taskAcceptTime, .houseSaleAndRentDetailsView .taskAcceptTime{
+    float:right;
+    margin-top: 7px;
+    color: #777;
+}
+.repairDetailsView .repairContent, .houseSaleAndRentDetailsView .repairContent{
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.repairDetailsView .repairAddress, .houseSaleAndRentDetailsView .repairAddress{
+    color: #777;
+}
+.fiftyPxHeightBlank{
+    background: #EFEFF4;
+    height: 20px;
+    border-top: 1px solid #C8C7CC;
+    border-bottom: 1px solid #C8C7CC;
+}
+.repairDetailsView .onePieceDetail, .houseSaleAndRentDetailsView .onePieceDetail{
+    height: 70px;
+}
+.repairDetailsView .headPortrait, .houseSaleAndRentDetailsView .headPortrait{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-left:15px;
+    margin-top: 10px;
+}
+.repairDetailsView .headPortrait.personIcon, .houseSaleAndRentDetailsView .headPortrait.personIcon{
+    background: #DDDBCE;
+}
+.repairDetailsView .progressStatus, .houseSaleAndRentDetailsView .progressStatus{
+    float: right;
+    height: 70px;
+    border-top: 1px solid #C8C7CC;
+}
+.repairDetailsView .progressStatus>div:first-child, .houseSaleAndRentDetailsView .progressStatus>div:first-child{
+    margin-top: 10px;
+}
+.repairDetailsView .progressStatus>div:last-child, .houseSaleAndRentDetailsView .progressStatus>div:last-child{
+    margin-top: 10px;
+    color:#777;
+}
+
+
+
+.repairDetailsFooter{
+    height: 60px;
+    padding: 0px;
+}
+
+.repairDetailsFooter div{
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.repairDetailsFooter>div:first-child{
+    background-color: #00C600;
+    width: 50%;
+    float: left;
+}
+.repairDetailsFooter>div:last-child{
+    background-color: red;
+    width: 50%;
+    float: right;
+}
+
 .goodPart{
     height: 40px;
     margin-top: 15px;
@@ -782,4 +887,23 @@ button.registBtn{
     width: 80%;
     left: 50px;
     font-size: 15px;
+}
+
+.showPhoneNumPopup .popup-buttons .button{
+    flex: 0;
+}
+
+.showPhoneNumPopup .popup-buttons .button-default{
+    min-width: 80px;
+    border: none;
+    background-color: #F5F5F5;
+    left: -10px;
+    margin-bottom: 10px;
+}
+
+.showPhoneNumPopup .popup-buttons .button-positive{
+    min-width: 150px;
+    background-color: #F23030;
+    margin-bottom: 10px;
+    right: 14px;
 }

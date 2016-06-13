@@ -189,6 +189,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     templateUrl: 'templates/newAskForRepair.html',
     controller: 'newAskForRepairCtrl'
   })
+  .state('repairDetails', {
+    url: '/repairDetails',
+    templateUrl: 'templates/repairDetails.html',
+    controller: 'repairDetailsCtrl'
+  })
+//House sale and rent
+  .state('houseSaleAndRent', {
+    url: '/houseSaleAndRent',
+    templateUrl: 'templates/houseSaleAndRent.html',
+    controller: 'houseSaleAndRentCtrl'
+  })
+  .state('newAskForSaleOrRent', {
+    url: '/newAskForSaleOrRent',
+    templateUrl: 'templates/newAskForSaleOrRent.html',
+    controller: 'newAskForSaleOrRentCtrl'
+  })
+  .state('houseSaleAndRentDetails', {
+    url: '/houseSaleAndRentDetails',
+    templateUrl: 'templates/houseSaleAndRentDetails.html',
+    controller: 'houseSaleAndRentDetailsCtrl'
+  })
+  .state('visitorPassport', {
+    url: '/visitorPassport',
+    templateUrl: 'templates/visitorPassport.html',
+    controller: 'visitorPassportCtrl'
+  })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/Home');

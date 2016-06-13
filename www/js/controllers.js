@@ -390,7 +390,7 @@ angular.module('starter.controllers', [])
     })
 
 //Property management sub page controllers
-    .controller('PropertyManagementCtrl', function($scope,$state,$ionicHistory) {
+    .controller('PropertyManagementCtrl', function($scope,$state,$ionicPopup) {
         var screenWidth = document.body.scrollWidth;
         var picHeight=Math.ceil((screenWidth * 164)/375);
         $scope.picHeight=picHeight+'px';
@@ -400,6 +400,38 @@ angular.module('starter.controllers', [])
         }
         $scope.gotoRelatedRepairs=function(){
             $state.go('relatedRepairs');
+        }
+        $scope.gotoHouseSaleAndRent=function(){
+            $state.go('houseSaleAndRent');
+        }
+        $scope.showConfirm = function() {
+            var confirmPopup = $ionicPopup.confirm({
+                //title: 'Consume Ice Cream',
+                template: '<div style="float: left;width: 42px;height: 42px;margin-left: 8px;padding-top: 7px;;border-radius: 50%;background-color: #00C800;"><i class="ion-ios-telephone" style="font-size: 30px;margin-left: 11px;color: #FFFFFF;"></i></div><div style="float: right;font-size: 35px;margin-top: 5px;margin-right: 5px">88888888</div> ',
+                //scope: $scope,
+                cssClass:"showPhoneNumPopup",
+                scope: $scope,
+                buttons: [
+                    { text: '取消' },
+                    {
+                        text: '<b>拨打物业电话</b>',
+                        type: 'button-positive',
+                        onTap: function(e) {
+                            console.log("call");
+                        }
+                    }
+                ]
+            })
+            //confirmPopup.then(function(res) {
+            //    if(res) {
+            //        console.log('You are sure');
+            //    } else {
+            //        console.log('You are not sure');
+            //    }
+            //});
+        }
+        $scope.gotoVisitorPassport=function(){
+            $state.go('visitorPassport');
         }
     })
     .controller('selectLocationToPayPropertyCtrl', function($scope,$state,$ionicHistory) {
@@ -480,8 +512,11 @@ angular.module('starter.controllers', [])
 
 //Related repairs controllers
     .controller('relatedRepairsCtrl', function($scope,$state,$ionicHistory) {
-        $scope.goNewAskForRepair= function () {
+        $scope.goNewAskForRepair = function () {
             $state.go('newAskForRepair');
+        }
+        $scope.goRepairDetails = function () {
+            $state.go('repairDetails');
         }
         $scope.back=function(){
             $ionicHistory.goBack();
@@ -489,7 +524,64 @@ angular.module('starter.controllers', [])
     })
     .controller('newAskForRepairCtrl', function($scope,$state,$ionicHistory) {
         var screenWidth = document.body.scrollWidth - 30;
-        $scope.textAreaCols=Math.floor(screenWidth/14)*2;
+        var screenHeight = document.body.scrollHeight - 30;
+        $scope.textAreaCols = Math.floor(screenWidth/14)*2;
+        $scope.submitBtnBackgroundHeight = screenHeight-15-162-36-120+'px';
+        $scope.goRelatedRepairs= function(){
+            $state.go('relatedRepairs');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('repairDetailsCtrl', function($scope,$state,$ionicHistory) {
+        var screenWidth = document.body.scrollWidth;
+        $scope.progressDetailContentWidth = screenWidth-15-40-20+'px';
+        console.log($scope.progressDetailContentWidth);
+
+
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+
+//House sale and rent controller
+    .controller('houseSaleAndRentCtrl', function($scope,$state,$ionicHistory) {
+        $scope.goNewAskForSaleOrRent = function () {
+            $state.go('newAskForSaleOrRent');
+        }
+        $scope.goSaleOrRentDetails = function () {
+            $state.go('houseSaleAndRentDetails');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('newAskForSaleOrRentCtrl', function($scope,$state,$ionicHistory) {
+        var screenWidth = document.body.scrollWidth - 30;
+        var screenHeight = document.body.scrollHeight - 30;
+        $scope.textAreaCols = Math.floor(screenWidth/14)*2;
+        $scope.submitBtnBackgroundHeight = screenHeight-15-162-36-120+'px';
+        $scope.gotoHouseSaleAndRent= function(){
+            $state.go('houseSaleAndRent');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('houseSaleAndRentDetailsCtrl', function($scope,$state,$ionicHistory) {
+        var screenWidth = document.body.scrollWidth;
+        $scope.progressDetailContentWidth = screenWidth-15-40-20+'px';
+        console.log($scope.progressDetailContentWidth);
+
+
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+
+    .controller('visitorPassportCtrl', function($scope,$state,$ionicHistory) {
+
 
         $scope.back=function(){
             $ionicHistory.goBack();
