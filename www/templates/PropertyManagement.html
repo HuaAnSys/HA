@@ -1,4 +1,4 @@
-<ion-view ng-controller="PropertyManagementCtrl">
+<ion-view id="propertyManagement" ng-controller="PropertyManagementCtrl">
     <ion-content>
         <div class="propertyManagementView">
             <ion-list>
@@ -17,20 +17,20 @@
                         <i class="icon ion-chevron-right"></i>
                     </div>
                 </ion-item>
-                <ion-item>
+                <ion-item ng-click="gotoHouseSaleAndRent()">
                     <div>
                         <span>房屋租售</span>
                         <i class="icon ion-chevron-right"></i>
                     </div>
                 </ion-item>
                 <div class="smallBlankLine"></div>
-                <ion-item>
+                <ion-item ng-click="showConfirm()">
                     <div>
                         <span>拨打物业电话</span>
                         <i class="icon ion-chevron-right"></i>
                     </div>
                 </ion-item>
-                <ion-item>
+                <ion-item ng-click="gotoVisitorPassport()">
                     <div>
                         <span>访客通行证</span>
                         <i class="icon ion-chevron-right"></i>

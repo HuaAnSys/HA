@@ -1,4 +1,4 @@
-<ion-view view-title="相关报修" ng-controller="relatedRepairsCtrl">
+<ion-view view-title="相关报修" id="relatedRepairs" ng-controller="relatedRepairsCtrl">
     <ion-nav-bar align-title="center">
         <ion-nav-buttons side="left" >
             <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
@@ -10,14 +10,14 @@
                 <ion-item class="mediumBlank">
                     大连XXX123号楼01-123
                 </ion-item>
-                <ion-item class="listInRelatedRepairs" ng-click="">
+                <ion-item class="listInRelatedRepairs" ng-click="goRepairDetails()">
                     <div>
                         <div>相关报修内容1</div>
                         <div>3天前</div>
                         <div class="haveSolved">已解决</div>
                     </div>
                 </ion-item>
-                <ion-item class="listInRelatedRepairs" ng-click="">
+                <ion-item class="listInRelatedRepairs" ng-click="goRepairDetails()">
                     <div>
                         <div>相关报修内容2</div>
                         <div>3分钟前</div>
