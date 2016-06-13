@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['starter.services'])
 
 .controller('DashCtrl', function($scope) {})
 
@@ -323,9 +323,8 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('HomeCtrl',function($scope,$state){
+.controller('HomeCtrl',function($scope,$state,commonService){
         console.log("HomeCtrl");
-
         $scope.slides = [
             {url:"img/adam.jpg"},
             {url:"img/ben.png"},

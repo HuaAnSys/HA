@@ -148,55 +148,74 @@ angular.module('starter.services', [])
     }
   };
 }])
-    .factory('ShopProductDetailService', ['$http','$q',function($http, $q){
-      // Might use a resource here that returns a JSON array
+.factory('ShopProductDetailService', ['$http','$q',function($http, $q){
+  // Might use a resource here that returns a JSON array
 
-      // Some fake testing data
+  // Some fake testing data
 
-      return {
-        getShopProductDetail: function (product) {
-          //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
+  return {
+    getShopProductDetail: function (product) {
+      //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
 
-          console.log(product);
-          var defer = $q.defer();
-          var request = $http.get('js/ShopProductDetail.json');
-          //if(type=='a'){
-          //  var request = $http.get('js/shopType_a.json');
-          //}else if(type=='b'){
-          //  var request = $http.get('js/shopType_b.json');
-          //}else if(type=='c'){
-          //  var request = $http.get('js/shopType_d.json');
-          //}else if(type=='d'){
-          //  var request = $http.get('js/shopType_d.json');
-          //}else if(type=='e'){
-          //  var request = $http.get('js/shopType_a.json');
-          //}else if(type=='f'){
-          //  var request = $http.get('js/shopType_b.json');
-          //}else if(type=='g'){
-          //  var request = $http.get('js/shopType_c.json');
-          //}else if(type=='h'){
-          //  var request = $http.get('js/shopType_d.json');
-          //}else if(type=='i'){
-          //  var request = $http.get('js/shopType_a.json');
-          //}else if(type=='j'){
-          //  var request = $http.get('js/shopType_b.json');
-          //}else if(type=='hot'){
-          //  var request = $http.get('js/shopTyp_hot.json');
-          //}
+      console.log(product);
+      var defer = $q.defer();
+      var request = $http.get('js/ShopProductDetail.json');
+      //if(type=='a'){
+      //  var request = $http.get('js/shopType_a.json');
+      //}else if(type=='b'){
+      //  var request = $http.get('js/shopType_b.json');
+      //}else if(type=='c'){
+      //  var request = $http.get('js/shopType_d.json');
+      //}else if(type=='d'){
+      //  var request = $http.get('js/shopType_d.json');
+      //}else if(type=='e'){
+      //  var request = $http.get('js/shopType_a.json');
+      //}else if(type=='f'){
+      //  var request = $http.get('js/shopType_b.json');
+      //}else if(type=='g'){
+      //  var request = $http.get('js/shopType_c.json');
+      //}else if(type=='h'){
+      //  var request = $http.get('js/shopType_d.json');
+      //}else if(type=='i'){
+      //  var request = $http.get('js/shopType_a.json');
+      //}else if(type=='j'){
+      //  var request = $http.get('js/shopType_b.json');
+      //}else if(type=='hot'){
+      //  var request = $http.get('js/shopTyp_hot.json');
+      //}
 
-          //Successful HTTP post request or not
-          request.success(function (result) {
-            //var status = result.success;
-            //if (status == "1") {
-            defer.resolve(result.data);
-            //} else {
-            //  defer.reject("Get draft list failed, please try again later.");
-            //}
-          });
-          request.error(function () {
-            defer.reject("Get draft list failed, please try again later.");
-          });
-          return defer.promise;
+      //Successful HTTP post request or not
+      request.success(function (result) {
+        //var status = result.success;
+        //if (status == "1") {
+        defer.resolve(result.data);
+        //} else {
+        //  defer.reject("Get draft list failed, please try again later.");
+        //}
+      });
+      request.error(function () {
+        defer.reject("Get draft list failed, please try again later.");
+      });
+      return defer.promise;
+    }
+  };
+}])
+
+.factory('commonService', function($ionicLoading){
+
+    function loading(){
+        $ionicLoading.show({
+            showBackdrop: true,
+            template: '<ion-spinner icon="spiral" class="spinner-assertive"></ion-spinner>'
+        });
+    }
+    return {
+        showLoading : function(){
+            loading();
+        },
+
+        hideLoading : function(){
+            $ionicLoading.hide();
         }
-      };
-    }])
+    };
+})
