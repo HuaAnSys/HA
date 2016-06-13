@@ -1,0 +1,25 @@
+<ion-view view-title="房屋租售" ng-controller="newAskForSaleOrRentCtrl">
+    <ion-nav-bar align-title="center">
+        <ion-nav-buttons side="left" >
+            <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="newAskForSaleOrRentView">
+            <div class="smallBlankLine"></div>
+            <div class="textAreaStyle">
+                <textarea rows="8" cols={{textAreaCols}} placeholder="如果有出租或者租赁本社区房屋的需求，可以告诉我们，会有专人为您服务..."></textarea>
+            </div>
+            <div class="bigBlankLine">添加图片</div>
+            <div class="selectPicOrOpenCamera">
+                <div class="selectPicOrOpenCameraPic" ng-click=""></div>
+            </div>
+
+            <div class="submitBtnBackground" style="height: {{submitBtnBackgroundHeight}};background-color: #EFEFF4">
+                <div class="submitBtn">
+                    <button type="submit" class="button button-block" ng-click="gotoHouseSaleAndRent()">提交</button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
