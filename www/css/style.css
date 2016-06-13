@@ -947,7 +947,7 @@ ion-view[view-title='购物车']{
     width:100%;
     min-width:320px;
     position:relative;
-    padding-left: 24px;
+    padding-left: 28px;
 
 }
 
@@ -1039,7 +1039,12 @@ ion-view[view-title='购物车']{
 #shoppingCar .item-checkbox .checkbox {
     width: 100px;
     right: 2px;
-    left: 2px;
+    left: 0px;
+}
+
+#shoppingCar .button-delete{
+    background-color: #FC5E5E;
+    color: #fff;
 }
 
 #shoppingCar .buttonSub{
