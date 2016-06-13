@@ -17,7 +17,225 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AboutMeCtrl', function($scope, $rootScope, $stateParams) {
+.controller('AboutMeCtrl', function($scope, $state, $rootScope, $stateParams) {
+        var screenWidth = document.body.scrollWidth;
+        var picHeight=Math.ceil((screenWidth * 274)/375);
+        $scope.picHeight=picHeight+'px';
+
+        $scope.moveToShoppingCarPage =  function(){
+            $state.go('shoppingCar');
+        }
+
+        $scope.moveToPaymentOrderPage =  function(){
+            $state.go('paymentOrder');
+        }
+
+        $scope.moveToMyOrderPage =  function(){
+            $state.go('myOrder');
+        }
+
+        $scope.moveToPublishThemePage =  function(){
+            $state.go('publishTheme');
+        }
+
+        $scope.moveToJoinThemePage =  function(){
+            $state.go('joinTheme');
+        }
+
+        $scope.moveToInfoPage =  function(){
+            $state.go('personalInfo');
+        }
+
+        $scope.moveToLoginPage = function(){
+            $state.go('login');
+        }
+
+})
+
+.controller('shoppingCarCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+
+    $ionicLoading.show({
+        template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
+        noBackdrop: true
+    });
+        ShopTypeService.getShopByType('a').then(function(data){
+        $scope.shoppingCarList = data;
+        $ionicLoading.hide();
+        $rootScope.domesticTabTitle = '';
+    }, function(error){
+        $ionicLoading.hide();
+        //$scope.showAlert(error);
+    });
+
+    $scope.editNickname = function(){
+        $state.go('editNickname');
+    };
+
+    $scope.moveToAboutPage = function(){
+        $state.go('tab.AboutMe');
+    }
+
+})
+
+.controller('paymentOrderCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+
+    $ionicLoading.show({
+        template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
+        noBackdrop: true
+    });
+    ShopTypeService.getShopByType('a').then(function(data){
+        $scope.shoppingCarList = data;
+        $ionicLoading.hide();
+        $rootScope.domesticTabTitle = '';
+    }, function(error){
+        $ionicLoading.hide();
+        //$scope.showAlert(error);
+    });
+
+    $scope.editNickname = function(){
+        $state.go('editNickname');
+    };
+
+    $scope.moveToAboutPage = function(){
+        $state.go('tab.AboutMe');
+    }
+
+})
+
+.controller('myOrderCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+
+    $ionicLoading.show({
+        template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
+        noBackdrop: true
+    });
+    ShopTypeService.getShopByType('a').then(function(data){
+        $scope.shoppingCarList = data;
+        $ionicLoading.hide();
+        $rootScope.domesticTabTitle = '';
+    }, function(error){
+        $ionicLoading.hide();
+        //$scope.showAlert(error);
+    });
+
+    $scope.editNickname = function(){
+        $state.go('editNickname');
+    };
+
+    $scope.moveToAboutPage = function(){
+        $state.go('tab.AboutMe');
+    }
+
+})
+
+.controller('publishThemeCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+
+    $scope.message_picture_width = document.body.scrollWidth-30+"px";
+
+    $scope.communityNews = [
+        {
+            "personIcon":"img/adam.jpg",
+            "name":"社区管理员",
+            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+            "descriptionImg":"img/adam.jpg"
+        },
+        {
+            "personIcon":"img/adam.jpg",
+            "name":"社区管理员",
+            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+            "descriptionImg":"img/adam.jpg"
+        },
+        {
+            "personIcon":"img/adam.jpg",
+            "name":"社区管理员",
+            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+            "descriptionImg":"img/adam.jpg"
+        },
+    ];
+
+
+    $scope.moveToAboutPage = function(){
+        $state.go('tab.AboutMe');
+    }
+
+})
+
+.controller('joinThemeCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+
+    $scope.message_picture_width = document.body.scrollWidth-30+"px";
+
+    $scope.communityNews = [
+        {
+            "personIcon":"img/adam.jpg",
+            "name":"社区管理员",
+            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+            "descriptionImg":"img/adam.jpg"
+        },
+        {
+            "personIcon":"img/adam.jpg",
+            "name":"社区管理员",
+            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+            "descriptionImg":"img/adam.jpg"
+        },
+        {
+            "personIcon":"img/adam.jpg",
+            "name":"社区管理员",
+            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+            "descriptionImg":"img/adam.jpg"
+        },
+    ];
+
+    $scope.moveToAboutPage = function(){
+        $state.go('tab.AboutMe');
+    }
+
+})
+
+.controller('personalInfoCtrl', function($scope, $state, $rootScope, $stateParams) {
+    var screenWidth = document.body.scrollWidth;
+    var picHeight=Math.ceil((screenWidth * 100)/290);
+    $scope.picHeight=picHeight+'px';
+    console.log($scope.picHeight);
+
+    $scope.editNickname = function(){
+        $state.go('editNickname');
+    };
+
+    $scope.moveToAboutPage = function(){
+        $state.go('tab.AboutMe');
+    }
+
+})
+
+.controller('editNicknameCtrl', function($scope, $state, $rootScope, $stateParams) {
+
+    $scope.nickName = 'aaa';
+
+    $scope.clearInput = function(){
+        $('.nickName').val('');
+        $scope.nickName = '';
+    };
+
+    $scope.moveToPerInfoPage = function(){
+        $state.go('personalInfo');
+    }
 
 })
 
@@ -57,11 +275,11 @@ angular.module('starter.controllers', [])
 
       $scope.on_select = function(idx){
         if(idx == 5){
-          $rootScope.domesticTabTitle ="anzhuang";
-        }else if(idx == 6){
           $rootScope.domesticTabTitle ="kaisuo";
-        }else if(idx == 7){
+        }else if(idx == 6){
           $rootScope.domesticTabTitle ="lvhua";
+        }else if(idx == 7){
+          $rootScope.domesticTabTitle ="anzhuang";
         }
         console.log($rootScope.domesticTabTitle);
         $ionicLoading.show({
@@ -113,26 +331,56 @@ angular.module('starter.controllers', [])
             {url:"img/ben.png"},
             {url:"img/perry.png"}
         ];
+
+        $scope.hotProducts = [
+            {
+             "productImg":"img/adam.jpg",
+             "description":"波兰(Mleko)进口纯牛奶",
+             "price":"9.9"
+            },
+            {
+                "productImg":"img/adam.jpg",
+                "description":"波兰(Mleko)进口纯牛奶",
+                "price":"9.9"
+            },
+            {
+                "productImg":"img/adam.jpg",
+                "description":"波兰(Mleko)进口纯牛奶",
+                "price":"9.9"
+            },
+            {
+                "productImg":"img/adam.jpg",
+                "description":"波兰(Mleko)进口纯牛奶",
+                "price":"9.9"
+            }
+        ];
+
+
         var slideHeight = document.body.scrollHeight-47;
         $scope.slideHeight = slideHeight*0.4+"px";
         var slideWidth = document.body.scrollWidth;
         $scope.slideWidth = slideWidth+"px";
 
         $scope.goAdvertise = function(arg){
-            if(arg==='a'){
-                $state.go('community');
-            }else if(arg==='b'){
-                $state.go('community');
-            }else if(arg==='c'){
-                $state.go('community');
-            }else if(arg==='d'){
-                $state.go('community');
+            if(arg==='0'){
+                $state.go('community',{'tabIndex':arg});
+            }else if(arg==='1'){
+                $state.go('community',{'tabIndex':arg});
+            }else if(arg==='2'){
+                $state.go('community',{'tabIndex':arg});
+            }else if(arg==='3'){
+                $state.go('community',{'tabIndex':arg});
             }
+        }
+
+        $scope.moreProduct = function(){
+            $state.go("tab.Shop");
         }
 
 })
 
-.controller('CommunityNews',function($scope,$state){
+.controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate){
+
         $scope.back = function(){
             $state.go('tab.Home');
         }
@@ -143,16 +391,96 @@ angular.module('starter.controllers', [])
         $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
         $scope.onTabSelect = function(index){
-            console.log(index);
+            selectTab();
         }
 
         $scope.goMessageDetail = function(){
-            $state.go('communityDetail');
+            var index = $ionicTabsDelegate.selectedIndex();
+            $state.go('communityDetail',{"tabIndex":index});
         }
+
+        function selectTab(){
+            var index = parseInt($stateParams.tabIndex);
+            if(index>-1){
+                $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(index);
+                $stateParams.type = -1;
+            }else{
+
+            }
+        }
+
+        $scope.addNews = function(){
+            var index = $ionicTabsDelegate.selectedIndex();
+            $state.go("addCommunity",{"tabIndex":index});
+        }
+
+        $scope.communityNews = [
+            {
+                "personIcon":"img/adam.jpg",
+                "name":"社区管理员",
+                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                        "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+                        "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+                        "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+                "descriptionImg":"img/adam.jpg"
+            },
+            {
+                "personIcon":"img/adam.jpg",
+                "name":"社区管理员",
+                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+                "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+                "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+                "descriptionImg":"img/adam.jpg"
+            },
+            {
+                "personIcon":"img/adam.jpg",
+                "name":"社区管理员",
+                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+                "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+                "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+                "descriptionImg":"img/adam.jpg"
+            },
+        ];
+
 
 })
 
-.controller('CommunityDetail',function($scope,$state){
+.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera){
+
+        $scope.back = function(){
+            $state.go("community",{"tabIndex":$stateParams.tabIndex});
+        }
+
+        $scope.showAddImgFlag = true;
+
+        $scope.takePhoto=function(){
+            var options = {
+                quality: 100,
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.CAMERA,
+                targetWidth: 500,
+                targetHeight: 500,
+                saveToPhotoAlbum: true,
+                encodingType:Camera.EncodingType.JPEG,
+                allowEdit: true,
+                mediaType:0,
+                cameraDirection:0,
+                popoverOptions: CameraPopoverOptions
+            };
+
+            $cordovaCamera.getPicture(options).then(function(imageURI) {
+                $scope.showAddImgFlag = false;
+                $scope.imageSrc= imageURI;
+                //image.src = "data:image/jpeg;base64," + imageData;
+            }, function(err) {
+
+            });
+        }
+    })
+
+.controller('CommunityDetail',function($scope,$state,$stateParams){
 
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
@@ -162,8 +490,43 @@ angular.module('starter.controllers', [])
         "background-color": "#FFFFFF",
         "border-bottom": "1px solid #c8c7cc"
     }
+
+        $scope.commentsDetail = {
+            "name":"社区管理员",
+            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+                "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+                "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+            "descriptionImg":"img/adam.jpg",
+            "comments":[
+                {
+                    name:'社区管理员',
+                    detail:'赞,支持!'
+                },
+                {
+                    name:'社区管理员',
+                    detail:'赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
+                    '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
+                    '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
+                    '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.' +
+                    '赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.赞,支持!这是一个神奇的网站.'
+                },
+                {
+                    name:'社区管理员',
+                    detail:'赞,支持!'
+                }
+            ]
+
+        };
+
+
     $scope.back = function(){
-        $state.go('community');
+        $state.go('community',{"tabIndex":$stateParams.tabIndex});
+    }
+
+    $scope.submitComment = function(){
+        var a = $scope.homtComments;
+        console.log(a);
     }
 })
     
@@ -271,11 +634,22 @@ angular.module('starter.controllers', [])
 
 
     })
-    .controller('ShopProductDetailCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout) {
+    .controller('ShopProductDetailCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        $scope.submitOrder=function(product){
+            $state.go('submitOrder', {
+                name: product.name,
+                type: product.type,
+                price: product.price
+            });
+        }
         console.log($stateParams);
         console.log($stateParams.name);
         console.log($stateParams.type);
         console.log($stateParams.price);
+        $scope.product = $stateParams;
         $scope.productDetail = function(product){
             ShopProductDetailService.getShopProductDetail(product).then(function(data){
                 $scope.productDetailData = data;
@@ -289,6 +663,33 @@ angular.module('starter.controllers', [])
 
         }
         $scope.productDetail($stateParams);
+        $scope.productTypeRadio = "";
+        $scope.clicProductTypeRadio = function(item){
+            $scope.itemRadio = item;
+
+
+        };
+        $scope.productNumAmount = 1;
+        $scope.buyProduct = function(){
+
+        }
+
+        //Tab 3
+        $scope.clicProductCommentType = function(item){
+            $scope.ProductCommentType = item;
+
+
+        };
+
+    })
+    .controller('submitOrderCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        console.log($stateParams);
+        console.log($stateParams.name);
+        console.log($stateParams.type);
+        console.log($stateParams.price);
 
     })
 

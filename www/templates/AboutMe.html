@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>AboutMe</title>
-</head>
-<body>
-  <h1>AboutMe</h1>
-</body>
-</html>
+<ion-view view-title="AboutMe" id="AboutView">
+    <ion-content>
+        <div class="aboutBag" style="height:{{picHeight}}">
+            <div class="aboutImgW">
+                <div class="aboutImgL">
+                    <img src="img/adam.jpg" class="aboutPhoImg"/>
+                    <span class="aboutNameText">Scarlette Johansson</span>
+                </div>
+            </div>
+        </div>
+        <ion-list class="aboutList">
+            <ion-item class="item item-icon-right" ng-click="moveToShoppingCarPage()">
+                <span class="aboutText">购物车</span>
+                <i class="icon ion-chevron-right icon-right"></i>
+            </ion-item>
+            <ion-item class="item item-icon-right" ng-click="moveToPaymentOrderPage()">
+                <span class="aboutText">代付款订单</span>
+                <i class="icon ion-chevron-right icon-right" ></i>
+            </ion-item>
+            <ion-item class="item item-icon-right" ng-click="moveToMyOrderPage()">
+                <span class="aboutText">我的订单</span>
+                <i class="icon ion-chevron-right icon-right"></i>
+            </ion-item>
+            <div class="smallBlankLine"></div>
+            <ion-item class="item item-icon-right " ng-click="moveToPublishThemePage()">
+                <span class="aboutText">我发表的主题</span>
+                <i class="icon ion-chevron-right icon-right"></i>
+            </ion-item>
+            <ion-item class="item item-icon-right" ng-click="moveToJoinThemePage()">
+                <span class="aboutText">我参与的主题</span>
+                <i class="icon ion-chevron-right icon-right"></i>
+            </ion-item>
+            <div class="smallBlankLine"></div>
+            <ion-item class="item item-icon-right" ng-click="moveToInfoPage()">
+                <span class="aboutText">个人信息</span>
+                <i class="icon ion-chevron-right icon-right"></i>
+            </ion-item>
+            <div class="smallBlankLine"></div>
+            <ion-item class="item item-icon-right"  ng-click="moveToLoginPage()">
+                <span class="aboutText">退出</span>
+                <i class="icon ion-chevron-right icon-right"></i>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

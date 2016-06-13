@@ -1,0 +1,21 @@
+<ion-view view-title="修改昵称" id="editNickname">
+    <ion-nav-bar align-title="center">
+        <ion-nav-buttons side="left" >
+            <i class="icon ion-chevron-left arrowP" ng-click="moveToPerInfoPage()"></i>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right" >
+            <span class="save" ng-click="moveToPerInfoPage()">保存</span>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="nickContent">
+            <div class="header_top">
+                <div class="header_bar">
+                    <span>昵称：</span>
+                    <input class="nickName" type="text" ng-model="nickName">
+                    <i class="icon ion-close-circled" ng-click="clearInput()"></i>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

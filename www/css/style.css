@@ -95,10 +95,6 @@ ion-tabs.tabs-color-active-positive .tab-item {
   color: #f40;
 }
 
-#Domestic1 .installTab span{
-margin-left: 16px;
-}
-
 #Domestic1 a.tabLeft{
   position: absolute;
   left: 6px;
@@ -112,10 +108,12 @@ font-size: 24px;
 
 #domesticTab .tabs-top > .tabs,#domesticTab .tabs.tabs-top{
   top: 0px;
+  padding-right: 14px;
 }
 
 #Domestic1 .tabs{
   top: 0px;
+  padding-left: 22px;
 }
 
 #Domestic a.tab-item.tab-item-active, #Domestic a.tab-item.active, #Domestic a.tab-item.activated,#Domestic1 a.tab-item.tab-item-active, #Domestic1 a.tab-item.active, #Domestic1 a.tab-item.activated{
@@ -128,18 +126,18 @@ font-size: 24px;
 }
 
 #Domestic .tab-item{
-  font-size: 18px;
+  font-size: 12px;
 }
 
 #Domestic1 .tab-item{
-  font-size: 18px;
+  font-size: 12px;
   max-width: 162px;
 }
 
 #Domestic .item, #Domestic1 .item {
   margin: -3px;
   padding: 0px;
-  height: 165px;
+  height: 140px;
   border-style: none;
 }
 
@@ -158,30 +156,30 @@ font-size: 24px;
   /*padding:25px 16px;*/
   /*float: left;*/
   position: absolute;
-  top: 20px;
+  top: 16px;
   left: 20px;
 }
 #Domestic .domImg .changeImg, #Domestic1 .domImg .changeImg{
-  width: 160px;
-  height: 120px;
+  width: 120px;
+  /*height: 120px;*/
 }
 
 #Domestic .domImg .fixImg, #Domestic1 .domImg .fixImg{
-  position: absolute;
-  left: -15px;
-  width: 75px;
-  top: 48px;
-
+    position: absolute;
+    left: -22px;
+    width: 55px;
+    top: 36px;
 }
 
 #Domestic .domText, #Domestic1 .domText{
   padding-top: 10px;
-  padding-left: 190px;
+  padding-left: 150px;
 
 }
 
 #Domestic .domTextLine, #Domestic1 .domTextLine{
-  height: 140px;
+  height: 124px;
+  padding-right: 2px;
   border-bottom-style: solid;
   border-width: 2px;
   border-color: #ddd;
@@ -190,13 +188,13 @@ font-size: 24px;
 }
 
 #Domestic .domText span, #Domestic1 .domText span{
-  line-height: 35px;
-  font-size: 18px;
+  line-height: 25px;
+  font-size: 14px;
 }
 
 #Domestic .domText p, #Domestic1 .domText p{
-  line-height: 35px;
-  font-size: 18px;
+  line-height: 25px;
+  font-size: 14px;
   overflow: inherit;
   text-overflow: clip;
   white-space: initial;
@@ -215,7 +213,7 @@ font-size: 24px;
 .domesticFooter .active {
   color: #FC5E5E;
 }
-ion-view[id="homeView"]{
+ion-view[id="homeView"],ion-view[id="addCommunity"]{
     background-color: #EFEFf4;
 }
 
@@ -322,7 +320,7 @@ ion-view[id="homeView"] .advertisements{
 .moreArrow{
     color:#8E8E8E;
     font-size: 10px;
-    margin-left: 2%;
+    padding-left: 2%;
 }
 
 .community_leftArrow{
@@ -506,7 +504,10 @@ ion-view[id="homeView"] .advertisements{
     left: 20px;
     color: #777;
 }
-
+#ShopProductDetail.tabs-top > .tabs,
+#ShopProductDetail .tabs.tabs-top{
+    top: 0;
+}
 
 
 
@@ -523,6 +524,224 @@ ion-view[id="homeView"] .advertisements{
     max-width: 60px;
     font-size: 16px;
 }
+/* Tab1 */
+#productDetailTab1{
+    background-color: #EFEFF4;
+}
+#productDetailTab1 .productImg{
+    background-color: #fff;
+    padding: 0;
+}
+#productDetailTab1 .productImg img{ display: block; height: 368px; margin: 0 auto;}
+
+#ShopProductDetail .has-tabs-top{top: 48px;}
+.productNameAndPrice,
+.productType,
+.productNum,
+.productButtom{
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 5px;
+}
+.productNameAndPrice span{
+    display: block;
+    margin-bottom: 10px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    white-space:nowrap;
+
+}
+.productNameAndPrice span.productName{
+    font-size: 14px;
+    color: #000;
+}
+.productNameAndPrice span.productSubName{
+    font-size: 12px;
+    color: #FC5E5E;
+}
+.productNameAndPrice span.productPrice{
+    font-size: 20px;
+    color: #FC5E5E;
+    margin-bottom: 0;
+}
+.productButtom div.productButtomLeft,
+.productButtom div.productButtomRight{ width: 50%; height: 38px; float: left; padding: 0 0 0 5px;}
+.productButtom div.productButtomLeft{ padding: 0 5px 0 0;}
+.productButtom div button{ background-color: #FF4200; color: #fff; width: 100%; height: 100%; margin: 0; border: 0; font-size: 16px;}
+.productButtom div.productButtomLeft button{ background-color: #FFE4CF; color: #E5511D;}
+.productButtom div.productButtomRight i.ion-ios-cart{ font-size: 18px; margin-right: 5px;}
+
+.productType,
+.productNum{
+    position: relative;
+}
+.productTypeLable,
+.productNumLable{
+    position: absolute;
+}
+.productTypeList,
+.productNumList{
+    padding-left: 80px;
+}
+.productTypeList .item-radio.item{
+    float: left;
+    font-size: 12px;
+    padding: 4px;
+    margin: 0 5px 5px 0;
+}
+.productTypeList .item-radio.item.active{
+    background-color: #fff;
+    border: 1px solid #FF4400;
+    color: #FF4400;
+}
+.productNumDiv,
+.productNumSpan{
+    display: block;
+    float: left;
+}
+.productNum input{
+    float: left;
+    border: 1px solid #999;
+    color: #999;
+    width: 30px;
+    height: 20px;
+    text-align: center;
+}
+.productNum .iconRight{
+    float: left;
+    text-align: center;
+    color: #999;
+    border: 1px solid #999;
+    height: 20px;
+    width: 24px;
+    border-radius: 0px 3px 3px 0px;
+}
+
+.productNum .iconLeft{
+    float: left;
+    text-align: center;
+    color: #999;
+    border: 1px solid #999;
+    height: 20px;
+    width: 24px;
+    border-radius: 3px 0px 0px 3px;
+}
+.productNumList .productNumSpan{
+    margin-left: 5px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.productDetailText {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #990000;
+}
+.productDetailText p{
+    margin-bottom: 10px;
+}
+.productDetailImg img{
+    width: 100%;
+}
+
+/* Tab 3 */
+.productComment{
+    position: relative;
+}
+.productCommentTitle{
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 44px;
+}
+.productCommentType{
+    padding: 10px 0;
+    width: 25%;
+    height: 44px;
+    float: left;
+}
+.productCommentType.active{
+    color: #FC5E5E;
+}
+.productCommentType span{
+    display: block;
+    text-align: center;
+    font-size: 12px;
+
+}
+.productCommentType span.type{
+    margin-bottom: 5px;
+
+}
+.productCommentType span.Num{
+
+}
+
+.productCommentMain{
+    background-color: #EFEFF4;
+    padding-top: 44px;
+}
+.itemTitle,
+.itemMain{
+    padding: 10px;
+}
+.productCommentItem{
+    background-color: #fff;
+    margin-top: 10px;
+    border-top: 1px solid #C8C7CC;
+    border-bottom: 1px solid #C8C7CC;
+}
+.productCommentItem .itemTitle{
+    border-bottom: 1px solid #C8C7CC;
+}
+.productCommentItem .itemTitleLeft{
+    float: left;
+}
+.productCommentItem .itemTitleRight{
+    float: right;
+}
+.productCommentItem .itemTitleLeft img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    float: left;
+    border-radius: 15px;
+
+}
+.productCommentItem .itemTitleLeft span{
+    font-size: 14px;
+    line-height: 30px;
+    float: left;
+
+}
+.productCommentItem .itemTitleRight{
+    font-size: 14px;
+    line-height: 30px;
+}
+.productCommentItem .itemMain .star{
+    color: #FC5E5E;
+    margin-bottom: 10px;
+}
+.productCommentItem .itemMain p{
+    color: #000;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+.productCommentItem .itemMain span{
+    display: block;
+    color: #777777;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.productCommentItem .itemMain span:last-child{
+    margin-bottom: 0;
+}
+
+
+
+
 
 ion-view[id="communityDetail"]{
     background-color: #EFEFf4;
@@ -559,7 +778,7 @@ ion-view[id="communityDetail"]{
     font-size: 23px;
     line-height: 23px;
     display: block;
-    margin-top: 13.5px;
+    margin-top: 18.5px;
 }
 
 
@@ -901,9 +1120,509 @@ button.registBtn{
     margin-bottom: 10px;
 }
 
-.showPhoneNumPopup .popup-buttons .button-positive{
+.showPhoneNumPopup .popup-buttons .button-positive {
     min-width: 150px;
     background-color: #F23030;
     margin-bottom: 10px;
     right: 14px;
+}
+/*===AboutMeCtrl===*/
+ion-view[view-title='AboutMe']{
+    background:url("../img/about.png")no-repeat;
+    background-size:100%;
+    background-color: #EFEFF4;
+}
+#AboutView .item{
+    margin: -3px;
+}
+
+#AboutView .icon-right, #personalInfo .icon-right{
+    font-size: 20px;
+    color: #C8C7CC;
+}
+
+#AboutView .aboutText, #personalInfo .aboutText{
+    color: #6B6A6D;
+}
+
+#AboutView .aboutImgW{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    height: 182px;
+
+}
+#AboutView .aboutImgL{
+    position: relative;
+    z-index: 100;
+}
+
+#AboutView .aboutBag .aboutPhoImg{
+    height: 142px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+    margin: 0 auto;
+    display: block;
+}
+
+#AboutView .aboutNameText{
+    width: 100%;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+    padding: 10px 0px;
+    font-size: 18px;
+    display: block;
+}
+/*===personalInfoCtrl===*/
+ion-view[view-title='个人信息']{
+    background:url("../img/perInfo.png")no-repeat;
+    background-size:100%;
+    background-color: #EFEFF4;
+}
+
+#personalInfo .perImgW{
+    position: relative;
+    padding: 1%;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+#personalInfo .perPhoImg{
+    height: 100px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+}
+
+#personalInfo .perNameText{
+    position: absolute;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    left: 110px;
+    top: 50%;
+    font-size: 18px;
+    color: #fff;
+}
+
+#personalInfo .text-right{
+    position: absolute;
+    right: 40px;
+    color: #FC5E5E;
+}
+
+/*===editNicknameCtrl===*/
+ion-view[view-title='修改昵称']{
+    background-color: #EFEFF4;
+}
+
+#editNickname .save{
+    padding-top: 8px;
+    /* top: 0px; */
+    padding-right: 2px;
+    color: #FC5E5E;
+}
+
+#editNickname .nickContent{
+    padding: 10px;
+}
+
+#editNickname .header_top{
+    width: 100%;
+    position: relative;
+
+}
+
+#editNickname .header_bar{
+    width: 100%;
+    border-radius: 4px;
+    padding: 0px 5px;
+    background: #fff;
+    display: flex;
+    border: 1px solid #FC5E5E;
+    height: 50px;
+
+}
+
+#editNickname .header_bar span{
+    line-height: 26px;
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 18px;
+    display: block;
+}
+
+#editNickname .header_bar input{
+    padding-left: 8px;
+    width: 70%;
+    background: inherit;
+    height: 46px;
+    line-height: 26px;
+    font-size: 18px;
+
+}
+
+#editNickname .header_bar i{
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    font-size: 18px;
+    color: #C8C7CC;
+}
+
+/*===shoppingCarCtrl===*/
+ion-view[view-title='购物车']{
+    background-color: #EFEFF4;
+}
+
+#shoppingCar .item{
+    margin: 10px 0px;
+    border-style: solid none;
+    padding: 10px;
+}
+
+#shoppingCar .item-content{
+    padding: 0px;
+    position: initial;
+}
+
+#shoppingCar .shoppingItem{
+    width:100%;
+    min-width:320px;
+    position:relative;
+    padding-left: 28px;
+
+}
+
+.shoppingImg{
+    border: 2px solid #ddd;
+    left: 36px;
+    width: 106px;
+    float: left;
+}
+
+.shopChangeImg{
+    width:100px;
+}
+
+.shopText{
+    position: absolute;
+    left: 140px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+.shopTextP p{
+    font-size: 13px;
+    overflow: inherit;
+    text-overflow: clip;
+    white-space: initial;
+    color: #000;
+}
+.shopTextSpan{
+    padding-top: 10px;
+    color: #999;
+}
+
+.shopTextSpan span{
+    font-size: 12px;
+}
+
+.shopTextPrice{
+    padding-top: 20px;
+    font-size: 16px;
+    color: #FC5E5E;
+}
+
+.shopAmount input{
+    border: 1px solid #999;
+    color: #999;
+    position: absolute;
+    bottom: 10px;
+    right: 43px;
+    width: 30px;
+    height: 20px;
+    text-align: center;
+}
+.iconRight{
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    right: 20px;
+    color: #999;
+    border: 1px solid #999;
+    height: 20px;
+    width: 24px;
+    border-radius: 0px 3px 3px 0px;
+}
+
+.iconLeft{
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    right: 72px;
+    color: #999;
+    border: 1px solid #999;
+    height: 20px;
+    width: 24px;
+    border-radius: 3px 0px 0px 3px;
+}
+
+#shoppingCar  .checkbox input, #shoppingCar  .checkbox-icon{
+    width: 24px;
+    height: 24px;
+}
+
+#shoppingCar .checkbox input:checked:before, #shoppingCar .checkbox input:checked + .checkbox-icon:before {
+    background: #FC5E5E;
+    border-color: #FC5E5E;
+}
+
+#shoppingCar .item-checkbox .checkbox {
+    width: 100px;
+    right: 2px;
+    left: 0px;
+}
+
+.button-delete{
+    background-color: #FC5E5E;
+    color: #fff;
+}
+
+.buttonSub{
+    position: absolute;
+    right: 0;
+    width: 30%;
+    top: 0px;
+    border-radius: 0;
+    height: 50px;
+    font-size: 16px;
+    border-color: #FF0000;
+    background-color: #FF0000;
+    color: #fff;
+}
+
+#shoppingCar .badge{
+    color: #fff;
+    padding: 3px 0px;
+}
+
+.checkAll{
+    position: absolute;
+    top: 34%;
+    font-size: 16px;
+    /* border-width: inherit; */
+    font-weight: bolder;
+    left: 42px;
+}
+.total{
+    position: absolute;
+    top: 35%;
+    right: 32%;
+    font-size: 14px;
+}
+
+.totalPrice {
+    color: #FC5E5E;
+}
+
+/*===paymentOrderCtrl===*/
+ion-view[view-title='待付款订单'], ion-view[view-title='我的订单']{
+    background-color: #EFEFF4;
+}
+
+#paymentOrder .item, #myOrder .item{
+    padding: 10px;
+    border-color: #fff;
+    background-color: #F9F9F9;;
+    margin: 0px 0px 1px;
+}
+
+.payContent{
+    background-color: #fff;
+    margin-top: 10px;
+    border: 1px solid #C8C7CC;
+}
+
+.payTop{
+    height: 40px;
+}
+
+.payBox{
+    color: #C8C7CC;
+    font-size: 34px;
+    padding-left: 10px;
+    position: absolute;
+    top: 4px;
+}
+
+.payText{
+    position: absolute;
+    left: 39px;
+    top: 16px;
+}
+
+.payRight{
+    color: #C8C7CC;
+    position: absolute;
+    top: 16px;
+    left: 146px;
+}
+
+.payTextRight{
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    color: #FC5E5E;
+    font-size: 14px;
+}
+
+#paymentOrder .shoppingItem, #myOrder .shoppingItem{
+    width:100%;
+    min-width:320px;
+}
+
+#paymentOrder .shoppingImg, #myOrder .shoppingImg{
+    border: 2px solid #ddd;
+    left: 36px;
+    width: 86px;
+    float: left;
+}
+
+#paymentOrder .shopChangeImg, #myOrder .shopChangeImg{
+    width:80px;
+}
+
+#paymentOrder .shopText, #myOrder .shopText{
+    position: absolute;
+    left: 110px;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+#paymentOrder .shopTextSpan, #myOrder .shopTextSpan{
+    padding-top: 10px;
+}
+
+.listBottom{
+    height: 40px;
+}
+
+.listBottomSpan{
+    position: absolute;
+    right: 20px;
+    font-size: 14px;
+}
+
+.listBottomSpan span{
+    line-height: 40px;
+}
+
+.payBottom{
+    height: 40px;
+    border-style: solid none;
+    border-width: 1px;
+    border-color: #C8C7CC;
+}
+
+#paymentOrder .button ,#myOrder .button{
+    min-height: 24px;
+    line-height: 24px;
+    border-color: #C8C7CC;
+    font-size: 14px;
+    background-color: #fff;
+    padding: 0px 4px;
+    position: absolute;
+}
+
+#paymentOrder .buttonLeft{
+    right: 78px;
+    bottom: 7px;
+}
+
+#paymentOrder .buttonRight, #myOrder .buttonRight{
+    right: 14px;
+    bottom: 7px;
+    color: #FC5E5E;
+    border-color: #F1A8A8;
+}
+
+#myOrder .buttonLeft{
+    right: 90px;
+    bottom: 7px;
+}
+
+.payTrash {
+    color: #C8C7CC;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 26px;
+}
+.noBorderTop{
+    border-top: none;
+}
+
+.add_comment_icon{
+    height: 30px;
+    font-size: 25px;
+    top: 3px;
+    color: #FF5c5a;
+    left: 91%;
+    position: absolute;
+    z-index: 9;
+}
+
+.addCommunity_content{
+    margin-top: 20px;
+    height: 150px;
+    width: 100%;
+}
+
+.addCommunity_content+p{
+   margin-top: 10px;
+   margin-left: 2%;
+   font-size: 15px;
+    color: #777777;
+}
+
+.addNews_div{
+    margin-top: 10px;
+    padding: 5%;
+    width: 100%;
+    background-color: #ffffff;
+    height: 150px;
+}
+
+.addNews_box{
+    height: 100%;
+    border: solid 3px #DBD9CB;
+    width: 35%;
+}
+
+.addNews_box span{
+    font-size: 60px;
+    color:#DBD9CB;
+    padding: 3%;
+}
+
+.submitNews_button{
+    height: 50px;
+    width: 90%;
+    margin: 10% 5%;
+    border: none;
+    background-color: #f23030;
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.img_part_style{
+    border: 1px dashed gray;
+    height: 100%;
+    width: 35%;
+    background-color: #f0f0f0;
+>>>>>>> 85a92a4b97ea9af8fc0aeee595a3d2a0674ced58
 }
