@@ -1172,18 +1172,18 @@ ion-view[view-title='购物车']{
 
 }
 
-#shoppingCar .shoppingImg{
+.shoppingImg{
     border: 2px solid #ddd;
     left: 36px;
     width: 106px;
     float: left;
 }
 
-#shoppingCar .shopChangeImg{
+.shopChangeImg{
     width:100px;
 }
 
-#shoppingCar .shopText{
+.shopText{
     position: absolute;
     left: 140px;
     top: 50%;
@@ -1191,29 +1191,29 @@ ion-view[view-title='购物车']{
     -webkit-transform: translateY(-50%);
 }
 
-#shoppingCar .shopTextP p{
+.shopTextP p{
     font-size: 13px;
     overflow: inherit;
     text-overflow: clip;
     white-space: initial;
     color: #000;
 }
-#shoppingCar .shopTextSpan{
+.shopTextSpan{
     padding-top: 10px;
     color: #999;
 }
 
-#shoppingCar .shopTextSpan span{
+.shopTextSpan span{
     font-size: 12px;
 }
 
-#shoppingCar .shopTextPrice{
+.shopTextPrice{
     padding-top: 20px;
     font-size: 16px;
     color: #FC5E5E;
 }
 
-#shoppingCar .shopAmount input{
+.shopAmount input{
     border: 1px solid #999;
     color: #999;
     position: absolute;
@@ -1223,7 +1223,7 @@ ion-view[view-title='购物车']{
     height: 20px;
     text-align: center;
 }
-#shoppingCar .iconRight{
+.iconRight{
     position: absolute;
     text-align: center;
     bottom: 10px;
@@ -1235,7 +1235,7 @@ ion-view[view-title='购物车']{
     border-radius: 0px 3px 3px 0px;
 }
 
-#shoppingCar .iconLeft{
+.iconLeft{
     position: absolute;
     text-align: center;
     bottom: 10px;
@@ -1263,12 +1263,12 @@ ion-view[view-title='购物车']{
     left: 0px;
 }
 
-#shoppingCar .button-delete{
+.button-delete{
     background-color: #FC5E5E;
     color: #fff;
 }
 
-#shoppingCar .buttonSub{
+.buttonSub{
     position: absolute;
     right: 0;
     width: 30%;
@@ -1286,7 +1286,7 @@ ion-view[view-title='购物车']{
     padding: 3px 0px;
 }
 
-#shoppingCar .checkAll{
+.checkAll{
     position: absolute;
     top: 34%;
     font-size: 16px;
@@ -1294,14 +1294,14 @@ ion-view[view-title='购物车']{
     font-weight: bolder;
     left: 42px;
 }
-#shoppingCar .total{
+.total{
     position: absolute;
     top: 35%;
     right: 32%;
     font-size: 14px;
 }
 
-#shoppingCar .totalPrice {
+.totalPrice {
     color: #FC5E5E;
 }
 
@@ -1317,17 +1317,17 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单']{
     margin: 0px 0px 1px;
 }
 
-#paymentOrder .payContent, #myOrder .payContent{
+.payContent{
     background-color: #fff;
     margin-top: 10px;
     border: 1px solid #C8C7CC;
 }
 
-#paymentOrder .payTop, #myOrder .payTop{
+.payTop{
     height: 40px;
 }
 
-#paymentOrder .payBox, #myOrder .payBox{
+.payBox{
     color: #C8C7CC;
     font-size: 34px;
     padding-left: 10px;
@@ -1335,20 +1335,20 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单']{
     top: 4px;
 }
 
-#paymentOrder .payText, #myOrder .payText{
+.payText{
     position: absolute;
     left: 39px;
     top: 16px;
 }
 
-#paymentOrder .payRight, #myOrder .payRight{
+.payRight{
     color: #C8C7CC;
     position: absolute;
     top: 16px;
     left: 146px;
 }
 
-#paymentOrder .payTextRight{
+.payTextRight{
     position: absolute;
     top: 16px;
     right: 10px;
@@ -1380,37 +1380,25 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单']{
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
 }
-
-#paymentOrder .shopTextP p, #myOrder .shopTextP p{
-    font-size: 13px;
-    overflow: inherit;
-    text-overflow: clip;
-    white-space: initial;
-    color: #000;
-}
 #paymentOrder .shopTextSpan, #myOrder .shopTextSpan{
     padding-top: 10px;
 }
 
-#paymentOrder .shopTextSpan span, #myOrder .shopTextSpan span{
-    font-size: 12px;
-}
-
-#paymentOrder .listBottom, #myOrder .listBottom{
+.listBottom{
     height: 40px;
 }
 
-#paymentOrder .listBottomSpan ,#myOrder .listBottomSpan{
+.listBottomSpan{
     position: absolute;
     right: 20px;
     font-size: 14px;
 }
 
-#paymentOrder .listBottomSpan span ,#myOrder .listBottomSpan span{
+.listBottomSpan span{
     line-height: 40px;
 }
 
-#paymentOrder .payBottom, #myOrder .payBottom{
+.payBottom{
     height: 40px;
     border-style: solid none;
     border-width: 1px;
@@ -1444,7 +1432,7 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单']{
     bottom: 7px;
 }
 
-#myOrder .payTrash {
+.payTrash {
     color: #C8C7CC;
     position: absolute;
     top: 10px;
