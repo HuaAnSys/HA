@@ -44,6 +44,33 @@ angular.module('starter.services', [])
     }
     };
 }])
+
+.factory('shoppingCarService', ['$http','$q',function($http, $q){
+  // Might use a resource here that returns a JSON array
+
+  // Some fake testing data
+
+  return {
+    getShoppingCar: function () {
+      //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
+      var defer = $q.defer();
+      var request = $http.get('js/shoppingCar.json');
+      //Successful HTTP post request or not
+      request.success(function (result) {
+        //var status = result.success;
+        //if (status == "1") {
+        defer.resolve(result.data);
+        //} else {
+        //  defer.reject("Get draft list failed, please try again later.");
+        //}
+      });
+      request.error(function () {
+        defer.reject("Get draft list failed, please try again later.");
+      });
+      return defer.promise;
+    }
+  };
+}])
 .factory('ShopTypeService', ['$http','$q',function($http, $q){
   // Might use a resource here that returns a JSON array
 

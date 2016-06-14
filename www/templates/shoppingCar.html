@@ -6,107 +6,45 @@
     </ion-nav-bar>
     <ion-content>
         <ion-list>
-            <ion-item  class="item-checkbox">
+            <ion-item  class="item-checkbox" ng-repeat="shoppingCar in shoppingCarList">
                 <label class="checkbox">
-                    <input type="checkbox" data-ng-model="shoppingCar.checked" data-ng-checked="shoppingCar.checked">
+                    <input type="checkbox" ng-model="shoppingCar.checked" ng-checked="shoppingCar.checked" ng-click="checkItem($index)">
                 </label>
                 <div class="shoppingItem">
                     <div class="shoppingImg">
-                        <img class="shopChangeImg" src="img/a.jpg">
+                        <img class="shopChangeImg"  src="{{shoppingCar.img}}"/>
                     </div>
                     <div class="shopText">
                         <div class="shopTextP">
-                          <p>泰国金枕头进口新鲜榴莲1个装4-9斤新鲜水果2kg-2.5kg</p>
+                          <p>{{shoppingCar.name}}</p>
                         </div>
                         <div class="shopTextSpan">
-                            <span>型号：</span><span>2.5kg(不含)-3.5kg(含)</span>
+                            <span>型号：</span><span>{{shoppingCar.type}}</span>
                         </div>
                         <div class="shopTextPrice">
-                            <span>￥158.00</span>
+                            <span>{{shoppingCar.price | currency: "￥" }}</span>
                         </div>
                     </div>
                     <div class="shopAmount">
-                        <i class="icon ion-minus-round iconLeft" data-ng-click="detailJson.amount > 1 ? detailJson.amount = detailJson.amount - 1 : detailJson.amount = 1"></i>
-                        <input type="number" maxlength="28" ng-model="detailJson.amount">
-                        <i class="icon ion-plus-round iconRight" data-ng-click="detailJson.amount =  detailJson.amount + 1"></i>
+                        <i class="icon ion-minus-round iconLeft" ng-click="shoppingCar.amount > 1 ? shoppingCar.amount = shoppingCar.amount - 1 : shoppingCar.amount = 1"></i>
+                        <input type="number" maxlength="28" ng-model="shoppingCar.amount">
+                        <i class="icon ion-plus-round iconRight" ng-click="shoppingCar.amount =  shoppingCar.amount + 1"></i>
                     </div>
                     <div class="clear"></div>
                 </div>
-                <ion-option-button class="button-delete icon ion-ios-trash-outline" ng-click="deleteItem(intent.intentCode)"></ion-option-button>
-            </ion-item>
-            <ion-item  class="item-checkbox">
-                <label class="checkbox">
-                    <input type="checkbox" data-ng-model="shoppingCar.checked" data-ng-checked="shoppingCar.checked">
-                </label>
-                <div class="shoppingItem">
-                    <div class="shoppingImg">
-                        <img class="shopChangeImg" src="img/b.jpg">
-                    </div>
-                    <div class="shopText">
-                        <div class="shopTextP">
-                            <p>泰国金枕头进口新鲜榴莲1个装4-9斤新鲜水果2kg-2.5kg</p>
-                        </div>
-                        <div class="shopTextSpan">
-                            <span>型号：</span><span>2.5kg(不含)-3.5kg(含)</span>
-                        </div>
-                        <div class="shopTextPrice">
-                            <span>￥158.00</span>
-                        </div>
-                    </div>
-                    <div class="shopAmount">
-                        <i class="icon ion-minus-round iconLeft" data-ng-click="detailJson.amount > 1 ? detailJson.amount = detailJson.amount - 1 : detailJson.amount = 1"></i>
-                        <input type="number" maxlength="28" ng-model="detailJson.amount">
-                        <i class="icon ion-plus-round iconRight" data-ng-click="detailJson.amount =  detailJson.amount + 1"></i>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <ion-option-button class="button-edit icon ion-ios-compose-outline" ng-click="editIntent(intent.itemName,$index)">
-                </ion-option-button>
-                <ion-option-button class="button-delete icon ion-ios-trash-outline" ng-click="deleteIntent($index)">
-                </ion-option-button>
-            </ion-item>
-            <ion-item  class="item-checkbox">
-                <label class="checkbox">
-                    <input type="checkbox" data-ng-model="shoppingCar.checked" data-ng-checked="shoppingCar.checked">
-                </label>
-                <div class="shoppingItem">
-                    <div class="shoppingImg">
-                        <img class="shopChangeImg" src="img/c.jpg">
-                    </div>
-                    <div class="shopText">
-                        <div class="shopTextP">
-                            <p>泰国金枕头进口新鲜榴莲1个装4-9斤新鲜水果2kg-2.5kg</p>
-                        </div>
-                        <div class="shopTextSpan">
-                            <span>型号：</span><span>2.5kg(不含)-3.5kg(含)</span>
-                        </div>
-                        <div class="shopTextPrice">
-                            <span>￥158.00</span>
-                        </div>
-                    </div>
-                    <div class="shopAmount">
-                        <i class="icon ion-minus-round iconLeft" data-ng-click="detailJson.amount > 1 ? detailJson.amount = detailJson.amount - 1 : detailJson.amount = 1"></i>
-                        <input type="number" maxlength="28" ng-model="detailJson.amount">
-                        <i class="icon ion-plus-round iconRight" data-ng-click="detailJson.amount =  detailJson.amount + 1"></i>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <ion-option-button class="button-edit icon ion-ios-compose-outline" ng-click="editIntent(intent.itemName,$index)">
-                </ion-option-button>
-                <ion-option-button class="button-delete icon ion-ios-trash-outline" ng-click="deleteIntent($index)">
-                </ion-option-button>
+                <ion-option-button class="button-delete icon ion-ios-trash-outline" ng-click="deleteItem($index)"></ion-option-button>
             </ion-item>
         </ion-list>
     </ion-content>
     <ion-footer-bar >
         <div class="item-checkbox">
             <label class="checkbox">
-                <input type="checkbox" data-ng-model="shoppingCar.checked" data-ng-checked="shoppingCar.checked">
+                <input type="checkbox" ng-click="checkAllIntents()" ng-model="checkAll">
             </label>
             <span class="checkAll">全选</span>
         </div>
         <div class="total">
-            <span>合计：</span><span class="totalPrice">￥232.90</span>
+            <span>合计：</span><span class="totalPrice">{{totalPrice | currency : "￥"}}</span>
         </div>
         <div class="has-badge">
             <button class="buttonSub" data-ng-click="submit()">去结算<i class="badge">(3)</i></button>

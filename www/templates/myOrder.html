@@ -13,49 +13,17 @@
                 <i class="icon ion-ios-trash-outline payTrash" ng-click="deleteOrder()"></i>
             </div>
             <ion-list>
-                <ion-item>
+                <ion-item  ng-repeat="shoppingCar in shoppingCarList">
                     <div class="shoppingItem">
                         <div class="shoppingImg">
-                            <img class="shopChangeImg" src="img/c.jpg">
+                            <img class="shopChangeImg" src="{{shoppingCar.img}}">
                         </div>
                         <div class="shopText">
                             <div class="shopTextP">
-                                <p>泰国金枕头进口新鲜榴莲1个装4-9斤新鲜水果2kg-2.5kg</p>
+                                <p>{{shoppingCar.name}}</p>
                             </div>
                             <div class="shopTextSpan">
-                                <span>型号：</span><span>2.5kg(不含)-3.5kg(含)</span>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                </ion-item>
-                <ion-item>
-                    <div class="shoppingItem">
-                        <div class="shoppingImg">
-                            <img class="shopChangeImg" src="img/c.jpg">
-                        </div>
-                        <div class="shopText">
-                            <div class="shopTextP">
-                                <p>泰国金枕头进口新鲜榴莲1个装4-9斤新鲜水果2kg-2.5kg</p>
-                            </div>
-                            <div class="shopTextSpan">
-                                <span>型号：</span><span>2.5kg(不含)-3.5kg(含)</span>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                </ion-item>
-                <ion-item>
-                    <div class="shoppingItem">
-                        <div class="shoppingImg">
-                            <img class="shopChangeImg" src="img/c.jpg">
-                        </div>
-                        <div class="shopText">
-                            <div class="shopTextP">
-                                <p>泰国金枕头进口新鲜榴莲1个装4-9斤新鲜水果2kg-2.5kg</p>
-                            </div>
-                            <div class="shopTextSpan">
-                                <span>型号：</span><span>2.5kg(不含)-3.5kg(含)</span>
+                                <span>型号：</span><span>{{shoppingCar.type}}</span>
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -63,7 +31,7 @@
                 </ion-item>
                 <div class="listBottom">
                     <div class="listBottomSpan">
-                        <span>共</span><span>3</span><span>件商品</span> <span>实付款：</span> <span>￥232.90</span>
+                        <span>共</span><span>{{shoppingCarList.length}}</span><span>件商品</span>  <span>实付款：</span> <span>{{totalPrice | currency:"￥"}}</span>
                     </div>
                 </div>
             </ion-list>

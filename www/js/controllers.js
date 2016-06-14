@@ -52,20 +52,78 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('shoppingCarCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
-
-    $ionicLoading.show({
-        template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
-        noBackdrop: true
-    });
-        ShopTypeService.getShopByType('a').then(function(data){
+.controller('shoppingCarCtrl', function($scope, $state, $rootScope, commonService, shoppingCarService, $stateParams) {
+    commonService.showLoading();
+    shoppingCarService.getShoppingCar().then(function(data){
         $scope.shoppingCarList = data;
-        $ionicLoading.hide();
-        $rootScope.domesticTabTitle = '';
+        commonService.hideLoading();
     }, function(error){
-        $ionicLoading.hide();
+        commonService.hideLoading();
         //$scope.showAlert(error);
     });
+
+    //$scope.checkItem = function($index){
+    //    console.log();
+    //    if($scope.shoppingCarList[$index].checked){
+    //        $scope.totalPrice += $scope.shoppingCarList[$index].price * $scope.shoppingCarList[$index].amount;
+    //    }else{
+    //        $scope.totalPrice += $scope.shoppingCarList[$index].price * $scope.shoppingCarList[$index].amount;
+    //    }
+    //}
+
+    //$scope.$watch("shoppingCar.checked", function() {
+    //    getTotal();
+    //}, true);
+
+    //$scope.getTotal = function(){
+    //    var total = 0;
+    //    for(var i=0;i<$scope.shoppingCarList.length;i++){
+    //        if($scope.intentsList[i].checked){
+    //            total += $scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+    //        }
+    //    }
+    //    return total;
+    //}
+
+    $scope.checkAllIntents = function(){
+        $scope.totalPrice = 0;
+        console.log($scope.shoppingCarList.length);
+        var shoppingCarListLength = $scope.shoppingCarList.length;
+        var shoppingCarCheckFlag = false;
+        if($scope.checkAll){
+            shoppingCarCheckFlag  = true;
+        }else{
+
+            shoppingCarCheckFlag  = false;
+        }
+        for(var i=0;i<shoppingCarListLength;i++){
+            if($scope.checkAll){
+                $scope.shoppingCarList[i].checked = shoppingCarCheckFlag;
+
+            }else{
+                $scope.shoppingCarList[i].checked = shoppingCarCheckFlag;
+            }
+            if($scope.shoppingCarList[i].checked == true){
+                $scope.totalPrice += $scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+            }else{
+                $scope.totalPrice = 0;
+            }
+
+
+        }
+    };
+
+
+    //var shoppingCarListLength = $scope.shoppingCarList.length;
+    //for(var i=0;i<$scope.shoppingCarList.length;i++){
+    //    if($scope.intentsList[i].checked){
+    //        $scope.totalPrice +=$scope.shoppingCarList.price * $scope.shoppingCarList.amount;
+    //    }else{
+    //        $scope.shoppingCarList[i].checked = checkFlag;
+    //    }
+    //
+    //}
+
 
     $scope.editNickname = function(){
         $state.go('editNickname');
@@ -77,22 +135,23 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('paymentOrderCtrl', function($scope, $state, $rootScope, $ionicPopup, $ionicLoading, ShopTypeService, $stateParams) {
+.controller('paymentOrderCtrl', function($scope, $state, $rootScope, $ionicPopup, commonService, shoppingCarService, $stateParams) {
 
-    $ionicLoading.show({
-        template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
-        noBackdrop: true
-    });
-    ShopTypeService.getShopByType('a').then(function(data){
-        $scope.shoppingCarList = data;
-        $ionicLoading.hide();
-        $rootScope.domesticTabTitle = '';
-    }, function(error){
-        $ionicLoading.hide();
-        //$scope.showAlert(error);
-    });
+        commonService.showLoading();
+        shoppingCarService.getShoppingCar().then(function(data){
+            $scope.shoppingCarList = data;
+            var shoppingCarListLength = $scope.shoppingCarList.length;
+            $scope.totalPrice = 0;
+            for(var i=0;i<shoppingCarListLength;i++){
+                $scope.totalPrice +=$scope.shoppingCarList[i].price;
+            }
+            commonService.hideLoading();
+        }, function(error){
+            commonService.hideLoading();
+            //$scope.showAlert(error);
+        });
 
-    $scope.cancelOrder = function(){
+        $scope.cancelOrder = function(){
         var confirmPopup = $ionicPopup.confirm({
             title: '确认取消订单？',
             buttons: [
@@ -119,17 +178,18 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('myOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, $ionicLoading, ShopTypeService, $stateParams) {
-    $ionicLoading.show({
-        template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
-        noBackdrop: true
-    });
-    ShopTypeService.getShopByType('a').then(function(data){
+.controller('myOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+    commonService.showLoading();
+    shoppingCarService.getShoppingCar().then(function(data){
         $scope.shoppingCarList = data;
-        $ionicLoading.hide();
-        $rootScope.domesticTabTitle = '';
+        var shoppingCarListLength = $scope.shoppingCarList.length;
+        $scope.totalPrice = 0;
+        for(var i=0;i<shoppingCarListLength;i++){
+            $scope.totalPrice +=$scope.shoppingCarList[i].price;
+        }
+        commonService.hideLoading();
     }, function(error){
-        $ionicLoading.hide();
+        commonService.hideLoading();
         //$scope.showAlert(error);
     });
 
@@ -272,7 +332,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('DomesticCtrl', function($scope, $rootScope, $state, $ionicLoading,DomesticService) {
+.controller('DomesticCtrl', function($scope, $rootScope, $state, commonService, DomesticService) {
       $scope.on_select = function(idx){
         $rootScope.domesticTabTitle = "baojie";
         if(idx == 1){
@@ -285,16 +345,13 @@ angular.module('starter.controllers', ['starter.services'])
           $rootScope.domesticTabTitle ="banyun";
         }
         console.log($rootScope.domesticTabTitle);
-        $ionicLoading.show({
-          template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
-          noBackdrop: true
-        });
+        commonService.showLoading();
         DomesticService.getDomesticByStatus($rootScope.domesticTabTitle).then(function(data){
           $scope.domesticList = data;
-          $ionicLoading.hide();
+          commonService.hideLoading();
           $rootScope.domesticTabTitle = '';
         }, function(error){
-          $ionicLoading.hide();
+          commonService.hideLoading();
           //$scope.showAlert(error);
         });
       }
@@ -304,7 +361,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('Domestic1Ctrl', function($scope, $rootScope, $state, $ionicLoading,DomesticService) {
+.controller('Domestic1Ctrl', function($scope, $rootScope, $state, commonService, DomesticService) {
 
       $scope.on_select = function(idx){
         if(idx == 5){
@@ -315,16 +372,13 @@ angular.module('starter.controllers', ['starter.services'])
           $rootScope.domesticTabTitle ="anzhuang";
         }
         console.log($rootScope.domesticTabTitle);
-        $ionicLoading.show({
-          template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
-          noBackdrop: true
-        });
+        commonService.showLoading();
         DomesticService.getDomesticByStatus($rootScope.domesticTabTitle).then(function(data){
           $scope.domesticList = data;
-          $ionicLoading.hide();
+          commonService.hideLoading();
           $rootScope.domesticTabTitle = '';
         }, function(error){
-          $ionicLoading.hide();
+          commonService.hideLoading();
           //$scope.showAlert(error);
         });
       };

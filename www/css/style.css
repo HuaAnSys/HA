@@ -1309,6 +1309,7 @@ ion-view[view-title='购物车']{
 .shopText{
     position: absolute;
     left: 140px;
+    right: 16px;
     top: 50%;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
