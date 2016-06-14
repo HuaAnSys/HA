@@ -63,8 +63,9 @@ angular.module('starter.controllers', ['starter.services'])
     });
 
     $scope.checkItem = function(index){
-        var checkStatue = $scope.shoppingCarList[index].checked;
         var shopingCartList = $scope.shoppingCarList;
+        var checkStatue = shopingCartList[index].checked;
+        //checkbox and select all
         if(checkStatue==false&&$scope.checkAll==true){
             $scope.checkAll= false;
         }else if(checkStatue==true&&$scope.checkAll==false){
@@ -72,7 +73,6 @@ angular.module('starter.controllers', ['starter.services'])
             var shoppingCarListLength = shopingCartList.length;
             for(var i=0;i<shoppingCarListLength;i++){
                 if(shopingCartList[i].checked == false){
-                    console.log("no no change");
                     selectAllFlag = false;
                     break;
                 }
@@ -83,6 +83,16 @@ angular.module('starter.controllers', ['starter.services'])
                 $scope.checkAll= false;
             }
         }
+
+        //change price
+        if(checkStatue==false){
+            var total = shopingCartList[index].price*shopingCartList[index].amount;
+            $scope.totalPrice = $scope.totalPrice - total;
+        }else{
+            var total = shopingCartList[index].price*shopingCartList[index].amount;
+            $scope.totalPrice = $scope.totalPrice + total;
+        }
+
     //    console.log();
     //    if($scope.shoppingCarList[$index].checked){
     //        $scope.totalPrice += $scope.shoppingCarList[$index].price * $scope.shoppingCarList[$index].amount;
