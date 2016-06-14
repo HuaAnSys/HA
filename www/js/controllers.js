@@ -62,7 +62,27 @@ angular.module('starter.controllers', ['starter.services'])
         //$scope.showAlert(error);
     });
 
-    //$scope.checkItem = function($index){
+    $scope.checkItem = function(index){
+        var checkStatue = $scope.shoppingCarList[index].checked;
+        var shopingCartList = $scope.shoppingCarList;
+        if(checkStatue==false&&$scope.checkAll==true){
+            $scope.checkAll= false;
+        }else if(checkStatue==true&&$scope.checkAll==false){
+            var selectAllFlag = true;
+            var shoppingCarListLength = shopingCartList.length;
+            for(var i=0;i<shoppingCarListLength;i++){
+                if(shopingCartList[i].checked == false){
+                    console.log("no no change");
+                    selectAllFlag = false;
+                    break;
+                }
+            }
+            if(selectAllFlag==true){
+                $scope.checkAll= true;
+            }else{
+                $scope.checkAll= false;
+            }
+        }
     //    console.log();
     //    if($scope.shoppingCarList[$index].checked){
     //        $scope.totalPrice += $scope.shoppingCarList[$index].price * $scope.shoppingCarList[$index].amount;
@@ -83,7 +103,7 @@ angular.module('starter.controllers', ['starter.services'])
     //        }
     //    }
     //    return total;
-    //}
+    }
 
     $scope.checkAllIntents = function(){
         $scope.totalPrice = 0;
@@ -131,6 +151,10 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');
+    }
+
+    $scope.changeProductNum = function(product){
+        console.log("haha"+product.amount);
     }
 
 })
