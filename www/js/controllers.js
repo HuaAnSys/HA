@@ -77,7 +77,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('paymentOrderCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+.controller('paymentOrderCtrl', function($scope, $state, $rootScope, $ionicPopup, $ionicLoading, ShopTypeService, $stateParams) {
 
     $ionicLoading.show({
         template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
@@ -92,17 +92,34 @@ angular.module('starter.controllers', [])
         //$scope.showAlert(error);
     });
 
-    $scope.editNickname = function(){
-        $state.go('editNickname');
-    };
+    $scope.cancelOrder = function(){
+        var confirmPopup = $ionicPopup.confirm({
+            title: '确认取消订单？',
+            buttons: [
+                { text: '取消' },
+                {
+                    text: '<b>确认</b>',
+                    type: 'button-positive'
+                }
+            ]
+        });
 
-    $scope.moveToAboutPage = function(){
+        confirmPopup.then(function(res) {
+            if(res) {
+                console.log('You are sure');
+            } else {
+                console.log('You are not sure');
+            }
+        });
+    }
+
+        $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');
     }
 
 })
 
-.controller('myOrderCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+.controller('myOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, $ionicLoading, ShopTypeService, $stateParams) {
     $ionicLoading.show({
         template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
         noBackdrop: true
@@ -116,6 +133,26 @@ angular.module('starter.controllers', [])
         //$scope.showAlert(error);
     });
 
+    $scope.deleteOrder = function(){
+        var confirmPopup = $ionicPopup.confirm({
+            title: '确认删除订单？',
+            buttons: [
+                { text: '取消' },
+                {
+                    text: '<b>确认</b>',
+                    type: 'button-positive'
+                }
+            ]
+        });
+
+        confirmPopup.then(function(res) {
+            if(res) {
+                console.log('You are sure');
+            } else {
+                console.log('You are not sure');
+            }
+        });
+    }
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');
