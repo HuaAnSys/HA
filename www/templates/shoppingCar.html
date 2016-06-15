@@ -26,9 +26,9 @@
                         </div>
                     </div>
                     <div class="shopAmount">
-                        <i class="icon ion-minus-round iconLeft" ng-click="shoppingCar.amount > 1 ? shoppingCar.amount = shoppingCar.amount - 1 : shoppingCar.amount = 1;changeProductNum(shoppingCar)"></i>
-                        <input type="number" maxlength="28" ng-model="shoppingCar.amount" ng-change="changeProductNum(shoppingCar)">
-                        <i class="icon ion-plus-round iconRight" ng-click="shoppingCar.amount =  shoppingCar.amount + 1;changeProductNum(shoppingCar)"></i>
+                        <i class="icon ion-minus-round iconLeft" ng-click="shoppingCar.amount > 1 ? shoppingCar.amount = shoppingCar.amount - 1 : shoppingCar.amount = 1;changeProductNum()"></i>
+                        <input type="number" maxlength="28" ng-model="shoppingCar.amount" ng-change="changeProductNum()">
+                        <i class="icon ion-plus-round iconRight" ng-click="shoppingCar.amount =  shoppingCar.amount + 1;changeProductNum()"></i>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -36,7 +36,7 @@
             </ion-item>
         </ion-list>
     </ion-content>
-    <ion-footer-bar >
+    <ion-footer-bar>
         <div class="item-checkbox">
             <label class="checkbox">
                 <input type="checkbox" ng-click="checkAllIntents()" ng-model="checkAll">

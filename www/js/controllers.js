@@ -163,8 +163,18 @@ angular.module('starter.controllers', ['starter.services'])
         $state.go('tab.AboutMe');
     }
 
-    $scope.changeProductNum = function(product){
-        console.log("haha"+product.amount);
+    $scope.changeProductNum = function(){
+        var totle = 0;
+        var shoppingCarList = $scope.shoppingCarList;
+        var length = $scope.shoppingCarList.length;
+        for(var i=0;i<length;i++){
+            var obj = shoppingCarList[i];
+            if(obj.checked==true){
+                totle = totle + obj.amount * obj.price;
+            }
+        }
+        $scope.totalPrice = totle;
+
     }
 
 })
