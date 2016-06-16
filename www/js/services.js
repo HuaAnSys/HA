@@ -246,3 +246,43 @@ angular.module('starter.services', [])
         }
     };
 })
+
+.factory('homePageService', ['$http','$q',function($http, $q){
+    return {
+        getAdvertisements : function(){
+            var url = "";
+            var defer =$q.defer();
+            var request =$http.post(url);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getHotProduct : function(){
+            var url = "";
+            var defer =$q.defer();
+            var request =$http.post(url);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        }
+    }
+}]);
