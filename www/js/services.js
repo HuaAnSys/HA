@@ -285,4 +285,384 @@ angular.module('starter.services', [])
             return defer.promise;
         }
     }
+}])
+
+.factory('CommunityService', ['$http','$q',function($http, $q){
+    return {
+        getAllBulletins : function(){
+            var url = "http://localhost:7080/HuanAnBackend/bulletin/getBulletin";
+            var defer =$q.defer();
+            var request =$http.post(url);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getAllCommentsByCommunity : function(communityId){
+            var url = "http://localhost:7080/HuanAnBackend/bulletin/getBulletinComments";
+            var defer =$q.defer();
+            var param = {"bulletinID":communityId};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getLikeNumByCommunity : function(communityId){
+            var url = "http://localhost:7080/HuanAnBackend/bulletin/getBulletinLike";
+            var defer =$q.defer();
+            var param = {"bulletinID":communityId};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        setLikeByCommunity : function(communityId){
+            var url = "http://localhost:7080/HuanAnBackend/bulletin/setBulletinLike";
+            var defer =$q.defer();
+            var param = {"bulletinID":communityId};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        addCommentsByCommunity : function(communityId){
+            var url = "http://localhost:7080/HuanAnBackend/bulletin/setBulletinComment";
+            var defer =$q.defer();
+            var param = {"bulletinID":communityId};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getAllDiscussions : function(){
+            var url = "http://localhost:7080/HuanAnBackend/discussionRoom/getDiscussion";
+            var defer =$q.defer();
+            var request =$http.post(url);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getAllCommentsByDiscussion : function(discussionID){
+            var url = "http://localhost:7080/HuanAnBackend/discussionRoom/getDiscussionComments";
+            var defer =$q.defer();
+            var param = {"discussionID":discussionID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getLikeNumByDiscussion : function(discussionID){
+            var url = "http://localhost:7080/HuanAnBackend/discussionRoom/getDiscussionLike";
+            var defer =$q.defer();
+            var param = {"discussionID":discussionID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        setLikeByDiscussion : function(discussionID){
+            var url = "http://localhost:7080/HuanAnBackend/discussionRoom/setDiscussionLike";
+            var defer =$q.defer();
+            var param = {"discussionID":discussionID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        addCommentsByDiscussion : function(discussionID){
+            var url = "http://localhost:7080/HuanAnBackend/discussionRoom/setDiscussionComment";
+            var defer =$q.defer();
+            var param = {"discussionID":discussionID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getAllCollections : function(){
+            var url = "http://localhost:7080/HuanAnBackend/actityAlarm/getActityAlarm";
+            var defer =$q.defer();
+            var request =$http.post(url);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getAllCommentsByCollection : function(actityAlarmID){
+            var url = "http://localhost:7080/HuanAnBackend/actityAlarm/getActityAlarmComments";
+            var defer =$q.defer();
+            var param = {"actityAlarmID":actityAlarmID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getLikeNumByCollection : function(actityAlarmID){
+            var url = "http://localhost:7080/HuanAnBackend/actityAlarm/getActityAlarmLike";
+            var defer =$q.defer();
+            var param = {"actityAlarmID":actityAlarmID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        setLikeByCollection : function(actityAlarmID){
+            var url = "http://localhost:7080/HuanAnBackend/actityAlarm/setActityAlarmLike";
+            var defer =$q.defer();
+            var param = {"actityAlarmID":actityAlarmID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        addCommentsByCollection : function(actityAlarmID){
+            var url = "http://localhost:7080/HuanAnBackend/actityAlarm/setActityAlarmComment";
+            var defer =$q.defer();
+            var param = {"actityAlarmID":actityAlarmID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getAllBestMemory : function(){
+            var url = "http://localhost:7080/HuanAnBackend/bestMemory/getBestMemory";
+            var defer =$q.defer();
+            var request =$http.post(url);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getAllCommentsByBestMemory : function(bestMemoryID){
+            var url = "http://localhost:7080/HuanAnBackend/bestMemory/getBestMemoryComments";
+            var defer =$q.defer();
+            var param = {"bestMemoryID":bestMemoryID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        getLikeNumByBestMemory : function(bestMemoryID){
+            var url = "http://localhost:7080/HuanAnBackend/bestMemory/getBestMemoryLike";
+            var defer =$q.defer();
+            var param = {"bestMemoryID":bestMemoryID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        setLikeByBestMemory : function(bestMemoryID){
+            var url = "http://localhost:7080/HuanAnBackend/bestMemory/setBestMemoryLike";
+            var defer =$q.defer();
+            var param = {"bestMemoryID":bestMemoryID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        },
+
+        addCommentsByBestMemory : function(bestMemoryID){
+            var url = "http://localhost:7080/HuanAnBackend/bestMemory/setBestMemoryComment";
+            var defer =$q.defer();
+            var param = {"bestMemoryID":bestMemoryID};
+            var request =$http.post(url,param);
+            request.success(function(data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function(){
+                defer.reject("fail");
+            });
+            return defer.promise;
+        }
+    }
 }]);
