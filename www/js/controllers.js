@@ -53,6 +53,7 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 .controller('shoppingCarCtrl', function($scope, $state, $rootScope, commonService, shoppingCarService, $stateParams) {
+    $scope.itemTotalNum = 0;
     commonService.showLoading();
     shoppingCarService.getShoppingCar().then(function(data){
         $scope.shoppingCarList = data;
@@ -64,13 +65,13 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.checkItem = function(index){
         var shopingCartList = $scope.shoppingCarList;
+        var shoppingCarListLength = shopingCartList.length;
         var checkStatue = shopingCartList[index].checked;
         //checkbox and select all
         if(checkStatue==false&&$scope.checkAll==true){
             $scope.checkAll= false;
         }else if(checkStatue==true&&$scope.checkAll==false){
             var selectAllFlag = true;
-            var shoppingCarListLength = shopingCartList.length;
             for(var i=0;i<shoppingCarListLength;i++){
                 if(shopingCartList[i].checked == false){
                     selectAllFlag = false;
@@ -83,7 +84,6 @@ angular.module('starter.controllers', ['starter.services'])
                 $scope.checkAll= false;
             }
         }
-
         //change price
         if(checkStatue==false){
             var total = shopingCartList[index].price*shopingCartList[index].amount;
@@ -92,27 +92,17 @@ angular.module('starter.controllers', ['starter.services'])
             var total = shopingCartList[index].price*shopingCartList[index].amount;
             $scope.totalPrice = $scope.totalPrice + total;
         }
+        //
+        var j=0;
+        if($scope.checkAll==false){
+            for(var i=0;i<shoppingCarListLength;i++){
+                if(shopingCartList[i].checked == true){
+                    j++;
+                }
+            }
+            $scope.itemTotalNum = j;
+        }
 
-    //    console.log();
-    //    if($scope.shoppingCarList[$index].checked){
-    //        $scope.totalPrice += $scope.shoppingCarList[$index].price * $scope.shoppingCarList[$index].amount;
-    //    }else{
-    //        $scope.totalPrice += $scope.shoppingCarList[$index].price * $scope.shoppingCarList[$index].amount;
-    //    }
-    //}
-
-    //$scope.$watch("shoppingCar.checked", function() {
-    //    getTotal();
-    //}, true);
-
-    //$scope.getTotal = function(){
-    //    var total = 0;
-    //    for(var i=0;i<$scope.shoppingCarList.length;i++){
-    //        if($scope.intentsList[i].checked){
-    //            total += $scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
-    //        }
-    //    }
-    //    return total;
     }
 
     $scope.checkAllIntents = function(){
@@ -121,9 +111,10 @@ angular.module('starter.controllers', ['starter.services'])
         var shoppingCarListLength = $scope.shoppingCarList.length;
         var shoppingCarCheckFlag = false;
         if($scope.checkAll){
+            $scope.itemTotalNum = shoppingCarListLength;
             shoppingCarCheckFlag  = true;
         }else{
-
+            $scope.itemTotalNum = 0;
             shoppingCarCheckFlag  = false;
         }
         for(var i=0;i<shoppingCarListLength;i++){
