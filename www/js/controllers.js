@@ -1,20 +1,20 @@
 angular.module('starter.controllers', ['starter.services'])
 
-.controller('DashCtrl', function($scope) {})
-
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+.controller('appCtrl', function($scope, $ionicPopup) {
+    $scope.showAlert = function(errorMessage){
+        var alertPopup = $ionicPopup.alert({
+            template: errorMessage,
+            cssClass: 'alertPop',
+            buttons: [
+                {  text: '知道了',
+                   type: 'button-positive'
+                }
+            ]
+        });
+        alertPopup.then(function(res) {
+            console.log('');
+        });
+    }
 })
 
 .controller('AboutMeCtrl', function($scope, $state, $rootScope, $stateParams) {
@@ -55,8 +55,10 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('shoppingCarCtrl', function($scope, $state, $rootScope, commonService, shoppingCarService, $stateParams) {
     $scope.itemTotalNum = 0;
     commonService.showLoading();
+        var len = 0;
     shoppingCarService.getShoppingCar().then(function(data){
         $scope.shoppingCarList = data;
+         len = $scope.shoppingCarList.length;
         commonService.hideLoading();
     }, function(error){
         commonService.hideLoading();
@@ -178,7 +180,7 @@ angular.module('starter.controllers', ['starter.services'])
             var shoppingCarListLength = $scope.shoppingCarList.length;
             $scope.totalPrice = 0;
             for(var i=0;i<shoppingCarListLength;i++){
-                $scope.totalPrice +=$scope.shoppingCarList[i].price;
+                $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
             }
             commonService.hideLoading();
         }, function(error){
@@ -220,7 +222,7 @@ angular.module('starter.controllers', ['starter.services'])
         var shoppingCarListLength = $scope.shoppingCarList.length;
         $scope.totalPrice = 0;
         for(var i=0;i<shoppingCarListLength;i++){
-            $scope.totalPrice +=$scope.shoppingCarList[i].price;
+            $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
         }
         commonService.hideLoading();
     }, function(error){
@@ -340,7 +342,6 @@ angular.module('starter.controllers', ['starter.services'])
     var screenWidth = document.body.scrollWidth;
     var picHeight=Math.ceil((screenWidth * 100)/290);
     $scope.picHeight=picHeight+'px';
-    console.log($scope.picHeight);
 
     $scope.editNickname = function(){
         $state.go('editNickname');
@@ -364,6 +365,24 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.moveToPerInfoPage = function(){
         $state.go('personalInfo');
     }
+
+    function valid(){
+        $scope.nickName = $('.nickName').val();
+        console.log($scope.nickName);
+        if($scope.nickName == '' || $scope.nickName == undefined){
+            $scope.showAlert("用户名不能为空");
+            return false;
+        }
+        return true;
+    }
+
+    $scope.save = function(){
+        if(valid()){
+            console.log($scope.nickName);
+            $state.go('personalInfo');
+        }
+    }
+
 
 })
 
