@@ -475,10 +475,10 @@ angular.module('starter.controllers', ['starter.services'])
   };
 })
 
-.controller('HomeCtrl',function($scope,$state,commonService){
+.controller('HomeCtrl',function($scope,$state,commonService,homePageService){
         console.log("HomeCtrl");
         $scope.slides = [
-            {url:"img/adam.jpg"},
+            {url:"img/adv_demo.png"},
             {url:"img/ben.png"},
             {url:"img/perry.png"}
         ];
@@ -526,6 +526,32 @@ angular.module('starter.controllers', ['starter.services'])
 
         $scope.moreProduct = function(){
             $state.go("tab.Shop");
+        }
+
+        function getAdvsAndProducts(){
+            commonService.showLoading();
+            homePageService.getAdvertisements().then(function(data){
+                if(data.length == 0){
+                    $scope.slides = [{url:"img/adv_demo.png"}];
+                }else{
+
+
+                }
+                homePageService.getHotProduct().then(function(data){
+                    if(data.length == 0){
+
+                    }else{
+
+
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                });
+            },function(error){
+                commonService.hideLoading();
+                $scope.slides = [{url:"img/adv_demo.png"}];
+            });
         }
 
 })
