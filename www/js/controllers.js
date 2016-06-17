@@ -547,10 +547,12 @@ angular.module('starter.controllers', ['starter.services'])
                     commonService.hideLoading();
                 },function(error){
                     commonService.hideLoading();
+                    $scope.showAlert(error);
                 });
             },function(error){
                 commonService.hideLoading();
                 $scope.slides = [{url:"img/adv_demo.png"}];
+                $scope.showAlert(error);
             });
         }
 
