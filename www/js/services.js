@@ -228,7 +228,7 @@ angular.module('starter.services', [])
   };
 }])
 
-.factory('commonService', function($ionicLoading){
+.factory('commonService', function($ionicLoading,$ionicPopup){
 
     function loading(){
         $ionicLoading.show({
@@ -258,11 +258,11 @@ angular.module('starter.services', [])
                 if(status == "1"){
                     defer.resolve(data.result);
                 }else{
-                    defer.reject();
+                    defer.reject(Messages.HOMEADVERSFAIL);
                 }
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject(Messages.HOMEADVERSFAIL);
             });
             return defer.promise;
         },
@@ -276,11 +276,11 @@ angular.module('starter.services', [])
                 if(status == "1"){
                     defer.resolve(data.result);
                 }else{
-                    defer.reject();
+                    defer.reject(Messages.HOMEPRODUCTSFAIL);
                 }
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject(Messages.HOMEPRODUCTSFAIL);
             });
             return defer.promise;
         }
