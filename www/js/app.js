@@ -274,7 +274,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
   .state('editNickname', {
     url: '/editNickname',
-    templateUrl: 'templates/editNickName.html',
+    templateUrl: 'templates/editNickname.html',
     controller: 'editNicknameCtrl',
     cache:false
   })
