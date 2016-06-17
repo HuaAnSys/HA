@@ -17,10 +17,34 @@ angular.module('starter.controllers', ['starter.services'])
     }
 })
 
-.controller('AboutMeCtrl', function($scope, $state, $rootScope, $stateParams) {
+.controller('AboutMeCtrl', function($scope, $state, $cordovaCamera) {
         var screenWidth = document.body.scrollWidth;
         var picHeight=Math.ceil((screenWidth * 274)/375);
         $scope.picHeight=picHeight+'px';
+        $scope.imageSrc = "img/adam.jpg";
+
+        $scope.changePhoto = function () {
+            var options = {
+                quality: 100,
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.CAMERA,
+                targetWidth: 500,
+                targetHeight: 500,
+                saveToPhotoAlbum: true,
+                encodingType:Camera.EncodingType.JPEG,
+                allowEdit: true,
+                mediaType:0,
+                cameraDirection:0,
+                popoverOptions: CameraPopoverOptions
+            };
+
+            $cordovaCamera.getPicture(options).then(function(imageURI) {
+                $scope.imageSrc= imageURI;
+                //image.src = "data:image/jpeg;base64," + imageData;
+            }, function(err) {
+
+            });
+        }
 
         $scope.moveToShoppingCarPage =  function(){
             $state.go('shoppingCar');
@@ -54,6 +78,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('shoppingCarCtrl', function($scope, $state, $rootScope, commonService, shoppingCarService, $stateParams) {
     $scope.itemTotalNum = 0;
+    $scope.totalPrice = 0;
     commonService.showLoading();
         var len = 0;
     shoppingCarService.getShoppingCar().then(function(data){
@@ -72,10 +97,10 @@ angular.module('starter.controllers', ['starter.services'])
         //checkbox and select all
         if(checkStatue==false&&$scope.checkAll==true){
             $scope.checkAll= false;
-        }else if(checkStatue==true&&$scope.checkAll==false){
+        }else if(checkStatue==true&&($scope.checkAll==false||$scope.checkAll==undefined)){
             var selectAllFlag = true;
             for(var i=0;i<shoppingCarListLength;i++){
-                if(shopingCartList[i].checked == false){
+                if(shopingCartList[i].checked == false || shopingCartList[i].checked == undefined){
                     selectAllFlag = false;
                     break;
                 }
@@ -96,20 +121,21 @@ angular.module('starter.controllers', ['starter.services'])
         }
         //
         var j=0;
-        if($scope.checkAll==false){
+        if($scope.checkAll==false || $scope.checkAll==undefined){
             for(var i=0;i<shoppingCarListLength;i++){
                 if(shopingCartList[i].checked == true){
                     j++;
                 }
             }
             $scope.itemTotalNum = j;
+        }else if($scope.checkAll==true){
+            $scope.itemTotalNum = shoppingCarListLength;
         }
 
     }
 
     $scope.checkAllIntents = function(){
         $scope.totalPrice = 0;
-        console.log($scope.shoppingCarList.length);
         var shoppingCarListLength = $scope.shoppingCarList.length;
         var shoppingCarCheckFlag = false;
         if($scope.checkAll){
@@ -136,21 +162,6 @@ angular.module('starter.controllers', ['starter.services'])
         }
     };
 
-
-    //var shoppingCarListLength = $scope.shoppingCarList.length;
-    //for(var i=0;i<$scope.shoppingCarList.length;i++){
-    //    if($scope.intentsList[i].checked){
-    //        $scope.totalPrice +=$scope.shoppingCarList.price * $scope.shoppingCarList.amount;
-    //    }else{
-    //        $scope.shoppingCarList[i].checked = checkFlag;
-    //    }
-    //
-    //}
-
-
-    $scope.editNickname = function(){
-        $state.go('editNickname');
-    };
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');
