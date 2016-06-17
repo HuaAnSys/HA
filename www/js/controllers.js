@@ -467,7 +467,7 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('HomeCtrl',function($scope,$state,commonService,homePageService){
         console.log("HomeCtrl");
         $scope.slides = [
-            {url:"img/adam.jpg"},
+            {url:"img/adv_demo.png"},
             {url:"img/ben.png"},
             {url:"img/perry.png"}
         ];
@@ -517,38 +517,32 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go("tab.Shop");
         }
 
-        function getAdvertisements(){
+        function getAdvsAndProducts(){
             commonService.showLoading();
             homePageService.getAdvertisements().then(function(data){
                 if(data.length == 0){
-                    commonService.hideLoading();
-
+                    $scope.slides = [{url:"img/adv_demo.png"}];
                 }else{
 
 
                 }
-            },function(error){
-                commonService.hideLoading();
+                homePageService.getHotProduct().then(function(data){
+                    if(data.length == 0){
+
+                    }else{
 
 
-            });
-        }
-
-        function getHotProduct(){
-            homePageService.getHotProduct().then(function(data){
-                if(data.length == 0){
+                    }
                     commonService.hideLoading();
-
-                }else{
-
-
-                }
+                },function(error){
+                    commonService.hideLoading();
+                });
             },function(error){
                 commonService.hideLoading();
-
-
+                $scope.slides = [{url:"img/adv_demo.png"}];
             });
         }
+
 })
 
 .controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate){
