@@ -686,6 +686,82 @@ angular.module('starter.controllers', [])
         $scope.back=function(){
             $ionicHistory.goBack();
         }
+        $scope.product = $stateParams;
+        $scope.submit=function(product){
+            $state.go('choosePaymentTerms', {
+                name: product.name,
+                type: product.type,
+                price: product.price
+            });
+        }
+        console.log($stateParams);
+        console.log($stateParams.name);
+        console.log($stateParams.type);
+        console.log($stateParams.price);
+
+    })
+    .controller('choosePaymentTermsCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        $scope.product = $stateParams;
+        $scope.submit=function(product){
+            $state.go('chooseBankCard', {
+                name: product.name,
+                type: product.type,
+                price: product.price
+            });
+        }
+        console.log($stateParams);
+        console.log($stateParams.name);
+        console.log($stateParams.type);
+        console.log($stateParams.price);
+
+    })
+    .controller('chooseBankCardCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        $scope.product = $stateParams;
+        $scope.submit=function(product){
+            $state.go('bankCardPassword', {
+                name: product.name,
+                type: product.type,
+                price: product.price
+            });
+        }
+        console.log($stateParams);
+        console.log($stateParams.name);
+        console.log($stateParams.type);
+        console.log($stateParams.price);
+
+    })
+    .controller('PaymentTermsResultCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        $scope.product = $stateParams;
+        $scope.goMyOrder=function(product){
+            $state.go('myOrder');
+        }
+        console.log($stateParams);
+        console.log($stateParams.name);
+        console.log($stateParams.type);
+        console.log($stateParams.price);
+
+    })
+    .controller('bankCardPasswordCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        $scope.product = $stateParams;
+        $scope.submit=function(product){
+            $state.go('PaymentTermsResult', {
+                name: product.name,
+                type: product.type,
+                price: product.price
+            });
+        }
         console.log($stateParams);
         console.log($stateParams.name);
         console.log($stateParams.type);
