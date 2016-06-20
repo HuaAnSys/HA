@@ -1,0 +1,54 @@
+<ion-view view-title="购物车" id="shoppingCar">
+    <ion-nav-bar align-title="center">
+        <ion-nav-buttons side="left" >
+            <i class="icon ion-chevron-left arrowP" ng-click="moveToAboutPage()"></i>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-list>
+            <ion-item  class="item-checkbox" ng-repeat="shoppingCar in shoppingCarList">
+                <label class="checkbox">
+                    <input type="checkbox" ng-model="shoppingCar.checked" ng-checked="shoppingCar.checked" ng-click="checkItem($index)">
+                </label>
+                <div class="shoppingItem">
+                    <div class="shoppingImg">
+                        <img class="shopChangeImg"  src="{{shoppingCar.img}}"/>
+                    </div>
+                    <div class="shopText">
+                        <div class="shopTextP">
+                          <p>{{shoppingCar.name}}</p>
+                        </div>
+                        <div class="shopTextSpan">
+                            <span>型号：</span><span>{{shoppingCar.type}}</span>
+                        </div>
+                        <div class="shopTextPrice">
+                            <span>{{shoppingCar.price | currency: "￥" }}</span>
+                        </div>
+                    </div>
+                    <div class="shopAmount">
+                        <i class="icon ion-minus-round iconLeft" ng-click="shoppingCar.amount > 1 ? shoppingCar.amount = shoppingCar.amount - 1 : shoppingCar.amount = 1;changeProductNum()"></i>
+                        <input type="number" maxlength="28" ng-model="shoppingCar.amount" ng-change="changeProductNum()">
+                        <i class="icon ion-plus-round iconRight" ng-click="shoppingCar.amount =  shoppingCar.amount + 1;changeProductNum()"></i>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <ion-option-button class="button-delete icon ion-ios-trash-outline" ng-click="deleteItem($index)"></ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+    <ion-footer-bar>
+        <div class="item-checkbox">
+            <label class="checkbox">
+                <input type="checkbox" ng-click="checkAllIntents()" ng-model="checkAll">
+            </label>
+            <span class="checkAll">全选</span>
+        </div>
+        <div class="total">
+            <span>合计：</span><span class="totalPrice">{{totalPrice | currency : "￥"}}</span>
+        </div>
+        <div class="has-badge">
+            <button class="buttonSub" data-ng-click="submit()">去结算<i class="badge">({{itemTotalNum}})</i></button>
+        </div>
+
+    </ion-footer-bar>
+</ion-view>

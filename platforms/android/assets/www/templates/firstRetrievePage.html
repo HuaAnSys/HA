@@ -1,0 +1,29 @@
+<ion-view view-title="找回密码" id="retrieve" ng-controller="firstRetrievePageCtrl">
+    <ion-nav-bar align-title="center">
+        <ion-nav-buttons side="left" >
+            <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="registView">
+            <ion-list>
+            <ion-item>
+                <div class="progressBar">
+                    <span style="color:#FC5E5E">1.输入手机号</span>
+                    &nbsp<span> > </span>&nbsp
+                    <span>2.输入验证码</span>
+                    &nbsp<span> > </span>&nbsp
+                    <span>3.设置新密码</span>
+                </div>
+            </ion-item>
+            <div class="smallBlankLine"></div>
+            <ion-item>
+                <input type="tel" placeholder=" 请输入手机号" ng-model="inputCaptcha"/>
+            </ion-item>
+        </ion-list>
+        </div>
+        <div class="submitBtn">
+            <button type="submit" class="button button-block" ng-click="goSecondRetrievePage()">获取验证码</button>
+        </div>
+    </ion-content>
+</ion-view>
