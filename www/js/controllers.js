@@ -558,7 +558,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate){
+.controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,CommunityService){
 
         $scope.back = function(){
             $state.go('tab.Home');
@@ -570,7 +570,18 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
         $scope.onTabSelect = function(index){
-            selectTab();
+            var selectedTab = parseInt($stateParams.tabIndex);
+            if(index==1&&(selectedTab>-1)&&(selectedTab!=0)){
+//                console.log("第一次进tab页");
+                $stateParams.tabIndex = -1;
+                $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(selectedTab);
+            }else if(index==1&&selectedTab==0){
+                $stateParams.tabIndex = -1;
+//                getCommunityByTab(1);
+            }else{
+//                getCommunityByTab(index);
+            }
+
         }
 
         $scope.goMessageDetail = function(){
@@ -578,13 +589,60 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('communityDetail',{"tabIndex":index});
         }
 
-        function selectTab(){
-            var index = parseInt($stateParams.tabIndex);
-            if(index>-1){
-                $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(index);
-                $stateParams.tabIndex = -1;
-            }else{
+        function getCommunityByTab(index){
+            console.log("获取第几个tab页数据："+index);
+            if(index==1){
+                CommunityService.getAllBulletins().then(function(data){
+                    if(data.length == 0){
 
+                    }else{
+
+
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                    $scope.showAlert(error);
+                });
+            }else if(index==2){
+                CommunityService.getAllDiscussions().then(function(data){
+                    if(data.length == 0){
+
+                    }else{
+
+
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                    $scope.showAlert(error);
+                });
+            }else if(index==3){
+                CommunityService.getAllCollections().then(function(data){
+                    if(data.length == 0){
+
+                    }else{
+
+
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                    $scope.showAlert(error);
+                });
+            }else{
+                CommunityService.getAllBestMemory().then(function(data){
+                    if(data.length == 0){
+
+                    }else{
+
+
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                    $scope.showAlert(error);
+                });
             }
         }
 
@@ -626,7 +684,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera){
+.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera,CommunityService){
 
         $scope.back = function(){
             $state.go("community",{"tabIndex":$stateParams.tabIndex});
@@ -656,6 +714,50 @@ angular.module('starter.controllers', ['starter.services'])
             }, function(err) {
 
             });
+
+            function addCommunity(){
+                var index = $stateParams.tabIndex;
+                if(index==1){
+                    CommunityService.addCommentsByDiscussion().then(function(data){
+                        if(data.length == 0){
+
+                        }else{
+
+
+                        }
+                        commonService.hideLoading();
+                    },function(error){
+                        commonService.hideLoading();
+                        $scope.showAlert(error);
+                    });
+                }else if(index==2){
+                    CommunityService.addCommentsByCollection().then(function(data){
+                        if(data.length == 0){
+
+                        }else{
+
+
+                        }
+                        commonService.hideLoading();
+                    },function(error){
+                        commonService.hideLoading();
+                        $scope.showAlert(error);
+                    });
+                }else{
+                    CommunityService.addCommentsByBestMemory().then(function(data){
+                        if(data.length == 0){
+
+                        }else{
+
+
+                        }
+                        commonService.hideLoading();
+                    },function(error){
+                        commonService.hideLoading();
+                        $scope.showAlert(error);
+                    });
+                }
+            }
         }
     })
 
