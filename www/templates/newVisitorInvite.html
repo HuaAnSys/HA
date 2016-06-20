@@ -1,0 +1,35 @@
+<ion-view view-title="新邀请" id="newVisitorInvite" ng-controller="newVisitorInviteCtrl">
+    <ion-nav-bar align-title="center">
+        <ion-nav-buttons side="left" >
+            <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="newVisitorInviteView">
+            <ion-list>
+                <ion-item class="mediumBlank">
+                    大连XXX123号楼01-123
+                </ion-item>
+                <ion-item>
+                    访客姓名：张三
+                </ion-item>
+                <ion-item ng-click="openDropList()">
+                    <div>
+                        <span>性别：</span>
+                        <span style="position: absolute;right:38px;">{{sexOne}}</span>
+                        <i ng-class={true:"ion-chevron-down",false:'ion-chevron-right'}[isActive] style="position: absolute;right:20px;"></i>
+                    </div>
+                </ion-item>
+                <ion-item ng-click="selectFemale()" ng-if="isActive==true" style="height: 48px;">
+                    <div>
+                        <span style="position: absolute;right:38px;">{{sexTwo}}</span>
+                    </div>
+                </ion-item>
+            </ion-list>
+            <div class="bigBlankLine lowerText">访客邀请码生成后24小时内有效</div>
+            <div class="submitBtn">
+                <button type="submit" class="button button-block" ng-click="gotoGenerateQR()">生成二维码</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
