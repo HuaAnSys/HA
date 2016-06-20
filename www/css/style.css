@@ -787,7 +787,7 @@ ion-view[id="communityDetail"]{
 */
 
 /*Login page css*/
-ion-view[id="login"],ion-view[id="regist"],ion-view[id="retrieve"],ion-view[id="propertyManagement"],ion-view[id="relatedRepairs"],ion-view[id="houseSaleAndRent"],ion-view[id="visitorPassport"]{
+ion-view[id="login"],ion-view[id="regist"],ion-view[id="retrieve"],ion-view[id="propertyManagement"],ion-view[id="relatedRepairs"],ion-view[id="houseSaleAndRent"],ion-view[id="visitorPassport"],ion-view[id="complaintPage"],ion-view[id="newVisitorInvite"],ion-view[id="generateQRCode"]{
     background-color: #EFEFf4;
 }
 ion-header-bar.bar.bar-header {
@@ -862,7 +862,7 @@ button.registBtn{
 }
 .registView .item-radio input:checked + .radio-content .radio-icon{
     color:#FC5E5E;
-    padding: 2px;
+    padding: 5px;
 }
 .registView .item.selectSex label{
     border: none;
@@ -888,7 +888,7 @@ button.registBtn{
 }
 
 /*Select Location to pay the property costs*/
-.selectLocationToPayView ion-item.bigBlankLine.item, .relatedRepairsView ion-item.mediumBlank.item, .houseSaleAndRentView ion-item.mediumBlank.item, .visitorPassportView ion-item.mediumBlank.item{
+.selectLocationToPayView ion-item.bigBlankLine.item, .relatedRepairsView ion-item.mediumBlank.item, .houseSaleAndRentView ion-item.mediumBlank.item, .visitorPassportView ion-item.mediumBlank.item, .complaintView ion-item.mediumBlank.item{
     border-top: none;
 }
 .selectLocationToPayView .list .item.item-accordion {
@@ -922,20 +922,20 @@ button.registBtn{
     font-size: 60px;
     margin: 15px auto;
 }
-.showBalanceInPayPropertyView .payDateHistory, .relatedRepairsView .haveSolved, .houseSaleAndRentView .haveSolved, .visitorPassportView .haveSolved{
+.showBalanceInPayPropertyView .payDateHistory, .relatedRepairsView .haveSolved, .houseSaleAndRentView .haveSolved, .visitorPassportView .haveSolved, .complaintView .haveSolved{
     position: absolute;
     right: 5px;
     bottom: 12px;
     color: #1ECD1E;
 }
-.showBalanceInPayPropertyView .listInShowBalance,.relatedRepairsView .listInRelatedRepairs, .houseSaleAndRentView .listInRelatedRepairs, .visitorPassportView .listInRelatedRepairs{
+.showBalanceInPayPropertyView .listInShowBalance,.relatedRepairsView .listInRelatedRepairs, .houseSaleAndRentView .listInRelatedRepairs, .visitorPassportView .listInRelatedRepairs, .complaintView .listInRelatedRepairs{
     padding: 0px;
 }
-.showBalanceInPayPropertyView .listInShowBalance div:nth-child(2),.relatedRepairsView .listInRelatedRepairs div:nth-child(2), .houseSaleAndRentView .listInRelatedRepairs div:nth-child(2), .visitorPassportView .listInRelatedRepairs div:nth-child(2){
+.showBalanceInPayPropertyView .listInShowBalance div:nth-child(2),.relatedRepairsView .listInRelatedRepairs div:nth-child(2), .houseSaleAndRentView .listInRelatedRepairs div:nth-child(2), .visitorPassportView .listInRelatedRepairs div:nth-child(2), .complaintView .listInRelatedRepairs div:nth-child(2){
     font-size: 14px;
     color: #777;
 }
-.showBalanceInPayPropertyView .listInShowBalance div,.relatedRepairsView .listInRelatedRepairs div, .houseSaleAndRentView .listInRelatedRepairs div, .houseSaleAndRentView .listInRelatedRepairs div, .visitorPassportView .listInRelatedRepairs div{
+.showBalanceInPayPropertyView .listInShowBalance div,.relatedRepairsView .listInRelatedRepairs div, .houseSaleAndRentView .listInRelatedRepairs div, .houseSaleAndRentView .listInRelatedRepairs div, .visitorPassportView .listInRelatedRepairs div, .complaintView .listInRelatedRepairs div{
     margin: 10px;
 }
 
@@ -946,7 +946,7 @@ button.registBtn{
 .mediumBlank {
     background: #EFEFF4;
     color: #777;
-    padding-top: 30px;
+    padding-top: 20px;
     padding-bottom: 10px;
 }
 .confirmStartAndEndDateView .bigBlankLine:last-child{
@@ -955,7 +955,7 @@ button.registBtn{
     border-bottom: none;
 }
 
-.relatedRepairsView .notSolved, .houseSaleAndRentView .notSolved, .visitorPassportView .notSolved{
+.relatedRepairsView .notSolved, .houseSaleAndRentView .notSolved, .visitorPassportView .notSolved, .complaintView .notSolved{
     position: absolute;
     right: 5px;
     bottom: 12px;
@@ -983,31 +983,31 @@ button.registBtn{
     padding-top: 5%;
 }
 
-.repairDetailsView .taskID,.repairDetailsView .taskAcceptOrNot,.houseSaleAndRentDetailsView .taskID,.houseSaleAndRentDetailsView .taskAcceptOrNot{
+.repairDetailsView .taskID,.repairDetailsView .taskAcceptOrNot,.houseSaleAndRentDetailsView .taskID,.houseSaleAndRentDetailsView .taskAcceptOrNot,.complaintDetailsView .taskID,.complaintDetailsView .taskAcceptOrNot{
     padding: 15px;
 }
-.repairDetailsView .taskID span:last-child, .houseSaleAndRentDetailsView .taskID span:last-child{
+.repairDetailsView .taskID span:last-child, .houseSaleAndRentDetailsView .taskID span:last-child,.complaintDetailsView .taskID span:last-child{
     float: right;
     margin-right:0px;
     color: #777;
 }
-.repairDetailsView .acceptOrNotBtn, .houseSaleAndRentDetailsView .acceptOrNotBtn{
+.repairDetailsView .acceptOrNotBtn, .houseSaleAndRentDetailsView .acceptOrNotBtn,.complaintDetailsView .acceptOrNotBtn{
     padding: 5px 10px;
     background-color: #00C600;
     color: #FFFFFF;
     border-radius: 7px;
     border: none;
 }
-.repairDetailsView .taskAcceptTime, .houseSaleAndRentDetailsView .taskAcceptTime{
+.repairDetailsView .taskAcceptTime, .houseSaleAndRentDetailsView .taskAcceptTime,.complaintDetailsView .taskAcceptTime{
     float:right;
     margin-top: 7px;
     color: #777;
 }
-.repairDetailsView .repairContent, .houseSaleAndRentDetailsView .repairContent{
+.repairDetailsView .repairContent, .houseSaleAndRentDetailsView .repairContent,.complaintDetailsView .repairContent{
     margin-top: 15px;
     margin-bottom: 10px;
 }
-.repairDetailsView .repairAddress, .houseSaleAndRentDetailsView .repairAddress{
+.repairDetailsView .repairAddress, .houseSaleAndRentDetailsView .repairAddress,.complaintDetailsView .repairAddress{
     color: #777;
 }
 .fiftyPxHeightBlank{
@@ -1016,10 +1016,10 @@ button.registBtn{
     border-top: 1px solid #C8C7CC;
     border-bottom: 1px solid #C8C7CC;
 }
-.repairDetailsView .onePieceDetail, .houseSaleAndRentDetailsView .onePieceDetail{
+.repairDetailsView .onePieceDetail, .houseSaleAndRentDetailsView .onePieceDetail,.complaintDetailsView .onePieceDetail{
     height: 70px;
 }
-.repairDetailsView .headPortrait, .houseSaleAndRentDetailsView .headPortrait{
+.repairDetailsView .headPortrait, .houseSaleAndRentDetailsView .headPortrait,.complaintDetailsView .headPortrait{
     position: absolute;
     height: 40px;
     width: 40px;
@@ -1027,18 +1027,18 @@ button.registBtn{
     margin-left:15px;
     margin-top: 10px;
 }
-.repairDetailsView .headPortrait.personIcon, .houseSaleAndRentDetailsView .headPortrait.personIcon{
+.repairDetailsView .headPortrait.personIcon, .houseSaleAndRentDetailsView .headPortrait.personIcon,.complaintDetailsView .headPortrait.personIcon{
     background: #DDDBCE;
 }
-.repairDetailsView .progressStatus, .houseSaleAndRentDetailsView .progressStatus{
+.repairDetailsView .progressStatus, .houseSaleAndRentDetailsView .progressStatus,.complaintDetailsView .progressStatus{
     float: right;
     height: 70px;
     border-top: 1px solid #C8C7CC;
 }
-.repairDetailsView .progressStatus>div:first-child, .houseSaleAndRentDetailsView .progressStatus>div:first-child{
+.repairDetailsView .progressStatus>div:first-child, .houseSaleAndRentDetailsView .progressStatus>div:first-child,.complaintDetailsView .progressStatus>div:first-child{
     margin-top: 10px;
 }
-.repairDetailsView .progressStatus>div:last-child, .houseSaleAndRentDetailsView .progressStatus>div:last-child{
+.repairDetailsView .progressStatus>div:last-child, .houseSaleAndRentDetailsView .progressStatus>div:last-child,.complaintDetailsView .progressStatus>div:last-child{
     margin-top: 10px;
     color:#777;
 }
@@ -1125,6 +1125,35 @@ button.registBtn{
     background-color: #F23030;
     margin-bottom: 10px;
     right: 14px;
+}
+.showPhoneNumPopup .popup-buttons .button-positive a{
+    color: #ffffff;
+}
+
+.newVisitorInviteView .lowerText{
+    margin-top: 10px;
+    padding-left: 15px;
+}
+.generateQRCodeView{
+    padding: 8%;
+    padding-bottom: 0px;
+}
+.generateQRCodeView .qrClass{
+    background: #FFFFFF;
+}
+.textUnderQR{
+    margin-top: 10%;
+    padding-bottom: 5%;
+    text-align: center;
+    border-bottom: 1px solid #C8C7CC;
+    color:#777;
+}
+.generateQRCodeView .visitorInfo p{
+    margin-top: 9%;
+    font-size: 14px;
+}
+.generateQRCodeView .visitorInfo p>span:last-child{
+    float: right;
 }
 /*===AboutMeCtrl===*/
 ion-view[view-title='AboutMe']{

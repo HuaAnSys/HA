@@ -696,58 +696,139 @@ angular.module('starter.controllers', [])
 /*
     Login and property mangement controllers
  */
-    .controller('loginCtrl', function($scope,$state) {
+    .controller('loginCtrl', function($scope,$state,$http,$ionicPopup,LoginService) {
+        $scope.user = {
+            username: '',
+            password: ''
+        }
+        $scope.login = function() {
+            LoginService.login($scope.user).then(function(msg) {
+                $state.go('tab.Home');
+            }, function(errMsg) {
+                var alertPopup = $ionicPopup.alert({
+                    title: '登录失败',
+                    template: '账号或密码错误，请重新输入'
+                })
+                console.log(errMsg);
+            });
+        }
         $scope.regist=function(){
             $state.go('firstRegistPage');
         }
         $scope.retrievePassword=function(){
             $state.go('firstRetrievePage');
         }
-        $scope.loginToMainPage=function(){
-            $state.go('tab.Home');
-        }
+        //$scope.loginToMainPage=function(){
+        //    $state.go('tab.Home');
+        //}
     })
 
 //Regist account page controllers
-    .controller('firstRegistPageCtrl', function($scope,$state,$ionicHistory) {
+    .controller('firstRegistPageCtrl', function($scope,$state,$ionicPopup,$ionicHistory) {
+        $scope.userPhoneNum = {
+            phoneNum:''
+        }
         $scope.goSecondRegistPage=function(){
-            $state.go('secondRegistPage');
+            if(!angular.isNumber(parseInt($scope.userPhoneNum.phoneNum)) || $scope.userPhoneNum.phoneNum == '' || $scope.userPhoneNum.phoneNum.length <11 ){
+                var alertPopup = $ionicPopup.alert({
+                    title: '注册失败',
+                    template: '亲，请输入11位的手机号码呦~'
+                })
+            }
+            else{
+                $state.go('secondRegistPage',{phoneNum : $scope.userPhoneNum.phoneNum});
+            }
         }
         $scope.back=function(){
             $ionicHistory.goBack();
         }
     })
 
-    .controller('secondRegistPageCtrl', function($scope,$state,$ionicHistory) {
+    .controller('secondRegistPageCtrl', function($scope,$state,$stateParams,$ionicHistory) {
+        $scope.userPhoneNum = $stateParams.phoneNum;
+        $scope.inputCaptcha = {
+            captcha:''
+        }
+        /*
+           call service function to verify the captcha
+        */
         $scope.goThirdRegistPage=function(){
-            $state.go('thirdRegistPage');
+            $state.go('thirdRegistPage',{phoneNum : $scope.userPhoneNum});
         }
         $scope.back=function(){
             $ionicHistory.goBack();
         }
     })
-    .controller('thirdRegistPageCtrl', function($scope,$state,$ionicHistory,$ionicPopup) {
+    .controller('thirdRegistPageCtrl', function($scope,$state,$ionicHistory,$http,$stateParams,$ionicPopup,RegistService) {
+        $scope.userPhoneNum = $stateParams.phoneNum;
+
+        $scope.user = {
+            inputPassword:'',
+            confirmPassword:'',
+            userName:'',
+            userIdentifyId:'',
+            userNickName:'',
+            userSex:'',
+            //userPhoneNum:$scope.userPhoneNum
+
+        }
+        $scope.selectSex= function (sex) {
+            if(sex=='male'){
+                $scope.user.userSex = 'male';
+                console.log($scope.user.userSex);
+            }
+            else{
+                $scope.user.userSex = 'female';
+                console.log($scope.user.userSex);
+            }
+        }
         $scope.registAccount = function() {
-
-            //if($scope.inputPassword && $scope.confirmPassword && $scope.inputName && $scope.inputIdentifyId && $scope.inputNickName !=null){
-            var alertPopup = $ionicPopup.alert({
-                title: '注册成功'
-                //template: '注册成功！'
-            });
-            alertPopup.then(function(res) {
-                $state.go('login');
-            });
-            //}
-        };
-
-        //$scope.selectMale=function(){
-        //    $('.selectMale').css('color','#FC5E5E');
-        //    $('.selectFemale').css('color','none');
-        //}
-        //$scope.selectFemale=function(){
-        //    $('.selectMale').css('color','none');
-        //    $('.selectFemale').css('color','#FC5E5E');
-        //}
+            console.log($scope.user.inputPassword);
+            var isPassword = new RegExp(/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/);
+            var isIDCard=new RegExp(/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/);
+            if(!isPassword.test($scope.user.inputPassword) || $scope.user.inputPassword.length<6){
+                var alertPopup = $ionicPopup.alert({
+                    title: '请输入正确密码',
+                    template: '亲，密码必须由字母和数字组成而且不能小于6位哦'
+                })
+            }
+            else if($scope.user.inputPassword !== $scope.user.confirmPassword){
+                var alertPopup = $ionicPopup.alert({
+                    title: '密码设置出错',
+                    template: '您输入的两次密码不一致，请修改'
+                })
+            }
+            else if($scope.user.userName=='' || $scope.user.userName.length<2){
+                console.log($scope.user);
+                var alertPopup = $ionicPopup.alert({
+                    title: '请填下您的名字',
+                    template: '亲，留下您的尊姓大名吧'
+                })
+            }
+            else if(!isIDCard.test($scope.user.userIdentifyId) || $scope.user.userIdentifyId.length<15){
+                var alertPopup = $ionicPopup.alert({
+                    title: '请输入正确身份证',
+                    template: '亲，身份证最少也是15位的呀，检查下吧'
+                })
+            }
+            else if($scope.user.inputPassword==''||$scope.user.confirmPassword==''||$scope.user.userName==''||$scope.user.userIdentifyId==''||$scope.user.userNickName==''||$scope.user.userSex==''){
+                var alertPopup = $ionicPopup.alert({
+                    title: '注册失败',
+                    template: '您填写的信息不完整呦，填满嘛~'
+                })
+            }
+            else{
+                RegistService.regist($scope.user).then(function(msg) {
+                    $state.go('tab.Home');
+                }, function(errMsg) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: '注册失败',
+                        template: '注册失败，请稍后重试'
+                    })
+                    console.log(errMsg);
+                })
+            }
+        }
         $scope.back=function(){
             $ionicHistory.goBack();
         }
@@ -815,7 +896,7 @@ angular.module('starter.controllers', [])
                 buttons: [
                     { text: '取消' },
                     {
-                        text: '<b>拨打物业电话</b>',
+                        text: '<a href="tel:10086">拨打物业电话</a>',
                         type: 'button-positive',
                         onTap: function(e) {
                             console.log("call");
@@ -833,6 +914,9 @@ angular.module('starter.controllers', [])
         }
         $scope.gotoVisitorPassport=function(){
             $state.go('visitorPassport');
+        }
+        $scope.gotoComplaintPage=function(){
+            $state.go('complaintPage');
         }
     })
     .controller('selectLocationToPayPropertyCtrl', function($scope,$state,$ionicHistory) {
@@ -981,8 +1065,101 @@ angular.module('starter.controllers', [])
         }
     })
 
+//Visitor passport page
     .controller('visitorPassportCtrl', function($scope,$state,$ionicHistory) {
+        $scope.gotoNewVisitorInvite=function(){
+            $state.go('newVisitorInvite');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('newVisitorInviteCtrl', function($scope,$state,$ionicHistory) {
+        $scope.sexOne='男';
+        $scope.sexTwo='女';
+        $scope.isActive = false;
+        $scope.openDropList=function(){
+            $scope.isActive = true;
+        }
+        $scope.selectFemale=function(){
+            var changeSex1=$scope.sexTwo;
+            var changeSex2 =$scope.sexOne;
+            $scope.sexOne = changeSex1;
+            $scope.sexTwo = changeSex2;
+            $scope.isActive = false;
+        }
+        $scope.gotoGenerateQR=function(){
+            $state.go('generateQRCode');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('generateQRCodeCtrl', function($scope,$state,$ionicHistory) {
+        var screenHeight = document.body.scrollHeight;
+        var screenWidth = document.body.scrollWidth;
+        $scope.whiteAreaHeight=screenHeight*0.92+'px';
+        $scope.contentHeight=screenHeight*0.84+'px';
+        $scope.paddingPX=screenWidth*0.08+'px';
+        $scope.qrWidth = screenWidth*0.68+'px';
 
+        function utf16to8(str) {
+            var out, i, len, c;
+            out = "";
+            len = str.length;
+            for (i = 0; i < len; i++) {
+                c = str.charCodeAt(i);
+                if ((c >= 0x0001) && (c <= 0x007F)) {
+                    out += str.charAt(i);
+                } else if (c > 0x07FF) {
+                    out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                    out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+                    out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                } else {
+                    out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+                    out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                }
+            }
+            return out;
+        }
+
+        $('#outputQR').qrcode(utf16to8("张三 男"));
+        $('#outputQR>canvas').css('height',$scope.qrWidth);
+        $('#outputQR>canvas').css('width',$scope.qrWidth);
+        //$('#outputQR>canvas:last-child').remove()
+        if($('#outputQR>canvas').length !==1){
+            $('#outputQR>canvas:last-child').remove();
+        }
+
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+//Complaint and suggestion page
+    .controller('complaintPageCtrl', function($scope,$state,$ionicHistory) {
+        $scope.goComplaintDetails= function () {
+            $state.go('complaintDetails');
+        }
+        $scope.goNewComplaintPage= function () {
+            $state.go('newComplaintPage');
+        }
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('newComplaintPageCtrl', function($scope,$state,$ionicHistory) {
+        var screenWidth = document.body.scrollWidth - 30;
+        var screenHeight = document.body.scrollHeight - 30;
+        $scope.textAreaCols = Math.floor(screenWidth/14)*2;
+        $scope.submitBtnBackgroundHeight = screenHeight-15-162-36-120+'px';
+
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+    })
+    .controller('complaintDetailsCtrl', function($scope,$state,$ionicHistory) {
+        var screenWidth = document.body.scrollWidth;
+        $scope.progressDetailContentWidth = screenWidth-15-40-20+'px';
 
         $scope.back=function(){
             $ionicHistory.goBack();

@@ -10,15 +10,15 @@
                 <ion-item class="bigBlankLine">
                 </ion-item>
                 <ion-item>
-                    <input type="text" placeholder=" 手机" ng-model="inputPhoneNum"/>
+                    <input type="text" placeholder=" 手机" ng-model="user.username"/>
                 </ion-item>
                 <ion-item>
-                    <input type="text" placeholder=" 密码" ng-model="inputPassword"/>
+                    <input type="text" placeholder=" 密码" ng-model="user.password"/>
                 </ion-item>
             </ion-list>
         </div>
         <div class="submitBtn">
-            <button type="submit" class="button button-block" ng-click="loginToMainPage()">登录</button>
+            <button type="submit" class="button button-block" ng-click="login()">登录</button>
         </div>
         <div class="retrievePassword" ng-click="retrievePassword()">
             <button ng-click="">找回密码</button>

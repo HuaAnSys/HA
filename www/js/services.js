@@ -200,3 +200,68 @@ angular.module('starter.services', [])
         }
       };
     }])
+.factory('LoginService', ['$http','$q',function($http, $q) {
+
+    return {
+        login: function (user) {
+            var defer = $q.defer();
+            var request = $http.post('http://localhost:7080/HuanAnBackend/user/login',user);
+            request.success(function (res) {
+                if(res.result=='success'){
+                    defer.resolve(res.result);
+                }
+                else{
+                  defer.reject("Login failed, please try again later.");
+                }
+            });
+            request.error(function () {
+                defer.reject("Login failed, please try again later.");
+            });
+            return defer.promise;
+
+        }
+    }
+}])
+.factory('checkCaptchaService', ['$http','$q',function($http, $q) {
+
+    return {
+        checkCaptcha: function (data) {
+            var defer = $q.defer();
+            var request = $http.post('http://localhost:7080/HuanAnBackend/user/****************',data);
+            request.success(function (res) {
+                if(res.result=='success'){
+                    defer.resolve(res.result);
+                }
+                else{
+                  defer.reject("Get captcha failed, please try again later.");
+                }
+            });
+            request.error(function () {
+                defer.reject("Verify the message authentication code failed, please try again later.");
+            });
+            return defer.promise;
+        }
+    }
+}])
+
+.factory('RegistService', ['$http','$q',function($http, $q) {
+
+    return {
+        regist: function (data) {
+            var defer = $q.defer();
+            var request = $http.post('http://localhost:7080/HuanAnBackend/user/registerUser',data);
+            request.success(function (res) {
+                if(res.result=='success'){
+                    defer.resolve(res.result);
+                }
+                else{
+                  defer.reject("Regist failed, please try again later.");
+                }
+            });
+            request.error(function () {
+                defer.reject("Regist failed, please try again later.");
+            });
+            return defer.promise;
+        }
+    }
+}])
