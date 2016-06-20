@@ -149,12 +149,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('secondRegistPage', {
     url: '/secondRegistPage',
     templateUrl: 'templates/secondRegistPage.html',
-    controller: 'secondRegistPageCtrl'
+    controller: 'secondRegistPageCtrl',
+    params: {phoneNum: null}
   })
   .state('thirdRegistPage', {
     url: '/thirdRegistPage',
     templateUrl: 'templates/thirdRegistPage.html',
-    controller: 'thirdRegistPageCtrl'
+    controller: 'thirdRegistPageCtrl',
+    params: {phoneNum: null}
   })
 
 
@@ -224,12 +226,39 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     templateUrl: 'templates/houseSaleAndRentDetails.html',
     controller: 'houseSaleAndRentDetailsCtrl'
   })
+//Vistor passport
   .state('visitorPassport', {
     url: '/visitorPassport',
     templateUrl: 'templates/visitorPassport.html',
     controller: 'visitorPassportCtrl'
   })
+  .state('newVisitorInvite', {
+    url: '/newVisitorInvite',
+    templateUrl: 'templates/newVisitorInvite.html',
+    controller: 'newVisitorInviteCtrl'
+  })
+  .state('generateQRCode', {
+    url: '/generateQRCode',
+    templateUrl: 'templates/generateQRCode.html',
+    controller: 'generateQRCodeCtrl'
+  })
 
+//Complaint and suggestion
+  .state('complaintPage', {
+    url: '/complaintPage',
+    templateUrl: 'templates/complaintPage.html',
+    controller: 'complaintPageCtrl'
+  })
+  .state('newComplaintPage', {
+    url: '/newComplaintPage',
+    templateUrl: 'templates/newComplaintPage.html',
+    controller: 'newComplaintPageCtrl'
+  })
+  .state('complaintDetails', {
+    url: '/complaintDetails',
+    templateUrl: 'templates/complaintDetails.html',
+    controller: 'complaintDetailsCtrl'
+  })
   .state('shoppingCar', {
     url: '/shoppingCar',
     templateUrl: 'templates/shoppingCar.html',
