@@ -739,7 +739,189 @@ ion-view[id="homeView"] .advertisements{
     margin-bottom: 0;
 }
 
+/* choosePaymentTermsContent */
+#choosePaymentTerms{
+    background-color: #EFEFF4;
 
+}
+#choosePaymentTermsContent{
+    padding-top: 10px;
+
+}
+#choosePaymentTermsContent .title{
+    background-color: #FFF;
+    padding: 0 10px;
+    height: 36px;
+    font-size: 16px;
+    line-height: 36px;
+    border-bottom: 1px solid #C8C7CC;
+}
+#choosePaymentTermsContent .title span{
+    display: block;
+    height: 36px;
+}
+#choosePaymentTermsContent .title .left{
+    float: left;
+}
+#choosePaymentTermsContent .title .right{
+    float: right;
+    color: #F23030;
+}
+
+.paymentItem{
+    position: relative;
+    background-color: #FFF;
+    padding: 9px 40px 9px 50px;
+    height: 50px;
+    border-bottom: 1px solid #C8C7CC;
+}
+.paymentItem.weixin{
+    background: #FFF url("../img/PaymentTermsIocn.png") no-repeat 0 0;
+    
+}
+
+.paymentItem.zhifubao{
+    background: #FFF url("../img/PaymentTermsIocn.png") no-repeat 0 -50px;
+
+}
+.paymentItem .text{
+    font-size: 12px;
+    color: #777777;
+}
+.paymentItem .text span{
+    display: block;
+}
+.paymentItem .text .ctitle{
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 5px;
+}
+.paymentItem i{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    padding: 0;
+    margin: 0;
+}
+
+/* chooseBankCard */
+#chooseBankCard,
+#bankCardPassword{
+    background-color: #F2F2F2;
+
+}
+
+
+#chooseBankCard .safety{
+    background-color: #F2F2F2;
+    position: relative;
+    padding: 10px 0;
+    border-bottom: 1px solid #C8C7CC;
+}
+#chooseBankCard .safety span{
+    display: inline-block;
+    background: #F2F2F2 url("../img/safety.png") no-repeat 0 0;
+    position: relative;
+    left: 50%;
+    transform: translatex(-50%);
+    -webkit-transform: translatex(-50%);
+    margin: 0 auto;
+    padding-left: 20px;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+
+}
+.chooseBankCardContent{
+    padding: 0 20px;
+    border-bottom: 1px solid #C8C7CC;
+}
+.chooseBankCardContent .top{
+    padding: 25px 0;
+    text-align: center;
+
+}
+.chooseBankCardContent .bottom{
+    border-top: 1px dotted #C8C7CC;
+    font-size: 12px;
+    color: #777777;
+    padding: 15px 0 5px 0;
+
+}
+.chooseBankCardContent .bottom div{
+    margin-bottom: 10px;
+    height: 12px;
+
+}
+.chooseBankCardContent .bottom span{
+    display: block;
+
+}
+.chooseBankCardContent .bottom .left{
+    float: left;
+}
+.chooseBankCardContent .bottom .right{
+    float: right;
+}
+.chooseBankCardContent .top .title{
+    display: block;
+    margin-bottom: 10px;
+    color: #777777;
+    font-size: 16px;
+
+}
+.chooseBankCardContent .top .content{
+    display: block;
+    color: #000;
+    font-size: 36px;
+    font-weight: bold;
+
+}
+.chooseBankCardContent .top .content span{
+    font-size: 14px;
+    font-weight: normal;
+
+}
+.paymentItem.bankCard{
+    padding: 9px 40px 9px 20px;
+    height: 50px;
+    border-bottom: 1px solid #C8C7CC;
+}
+.paymentItem.bankCard .text .ctitle{
+    line-height: 32px;
+}
+
+/*  */
+#PaymentTermsResultContent .chooseBankCardContent .top img{
+    margin-bottom: 10px;
+}
+#PaymentTermsResultContent .chooseBankCardContent .top .title{
+    color: #00C600;
+}
+#PaymentTermsResultContent .chooseBankCardContent .bottom{
+    border-bottom: 1px dotted #C8C7CC;
+
+}
+#PaymentTermsResultContent .chooseBankCardContent{
+    border-bottom:0;
+}
+
+/* bankCardPassword */
+#bankCardPassword .chooseBankCardContent .top .title{
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+#bankCardPassword .chooseBankCardContent .bankCardPasswordInput input{
+    width: 100%;
+    height: 50px;
+    padding: 5px 10px;
+    font-size: 40px;
+    border: 1px solid #C8C7CC;
+}
+#bankCardPassword .chooseBankCardContent{
+    border-bottom: 0;
+}
 
 
 
