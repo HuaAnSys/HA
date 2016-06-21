@@ -1093,7 +1093,7 @@ button.registBtn{
 
 .community_detail_good_who{
     top: -40px;
-    width: 45%;
+    width: 100%;
     overflow:hidden;
     text-overflow:ellipsis;
     -o-text-overflow:ellipsis;
@@ -1103,18 +1103,28 @@ button.registBtn{
 .community_detail_good_time{
     font-size: 14px;
     line-height: 14px;
-    position: relative;
-    top: -57px;
-    left: 65%;
+    position: absolute;
+    top: 16px;
+    right: 5%;
     color: #B6B6B6;
 }
 
+.commentTextDesc{
+    width: 100%;
+    padding-left: 50px;
+    float: left;
+}
+
+.commentTextDesc .message_icon{
+    margin-left: -50px;
+}
+
+.commentTextDesc .message_people{
+    left: 0px;
+}
+
 .community_detail_good_time+div{
-    position: relative;
-    top: -45px;
-    width: 80%;
-    left: 50px;
-    font-size: 15px;
+    margin-top: -20px;
 }
 
 .showPhoneNumPopup .popup-buttons .button{
