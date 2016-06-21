@@ -307,6 +307,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     controller: 'editNicknameCtrl',
     cache:false
   })
+
+  .state('comment', {
+    url: '/comment',
+    templateUrl: 'templates/comment.html',
+    controller: 'commentCtrl',
+    cache:false
+  })
       // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/Home');
 

@@ -266,6 +266,31 @@ angular.module('starter.controllers', ['starter.services'])
         $state.go('tab.AboutMe');
     }
 
+    $scope.comment = function(){
+        $state.go('comment');
+    }
+
+})
+
+.controller('commentCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+    commonService.showLoading();
+    shoppingCarService.getShoppingCar().then(function(data){
+        $scope.shoppingCarList = data;
+        var shoppingCarListLength = $scope.shoppingCarList.length;
+        $scope.totalPrice = 0;
+        for(var i=0;i<shoppingCarListLength;i++){
+            $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+        }
+        commonService.hideLoading();
+    }, function(error){
+        commonService.hideLoading();
+        //$scope.showAlert(error);
+    });
+
+    $scope.moveToMyOrderPage = function(){
+        $state.go('myOrder');
+    }
+
 })
 
 .controller('publishThemeCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
