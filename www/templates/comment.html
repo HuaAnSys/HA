@@ -6,15 +6,33 @@
     </ion-nav-bar>
     <ion-content>
         <ion-list>
-            <ion-item>
+            <ion-item ng-repeat="shoppingCar in shoppingCarList">
                 <div class="comment_up">
-
+                    <div class="commentImg">
+                        <img class="commentChangeImg" src="{{shoppingCar.img}}">
+                    </div>
+                    <div >
+                        <textarea class="comment_text" placeholder="请写下对宝贝的感受吧,对他人帮助很大哦!"></textarea>
+                    </div>
                 </div>
                 <div class="comment_down">
-
+                    <div class="comment_span"><span>商品描述相符:</span></div>
+                        <div class="comment_star"  star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+                    <div class="clear"></div>
                 </div>
             </ion-item>
         </ion-list>
     </ion-content>
-
+    <ion-footer-bar>
+        <div class="comment_check">
+            <label class="checkbox">
+                <input type="checkbox" ng-click="checkAllIntents()" ng-model="commentCheck">
+            </label>
+            <span class="comment_footer_span">匿名评价</span>
+        </div>
+        <div class="comment_button">
+            <button class="buttonSub" ng-click="publishComment()">发表评价</button>
+        </div>
+    </ion-footer-bar>
 </ion-view>
+

@@ -6,27 +6,12 @@ angular.module('starter.services', [])
   // Some fake testing data
 
   return {
-    getDomesticByStatus: function (domesticTabTitle) {
+    getDomesticByStatus: function () {
       //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
 
-      console.log(domesticTabTitle);
       var defer = $q.defer();
 
-      if(domesticTabTitle=='baojie'){
-        var request = $http.get('js/Domestic.json');
-      }else if(domesticTabTitle=='weixiu'){
-        var request = $http.get('js/Domestic1.json');
-      }else if(domesticTabTitle=='daixi'){
-        var request = $http.get('js/Domestic2.json');
-      }else if(domesticTabTitle=='banyun'){
-        var request = $http.get('js/Domestic3.json');
-      }else if(domesticTabTitle=='anzhuang'){
-        var request = $http.get('js/Domestic4.json');
-      }else if(domesticTabTitle=='kaisuo'){
-        var request = $http.get('js/Domestic5.json');
-      }else if(domesticTabTitle=='lvhua'){
-        var request = $http.get('js/Domestic6.json');
-      }
+     var request = $http.get('js/Domestic.json');
 
       //Successful HTTP post request or not
       request.success(function (result) {

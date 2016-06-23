@@ -100,7 +100,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
 /*===DomesticCtrl===*/
 #Domestic a.tabRight{
   position: absolute;
-  right: 0px;
+  right: 4px;
   color: #f40;
 }
 
@@ -1855,4 +1855,106 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单']{
     height: 100%;
     width: 35%;
     background-color: #f0f0f0;
+}
+
+/*===commentCtrl===*/
+ion-view[view-title='发表评价']{
+    background-color: #EFEFF4;
+}
+
+#comment .item{
+    margin: 10px 0px;
+}
+
+.comment_up{
+    border-bottom-style: solid;
+    border-width: 2px;
+    border-color: #ddd;
+}
+
+.commentImg{
+    left: 30px;
+    width: 86px;
+    float: left;
+}
+
+.commentChangeImg{
+    width:80px;
+}
+.comment_text{
+    width: 70%;
+    height: 80px;
+    resize : none;
+    overflow:hidden;
+    padding-top: 6px;
+}
+.comment_down{
+    padding-top: 10px;
+    color: #000;
+}
+
+.comment_span{
+    float: left;
+    padding-top: 4px;
+}
+
+.comment_star{
+    position: absolute;
+    right: 20px;
+    font-size: 22px;
+    color: #FC5E5E;
+}
+
+/*.comment_check{*/
+    /*width: 60px;*/
+/*}*/
+
+#comment .checkbox input:before, #comment .checkbox-icon:before{
+    border-radius: 2px;
+}
+
+#comment .checkbox input:after, #comment .checkbox-icon:after{
+    top: 24%;
+    width: 9px;
+    height: 6px;
+}
+#comment .checkbox input, #comment .checkbox-icon{
+    width: 18px;
+    height: 18px;
+}
+
+#comment  .checkbox input:checked:before, #comment .checkbox input:checked + .checkbox-icon:before {
+    background: #ff9666;
+    border-color: #ff9666;
+}
+
+.unrated{
+    color: #000;
+}
+
+.rating {
+    color: #a9a9a9;
+    margin: 0;
+    padding: 0;
+}
+ul.rating {
+    display: inline-block;
+}
+.rating li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 1px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.rating .filled {
+    color: #FC5E5E;
+}
+
+.comment_footer_span{
+    position: absolute;
+    top: 34%;
+    font-size: 14px;
+    left: 34px;
 }
