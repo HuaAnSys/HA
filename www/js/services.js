@@ -669,18 +669,19 @@ angular.module('starter.services', [])
 .factory('LoginService', ['$http','$q',function($http, $q) {
 
     return {
-        login: function (user) {
+        login: function (data) {
             var defer = $q.defer();
-            var request = $http.post('http://localhost:7080/HuanAnBackend/user/login',user);
-            request.success(function (res) {
-                if(res.result=='success'){
-                    defer.resolve(res.result);
+            var loginUrl ='http://9.110.54.76:7080/HuanAnBackend/user/login/phoneNo/' + data.phoneNo + '/pwd/'+data.pwd;
+            var request = $http.post(loginUrl);
+            request.success(function (data) {
+                if(data.result=="success"){
+                    defer.resolve(data.result);
                 }
                 else{
                   defer.reject("Login failed, please try again later.");
                 }
             });
-            request.error(function () {
+            request.error(function (data) {
                 defer.reject("Login failed, please try again later.");
             });
             return defer.promise;
@@ -694,16 +695,16 @@ angular.module('starter.services', [])
         checkCaptcha: function (data) {
             var defer = $q.defer();
             var request = $http.post('http://localhost:7080/HuanAnBackend/user/****************',data);
-            request.success(function (res) {
-                if(res.result=='success'){
-                    defer.resolve(res.result);
+            request.success(function (data) {
+                if(data.result=='success'){
+                    defer.resolve(data);
                 }
                 else{
-                  defer.reject("Get captcha failed, please try again later.");
+                  defer.reject("Get captcha failed");
                 }
             });
             request.error(function () {
-                defer.reject("Verify the message authentication code failed, please try again later.");
+                defer.reject("Verify the message authentication code failed");
             });
             return defer.promise;
         }
@@ -715,10 +716,10 @@ angular.module('starter.services', [])
     return {
         regist: function (data) {
             var defer = $q.defer();
-            var request = $http.post('http://localhost:7080/HuanAnBackend/user/registerUser',data);
-            request.success(function (res) {
-                if(res.result=='success'){
-                    defer.resolve(res.result);
+            var request = $http.post('http://9.110.54.76:7080/HuanAnBackend/user/registerUser',data);
+            request.success(function (data) {
+                if(data.result=='success'){
+                    defer.resolve(data.result);
                 }
                 else{
                   defer.reject("Regist failed, please try again later.");
@@ -726,6 +727,162 @@ angular.module('starter.services', [])
             });
             request.error(function () {
                 defer.reject("Regist failed, please try again later.");
+            });
+            return defer.promise;
+        }
+    }
+}])
+.factory('RelatedRepairsService', ['$http','$q',function($http, $q) {
+
+    return {
+        getRelatedRepairs: function (user) {
+            var defer = $q.defer();
+            //var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getClaimedRepairs',user);
+            var request = $http.get('js/propertyManagement.json');
+            request.success(function (data) {
+                var status =data.resultCode;
+                //if(status == "1"){
+                    defer.resolve(data.result);
+                //}else{
+                //    defer.reject();
+                //}
+            });
+            request.error(function () {
+                defer.reject("Get related repairs information failed.");
+            });
+            return defer.promise;
+        },
+
+        newAskForRepair: function (user) {
+            var defer = $q.defer();
+            var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewRepair',user);
+            request.success(function (data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function () {
+                defer.reject("Get related repairs information failed.");
+            });
+            return defer.promise;
+        },
+
+    }
+}])
+.factory('HouseSaleAndRentService', ['$http','$q',function($http, $q) {
+
+    return {
+        getHouseSaleAndRent: function (user) {
+            var defer = $q.defer();
+            var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getRentSaleProperty',user);
+            request.success(function (data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function () {
+                defer.reject("Get related repairs information failed.");
+            });
+            return defer.promise;
+        },
+
+        newAskForHouseSaleOrRent: function (user) {
+            var defer = $q.defer();
+            var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewRentSaleProperty',user);
+            request.success(function (data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function () {
+                defer.reject("Get related repairs information failed.");
+            });
+            return defer.promise;
+        }
+    }
+}])
+
+.factory('VisitorPassportService', ['$http','$q',function($http, $q) {
+
+    return {
+        getVisitorPassport: function (user) {
+            var defer = $q.defer();
+            var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getCustomers',user);
+            request.success(function (data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function () {
+                defer.reject("Get related repairs information failed.");
+            });
+            return defer.promise;
+        },
+
+        newVisitorInvites: function (user) {
+            var defer = $q.defer();
+            var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewCustomer',user);
+            request.success(function (data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function () {
+                defer.reject("Get related repairs information failed.");
+            });
+            return defer.promise;
+        }
+    }
+}])
+
+.factory('ComplaintService', ['$http','$q',function($http, $q) {
+
+    return {
+        getComplaint: function (user) {
+            var defer = $q.defer();
+            var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getComplain',user);
+            request.success(function (data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function () {
+                defer.reject("Get related repairs information failed.");
+            });
+            return defer.promise;
+        },
+
+        newComplaint: function (user) {
+            var defer = $q.defer();
+            var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewComplain',user);
+            request.success(function (data) {
+                var status =data.resultCode;
+                if(status == "1"){
+                    defer.resolve(data.result);
+                }else{
+                    defer.reject();
+                }
+            });
+            request.error(function () {
+                defer.reject("Get related repairs information failed.");
             });
             return defer.promise;
         }

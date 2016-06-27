@@ -198,7 +198,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('relatedRepairs', {
     url: '/relatedRepairs',
     templateUrl: 'templates/relatedRepairs.html',
-    controller: 'relatedRepairsCtrl'
+    controller: 'relatedRepairsCtrl',
+    cache:false
   })
   .state('newAskForRepair', {
     url: '/newAskForRepair',
@@ -208,13 +209,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('repairDetails', {
     url: '/repairDetails',
     templateUrl: 'templates/repairDetails.html',
-    controller: 'repairDetailsCtrl'
+    controller: 'repairDetailsCtrl',
+    params: {datas: null}
   })
 //House sale and rent
   .state('houseSaleAndRent', {
     url: '/houseSaleAndRent',
     templateUrl: 'templates/houseSaleAndRent.html',
-    controller: 'houseSaleAndRentCtrl'
+    controller: 'houseSaleAndRentCtrl',
+    cache:false
   })
   .state('newAskForSaleOrRent', {
     url: '/newAskForSaleOrRent',
@@ -230,24 +233,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('visitorPassport', {
     url: '/visitorPassport',
     templateUrl: 'templates/visitorPassport.html',
-    controller: 'visitorPassportCtrl'
+    controller: 'visitorPassportCtrl',
+    cache:false
   })
   .state('newVisitorInvite', {
     url: '/newVisitorInvite',
     templateUrl: 'templates/newVisitorInvite.html',
-    controller: 'newVisitorInviteCtrl'
+    controller: 'newVisitorInviteCtrl',
   })
   .state('generateQRCode', {
     url: '/generateQRCode',
     templateUrl: 'templates/generateQRCode.html',
-    controller: 'generateQRCodeCtrl'
+    controller: 'generateQRCodeCtrl',
+    params: {QRvisitorName: null,visitorSex:null},
+    cache:false
   })
 
 //Complaint and suggestion
   .state('complaintPage', {
     url: '/complaintPage',
     templateUrl: 'templates/complaintPage.html',
-    controller: 'complaintPageCtrl'
+    controller: 'complaintPageCtrl',
+    cache:false
   })
   .state('newComplaintPage', {
     url: '/newComplaintPage',

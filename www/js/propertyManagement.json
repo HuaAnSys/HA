@@ -1,0 +1,30 @@
+{
+    "result": [
+        {
+            "content": "我家水管子爆了，赶紧来修！",
+            "status": true,
+            "time": "2016-06-07 13:45:00",
+            "taskNum": "20160607123123",
+            "location": "大连123号楼01-0123",
+            "process": {
+                "startTime": "13:45:00",
+                "startAcceptTime": "13:50:00",
+                "someoneAcceptTime": "13:55:00",
+                "someoneAccept": "张三"
+            }
+        },
+        {
+            "content": "我家水管子又爆了，艾玛赶紧来修！",
+            "status": false,
+            "time": "2016-06-07 03:45:00",
+            "taskNum": "20160607123123",
+            "location": "大连123号楼01-0123",
+            "process": {
+                "startTime": "03:45:00",
+                "startAcceptTime": "03:50:00",
+                "someoneAcceptTime": "03:55:00",
+                "someoneAccept": "张三"
+            }
+        }
+    ]
+}

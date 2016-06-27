@@ -10,20 +10,21 @@
                 <ion-item class="mediumBlank">
                     大连XXX123号楼01-123
                 </ion-item>
-                <ion-item class="listInRelatedRepairs" ng-click="goRepairDetails()">
+                <ion-item class="listInRelatedRepairs" ng-repeat="item in items" ng-click="goRepairDetails(item)">
                     <div>
-                        <div>相关报修内容1</div>
+                        <div>{{item.content}}</div>
                         <div>3天前</div>
-                        <div class="haveSolved">已解决</div>
+                        <div class="haveSolved" ng-if="item.status == true" >已解决</div>
+                        <div class="notSolved" ng-if="item.status == false" >未处理</div>
                     </div>
                 </ion-item>
-                <ion-item class="listInRelatedRepairs" ng-click="goRepairDetails()">
-                    <div>
-                        <div>相关报修内容2</div>
-                        <div>3分钟前</div>
-                        <div class="notSolved">未处理</div>
-                    </div>
-                </ion-item>
+                <!--<ion-item class="listInRelatedRepairs" ng-click="goRepairDetails()">-->
+                    <!--<div>-->
+                        <!--<div>相关报修内容2</div>-->
+                        <!--<div>3分钟前</div>-->
+                        <!--<div class="notSolved">未处理</div>-->
+                    <!--</div>-->
+                <!--</ion-item>-->
             </ion-list>
         </div>
         <div class="submitBtn">

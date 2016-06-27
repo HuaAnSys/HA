@@ -1002,7 +1002,7 @@ button.registBtn{
 }
 .repairDetailsView .acceptOrNotBtn, .houseSaleAndRentDetailsView .acceptOrNotBtn,.complaintDetailsView .acceptOrNotBtn{
     padding: 5px 10px;
-    background-color: #00C600;
+    background-color: #777;
     color: #FFFFFF;
     border-radius: 7px;
     border: none;
@@ -1052,7 +1052,9 @@ button.registBtn{
     color:#777;
 }
 
-
+.repairDetailsView .fiftyPxHeightBlank:first-child, .houseSaleAndRentDetailsView .fiftyPxHeightBlank:first-child,.complaintDetailsView .fiftyPxHeightBlank:first-child{
+    border-top: none;
+}
 
 .repairDetailsFooter{
     height: 60px;
@@ -1142,6 +1144,13 @@ button.registBtn{
 .newVisitorInviteView .lowerText{
     margin-top: 10px;
     padding-left: 15px;
+}
+.newVisitorInviteView .inputVisitorName{
+    position: absolute;
+    top: 5px;
+}
+.newVisitorInviteView .inputVisitorName>input{
+    font-size: 17px;
 }
 .generateQRCodeView{
     padding: 8%;
