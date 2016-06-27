@@ -112,6 +112,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         cache:false
       })
 
+          .state('choosePaymentTerms', {
+            url: '/choosePaymentTerms?name&type&price',
+            templateUrl: 'templates/choosePaymentTerms.html',
+            controller: 'choosePaymentTermsCtrl',
+            cache:false
+          })
+      .state('chooseBankCard', {
+        url: '/chooseBankCard?name&type&price',
+        templateUrl: 'templates/chooseBankCard.html',
+        controller: 'chooseBankCardCtrl',
+        cache:false
+      })
+
+          .state('PaymentTermsResult', {
+            url: '/PaymentTermsResult?name&type&price',
+            templateUrl: 'templates/PaymentTermsResult.html',
+            controller: 'PaymentTermsResultCtrl',
+            cache:false
+          })
+      .state('bankCardPassword', {
+        url: '/bankCardPassword?name&type&price',
+        templateUrl: 'templates/bankCardPassword.html',
+        controller: 'bankCardPasswordCtrl',
+        cache:false
+      })
+
 
   .state('community', {
       url: '/community/:tabIndex',
@@ -312,6 +338,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/editNickname',
     templateUrl: 'templates/editNickname.html',
     controller: 'editNicknameCtrl',
+    cache:false
+  })
+
+  .state('comment', {
+    url: '/comment',
+    templateUrl: 'templates/comment.html',
+    controller: 'commentCtrl',
     cache:false
   })
       // if none of the above states are matched, use this as the fallback

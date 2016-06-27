@@ -1,0 +1,33 @@
+<ion-view view-title="选择支付方式" id="choosePaymentTerms">
+    <ion-nav-bar align-title="center">
+        <ion-nav-buttons side="left" >
+            <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div id="choosePaymentTermsContent">
+            <div class="title">
+                <span class="left">订单金额</span>
+                <span class="right">232.90元</span>
+            </div>
+            <div class="paymentItems">
+                <div class="paymentItem weixin" ng-click="submit(product)">
+                    <div class="text">
+                        <span class="ctitle">微信支付</span>
+                        <span class="subTitle">微信安全支付</span>
+                    </div>
+                    <i class="icon ion-chevron-right arrowP"></i>
+                </div>
+
+                <div class="paymentItem zhifubao" ng-click="submit(product)">
+                    <div class="text">
+                        <span class="ctitle">支付吧支付</span>
+                        <span class="subTitle">支付宝安全支付</span>
+                    </div>
+                    <i class="icon ion-chevron-right arrowP"></i>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+
+</ion-view>

@@ -248,7 +248,8 @@ angular.module('starter.controllers', ['starter.services'])
                 { text: '取消' },
                 {
                     text: '<b>确认</b>',
-                    type: 'button-positive'
+                    type: 'button-positive',
+                    onTap: function() { return true; }
                 }
             ]
         });
@@ -266,6 +267,123 @@ angular.module('starter.controllers', ['starter.services'])
         $state.go('tab.AboutMe');
     }
 
+    $scope.comment = function(){
+        $state.go('comment');
+    }
+
+})
+
+.controller('commentCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+    $scope.commentCheck = true;
+    $scope.max = 5;
+    $scope.ratingVal = 5;
+    $scope.readonly = false;
+    $scope.onHover = function(val){
+        $scope.hoverVal = val;
+    };
+    $scope.onLeave = function(){
+        $scope.hoverVal = null;
+    }
+    $scope.onChange = function(val){
+        $scope.ratingVal = val;
+    }
+    commonService.showLoading();
+    shoppingCarService.getShoppingCar().then(function(data){
+        $scope.shoppingCarList = data;
+        var shoppingCarListLength = $scope.shoppingCarList.length;
+        $scope.totalPrice = 0;
+        for(var i=0;i<shoppingCarListLength;i++){
+            $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+        }
+        commonService.hideLoading();
+    }, function(error){
+        commonService.hideLoading();
+        //$scope.showAlert(error);
+    });
+
+    $scope.moveToMyOrderPage = function(){
+        var confirmPopup = $ionicPopup.confirm({
+            title: '评价还没完成，您确定要离开？',
+            buttons: [
+                { text: '取消' },
+                {
+                    text: '<b>确认</b>',
+                    type: 'button-positive',
+                    onTap: function() { return true; }
+                }
+            ]
+        });
+
+        confirmPopup.then(function(res) {
+            if(res) {
+                $state.go('myOrder');
+            } else {
+                console.log('You are not sure');
+            }
+        });
+
+    }
+
+    $scope.publishComment = function(){
+        $state.go('myOrder');
+    }
+
+})
+
+.directive('star', function () {
+    return {
+        template: '<ul class="rating" ng-mouseleave="leave()">' +
+        '<li ng-repeat="star in stars" ng-class="star" ng-click="click($index + 1)" ng-mouseover="over($index + 1)">' +
+        '\u2605' +
+        '</li>' +
+        '</ul>',
+        scope: {
+            ratingValue: '=',
+            max: '=',
+            readonly: '@',
+            onHover: '=',
+            onLeave: '='
+        },
+        controller: function($scope){
+            $scope.ratingValue = $scope.ratingValue || 0;
+            $scope.max = $scope.max || 5;
+            $scope.click = function(val){
+                if ($scope.readonly && $scope.readonly === 'true') {
+                    return;
+                }
+                $scope.ratingValue = val;
+            };
+            $scope.over = function(val){
+                $scope.onHover(val);
+            };
+            $scope.leave = function(){
+                $scope.onLeave();
+            }
+        },
+        link: function (scope, elem, attrs) {
+            elem.css("text-align", "center");
+            var updateStars = function () {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({
+                        filled: i < scope.ratingValue
+                    });
+                }
+            };
+            updateStars();
+
+            scope.$watch('ratingValue', function (oldVal, newVal) {
+                if (newVal) {
+                    updateStars();
+                }
+            });
+            scope.$watch('max', function (oldVal, newVal) {
+                if (newVal) {
+                    updateStars();
+                }
+            });
+        }
+    };
 })
 
 .controller('publishThemeCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
@@ -398,8 +516,7 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 .controller('DomesticCtrl', function($scope, $rootScope, $state, commonService, DomesticService) {
-      $scope.on_select = function(idx){
-        $rootScope.domesticTabTitle = "baojie";
+        $scope.on_select = function(idx){
         if(idx == 1){
           $rootScope.domesticTabTitle ="baojie";
         }else if(idx == 2){
@@ -409,10 +526,14 @@ angular.module('starter.controllers', ['starter.services'])
         }else if(idx == 4){
           $rootScope.domesticTabTitle ="banyun";
         }
-        console.log($rootScope.domesticTabTitle);
         commonService.showLoading();
-        DomesticService.getDomesticByStatus($rootScope.domesticTabTitle).then(function(data){
-          $scope.domesticList = data;
+        DomesticService.getDomesticByStatus().then(function(data){
+            $scope.domesticList = [];
+            for(i=0;i<data.length;i++){
+                if($rootScope.domesticTabTitle == data[i].type){
+                    $scope.domesticList.push(data[i]);
+                }
+            }
           commonService.hideLoading();
           $rootScope.domesticTabTitle = '';
         }, function(error){
@@ -438,11 +559,17 @@ angular.module('starter.controllers', ['starter.services'])
         }
         console.log($rootScope.domesticTabTitle);
         commonService.showLoading();
-        DomesticService.getDomesticByStatus($rootScope.domesticTabTitle).then(function(data){
-          $scope.domesticList = data;
-          commonService.hideLoading();
-          $rootScope.domesticTabTitle = '';
-        }, function(error){
+          DomesticService.getDomesticByStatus().then(function(data){
+              $scope.domesticList = [];
+              for(i=0;i<data.length;i++){
+                  if($rootScope.domesticTabTitle == data[i].type){
+                      console.log(data[i].type);
+                      $scope.domesticList.push(data[i]);
+                  }
+              }
+              commonService.hideLoading();
+              $rootScope.domesticTabTitle = '';
+          }, function(error){
           commonService.hideLoading();
           //$scope.showAlert(error);
         });
@@ -966,6 +1093,82 @@ angular.module('starter.controllers', ['starter.services'])
     .controller('submitOrderCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
         $scope.back=function(){
             $ionicHistory.goBack();
+        }
+        $scope.product = $stateParams;
+        $scope.submit=function(product){
+            $state.go('choosePaymentTerms', {
+                name: product.name,
+                type: product.type,
+                price: product.price
+            });
+        }
+        console.log($stateParams);
+        console.log($stateParams.name);
+        console.log($stateParams.type);
+        console.log($stateParams.price);
+
+    })
+    .controller('choosePaymentTermsCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        $scope.product = $stateParams;
+        $scope.submit=function(product){
+            $state.go('chooseBankCard', {
+                name: product.name,
+                type: product.type,
+                price: product.price
+            });
+        }
+        console.log($stateParams);
+        console.log($stateParams.name);
+        console.log($stateParams.type);
+        console.log($stateParams.price);
+
+    })
+    .controller('chooseBankCardCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        $scope.product = $stateParams;
+        $scope.submit=function(product){
+            $state.go('bankCardPassword', {
+                name: product.name,
+                type: product.type,
+                price: product.price
+            });
+        }
+        console.log($stateParams);
+        console.log($stateParams.name);
+        console.log($stateParams.type);
+        console.log($stateParams.price);
+
+    })
+    .controller('PaymentTermsResultCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        $scope.product = $stateParams;
+        $scope.goMyOrder=function(product){
+            $state.go('myOrder');
+        }
+        console.log($stateParams);
+        console.log($stateParams.name);
+        console.log($stateParams.type);
+        console.log($stateParams.price);
+
+    })
+    .controller('bankCardPasswordCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+        $scope.back=function(){
+            $ionicHistory.goBack();
+        }
+        $scope.product = $stateParams;
+        $scope.submit=function(product){
+            $state.go('PaymentTermsResult', {
+                name: product.name,
+                type: product.type,
+                price: product.price
+            });
         }
         console.log($stateParams);
         console.log($stateParams.name);
