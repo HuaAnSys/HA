@@ -612,22 +612,22 @@ angular.module('starter.controllers', ['starter.services'])
 
         $scope.hotProducts = [
             {
-             "productImg":"img/adam.jpg",
+             "productImg":"img/a.jpg",
              "description":"波兰(Mleko)进口纯牛奶",
              "price":"9.9"
             },
             {
-                "productImg":"img/adam.jpg",
+                "productImg":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             },
             {
-                "productImg":"img/adam.jpg",
+                "productImg":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             },
             {
-                "productImg":"img/adam.jpg",
+                "productImg":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             }
@@ -786,7 +786,7 @@ angular.module('starter.controllers', ['starter.services'])
                         "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                         "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                         "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/adam.jpg"
+                "descriptionImg":"img/community_demo.jpg"
             },
             {
                 "personIcon":"img/adam.jpg",
@@ -795,7 +795,7 @@ angular.module('starter.controllers', ['starter.services'])
                 "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                 "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                 "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/adam.jpg"
+                "descriptionImg":"img/community_demo.jpg"
             },
             {
                 "personIcon":"img/adam.jpg",
@@ -804,7 +804,7 @@ angular.module('starter.controllers', ['starter.services'])
                 "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                 "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                 "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/adam.jpg"
+                "descriptionImg":"img/community_demo.jpg"
             },
         ];
 
@@ -910,6 +910,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('CommunityDetail',function($scope,$state,$stateParams){
 
+    $scope.hotComments = "";
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
     $scope.divMain = {
@@ -920,12 +921,13 @@ angular.module('starter.controllers', ['starter.services'])
     }
 
         $scope.commentsDetail = {
+            "personIcon":"img/adam.jpg",
             "name":"社区管理员",
             "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
                 "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                 "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                 "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-            "descriptionImg":"img/adam.jpg",
+            "descriptionImg":"img/community_demo.jpg",
             "comments":[
                 {
                     name:'社区管理员',
@@ -953,8 +955,10 @@ angular.module('starter.controllers', ['starter.services'])
     }
 
     $scope.submitComment = function(){
-        var a = $scope.homtComments;
-        console.log(a);
+        var say = $scope.hotComments;
+        var a = {"name":"社区管理员","detail":say};
+        $scope.commentsDetail.comments.push(a);
+        $scope.hotComments = "";
     }
 })
     
