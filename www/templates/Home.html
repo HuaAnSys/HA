@@ -1,7 +1,7 @@
 <ion-view id="homeView">
     <ion-content>
         <ion-slide-box auto-play="true" slide-interval="2500">
-            <ion-slide ng-repeat="slide in slides">
+            <ion-slide ng-repeat="slide in slides" ng-click="moreProduct()">
                 <img src="{{slide.url}}" height="{{slideHeight}}" width="{{slideWidth}}"/>
             </ion-slide>
         </ion-slide-box>
@@ -13,11 +13,11 @@
                 <div class="ion-ios-glasses-outline glass"></div>
             </div>
             <div class="others">
-                <div class="collections" ng-click="goAdvertise('1')">
+                <div class="collections" ng-click="goAdvertise('2')">
                     <p class="pp1">活动召集令</p>
                     <p class="pp2">提供各种活动</p>
                 </div>
-                <div class="discuss" ng-click="goAdvertise('2')">
+                <div class="discuss" ng-click="goAdvertise('1')">
                     <p class="pp1">议事厅</p>
                     <p class="pp2">各种生活乐事</p>
                 </div>

@@ -605,9 +605,9 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('HomeCtrl',function($scope,$state,commonService,homePageService){
         console.log("HomeCtrl");
         $scope.slides = [
-            {url:"img/adv_demo.png"},
-            {url:"img/ben.png"},
-            {url:"img/perry.png"}
+            {url:"img/adv_demo.PNG"},
+            {url:"img/advertise_a.png"},
+            {url:"img/advertise_b.png"}
         ];
 
         $scope.hotProducts = [
@@ -685,7 +685,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,CommunityService){
+.controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,CommunityService,commonService){
 
         $scope.back = function(){
             $state.go('tab.Home');
@@ -811,15 +811,16 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera,CommunityService){
+.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera,CommunityService,$cordovaFileTransfer){
 
+        $scope.commentText = "";
         $scope.back = function(){
             $state.go("community",{"tabIndex":$stateParams.tabIndex});
         }
 
         $scope.showAddImgFlag = true;
 
-        $scope.takePhoto=function(){
+        $scope.takePhoto=function() {
             var options = {
                 quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
@@ -827,66 +828,85 @@ angular.module('starter.controllers', ['starter.services'])
                 targetWidth: 500,
                 targetHeight: 500,
                 saveToPhotoAlbum: true,
-                encodingType:Camera.EncodingType.JPEG,
+                encodingType: Camera.EncodingType.JPEG,
                 allowEdit: true,
-                mediaType:0,
-                cameraDirection:0,
+                mediaType: 0,
+                cameraDirection: 0,
                 popoverOptions: CameraPopoverOptions
             };
 
-            $cordovaCamera.getPicture(options).then(function(imageURI) {
+            $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.showAddImgFlag = false;
-                $scope.imageSrc= imageURI;
+                $scope.imageSrc = imageURI;
                 //image.src = "data:image/jpeg;base64," + imageData;
-            }, function(err) {
+            }, function (err) {
 
             });
+        }
 
-            function addCommunity(){
-                var index = $stateParams.tabIndex;
-                if(index==1){
-                    CommunityService.addCommentsByDiscussion().then(function(data){
-                        if(data.length == 0){
+        $scope.fileUpload = function() {
 
-                        }else{
+            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            var filePath = $scope.imageSrc;
+            var options = {};
+            options.comment = $scope.commentText;
+            $cordovaFileTransfer.upload(uploadUrl, filePath, options)
+                .then(function (result) {
+                    // Success!
+                    alert("1");
+                }, function (err) {
+                    // Error
+                    alert("0");
+                }, function (progress) {
+                    alert("0");
+                    // constant progress updates
+                });
+        }
 
+        function addCommunity(){
+            var index = $stateParams.tabIndex;
+            if(index==1){
+                CommunityService.addCommentsByDiscussion().then(function(data){
+                    if(data.length == 0){
 
-                        }
-                        commonService.hideLoading();
-                    },function(error){
-                        commonService.hideLoading();
-                        $scope.showAlert(error);
-                    });
-                }else if(index==2){
-                    CommunityService.addCommentsByCollection().then(function(data){
-                        if(data.length == 0){
-
-                        }else{
-
-
-                        }
-                        commonService.hideLoading();
-                    },function(error){
-                        commonService.hideLoading();
-                        $scope.showAlert(error);
-                    });
-                }else{
-                    CommunityService.addCommentsByBestMemory().then(function(data){
-                        if(data.length == 0){
-
-                        }else{
+                    }else{
 
 
-                        }
-                        commonService.hideLoading();
-                    },function(error){
-                        commonService.hideLoading();
-                        $scope.showAlert(error);
-                    });
-                }
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                    $scope.showAlert(error);
+                });
+            }else if(index==2){
+                CommunityService.addCommentsByCollection().then(function(data){
+                    if(data.length == 0){
+
+                    }else{
+
+
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                    $scope.showAlert(error);
+                });
+            }else{
+                CommunityService.addCommentsByBestMemory().then(function(data){
+                    if(data.length == 0){
+
+                    }else{
+
+
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                    $scope.showAlert(error);
+                });
             }
         }
-    })
+})
 
 .controller('CommunityDetail',function($scope,$state,$stateParams){
 
