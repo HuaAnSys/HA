@@ -1159,16 +1159,10 @@ button.registBtn{
 .newAskForRepairView .bigBlankLine, .newAskForSaleOrRentView .bigBlankLine{
     padding: 10px 15px;
 }
-.newAskForRepairView .selectPicOrOpenCamera, .newAskForSaleOrRentView .selectPicOrOpenCamera{
-    height: 120px;
-    padding: 10px 20px;
+.newAskForRepairView .addNews_div, .newAskForSaleOrRentView .addNews_div, .newAskForRepairView {
+   margin-top:0px;
 }
-.newAskForRepairView .selectPicOrOpenCameraPic, .newAskForSaleOrRentView .selectPicOrOpenCameraPic{
-    background: url('../img/addp.jpg') no-repeat;
-    background-size: 100%;
-    height: 100px;
-    width: 100px;
-}
+
 .newAskForRepairView .submitBtn, .newAskForSaleOrRentView .submitBtn{
     margin-top: 0%;
     padding-top: 5%;
@@ -1185,6 +1179,13 @@ button.registBtn{
 .repairDetailsView .acceptOrNotBtn, .houseSaleAndRentDetailsView .acceptOrNotBtn,.complaintDetailsView .acceptOrNotBtn{
     padding: 5px 10px;
     background-color: #777;
+    color: #FFFFFF;
+    border-radius: 7px;
+    border: none;
+}
+.repairDetailsView .acceptDoneBtn, .houseSaleAndRentDetailsView .acceptDoneBtn,.complaintDetailsView .acceptDoneBtn{
+    padding: 5px 10px;
+    background-color: #00C600;
     color: #FFFFFF;
     border-radius: 7px;
     border: none;

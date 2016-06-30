@@ -1,0 +1,16 @@
+{
+    "result": [
+        {
+            "name": "张三",
+            "sex": "男",
+            "endDate": "2016年5月5日 18:30:23",
+            "status":"working"
+        },
+        {
+            "name": "李四",
+            "sex": "女",
+            "endDate": "2016年5月9日 10:25:44",
+            "status":"cancel"
+        }
+    ]
+}

@@ -253,7 +253,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('houseSaleAndRentDetails', {
     url: '/houseSaleAndRentDetails',
     templateUrl: 'templates/houseSaleAndRentDetails.html',
-    controller: 'houseSaleAndRentDetailsCtrl'
+    controller: 'houseSaleAndRentDetailsCtrl',
+    params: {datas: null}
   })
 //Vistor passport
   .state('visitorPassport', {
@@ -290,7 +291,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('complaintDetails', {
     url: '/complaintDetails',
     templateUrl: 'templates/complaintDetails.html',
-    controller: 'complaintDetailsCtrl'
+    controller: 'complaintDetailsCtrl',
+    params: {datas: null}
   })
   .state('shoppingCar', {
     url: '/shoppingCar',

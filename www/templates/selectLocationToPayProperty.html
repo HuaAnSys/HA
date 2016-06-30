@@ -1,4 +1,4 @@
-<ion-view view-title="物业费缴纳" id="propertyManagement" ng-controller="selectLocationToPayPropertyCtrl">
+<ion-view view-title="物业费缴纳" id="propertyManagement">
     <ion-nav-bar align-title="center">
         <ion-nav-buttons side="left" >
             <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
@@ -15,7 +15,7 @@
                         {{group.name}}小区{{group.childs[0].period}}期{{group.childs[0].building}}号楼{{group.childs[0].unit}}单元
                         <i class="icon" ng-class="isGroupShown(group) ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
                     </ion-item>
-                    <ion-item ng-repeat="list in group.childs" class="item-accordion" ng-show="isGroupShown(group)">
+                    <ion-item ng-repeat="list in group.childs" class="item-accordion" ng-show="isGroupShown(group)" ng-click="selectItem(list)">
                     {{group.name}}小区{{list.period}}期{{list.building}}号楼{{list.unit}}单元{{list.floor}}层{{list.number}}号
                     </ion-item>
                 </div>

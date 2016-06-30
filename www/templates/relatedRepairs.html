@@ -1,4 +1,4 @@
-<ion-view view-title="相关报修" id="relatedRepairs" ng-controller="relatedRepairsCtrl">
+<ion-view view-title="相关报修" id="relatedRepairs">
     <ion-nav-bar align-title="center">
         <ion-nav-buttons side="left" >
             <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
@@ -14,17 +14,12 @@
                     <div>
                         <div>{{item.content}}</div>
                         <div>3天前</div>
-                        <div class="haveSolved" ng-if="item.status == true" >已解决</div>
-                        <div class="notSolved" ng-if="item.status == false" >未处理</div>
+                        <div class="haveSolved" ng-if="item.currentStatus == 'handled'" >已解决</div>
+                        <div class="notSolved" ng-if="item.currentStatus == 'handling'" >处理中</div>
+                        <div class="notSolved" ng-if="item.currentStatus == 'accept'" >已接受</div>
+                        <div class="notSolved" ng-if="item.currentStatus == 'new'" >未处理</div>
                     </div>
                 </ion-item>
-                <!--<ion-item class="listInRelatedRepairs" ng-click="goRepairDetails()">-->
-                    <!--<div>-->
-                        <!--<div>相关报修内容2</div>-->
-                        <!--<div>3分钟前</div>-->
-                        <!--<div class="notSolved">未处理</div>-->
-                    <!--</div>-->
-                <!--</ion-item>-->
             </ion-list>
         </div>
         <div class="submitBtn">

@@ -1,4 +1,4 @@
-<ion-view view-title="房屋租售" ng-controller="newAskForSaleOrRentCtrl">
+<ion-view view-title="房屋租售">
     <ion-nav-bar align-title="center">
         <ion-nav-buttons side="left" >
             <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
@@ -11,10 +11,15 @@
                 <textarea rows="8" cols={{textAreaCols}} placeholder="如果有出租或者租赁本社区房屋的需求，可以告诉我们，会有专人为您服务..."></textarea>
             </div>
             <div class="bigBlankLine">添加图片</div>
-            <div class="selectPicOrOpenCamera">
-                <div class="selectPicOrOpenCameraPic" ng-click=""></div>
+            <!--<div class="selectPicOrOpenCamera">-->
+                <!--<div class="selectPicOrOpenCameraPic" ng-click=""></div>-->
+            <!--</div>-->
+            <div class="addNews_div">
+                <div class="addNews_box" ng-if="showAddImgFlag" ng-click="takePhoto()">
+                    <span class="ion-ios-plus-empty"></span>
+                </div>
+                <img ng-src="{{imageSrc}}" class="img_part_style" ng-if="!showAddImgFlag"/>
             </div>
-
             <div class="submitBtnBackground" style="height: {{submitBtnBackgroundHeight}};background-color: #EFEFF4">
                 <div class="submitBtn">
                     <button type="submit" class="button button-block" ng-click="submitNewSaleOrRent()">提交</button>

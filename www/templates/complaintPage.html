@@ -1,4 +1,4 @@
-<ion-view view-title="投诉及建议" id="complaintPage" ng-controller="complaintPageCtrl">
+<ion-view view-title="投诉及建议" id="complaintPage">
     <ion-nav-bar align-title="center">
         <ion-nav-buttons side="left" >
             <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
@@ -10,18 +10,14 @@
                 <ion-item class="mediumBlank">
                     大连XXX123号楼01-123
                 </ion-item>
-                <ion-item class="listInRelatedRepairs" ng-click="goComplaintDetails()">
+                <ion-item class="listInRelatedRepairs" ng-repeat="item in items" ng-click="goComplaintDetails(item)">
                     <div>
-                        <div>投诉意见内容1</div>
+                        <div>{{item.content}}</div>
                         <div>3天前</div>
-                        <div class="haveSolved">已解决</div>
-                    </div>
-                </ion-item>
-                <ion-item class="listInRelatedRepairs" ng-click="goComplaintDetails()">
-                    <div>
-                        <div>投诉意见内容2</div>
-                        <div>3分钟前</div>
-                        <div class="notSolved">未处理</div>
+                        <div class="haveSolved" ng-if="item.currentStatus == 'handled'" >已解决</div>
+                        <div class="notSolved" ng-if="item.currentStatus == 'handling'" >处理中</div>
+                        <div class="notSolved" ng-if="item.currentStatus == 'accept'" >已接受</div>
+                        <div class="notSolved" ng-if="item.currentStatus == 'new'" >未处理</div>
                     </div>
                 </ion-item>
             </ion-list>

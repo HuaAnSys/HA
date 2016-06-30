@@ -1,4 +1,4 @@
-<ion-view view-title="房屋租售" ng-controller="houseSaleAndRentDetailsCtrl">
+<ion-view view-title="房屋租售">
     <ion-nav-bar align-title="center">
         <ion-nav-buttons side="left" >
             <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
@@ -9,36 +9,39 @@
             <div class="fiftyPxHeightBlank"></div>
             <div class="taskID">
                 <span>任务编号</span>
-                <span>20160505000000</span>
+                <span>{{items.taskNum}}</span>
             </div>
             <div class="fiftyPxHeightBlank"></div>
             <div class="taskAcceptOrNot">
                 <div>
-                    <button class="acceptOrNotBtn">已接受</button>
-                    <div class="taskAcceptTime">2016-05-05 00:00:00</div>
+                    <button class="acceptDoneBtn" ng-if="items.currentStatus == 'handled'">已完成</button>
+                    <button class="acceptOrNotBtn" ng-if="items.currentStatus == 'handling'">处理中</button>
+                    <button class="acceptOrNotBtn" ng-if="items.currentStatus == 'accept'">已接受</button>
+                    <button class="acceptOrNotBtn" ng-if="items.currentStatus == 'new'">新投诉</button>
+                    <div class="taskAcceptTime">{{items.date}}</div>
                 </div>
-                <div class="repairContent">房屋租售内容1</div>
-                <div class="repairAddress">大连xxx123号楼01-0123</div>
+                <div class="repairContent">{{items.content}}</div>
+                <div class="repairAddress">{{items.location}}</div>
             </div>
             <div class="fiftyPxHeightBlank"></div>
 
             <div class="progressDetails">
                 <div style="padding: 15px">进度</div>
-                <div class="onePieceDetail">
+                <div class="onePieceDetail" ng-if="statusList.length > 2">
                     <div class="headPortrait" style="background: url('../img/ben.png') no-repeat;background-size: 100%;"></div>
                     <div class="progressStatus"  style="width:{{progressDetailContentWidth}}">
                         <div>已提交给张三处理</div>
                         <div>2016-05-05 00:00:00</div>
                     </div>
                 </div>
-                <div class="onePieceDetail">
+                <div class="onePieceDetail" ng-if="statusList.length > 1">
                     <div class="headPortrait personIcon"><i class="icon ion-ios-person-outline" style="color: #FFFFFF;margin-left: 7px"></i></i></div>
                     <div class="progressStatus"  style="width:{{progressDetailContentWidth}}">
                         <div>呼叫中心发布了抢单</div>
                         <div>2016-05-05 00:00:00</div>
                     </div>
                 </div>
-                <div class="onePieceDetail">
+                <div class="onePieceDetail" ng-if="statusList.length > 0">
                     <div class="headPortrait" style="background: url('../img/adam.jpg') no-repeat;background-size: 100%;"></div>
                     <div class="progressStatus"  style="width:{{progressDetailContentWidth}}">
                         <div>您创建了任务</div>
