@@ -605,29 +605,29 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('HomeCtrl',function($scope,$state,commonService,homePageService){
         console.log("HomeCtrl");
         $scope.slides = [
-            {url:"img/adv_demo.png"},
-            {url:"img/ben.png"},
-            {url:"img/perry.png"}
+            {url:"img/adv_demo.PNG"},
+            {url:"img/advertise_a.png"},
+            {url:"img/advertise_b.png"}
         ];
 
         $scope.hotProducts = [
             {
-             "productImg":"img/adam.jpg",
+             "productImg":"img/a.jpg",
              "description":"波兰(Mleko)进口纯牛奶",
              "price":"9.9"
             },
             {
-                "productImg":"img/adam.jpg",
+                "productImg":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             },
             {
-                "productImg":"img/adam.jpg",
+                "productImg":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             },
             {
-                "productImg":"img/adam.jpg",
+                "productImg":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             }
@@ -685,7 +685,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,CommunityService){
+.controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,CommunityService,commonService){
 
         $scope.back = function(){
             $state.go('tab.Home');
@@ -786,7 +786,7 @@ angular.module('starter.controllers', ['starter.services'])
                         "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                         "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                         "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/adam.jpg"
+                "descriptionImg":"img/community_demo.jpg"
             },
             {
                 "personIcon":"img/adam.jpg",
@@ -795,7 +795,7 @@ angular.module('starter.controllers', ['starter.services'])
                 "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                 "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                 "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/adam.jpg"
+                "descriptionImg":"img/community_demo.jpg"
             },
             {
                 "personIcon":"img/adam.jpg",
@@ -804,22 +804,23 @@ angular.module('starter.controllers', ['starter.services'])
                 "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                 "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                 "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/adam.jpg"
+                "descriptionImg":"img/community_demo.jpg"
             },
         ];
 
 
 })
 
-.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera,CommunityService){
+.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera,CommunityService,$cordovaFileTransfer){
 
+        $scope.commentText = "";
         $scope.back = function(){
             $state.go("community",{"tabIndex":$stateParams.tabIndex});
         }
 
         $scope.showAddImgFlag = true;
 
-        $scope.takePhoto=function(){
+        $scope.takePhoto=function() {
             var options = {
                 quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
@@ -827,69 +828,89 @@ angular.module('starter.controllers', ['starter.services'])
                 targetWidth: 500,
                 targetHeight: 500,
                 saveToPhotoAlbum: true,
-                encodingType:Camera.EncodingType.JPEG,
+                encodingType: Camera.EncodingType.JPEG,
                 allowEdit: true,
-                mediaType:0,
-                cameraDirection:0,
+                mediaType: 0,
+                cameraDirection: 0,
                 popoverOptions: CameraPopoverOptions
             };
 
-            $cordovaCamera.getPicture(options).then(function(imageURI) {
+            $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.showAddImgFlag = false;
-                $scope.imageSrc= imageURI;
+                $scope.imageSrc = imageURI;
                 //image.src = "data:image/jpeg;base64," + imageData;
-            }, function(err) {
+            }, function (err) {
 
             });
+        }
 
-            function addCommunity(){
-                var index = $stateParams.tabIndex;
-                if(index==1){
-                    CommunityService.addCommentsByDiscussion().then(function(data){
-                        if(data.length == 0){
+        $scope.fileUpload = function() {
 
-                        }else{
+            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            var filePath = $scope.imageSrc;
+            var options = {};
+            options.comment = $scope.commentText;
+            $cordovaFileTransfer.upload(uploadUrl, filePath, options)
+                .then(function (result) {
+                    // Success!
+                    alert("1");
+                }, function (err) {
+                    // Error
+                    alert("0");
+                }, function (progress) {
+                    alert("0");
+                    // constant progress updates
+                });
+        }
 
+        function addCommunity(){
+            var index = $stateParams.tabIndex;
+            if(index==1){
+                CommunityService.addCommentsByDiscussion().then(function(data){
+                    if(data.length == 0){
 
-                        }
-                        commonService.hideLoading();
-                    },function(error){
-                        commonService.hideLoading();
-                        $scope.showAlert(error);
-                    });
-                }else if(index==2){
-                    CommunityService.addCommentsByCollection().then(function(data){
-                        if(data.length == 0){
-
-                        }else{
-
-
-                        }
-                        commonService.hideLoading();
-                    },function(error){
-                        commonService.hideLoading();
-                        $scope.showAlert(error);
-                    });
-                }else{
-                    CommunityService.addCommentsByBestMemory().then(function(data){
-                        if(data.length == 0){
-
-                        }else{
+                    }else{
 
 
-                        }
-                        commonService.hideLoading();
-                    },function(error){
-                        commonService.hideLoading();
-                        $scope.showAlert(error);
-                    });
-                }
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                    $scope.showAlert(error);
+                });
+            }else if(index==2){
+                CommunityService.addCommentsByCollection().then(function(data){
+                    if(data.length == 0){
+
+                    }else{
+
+
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                    $scope.showAlert(error);
+                });
+            }else{
+                CommunityService.addCommentsByBestMemory().then(function(data){
+                    if(data.length == 0){
+
+                    }else{
+
+
+                    }
+                    commonService.hideLoading();
+                },function(error){
+                    commonService.hideLoading();
+                    $scope.showAlert(error);
+                });
             }
         }
-    })
+})
 
 .controller('CommunityDetail',function($scope,$state,$stateParams){
 
+    $scope.hotComments = "";
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
     $scope.divMain = {
@@ -900,12 +921,13 @@ angular.module('starter.controllers', ['starter.services'])
     }
 
         $scope.commentsDetail = {
+            "personIcon":"img/adam.jpg",
             "name":"社区管理员",
             "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
                 "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                 "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                 "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-            "descriptionImg":"img/adam.jpg",
+            "descriptionImg":"img/community_demo.jpg",
             "comments":[
                 {
                     name:'社区管理员',
@@ -933,8 +955,10 @@ angular.module('starter.controllers', ['starter.services'])
     }
 
     $scope.submitComment = function(){
-        var a = $scope.homtComments;
-        console.log(a);
+        var say = $scope.hotComments;
+        var a = {"name":"社区管理员","detail":say};
+        $scope.commentsDetail.comments.push(a);
+        $scope.hotComments = "";
     }
 })
     

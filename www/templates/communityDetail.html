@@ -7,7 +7,7 @@
     </ion-header-bar>
     <ion-content>
         <div ng-style="{{divMain}}">
-            <img src="{{commentsDetail.descriptionImg}}" class="message_icon"/>
+            <img src="{{commentsDetail.personIcon}}" class="message_icon"/>
             <span class="message_people">{{commentsDetail.name}}</span>
             <div class="message_content">{{commentsDetail.detail}}</div>
             <img src="{{commentsDetail.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
@@ -21,7 +21,7 @@
         <ion-list ng-repeat="comment in commentsDetail.comments">
             <ion-item>
                 <div class="commentTextDesc">
-                    <img src="{{commentsDetail.descriptionImg}}" class="message_icon"/>
+                    <img src="{{commentsDetail.personIcon}}" class="message_icon"/>
                     <span class="message_people community_detail_good_who">{{comment.name}}</span>
                     <span class="community_detail_good_time">2016-05-05 00:00</span>
                     <div>{{comment.detail}}</div>
@@ -30,7 +30,7 @@
         </ion-list>
     </ion-content>
     <ion-footer-bar class="bar-assertive">
-        <textarea class="comment_input" ng-model="homtComments"></textarea>
+        <textarea class="comment_input" ng-model="hotComments"></textarea>
         <div class="submit_comment" ng-click="submitComment()"><span>评论</span></div>
     </ion-footer-bar>
 
