@@ -811,9 +811,16 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera,CommunityService,$cordovaFileTransfer){
+.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera,CommunityService,$cordovaFileTransfer,commonService){
 
-        $scope.commentText = "";
+        if($stateParams.tabIndex==1){
+            $scope.addType = "discussion";
+        }else if($stateParams.tabIndex==2){
+            $scope.addType = "activity";
+        }else if($stateParams.tabIndex==3){
+            $scope.addType = "memory";
+        }
+        $scope.comment = {detail:""};
         $scope.back = function(){
             $state.go("community",{"tabIndex":$stateParams.tabIndex});
         }
@@ -825,8 +832,8 @@ angular.module('starter.controllers', ['starter.services'])
                 quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
-                targetWidth: 500,
-                targetHeight: 500,
+                targetWidth: 600,
+                targetHeight: 400,
                 saveToPhotoAlbum: true,
                 encodingType: Camera.EncodingType.JPEG,
                 allowEdit: true,
@@ -844,23 +851,35 @@ angular.module('starter.controllers', ['starter.services'])
             });
         }
 
-        $scope.fileUpload = function() {
+        $scope.fileUpload = function(type) {
 
-            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            commonService.showLoading();
+            var uploadUrl = "http://192.168.1.7:8080/HuanAnBackend/upload/file";
             var filePath = $scope.imageSrc;
-            var options = {};
-            options.comment = $scope.commentText;
-            $cordovaFileTransfer.upload(uploadUrl, filePath, options)
-                .then(function (result) {
-                    // Success!
-                    alert("1");
-                }, function (err) {
-                    // Error
-                    alert("0");
-                }, function (progress) {
-                    alert("0");
-                    // constant progress updates
-                });
+            var options = new FileUploadOptions();
+            var params = {
+                'type':type,
+                'content':$scope.comment.detail
+            };
+            options.params = params;
+            document.addEventListener('deviceready', function () {
+                $cordovaFileTransfer.upload(uploadUrl, filePath, options)
+                    .then(function (result) {
+                        commonService.hideLoading();
+                        var json = eval('(' + result.response + ')');
+                        if(json.status=='success'){
+                            $scope.showAlert("上传成功！");
+                            $state.go("community",{"tabIndex":$stateParams.tabIndex});
+                        }
+                    }, function (err) {
+                        commonService.hideLoading();
+                        $scope.showAlert("服务器异常，请重新上传！");
+                    }, function (progress) {
+                        console.log(progress.loaded+"---******--");
+                    });
+
+            }, false);
+
         }
 
         function addCommunity(){
