@@ -854,7 +854,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.fileUpload = function(type) {
 
             commonService.showLoading();
-            var uploadUrl = "http://192.168.1.7:8080/HuanAnBackend/upload/file";
+            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
             var filePath = $scope.imageSrc;
             var options = new FileUploadOptions();
             var params = {
