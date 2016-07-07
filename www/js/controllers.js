@@ -28,20 +28,21 @@ angular.module('starter.controllers', ['starter.services'])
                 quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
-                targetWidth: 500,
-                targetHeight: 500,
+                targetWidth: 600,
+                targetHeight: 400,
                 saveToPhotoAlbum: true,
-                encodingType:Camera.EncodingType.JPEG,
+                encodingType: Camera.EncodingType.JPEG,
                 allowEdit: true,
-                mediaType:0,
-                cameraDirection:0,
+                mediaType: 0,
+                cameraDirection: 0,
                 popoverOptions: CameraPopoverOptions
             };
 
-            $cordovaCamera.getPicture(options).then(function(imageURI) {
-                $scope.imageSrc= imageURI;
+            $cordovaCamera.getPicture(options).then(function (imageURI) {
+                $scope.showAddImgFlag = false;
+                $scope.imageSrc = imageURI;
                 //image.src = "data:image/jpeg;base64," + imageData;
-            }, function(err) {
+            }, function (err) {
 
             });
         }
@@ -518,20 +519,21 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('DomesticCtrl', function($scope, $rootScope, $state, commonService, DomesticService) {
         $scope.on_select = function(idx){
         if(idx == 1){
-          $rootScope.domesticTabTitle ="baojie";
+          $rootScope.domesticTabTitle ="家具保洁";
         }else if(idx == 2){
-          $rootScope.domesticTabTitle ="weixiu";
+          $rootScope.domesticTabTitle ="家庭维修";
         }else if(idx == 3){
-          $rootScope.domesticTabTitle ="daixi";
+          $rootScope.domesticTabTitle ="家庭代洗";
         }else if(idx == 4){
-          $rootScope.domesticTabTitle ="banyun";
+          $rootScope.domesticTabTitle ="家庭搬运";
         }
         commonService.showLoading();
         DomesticService.getDomesticByStatus().then(function(data){
             $scope.domesticList = [];
             for(i=0;i<data.length;i++){
-                if($rootScope.domesticTabTitle == data[i].type){
+                if($rootScope.domesticTabTitle == data[i].category){
                     $scope.domesticList.push(data[i]);
+                    //$scope.domesticList[i].picName;
                 }
             }
           commonService.hideLoading();
@@ -551,18 +553,18 @@ angular.module('starter.controllers', ['starter.services'])
 
       $scope.on_select = function(idx){
         if(idx == 5){
-          $rootScope.domesticTabTitle ="kaisuo";
+          $rootScope.domesticTabTitle ="开锁";
         }else if(idx == 6){
-          $rootScope.domesticTabTitle ="lvhua";
+          $rootScope.domesticTabTitle ="绿化养护";
         }else if(idx == 7){
-          $rootScope.domesticTabTitle ="anzhuang";
+          $rootScope.domesticTabTitle ="纱窗安装管道疏通";
         }
         console.log($rootScope.domesticTabTitle);
         commonService.showLoading();
           DomesticService.getDomesticByStatus().then(function(data){
               $scope.domesticList = [];
               for(i=0;i<data.length;i++){
-                  if($rootScope.domesticTabTitle == data[i].type){
+                  if($rootScope.domesticTabTitle == data[i].category){
                       console.log(data[i].type);
                       $scope.domesticList.push(data[i]);
                   }

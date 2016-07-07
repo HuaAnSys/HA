@@ -9,15 +9,16 @@ angular.module('starter.services', [])
     getDomesticByStatus: function () {
       //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
 
-      var defer = $q.defer();
-
-     var request = $http.get('js/Domestic.json');
+        var url = "http://9.110.54.84:7080/HuanAnBackend/housekeepinfo/getHousekeepingInfo";
+        var defer =$q.defer();
+        var request =$http.get(url);
 
       //Successful HTTP post request or not
       request.success(function (result) {
+          console.log(result);
         //var status = result.success;
         //if (status == "1") {
-          defer.resolve(result.data);
+          defer.resolve(result);
         //} else {
         //  defer.reject("Get draft list failed, please try again later.");
         //}
