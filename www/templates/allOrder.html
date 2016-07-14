@@ -1,0 +1,54 @@
+<ion-view view-title="确认订单" id="allOrder">
+    <ion-nav-bar align-title="center">
+        <ion-nav-buttons side="left" >
+            <i class="icon ion-chevron-left arrowP" ng-click="moveToPrePage()"></i>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="allContent">
+            <div class="payTop">
+                <span class="orderText">张三</span><span class="orderText orderTextN">150****5163</span>
+                <i class="icon ion-ios-location-outline orderLoc" ng-click="deleteOrder()"></i>
+                <p class="orderTextP">辽宁省大连市沙河口区XX小区10号楼28层2号</p>
+            </div>
+            <div class="orderLine">
+                <img  src="../img/line.PNG">
+            </div>
+            <ion-list>
+                <ion-item  ng-repeat="shoppingCar in shoppingCarList">
+                    <div class="shoppingItem">
+                        <div class="shoppingImgO">
+                            <img class="shopChangeImg" src="{{shoppingCar.img}}">
+                        </div>
+                        <div class="shopText">
+                            <div class="shopTextP">
+                                <p>{{shoppingCar.name}}</p>
+                            </div>
+                            <div class="shopTextSpan">
+                                <span>数量: </span><span>x{{shoppingCar.amount}}</span> <span>型号:</span><span>{{shoppingCar.type}}</span>
+                            </div>
+                            <div class="shopTextPrice"><span>{{shoppingCar.price | currency: "￥" }}</span></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </ion-item>
+                <div class="listBottom">
+                    <div class="listBottomSpanL"><span>支付方式</span></div>
+                    <div class="listBottomSpanR">
+                        <span>在线支付</span><i class="icon ion-ios-arrow-right" ng-click="moveToPrePage()"></i>
+                    </div>
+                </div>
+            </ion-list>
+        </div>
+
+    </ion-content>
+    <ion-footer-bar>
+        <div class="total">
+            <span class="totalPrice">合计：</span><span class="totalPrice">{{totalPrice | currency : "￥"}}</span>
+        </div>
+        <div class="has-badge">
+            <button class="buttonSub" data-ng-click="submit()">立即下单</button>
+        </div>
+
+    </ion-footer-bar>
+</ion-view>

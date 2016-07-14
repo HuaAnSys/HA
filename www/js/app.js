@@ -315,6 +315,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     cache:false
   })
 
+  .state('allOrder', {
+    url: '/allOrder',
+    templateUrl: 'templates/allOrder.html',
+    controller: 'allOrderCtrl',
+    cache:false
+  })
+
   .state('publishTheme', {
     url: '/publishTheme',
     templateUrl: 'templates/publishTheme.html',

@@ -41,7 +41,23 @@ angular.module('starter.controllers', ['starter.services'])
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.showAddImgFlag = false;
                 $scope.imageSrc = imageURI;
-                //image.src = "data:image/jpeg;base64," + imageData;
+                var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+                var filePath = $scope.imageSrc;
+                document.addEventListener('deviceready', function () {
+                    $cordovaFileTransfer.upload(uploadUrl, filePath)
+                        .then(function (result) {
+                            var json = eval('(' + result.response + ')');
+                            if(json.status=='success'){
+                                $scope.showAlert("上传成功！");
+                            }
+                        }, function (err) {
+                            commonService.hideLoading();
+                            $scope.showAlert("服务器异常，请重新上传！");
+                        }, function (progress) {
+                            console.log(progress.loaded+"---******--");
+                        });
+
+                }, false);
             }, function (err) {
 
             });
@@ -272,9 +288,61 @@ angular.module('starter.controllers', ['starter.services'])
         $state.go('comment');
     }
 
+    $scope.buyAgain = function(){
+        $state.go('allOrder');
+    }
+
 })
 
-.controller('commentCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+.controller('allOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+    commonService.showLoading();
+    shoppingCarService.getShoppingCar().then(function(data){
+        $scope.shoppingCarList = data;
+        var shoppingCarListLength = $scope.shoppingCarList.length;
+        $scope.totalPrice = 0;
+        for(var i=0;i<shoppingCarListLength;i++){
+            $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+        }
+        commonService.hideLoading();
+    }, function(error){
+        commonService.hideLoading();
+        //$scope.showAlert(error);
+    });
+
+    $scope.deleteOrder = function(){
+        var confirmPopup = $ionicPopup.confirm({
+            title: '确认删除订单？',
+            buttons: [
+                { text: '取消' },
+                {
+                    text: '<b>确认</b>',
+                    type: 'button-positive',
+                    onTap: function() { return true; }
+                }
+            ]
+        });
+
+        confirmPopup.then(function(res) {
+            if(res) {
+                console.log('You are sure');
+            } else {
+                console.log('You are not sure');
+            }
+        });
+    }
+
+    $scope.moveToPrePage = function(){
+        $state.go('myOrder');
+    }
+
+    $scope.comment = function(){
+        $state.go('comment');
+    }
+
+})
+
+
+    .controller('commentCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
     $scope.commentCheck = true;
     $scope.max = 5;
     $scope.ratingVal = 5;
