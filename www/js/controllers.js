@@ -28,20 +28,37 @@ angular.module('starter.controllers', ['starter.services'])
                 quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
-                targetWidth: 500,
-                targetHeight: 500,
+                targetWidth: 600,
+                targetHeight: 400,
                 saveToPhotoAlbum: true,
-                encodingType:Camera.EncodingType.JPEG,
+                encodingType: Camera.EncodingType.JPEG,
                 allowEdit: true,
-                mediaType:0,
-                cameraDirection:0,
+                mediaType: 0,
+                cameraDirection: 0,
                 popoverOptions: CameraPopoverOptions
             };
 
-            $cordovaCamera.getPicture(options).then(function(imageURI) {
-                $scope.imageSrc= imageURI;
-                //image.src = "data:image/jpeg;base64," + imageData;
-            }, function(err) {
+            $cordovaCamera.getPicture(options).then(function (imageURI) {
+                $scope.showAddImgFlag = false;
+                $scope.imageSrc = imageURI;
+                var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+                var filePath = $scope.imageSrc;
+                document.addEventListener('deviceready', function () {
+                    $cordovaFileTransfer.upload(uploadUrl, filePath)
+                        .then(function (result) {
+                            var json = eval('(' + result.response + ')');
+                            if(json.status=='success'){
+                                $scope.showAlert("上传成功！");
+                            }
+                        }, function (err) {
+                            commonService.hideLoading();
+                            $scope.showAlert("服务器异常，请重新上传！");
+                        }, function (progress) {
+                            console.log(progress.loaded+"---******--");
+                        });
+
+                }, false);
+            }, function (err) {
 
             });
         }
@@ -271,9 +288,61 @@ angular.module('starter.controllers', ['starter.services'])
         $state.go('comment');
     }
 
+    $scope.buyAgain = function(){
+        $state.go('allOrder');
+    }
+
 })
 
-.controller('commentCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+.controller('allOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+    commonService.showLoading();
+    shoppingCarService.getShoppingCar().then(function(data){
+        $scope.shoppingCarList = data;
+        var shoppingCarListLength = $scope.shoppingCarList.length;
+        $scope.totalPrice = 0;
+        for(var i=0;i<shoppingCarListLength;i++){
+            $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+        }
+        commonService.hideLoading();
+    }, function(error){
+        commonService.hideLoading();
+        //$scope.showAlert(error);
+    });
+
+    $scope.deleteOrder = function(){
+        var confirmPopup = $ionicPopup.confirm({
+            title: '确认删除订单？',
+            buttons: [
+                { text: '取消' },
+                {
+                    text: '<b>确认</b>',
+                    type: 'button-positive',
+                    onTap: function() { return true; }
+                }
+            ]
+        });
+
+        confirmPopup.then(function(res) {
+            if(res) {
+                console.log('You are sure');
+            } else {
+                console.log('You are not sure');
+            }
+        });
+    }
+
+    $scope.moveToPrePage = function(){
+        $state.go('myOrder');
+    }
+
+    $scope.comment = function(){
+        $state.go('comment');
+    }
+
+})
+
+
+    .controller('commentCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
     $scope.commentCheck = true;
     $scope.max = 5;
     $scope.ratingVal = 5;
@@ -518,20 +587,21 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('DomesticCtrl', function($scope, $rootScope, $state, commonService, DomesticService) {
         $scope.on_select = function(idx){
         if(idx == 1){
-          $rootScope.domesticTabTitle ="baojie";
+          $rootScope.domesticTabTitle ="家具保洁";
         }else if(idx == 2){
-          $rootScope.domesticTabTitle ="weixiu";
+          $rootScope.domesticTabTitle ="家庭维修";
         }else if(idx == 3){
-          $rootScope.domesticTabTitle ="daixi";
+          $rootScope.domesticTabTitle ="家庭代洗";
         }else if(idx == 4){
-          $rootScope.domesticTabTitle ="banyun";
+          $rootScope.domesticTabTitle ="家庭搬运";
         }
         commonService.showLoading();
         DomesticService.getDomesticByStatus().then(function(data){
             $scope.domesticList = [];
             for(i=0;i<data.length;i++){
-                if($rootScope.domesticTabTitle == data[i].type){
+                if($rootScope.domesticTabTitle == data[i].category){
                     $scope.domesticList.push(data[i]);
+                    //$scope.domesticList[i].picName;
                 }
             }
           commonService.hideLoading();
@@ -551,18 +621,18 @@ angular.module('starter.controllers', ['starter.services'])
 
       $scope.on_select = function(idx){
         if(idx == 5){
-          $rootScope.domesticTabTitle ="kaisuo";
+          $rootScope.domesticTabTitle ="开锁";
         }else if(idx == 6){
-          $rootScope.domesticTabTitle ="lvhua";
+          $rootScope.domesticTabTitle ="绿化养护";
         }else if(idx == 7){
-          $rootScope.domesticTabTitle ="anzhuang";
+          $rootScope.domesticTabTitle ="纱窗安装管道疏通";
         }
         console.log($rootScope.domesticTabTitle);
         commonService.showLoading();
           DomesticService.getDomesticByStatus().then(function(data){
               $scope.domesticList = [];
               for(i=0;i<data.length;i++){
-                  if($rootScope.domesticTabTitle == data[i].type){
+                  if($rootScope.domesticTabTitle == data[i].category){
                       console.log(data[i].type);
                       $scope.domesticList.push(data[i]);
                   }
@@ -811,9 +881,16 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera,CommunityService,$cordovaFileTransfer){
+.controller('addCommunityNewsCtrl',function($scope,$state,$stateParams,$cordovaCamera,CommunityService,$cordovaFileTransfer,commonService){
 
-        $scope.commentText = "";
+        if($stateParams.tabIndex==1){
+            $scope.addType = "discussion";
+        }else if($stateParams.tabIndex==2){
+            $scope.addType = "activity";
+        }else if($stateParams.tabIndex==3){
+            $scope.addType = "memory";
+        }
+        $scope.comment = {detail:""};
         $scope.back = function(){
             $state.go("community",{"tabIndex":$stateParams.tabIndex});
         }
@@ -825,8 +902,8 @@ angular.module('starter.controllers', ['starter.services'])
                 quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
-                targetWidth: 500,
-                targetHeight: 500,
+                targetWidth: 600,
+                targetHeight: 400,
                 saveToPhotoAlbum: true,
                 encodingType: Camera.EncodingType.JPEG,
                 allowEdit: true,
@@ -844,23 +921,35 @@ angular.module('starter.controllers', ['starter.services'])
             });
         }
 
-        $scope.fileUpload = function() {
+        $scope.fileUpload = function(type) {
 
+            commonService.showLoading();
             var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
             var filePath = $scope.imageSrc;
-            var options = {};
-            options.comment = $scope.commentText;
-            $cordovaFileTransfer.upload(uploadUrl, filePath, options)
-                .then(function (result) {
-                    // Success!
-                    alert("1");
-                }, function (err) {
-                    // Error
-                    alert("0");
-                }, function (progress) {
-                    alert("0");
-                    // constant progress updates
-                });
+            var options = new FileUploadOptions();
+            var params = {
+                'type':type,
+                'content':$scope.comment.detail
+            };
+            options.params = params;
+            document.addEventListener('deviceready', function () {
+                $cordovaFileTransfer.upload(uploadUrl, filePath, options)
+                    .then(function (result) {
+                        commonService.hideLoading();
+                        var json = eval('(' + result.response + ')');
+                        if(json.status=='success'){
+                            $scope.showAlert("上传成功！");
+                            $state.go("community",{"tabIndex":$stateParams.tabIndex});
+                        }
+                    }, function (err) {
+                        commonService.hideLoading();
+                        $scope.showAlert("服务器异常，请重新上传！");
+                    }, function (progress) {
+                        console.log(progress.loaded+"---******--");
+                    });
+
+            }, false);
+
         }
 
         function addCommunity(){

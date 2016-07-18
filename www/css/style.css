@@ -1659,7 +1659,7 @@ ion-view[view-title='购物车']{
 }
 .total{
     position: absolute;
-    top: 35%;
+    top: 40%;
     right: 32%;
     font-size: 14px;
 }
@@ -1669,7 +1669,7 @@ ion-view[view-title='购物车']{
 }
 
 /*===paymentOrderCtrl===*/
-ion-view[view-title='待付款订单'], ion-view[view-title='我的订单']{
+ion-view[view-title='待付款订单'], ion-view[view-title='我的订单'], ion-view[view-title='确认订单']{
     background-color: #EFEFF4;
 }
 
@@ -1967,4 +1967,82 @@ ul.rating {
     top: 34%;
     font-size: 14px;
     left: 34px;
+}
+
+/*===allOrderCtrl===*/
+#allOrder .item{
+    margin: 0px;
+    border-width: 2px;
+    border-style: none none solid;
+}
+.allContent{
+    background-color: #ffffff;
+}
+
+.allContent .payTop{
+    height: 60px;
+}
+
+.orderText{
+    position: absolute;
+    left: 28px;
+    top: 16px;
+}
+
+.orderTextN{
+    left: 74px;
+}
+
+.orderLoc{
+    color: #C8C7CC;
+    position: absolute;
+    top: 38px;
+    left: 12px;
+    font-size: 16px;
+}
+
+.orderTextP{
+    position: absolute;
+    left: 26px;
+    top: 40px;
+    font-size: 14px;
+}
+
+.orderLine{
+    width: 100%;
+}
+
+.orderLine img{
+    width: 100%;
+}
+
+.shoppingImgO {
+    left: 36px;
+    width: 106px;
+    float: left;
+}
+
+.listBottomSpanL{
+    position: absolute;
+    left: 20px;
+    font-size: 16px;
+}
+
+.listBottomSpanL span {
+    line-height: 40px;
+}
+
+.listBottomSpanR{
+    position: absolute;
+    right: 10px;
+    font-size: 16px;
+}
+
+.listBottomSpanR span {
+    line-height: 40px;
+    padding-right: 4px;
+}
+
+#allOrder .bar button, #shoppingCar .bar button{
+    font-size: 16px;
 }
