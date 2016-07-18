@@ -738,22 +738,22 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        newAskForRepair: function (user) {
-            var defer = $q.defer();
-            var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewRepair',user);
-            request.success(function (data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
-            });
-            request.error(function () {
-                defer.reject("Get related repairs information failed.");
-            });
-            return defer.promise;
-        },
+        //newAskForRepair: function (user) {
+        //    var defer = $q.defer();
+        //    var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewRepair',user);
+        //    request.success(function (data) {
+        //        var status =data.resultCode;
+        //        if(status == "1"){
+        //            defer.resolve(data.result);
+        //        }else{
+        //            defer.reject();
+        //        }
+        //    });
+        //    request.error(function () {
+        //        defer.reject("Get related repairs information failed.");
+        //    });
+        //    return defer.promise;
+        //},
 
         repairDetails: function (user) {
             var defer = $q.defer();
@@ -795,22 +795,22 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        newAskForHouseSaleOrRent: function (user) {
-            var defer = $q.defer();
-            var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewRentSaleProperty',user);
-            request.success(function (data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
-            });
-            request.error(function () {
-                defer.reject("Get related repairs information failed.");
-            });
-            return defer.promise;
-        },
+        //newAskForHouseSaleOrRent: function (user) {
+        //    var defer = $q.defer();
+        //    var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewRentSaleProperty',user);
+        //    request.success(function (data) {
+        //        var status =data.resultCode;
+        //        if(status == "1"){
+        //            defer.resolve(data.result);
+        //        }else{
+        //            defer.reject();
+        //        }
+        //    });
+        //    request.error(function () {
+        //        defer.reject("Get related repairs information failed.");
+        //    });
+        //    return defer.promise;
+        //},
 
         saleAndRentDetails: function (user) {
             var defer = $q.defer();
@@ -893,22 +893,22 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        newComplaint: function (user) {
-            var defer = $q.defer();
-            var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewComplain',user);
-            request.success(function (data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
-            });
-            request.error(function () {
-                defer.reject("Get related repairs information failed.");
-            });
-            return defer.promise;
-        },
+        //newComplaint: function (user) {
+        //    var defer = $q.defer();
+        //    var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewComplain',user);
+        //    request.success(function (data) {
+        //        var status =data.resultCode;
+        //        if(status == "1"){
+        //            defer.resolve(data.result);
+        //        }else{
+        //            defer.reject();
+        //        }
+        //    });
+        //    request.error(function () {
+        //        defer.reject("Get related repairs information failed.");
+        //    });
+        //    return defer.promise;
+        //},
 
         complaintDetails: function (user) {
             var defer = $q.defer();

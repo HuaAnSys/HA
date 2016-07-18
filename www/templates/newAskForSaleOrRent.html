@@ -8,7 +8,7 @@
         <div class="newAskForSaleOrRentView">
             <div class="smallBlankLine"></div>
             <div class="textAreaStyle">
-                <textarea rows="8" cols={{textAreaCols}} placeholder="如果有出租或者租赁本社区房屋的需求，可以告诉我们，会有专人为您服务..."></textarea>
+                <textarea rows="8" cols={{textAreaCols}} placeholder="如果有出租或者租赁本社区房屋的需求，可以告诉我们，会有专人为您服务..." ng-model="comment.detail"></textarea>
             </div>
             <div class="bigBlankLine">添加图片</div>
             <!--<div class="selectPicOrOpenCamera">-->
@@ -22,7 +22,7 @@
             </div>
             <div class="submitBtnBackground" style="height: {{submitBtnBackgroundHeight}};background-color: #EFEFF4">
                 <div class="submitBtn">
-                    <button type="submit" class="button button-block" ng-click="submitNewSaleOrRent()">提交</button>
+                    <button type="submit" class="button button-block" ng-click="submitNewSaleOrRent('saleOrRent')">提交</button>
                 </div>
             </div>
         </div>

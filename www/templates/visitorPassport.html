@@ -14,8 +14,8 @@
                     <div>
                         <div>{{item.name}}</div>
                         <div>有效期至：{{item.endDate}}</div>
-                        <div class="haveSolved" ng-if="item.status == 'working'">生效中</div>
-                        <div class="notSolved" ng-if="item.status == 'cancel'">已作废</div>
+                        <div class="haveSolved" ng-if="getMillisecond(item.endDate) - getMillisecond('') < 24*60*60*1000 && getMillisecond(item.endDate) - getMillisecond('') >0 ">生效中</div>
+                        <div class="notSolved" ng-if="getMillisecond(item.endDate) - getMillisecond('') <= 0">已作废</div>
                     </div>
                 </ion-item>
             </ion-list>

@@ -1514,20 +1514,21 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newAskForRepairCtrl', function($scope,$state,$cordovaCamera,commonService,RelatedRepairsService) {
+    .controller('newAskForRepairCtrl', function($scope,$state,$cordovaCamera,commonService) {
         var screenWidth = document.body.scrollWidth - 30;
         var screenHeight = document.body.scrollHeight - 30;
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
         $scope.submitBtnBackgroundHeight = screenHeight-15-162-36-120+'px';
         $scope.showAddImgFlag = true;
+        $scope.comment = {detail:""};
 
         $scope.takePhoto=function() {
             var options = {
                 quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
-                targetWidth: 500,
-                targetHeight: 500,
+                targetWidth: 600,
+                targetHeight: 400,
                 saveToPhotoAlbum: true,
                 encodingType: Camera.EncodingType.JPEG,
                 allowEdit: true,
@@ -1541,22 +1542,52 @@ angular.module('starter.controllers', ['starter.services'])
                 $scope.imageSrc = imageURI;
                 //image.src = "data:image/jpeg;base64," + imageData;
             }, function (err) {
-
+                console.log('error'+err);
             });
         }
 
+        $scope.submitNewRepair = function(type) {
 
-        $scope.submitNewRepair= function(){
             commonService.showLoading();
-            RelatedRepairsService.newAskForRepair($scope.user).then(function(data) {
-                commonService.hideLoading();
-                $state.go('relatedRepairs');
-            }, function(errMsg) {
-                commonService.hideLoading();
-                $scope.showAlert('提交失败，请稍后重试');
-                console.log(errMsg);
-            });
+            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            var filePath = $scope.imageSrc;
+            var options = new FileUploadOptions();
+            var params = {
+                'type':type,
+                'content':$scope.comment.detail
+            };
+            options.params = params;
+            document.addEventListener('deviceready', function () {
+                $cordovaFileTransfer.upload(uploadUrl, filePath, options)
+                    .then(function (result) {
+                        commonService.hideLoading();
+                        var json = eval('(' + result.response + ')');
+                        if(json.status=='success'){
+                            $scope.showAlert("上传成功！");
+                            $state.go('relatedRepairs');
+                        }
+                    }, function (err) {
+                        commonService.hideLoading();
+                        $scope.showAlert("服务器异常，请重新上传！");
+                    }, function (progress) {
+                        console.log(progress.loaded+"---******--");
+                    });
+
+            }, false);
+
         }
+
+        //$scope.submitNewRepair= function(){
+        //    commonService.showLoading();
+        //    RelatedRepairsService.newAskForRepair($scope.user).then(function(data) {
+        //        commonService.hideLoading();
+        //        $state.go('relatedRepairs');
+        //    }, function(errMsg) {
+        //        commonService.hideLoading();
+        //        $scope.showAlert('提交失败，请稍后重试');
+        //        console.log(errMsg);
+        //    });
+        //}
         $scope.back=function(){
             $state.go('relatedRepairs');
         }
@@ -1605,20 +1636,21 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newAskForSaleOrRentCtrl', function($scope,$state,$cordovaCamera,commonService,HouseSaleAndRentService) {
+    .controller('newAskForSaleOrRentCtrl', function($scope,$state,$cordovaCamera,commonService) {
         var screenWidth = document.body.scrollWidth - 30;
         var screenHeight = document.body.scrollHeight - 30;
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
         $scope.submitBtnBackgroundHeight = screenHeight-15-162-36-120+'px';
         $scope.showAddImgFlag = true;
+        $scope.comment = {detail:""};
 
         $scope.takePhoto=function() {
             var options = {
                 quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
-                targetWidth: 500,
-                targetHeight: 500,
+                targetWidth: 600,
+                targetHeight: 400,
                 saveToPhotoAlbum: true,
                 encodingType: Camera.EncodingType.JPEG,
                 allowEdit: true,
@@ -1635,17 +1667,48 @@ angular.module('starter.controllers', ['starter.services'])
 
             });
         }
-        $scope.submitNewSaleOrRent= function(){
+        $scope.submitNewSaleOrRent = function(type) {
+
             commonService.showLoading();
-            HouseSaleAndRentService.newAskForHouseSaleOrRent($scope.user).then(function(data) {
-                commonService.hideLoading();
-                $state.go('houseSaleAndRent');
-            }, function(errMsg) {
-                commonService.hideLoading();
-                $scope.showAlert('提交失败，请稍后重试');
-                console.log(errMsg);
-            });
+            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            var filePath = $scope.imageSrc;
+            var options = new FileUploadOptions();
+            var params = {
+                'type':type,
+                'content':$scope.comment.detail
+            };
+            options.params = params;
+            document.addEventListener('deviceready', function () {
+                $cordovaFileTransfer.upload(uploadUrl, filePath, options)
+                    .then(function (result) {
+                        commonService.hideLoading();
+                        var json = eval('(' + result.response + ')');
+                        if(json.status=='success'){
+                            $scope.showAlert("上传成功！");
+                            $state.go('houseSaleAndRent');
+                        }
+                    }, function (err) {
+                        commonService.hideLoading();
+                        $scope.showAlert("服务器异常，请重新上传！");
+                    }, function (progress) {
+                        console.log(progress.loaded+"---******--");
+                    });
+
+            }, false);
+
         }
+
+        //$scope.submitNewSaleOrRent= function(){
+        //    commonService.showLoading();
+        //    HouseSaleAndRentService.newAskForHouseSaleOrRent($scope.user).then(function(data) {
+        //        commonService.hideLoading();
+        //        $state.go('houseSaleAndRent');
+        //    }, function(errMsg) {
+        //        commonService.hideLoading();
+        //        $scope.showAlert('提交失败，请稍后重试');
+        //        console.log(errMsg);
+        //    });
+        //}
         $scope.back=function(){
             $state.go('houseSaleAndRent');
         }
@@ -1677,6 +1740,17 @@ angular.module('starter.controllers', ['starter.services'])
         commonService.showLoading();
         VisitorPassportService.getVisitorPassport($scope.user).then(function(data) {
             $scope.items = data;
+            $scope.getMillisecond = function(data){
+                if(data == ''){
+                    $scope.currentTime = new Date().getTime();
+                    return $scope.currentTime
+                }
+                else{
+                    $scope.endTime = new Date(data).getTime();
+                    return $scope.endTime
+                }
+                return;
+            }
             commonService.hideLoading();
         }, function(errMsg) {
             commonService.hideLoading();
@@ -1722,11 +1796,19 @@ angular.module('starter.controllers', ['starter.services'])
         }
         $scope.gotoGenerateQR=function(){
             if($scope.info.visitorName !=''){
+                var d = new Date();    //根据时间戳生成的时间对象
+                var date = (d.getFullYear()) + "/" +
+                    (d.getMonth() + 1) + "/" +
+                    (d.getDate()) + " " +
+                    (d.getHours()) + ":" +
+                    (d.getMinutes()) + ":" +
+                    (d.getSeconds());
+
                 //commonService.showLoading();
-                //VisitorPassportService.newVisitorInvites($scope.user).then(function(data) {
+                //VisitorPassportService.newVisitorInvites($scope.user,$scope.timestamp).then(function(data) {
                 //
-                //    //返回有效期至什么时间
-                //
+                //    $scope.endDate =
+                //      $scope.validity = data;
                 //    commonService.hideLoading();
                     $state.go('generateQRCode',{QRvisitorName: $scope.info.visitorName,visitorSex: $scope.sexOne});
                 //}, function(errMsg) {
@@ -1819,14 +1901,15 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
         $scope.submitBtnBackgroundHeight = screenHeight-15-162-36-120+'px';
         $scope.showAddImgFlag = true;
+        $scope.comment = {detail:""};
 
         $scope.takePhoto=function() {
             var options = {
                 quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
-                targetWidth: 500,
-                targetHeight: 500,
+                targetWidth: 600,
+                targetHeight: 400,
                 saveToPhotoAlbum: true,
                 encodingType: Camera.EncodingType.JPEG,
                 allowEdit: true,
@@ -1843,17 +1926,48 @@ angular.module('starter.controllers', ['starter.services'])
                 console.log('Failed to open the camera');
             });
         }
-        $scope.submitNewComplaint= function(){
+
+        $scope.submitNewComplaint = function(type) {
+
             commonService.showLoading();
-            ComplaintService.newComplaint($scope.user).then(function(data) {
-                commonService.hideLoading();
-                $state.go('complaintPage');
-            }, function(errMsg) {
-                commonService.hideLoading();
-                $scope.showAlert('提交失败，请稍后重试');
-                console.log(errMsg);
-            });
+            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            var filePath = $scope.imageSrc;
+            var options = new FileUploadOptions();
+            var params = {
+                'type':type,
+                'content':$scope.comment.detail
+            };
+            options.params = params;
+            document.addEventListener('deviceready', function () {
+                $cordovaFileTransfer.upload(uploadUrl, filePath, options)
+                    .then(function (result) {
+                        commonService.hideLoading();
+                        var json = eval('(' + result.response + ')');
+                        if(json.status=='success'){
+                            $scope.showAlert("上传成功！");
+                            $state.go('complaintPage');
+                        }
+                    }, function (err) {
+                        commonService.hideLoading();
+                        $scope.showAlert("服务器异常，请重新上传！");
+                    }, function (progress) {
+                        console.log(progress.loaded+"---******--");
+                    });
+
+            }, false);
+
         }
+        //$scope.submitNewComplaint= function(){
+        //    commonService.showLoading();
+        //    ComplaintService.newComplaint($scope.user).then(function(data) {
+        //        commonService.hideLoading();
+        //        $state.go('complaintPage');
+        //    }, function(errMsg) {
+        //        commonService.hideLoading();
+        //        $scope.showAlert('提交失败，请稍后重试');
+        //        console.log(errMsg);
+        //    });
+        //}
         $scope.back=function(){
             $state.go('complaintPage');
         }
