@@ -723,8 +723,8 @@ angular.module('starter.services', [])
     return {
         getRelatedRepairs: function (user) {
             var defer = $q.defer();
-            //var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getClaimedRepairs',user);
-            var request = $http.get('js/propertyManagement.json');
+            var request = $http.post('http://9.112.87.121:8080/HuanAnBackend/propertyManagement/getClaimedRepairs',user);
+            //var request = $http.get('js/propertyManagement.json');
             request.success(function (data) {
                 var status =data.resultCode;
                 //if(status == "1"){
@@ -741,7 +741,7 @@ angular.module('starter.services', [])
 
         //newAskForRepair: function (user) {
         //    var defer = $q.defer();
-        //    var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewRepair',user);
+        //    var request = $http.post('http://localhost:8080/HuanAnBackend/propertyManagement/createNewRepair',user);
         //    request.success(function (data) {
         //        var status =data.resultCode;
         //        if(status == "1"){
@@ -758,8 +758,8 @@ angular.module('starter.services', [])
 
         repairDetails: function (user) {
             var defer = $q.defer();
-            //var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getComplain',user);
-            var request = $http.get('js/repairsHistory.json');
+            var request = $http.post('http://9.112.87.121:8080/HuanAnBackend/propertyManagement/getComplain',user);
+            //var request = $http.get('js/repairsHistory.json');
             request.success(function (data) {
                 //var status =data.resultCode;
                 //if(status == "1"){
