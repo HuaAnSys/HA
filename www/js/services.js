@@ -237,16 +237,11 @@ angular.module('starter.services', [])
 .factory('homePageService', ['$http','$q',function($http, $q){
     return {
         getAdvertisements : function(){
-            var url = "";
+            var url = BASE_URL+"shoppingmall/getHotProducts";
             var defer =$q.defer();
             var request =$http.post(url);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject(Messages.HOMEADVERSFAIL);
-                }
+                defer.resolve(data);
             });
             request.error(function(){
                 defer.reject(Messages.HOMEADVERSFAIL);
