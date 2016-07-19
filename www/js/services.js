@@ -279,7 +279,7 @@ angular.module('starter.services', [])
                 defer.resolve(data);
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject(Messages.GETBULLETINSFAIL);
             });
             return defer.promise;
         },
