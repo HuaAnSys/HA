@@ -757,6 +757,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,CommunityService,commonService){
 
+        $scope.bulletions = [];
         $scope.back = function(){
             $state.go('tab.Home');
         }
@@ -787,13 +788,18 @@ angular.module('starter.controllers', ['starter.services'])
         }
 
         function getCommunityByTab(index){
+            $scope.bulletions = [];
             console.log("获取第几个tab页数据："+index);
             if(index==1){
                 CommunityService.getAllBulletins().then(function(data){
                     if(data.length == 0){
 
                     }else{
-
+                        angular.forEach(data,function(value ,index){
+                            value.picName = "" + value.picName;
+                            $scope.bulletions.push(value);
+                        });
+                        $scope.bulletions = data;
 
                     }
                     commonService.hideLoading();
@@ -848,33 +854,36 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go("addCommunity",{"tabIndex":index});
         }
 
-        $scope.communityNews = [
+        $scope.bulletions = [
             {
                 "personIcon":"img/adam.jpg",
-                "name":"社区管理员",
-                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
-                        "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
-                        "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
-                        "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/community_demo.jpg"
-            },
-            {
-                "personIcon":"img/adam.jpg",
-                "name":"社区管理员",
-                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "uploaderName":"社区管理员",
+                "content":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
                 "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                 "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                 "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/community_demo.jpg"
+                "picName":"img/community_demo.jpg",
+                "uploadTime":"2016-07-05 12:32:20"
             },
             {
                 "personIcon":"img/adam.jpg",
-                "name":"社区管理员",
-                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "uploaderName":"社区管理员",
+                "content":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
                 "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                 "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                 "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/community_demo.jpg"
+                "picName":"img/community_demo.jpg",
+                "uploadTime":"2016-07-05 12:32:20"
+            },
+            {
+                "personIcon":"img/adam.jpg",
+                "uploaderName":"社区管理员",
+                "content":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+                "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+                "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+                "picName":"img/community_demo.jpg",
+                "uploadTime":"2016-07-05 12:32:20"
             },
         ];
 
@@ -924,12 +933,16 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.fileUpload = function(type) {
 
             commonService.showLoading();
-            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            /*            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";*/
+            var uploadUrl = "http://9.110.47.10:8080/HuanAnBackend/actityAlarm/createNewActityAlarm";
             var filePath = $scope.imageSrc;
+            if(filePath == undefined){
+                filePath = "";
+            }
             var options = new FileUploadOptions();
             var params = {
-                'type':type,
-                'content':$scope.comment.detail
+                'content':$scope.comment.detail,
+                'userId' : '1'
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
