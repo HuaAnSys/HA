@@ -674,6 +674,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('HomeCtrl',function($scope,$state,commonService,homePageService){
         console.log("HomeCtrl");
+//        getAdvsAndProducts();
         $scope.slides = [
             {url:"img/adv_demo.PNG"},
             {url:"img/advertise_a.png"},
@@ -770,14 +771,14 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.onTabSelect = function(index){
             var selectedTab = parseInt($stateParams.tabIndex);
             if(index==1&&(selectedTab>-1)&&(selectedTab!=0)){
-//                console.log("第一次进tab页");
+                console.log("第一次进tab页");
                 $stateParams.tabIndex = -1;
                 $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(selectedTab);
             }else if(index==1&&selectedTab==0){
                 $stateParams.tabIndex = -1;
-//                getCommunityByTab(1);
+                getCommunityByTab(1);
             }else{
-//                getCommunityByTab(index);
+                getCommunityByTab(index);
             }
 
         }
@@ -800,7 +801,6 @@ angular.module('starter.controllers', ['starter.services'])
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
-
                     }
                     commonService.hideLoading();
                 },function(error){
@@ -812,8 +812,11 @@ angular.module('starter.controllers', ['starter.services'])
                     if(data.length == 0){
 
                     }else{
-
-
+                        angular.forEach(data,function(value ,index){
+                            value.picName = "" + value.picName;
+                            $scope.bulletions.push(value);
+                        });
+                        $scope.bulletions = data;
                     }
                     commonService.hideLoading();
                 },function(error){
@@ -825,8 +828,11 @@ angular.module('starter.controllers', ['starter.services'])
                     if(data.length == 0){
 
                     }else{
-
-
+                        angular.forEach(data,function(value ,index){
+                            value.picName = "" + value.picName;
+                            $scope.bulletions.push(value);
+                        });
+                        $scope.bulletions = data;
                     }
                     commonService.hideLoading();
                 },function(error){
@@ -836,10 +842,13 @@ angular.module('starter.controllers', ['starter.services'])
             }else{
                 CommunityService.getAllBestMemory().then(function(data){
                     if(data.length == 0){
-
+                        $scope.bulletions = [];
                     }else{
-
-
+                        angular.forEach(data,function(value ,index){
+                            value.picName = "" + value.picName;
+                            $scope.bulletions.push(value);
+                        });
+                        $scope.bulletions = data;
                     }
                     commonService.hideLoading();
                 },function(error){
