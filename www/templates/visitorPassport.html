@@ -10,18 +10,24 @@
                 <ion-item class="mediumBlank">
                     大连XXX123号楼01-123
                 </ion-item>
-                <ion-item class="listInRelatedRepairs" ng-repeat="item in items" ng-click="gotoQRPage(item)">
+                <ion-item class="listInRelatedRepairs" ng-repeat="item in items" ng-if="getMillisecond(item.endDate) - getMillisecond('') < 24*60*60*1000 && getMillisecond(item.endDate) - getMillisecond('') >0" ng-click="gotoQRPage(item)">
                     <div>
                         <div>{{item.name}}</div>
                         <div>有效期至：{{item.endDate}}</div>
-                        <div class="haveSolved" ng-if="getMillisecond(item.endDate) - getMillisecond('') < 24*60*60*1000 && getMillisecond(item.endDate) - getMillisecond('') >0 ">生效中</div>
-                        <div class="notSolved" ng-if="getMillisecond(item.endDate) - getMillisecond('') <= 0">已作废</div>
+                        <div class="haveSolved">生效中</div>
+                    </div>
+                </ion-item>
+                <ion-item class="listInRelatedRepairs" ng-repeat="item in items" ng-if="getMillisecond(item.endDate) - getMillisecond('') <= 0">
+                    <div>
+                        <div>{{item.name}}</div>
+                        <div>有效期至：{{item.endDate}}</div>
+                        <div class="notSolved">已作废</div>
                     </div>
                 </ion-item>
             </ion-list>
         </div>
         <div class="submitBtn">
-            <button type="submit" class="button button-block" ng-click="gotoNewVisitorInvite()">+新邀请</button>
+            <button type="submit" class="button button-block" ng-click="gotoNewVisitorInvite()">+ 新邀请</button>
         </div>
 
     </ion-content>

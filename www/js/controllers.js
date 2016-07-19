@@ -1315,21 +1315,21 @@ angular.module('starter.controllers', ['starter.services'])
 /*
     Login and property mangement controllers
  */
-    .controller('loginCtrl', function($scope,$state,$http,$ionicPopup,LoginService) {
-        $scope.user = {
+    .controller('loginCtrl', function($scope,$rootScope,$state,$http,$ionicPopup,LoginService) {
+        $rootScope.user = {
             phoneNo: '',
             pwd: ''
         }
         $scope.login = function() {
-            //LoginService.login($scope.user).then(function(res) {
+            LoginService.login($rootScope.user).then(function(res) {
                 $state.go('tab.Home');
-            //}, function(errMsg) {
-            //    var alertPopup = $ionicPopup.alert({
-            //        title: '登录失败',
-            //        template: '账号或密码错误，请重新输入'
-            //    })
-            //    console.log(errMsg);
-            //});
+            }, function(errMsg) {
+                var alertPopup = $ionicPopup.alert({
+                    title: '登录失败',
+                    template: '账号或密码错误，请重新输入'
+                })
+                console.log(errMsg);
+            });
         }
         $scope.regist=function(){
             $state.go('firstRegistPage');
@@ -1337,9 +1337,6 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.retrievePassword=function(){
             $state.go('firstRetrievePage');
         }
-        //$scope.loginToMainPage=function(){
-        //    $state.go('tab.Home');
-        //}
     })
 
 //Regist account page controllers
@@ -1386,7 +1383,6 @@ angular.module('starter.controllers', ['starter.services'])
             pwd:'',
             confirmPassword:'',
             name:'',
-            identifierNo:'',
             nickName:'',
             sex:''
         }
@@ -1415,28 +1411,28 @@ angular.module('starter.controllers', ['starter.services'])
                 console.log($scope.user);
                 $scope.showAlert('亲，留下您的尊姓大名吧');
             }
-            else if(!isIDCard.test($scope.user.identifierNo) || $scope.user.identifierNo.length<15){
-                $scope.showAlert('亲，身份证不对哟，检查下吧');
-            }
+            //else if(!isIDCard.test($scope.user.identifierNo) || $scope.user.identifierNo.length<15){
+            //    $scope.showAlert('亲，身份证不对哟，检查下吧');
+            //}
             else if( $scope.user.sex == ""){
                 $scope.showAlert('您是帅哥还是美女，选下嘛');
             }
-            else if($scope.user.pwd==''||$scope.user.confirmPassword==''||$scope.user.name==''||$scope.user.identifierNo==''||$scope.user.nickName==''||$scope.user.sex==''){
+            else if($scope.user.pwd==''||$scope.user.confirmPassword==''||$scope.user.name==''||$scope.user.nickName==''||$scope.user.sex==''){
                 $scope.showAlert('您填写的信息不完整呦，填满嘛~');
             }
             else{
-                //commonService.showLoading();
-                //RegistService.regist($scope.user).then(function(res) {
-                //    commonService.hideLoading();
+                commonService.showLoading();
+                RegistService.regist($scope.user).then(function(res) {
+                    commonService.hideLoading();
                     $state.go('login');
-                //}, function(errMsg) {
-                //    commonService.hideLoading();
-                //    var alertPopup = $ionicPopup.alert({
-                //        title: '哎呀，出错了',
-                //        template: '注册失败，请稍后重试'
-                //    })
-                //    console.log(errMsg);
-                //})
+                }, function(errMsg) {
+                    commonService.hideLoading();
+                    var alertPopup = $ionicPopup.alert({
+                        title: '哎呀，出错了',
+                        template: '注册失败，请稍后重试'
+                    })
+                    console.log(errMsg);
+                })
             }
         }
         $scope.back=function(){
@@ -1479,6 +1475,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 //Property management sub page controllers
     .controller('PropertyManagementCtrl', function($scope,$state,$ionicPopup) {
+
         var screenWidth = document.body.scrollWidth;
         var picHeight=Math.ceil((screenWidth * 164)/375);
         $scope.picHeight=picHeight+'px';
@@ -1493,6 +1490,27 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('houseSaleAndRent');
         }
         $scope.showConfirm = function() {
+            function onSuccess(result){
+                console.log("Success:"+result);
+            }
+
+            function onError(result) {
+                console.log("Error:"+result);
+                $ionicPopup.alert({
+                    template: 'OK',
+                    buttons: [
+                        {  text: 'know',
+                            type: 'button-positive'
+                        }
+                    ]
+                });
+            }
+
+            $scope.call = function(){
+                console.log('calling');
+                window.plugins.CallNumber.callNumber(onSuccess, onError, '88888888', true);
+            }
+
             var confirmPopup = $ionicPopup.confirm({
                 //title: 'Consume Ice Cream',
                 template: '<div style="float: left;width: 42px;height: 42px;margin-left: 8px;padding-top: 7px;;border-radius: 50%;background-color: #00C800;"><i class="ion-ios-telephone" style="font-size: 30px;margin-left: 11px;color: #FFFFFF;"></i></div><div style="float: right;font-size: 35px;margin-top: 5px;margin-right: 5px">88888888</div> ',
@@ -1502,7 +1520,7 @@ angular.module('starter.controllers', ['starter.services'])
                 buttons: [
                     { text: '取消' },
                     {
-                        text: '<a href="tel:10086">拨打物业电话</a>',
+                        text: '<a href="tel:10086" ng-click="call()">拨打物业电话</a>',
                         type: 'button-positive',
                         onTap: function(e) {
                             console.log("call");
@@ -1604,9 +1622,10 @@ angular.module('starter.controllers', ['starter.services'])
     })
 
 //Related repairs controllers
-    .controller('relatedRepairsCtrl', function($scope,$state,commonService,RelatedRepairsService) {
+    .controller('relatedRepairsCtrl', function($scope,$rootScope,$state,commonService,RelatedRepairsService) {
+        console.log($rootScope.user.phoneNo);
         commonService.showLoading();
-        RelatedRepairsService.getRelatedRepairs($scope.user).then(function(data) {
+        RelatedRepairsService.getRelatedRepairs($rootScope.user.phoneNo).then(function(data) {
             $scope.items = data;
             commonService.hideLoading();
         }, function(errMsg) {
@@ -1625,7 +1644,7 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newAskForRepairCtrl', function($scope,$state,$cordovaCamera,commonService) {
+    .controller('newAskForRepairCtrl', function($scope,$state,$cordovaCamera,commonService,$cordovaFileTransfer) {
         var screenWidth = document.body.scrollWidth - 30;
         var screenHeight = document.body.scrollHeight - 30;
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
@@ -1660,7 +1679,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.submitNewRepair = function(type) {
 
             commonService.showLoading();
-            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            var uploadUrl = "http://9.112.87.121:8080/HuanAnBackend/upload/file";
             var filePath = $scope.imageSrc;
             var options = new FileUploadOptions();
             var params = {
@@ -1747,7 +1766,7 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newAskForSaleOrRentCtrl', function($scope,$state,$cordovaCamera,commonService) {
+    .controller('newAskForSaleOrRentCtrl', function($scope,$state,$cordovaCamera,commonService,$cordovaFileTransfer) {
         var screenWidth = document.body.scrollWidth - 30;
         var screenHeight = document.body.scrollHeight - 30;
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
@@ -1869,12 +1888,7 @@ angular.module('starter.controllers', ['starter.services'])
             console.log(errMsg);
         })
         $scope.gotoQRPage=function(data){
-            if(data.status == 'working'){
-                $state.go('generateQRCode',{QRvisitorName: data.name,visitorSex: data.sex});
-            }
-            else{
-                return;
-            }
+                $state.go('generateQRCode',{QRvisitorName: data.name,visitorSex: data.sex,lastDate: data.endDate});
         }
         $scope.gotoNewVisitorInvite=function(){
             $state.go('newVisitorInvite');
@@ -1907,21 +1921,29 @@ angular.module('starter.controllers', ['starter.services'])
         }
         $scope.gotoGenerateQR=function(){
             if($scope.info.visitorName !=''){
-                var d = new Date();    //根据时间戳生成的时间对象
-                var date = (d.getFullYear()) + "/" +
-                    (d.getMonth() + 1) + "/" +
-                    (d.getDate()) + " " +
-                    (d.getHours()) + ":" +
-                    (d.getMinutes()) + ":" +
-                    (d.getSeconds());
+                var nowDate = new Date();
+                $scope.currentTime = nowDate.getTime();
+                $scope.endTime = $scope.currentTime + 24*60*60*1000;
+                var endDate = new Date($scope.endTime);
+                $scope.currentTimestamp = (nowDate.getFullYear()) + "/" +
+                    (nowDate.getMonth() + 1) + "/" +
+                    (nowDate.getDate()) + " " +
+                    (nowDate.getHours()) + ":" +
+                    (nowDate.getMinutes()) + ":" +
+                    (nowDate.getSeconds());
+                $scope.endTimestamp = (endDate.getFullYear()) + "/" +
+                    (endDate.getMonth() + 1) + "/" +
+                    (endDate.getDate()) + " " +
+                    (endDate.getHours()) + ":" +
+                    (endDate.getMinutes()) + ":" +
+                    (endDate.getSeconds());
 
+                console.log($scope.endTimestamp);
                 //commonService.showLoading();
-                //VisitorPassportService.newVisitorInvites($scope.user,$scope.timestamp).then(function(data) {
+                //VisitorPassportService.newVisitorInvites($scope.user,$scope.currentTimestamp,$scope.endTimestamp).then(function(data) {
                 //
-                //    $scope.endDate =
-                //      $scope.validity = data;
                 //    commonService.hideLoading();
-                    $state.go('generateQRCode',{QRvisitorName: $scope.info.visitorName,visitorSex: $scope.sexOne});
+                    $state.go('generateQRCode',{QRvisitorName: $scope.info.visitorName,visitorSex: $scope.sexOne,lastDate: $scope.endTimestamp});
                 //}, function(errMsg) {
                 //    commonService.hideLoading();
                 //    $scope.showAlert('生成二维码失败，请稍后重试');
@@ -1940,7 +1962,8 @@ angular.module('starter.controllers', ['starter.services'])
         console.log($ionicHistory.viewHistory());
         $scope.name = $stateParams.QRvisitorName;
         $scope.sex = $stateParams.visitorSex;
-        var nameAndSex = $scope.name + ' '+ $scope.sex;
+        $scope.endTime = $stateParams.lastDate;
+        var nameAndSex = $scope.name + ' '+ $scope.sex + ' ' + $scope.endTime;
         var screenHeight = document.body.scrollHeight;
         var screenWidth = document.body.scrollWidth;
         $scope.whiteAreaHeight=screenHeight*0.92+'px';
@@ -2006,7 +2029,7 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newComplaintPageCtrl', function($scope,$state,$stateParams,$cordovaCamera,commonService,ComplaintService) {
+    .controller('newComplaintPageCtrl', function($scope,$state,$stateParams,$cordovaCamera,commonService,ComplaintService,$cordovaFileTransfer) {
         var screenWidth = document.body.scrollWidth - 30;
         var screenHeight = document.body.scrollHeight - 30;
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
