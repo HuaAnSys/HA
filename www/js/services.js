@@ -361,19 +361,14 @@ angular.module('starter.services', [])
         },
 
         getAllDiscussions : function(){
-            var url = "http://localhost:7080/HuanAnBackend/discussionRoom/getDiscussion";
-            var defer =$q.defer();
+            var url = BASE_URL + "discussionRoom/getDiscussion";
+            var defer = $q.defer();
             var request =$http.post(url);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
+                defer.resolve(data);
             });
-            request.error(function(){
-                defer.reject("fail");
+            request.error(function(error){
+                defer.reject(Messages.getAllDiscussionsError);
             });
             return defer.promise;
         },
@@ -455,19 +450,14 @@ angular.module('starter.services', [])
         },
 
         getAllCollections : function(){
-            var url = "http://localhost:7080/HuanAnBackend/actityAlarm/getActityAlarm";
-            var defer =$q.defer();
-            var request =$http.post(url);
+            var url = BASE_URL + "actityAlarm/getAllActityAlarm";
+            var defer = $q.defer();
+            var request = $http.post(url);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
+                defer.resolve(data);
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject(Messages.getAllCollectionsError);
             });
             return defer.promise;
         },
@@ -549,19 +539,14 @@ angular.module('starter.services', [])
         },
 
         getAllBestMemory : function(){
-            var url = "http://localhost:7080/HuanAnBackend/bestMemory/getBestMemory";
+            var url = BASE_URL + "bestMemory/getAllBestMemory";
             var defer =$q.defer();
             var request =$http.post(url);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
+                defer.resolve(data);
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject(Messages.getAllBestMemoryError);
             });
             return defer.promise;
         },
