@@ -1,3 +1,4 @@
+var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
 angular.module('starter.services', [])
 
 .factory('DomesticService', ['$http','$q',function($http, $q){
@@ -276,16 +277,11 @@ angular.module('starter.services', [])
 .factory('CommunityService', ['$http','$q',function($http, $q){
     return {
         getAllBulletins : function(){
-            var url = "http://localhost:7080/HuanAnBackend/bulletin/getBulletin";
+            var url = BASE_URL+ "bulletin/getBulletins";
             var defer =$q.defer();
             var request =$http.post(url);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
+                defer.resolve(data);
             });
             request.error(function(){
                 defer.reject("fail");
