@@ -1312,7 +1312,7 @@ angular.module('starter.controllers', ['starter.services'])
             pwd: ''
         }
         $scope.login = function() {
-            LoginService.login($scope.user).then(function(res) {
+            LoginService.login($rootScope.user).then(function(res) {
                 $state.go('tab.Home');
             }, function(errMsg) {
                 var alertPopup = $ionicPopup.alert({

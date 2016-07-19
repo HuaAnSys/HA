@@ -648,7 +648,7 @@ angular.module('starter.services', [])
     return {
         login: function (data) {
             var defer = $q.defer();
-            var loginUrl ='http://9.110.54.76:7080/HuanAnBackend/user/login/phoneNo/' + data.phoneNo + '/pwd/'+data.pwd;
+            var loginUrl = BASE_URL + 'user/login/phoneNo/' + data.phoneNo + '/pwd/'+data.pwd;
             var request = $http.post(loginUrl);
             request.success(function (data) {
                 if(data.result=="success"){
@@ -693,7 +693,8 @@ angular.module('starter.services', [])
     return {
         regist: function (data) {
             var defer = $q.defer();
-            var request = $http.post('http://9.110.54.76:7080/HuanAnBackend/user/registerUser',data);
+            var url = BASE_URL + 'user/registerUser';
+            var request = $http.post(url,data);
             request.success(function (data) {
                 if(data.result=='success'){
                     defer.resolve(data.result);
@@ -714,7 +715,8 @@ angular.module('starter.services', [])
     return {
         getRelatedRepairs: function (user) {
             var defer = $q.defer();
-            var request = $http.post('http://9.112.87.121:8080/HuanAnBackend/propertyManagement/getClaimedRepairs',user);
+            var url = BASE_URL + 'propertyManagement/getClaimedRepairs';
+            var request = $http.post(url,user);
             //var request = $http.get('js/propertyManagement.json');
             request.success(function (data) {
                 var status =data.resultCode;
@@ -749,7 +751,8 @@ angular.module('starter.services', [])
 
         repairDetails: function (user) {
             var defer = $q.defer();
-            var request = $http.post('http://9.112.87.121:8080/HuanAnBackend/propertyManagement/getComplain',user);
+            var url = BASE_URL + 'propertyManagement/getComplain';
+            var request = $http.post(url,user);
             //var request = $http.get('js/repairsHistory.json');
             request.success(function (data) {
                 //var status =data.resultCode;
