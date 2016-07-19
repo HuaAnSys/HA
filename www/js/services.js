@@ -719,12 +719,7 @@ angular.module('starter.services', [])
             var request = $http.post(url,user);
             //var request = $http.get('js/propertyManagement.json');
             request.success(function (data) {
-                var status =data.resultCode;
-                //if(status == "1"){
-                    defer.resolve(data.result);
-                //}else{
-                //    defer.reject();
-                //}
+                defer.resolve(data);
             });
             request.error(function () {
                 defer.reject("Get related repairs information failed.");
@@ -736,12 +731,7 @@ angular.module('starter.services', [])
         //    var defer = $q.defer();
         //    var request = $http.post('http://localhost:8080/HuanAnBackend/propertyManagement/createNewRepair',user);
         //    request.success(function (data) {
-        //        var status =data.resultCode;
-        //        if(status == "1"){
-        //            defer.resolve(data.result);
-        //        }else{
-        //            defer.reject();
-        //        }
+        //            defer.resolve(data);
         //    });
         //    request.error(function () {
         //        defer.reject("Get related repairs information failed.");
@@ -755,12 +745,7 @@ angular.module('starter.services', [])
             var request = $http.post(url,user);
             //var request = $http.get('js/repairsHistory.json');
             request.success(function (data) {
-                //var status =data.resultCode;
-                //if(status == "1"){
-                defer.resolve(data.result);
-                //}else{
-                //    defer.reject();
-                //}
+                defer.resolve(data);
             });
             request.error(function () {
                 defer.reject("Get related repairs information failed.");
@@ -777,12 +762,7 @@ angular.module('starter.services', [])
             //var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getRentSaleProperty',user);
             var request = $http.get('js/houseSaleAndRent.json');
             request.success(function (data) {
-                var status =data.resultCode;
-                //if(status == "1"){
-                    defer.resolve(data.result);
-                //}else{
-                //    defer.reject();
-                //}
+                defer.resolve(data);
             });
             request.error(function () {
                 defer.reject("Get related repairs information failed.");
@@ -794,12 +774,7 @@ angular.module('starter.services', [])
         //    var defer = $q.defer();
         //    var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewRentSaleProperty',user);
         //    request.success(function (data) {
-        //        var status =data.resultCode;
-        //        if(status == "1"){
-        //            defer.resolve(data.result);
-        //        }else{
-        //            defer.reject();
-        //        }
+        //            defer.resolve(data);
         //    });
         //    request.error(function () {
         //        defer.reject("Get related repairs information failed.");
@@ -812,12 +787,7 @@ angular.module('starter.services', [])
             //var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getComplain',user);
             var request = $http.get('js/houseSaleHistory.json');
             request.success(function (data) {
-                //var status =data.resultCode;
-                //if(status == "1"){
-                defer.resolve(data.result);
-                //}else{
-                //    defer.reject();
-                //}
+                defer.resolve(data);
             });
             request.error(function () {
                 defer.reject("Get related repairs information failed.");
@@ -835,12 +805,7 @@ angular.module('starter.services', [])
             //var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getCustomers',user);
             var request = $http.get('js/visitorPassport.json');
             request.success(function (data) {
-                var status =data.resultCode;
-                //if(status == "1"){
-                    defer.resolve(data.result);
-                //}else{
-                //    defer.reject();
-                //}
+                    defer.resolve(data);
             });
             request.error(function () {
                 defer.reject("Get related repairs information failed.");
@@ -852,12 +817,7 @@ angular.module('starter.services', [])
             var defer = $q.defer();
             var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewCustomer',user);
             request.success(function (data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
+                    defer.resolve(data);
             });
             request.error(function () {
                 defer.reject("Get related repairs information failed.");
@@ -875,12 +835,7 @@ angular.module('starter.services', [])
             //var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getComplain',user);
             var request = $http.get('js/complaint.json');
             request.success(function (data) {
-                //var status =data.resultCode;
-                //if(status == "1"){
-                    defer.resolve(data.result);
-                //}else{
-                //    defer.reject();
-                //}
+                    defer.resolve(data);
             });
             request.error(function () {
                 defer.reject("Get related repairs information failed.");
@@ -892,12 +847,7 @@ angular.module('starter.services', [])
         //    var defer = $q.defer();
         //    var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/createNewComplain',user);
         //    request.success(function (data) {
-        //        var status =data.resultCode;
-        //        if(status == "1"){
-        //            defer.resolve(data.result);
-        //        }else{
-        //            defer.reject();
-        //        }
+        //            defer.resolve(data);
         //    });
         //    request.error(function () {
         //        defer.reject("Get related repairs information failed.");
@@ -910,12 +860,7 @@ angular.module('starter.services', [])
             //var request = $http.post('http://localhost:7080/HuanAnBackend/propertyManagement/getComplain',user);
             var request = $http.get('js/complaintHistory.json');
             request.success(function (data) {
-                //var status =data.resultCode;
-                //if(status == "1"){
-                defer.resolve(data.result);
-                //}else{
-                //    defer.reject();
-                //}
+                defer.resolve(data);
             });
             request.error(function () {
                 defer.reject("Get related repairs information failed.");

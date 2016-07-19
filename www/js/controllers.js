@@ -1306,13 +1306,15 @@ angular.module('starter.controllers', ['starter.services'])
 /*
     Login and property mangement controllers
  */
-    .controller('loginCtrl', function($scope,$rootScope,$state,$http,$ionicPopup,LoginService) {
+    .controller('loginCtrl', function($scope,$rootScope,$state,$ionicPopup,commonService,LoginService) {
         $rootScope.user = {
             phoneNo: '',
             pwd: ''
         }
         $scope.login = function() {
+            commonService.showLoading();
             LoginService.login($rootScope.user).then(function(res) {
+                commonService.hideLoading();
                 $state.go('tab.Home');
             }, function(errMsg) {
                 var alertPopup = $ionicPopup.alert({
@@ -1366,7 +1368,7 @@ angular.module('starter.controllers', ['starter.services'])
             $ionicHistory.goBack();
         }
     })
-    .controller('thirdRegistPageCtrl', function($scope,$state,$ionicHistory,$http,$stateParams,$ionicPopup,commonService,RegistService) {
+    .controller('thirdRegistPageCtrl', function($scope,$state,$ionicHistory,$stateParams,$ionicPopup,commonService,RegistService) {
         $scope.userPhoneNum = $stateParams.phoneNum;
 
         $scope.user = {
@@ -1380,11 +1382,11 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.user.phoneNo = $scope.userPhoneNum;
         $scope.selectSex= function (sex) {
             if(sex=='male'){
-                $scope.user.sex = 'male';
+                $scope.user.sex = 'm';
                 console.log($scope.user.sex);
             }
             else{
-                $scope.user.sex = 'female';
+                $scope.user.sex = 'f';
                 console.log($scope.user.sex);
             }
         }
@@ -1667,15 +1669,18 @@ angular.module('starter.controllers', ['starter.services'])
             });
         }
 
-        $scope.submitNewRepair = function(type) {
+        $scope.submitNewRepair = function() {
 
             commonService.showLoading();
             var uploadUrl = "http://9.112.87.121:8080/HuanAnBackend/upload/file";
             var filePath = $scope.imageSrc;
+            if(filePath == undefined){
+                filePath = "";
+            }
             var options = new FileUploadOptions();
             var params = {
-                'type':type,
-                'content':$scope.comment.detail
+                'content':$scope.comment.detail,
+                'userId' : '2'
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
@@ -1788,15 +1793,18 @@ angular.module('starter.controllers', ['starter.services'])
 
             });
         }
-        $scope.submitNewSaleOrRent = function(type) {
+        $scope.submitNewSaleOrRent = function() {
 
             commonService.showLoading();
             var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
             var filePath = $scope.imageSrc;
+            if(filePath == undefined){
+                filePath = "";
+            }
             var options = new FileUploadOptions();
             var params = {
-                'type':type,
-                'content':$scope.comment.detail
+                'content':$scope.comment.detail,
+                'userId' : '2'
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
@@ -1892,8 +1900,8 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.info={
             visitorName:''
         };
-        $scope.sexOne='男';
-        $scope.sexTwo='女';
+        $scope.sexOne='m';
+        $scope.sexTwo='f';
         $scope.isActive = false;
         $scope.openDropList=function(){
             if($scope.isActive == false){
@@ -2052,15 +2060,18 @@ angular.module('starter.controllers', ['starter.services'])
             });
         }
 
-        $scope.submitNewComplaint = function(type) {
+        $scope.submitNewComplaint = function() {
 
             commonService.showLoading();
             var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
             var filePath = $scope.imageSrc;
+            if(filePath == undefined){
+                filePath = "";
+            }
             var options = new FileUploadOptions();
             var params = {
-                'type':type,
-                'content':$scope.comment.detail
+                'content':$scope.comment.detail,
+                'userId' : '2'
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
