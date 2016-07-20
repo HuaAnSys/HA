@@ -272,7 +272,7 @@ angular.module('starter.services', [])
 .factory('CommunityService', ['$http','$q',function($http, $q){
     return {
         getAllBulletins : function(){
-            var url = BASE_URL+ "bulletin/getBulletins";
+            var url = BASE_URL + "bulletin/getBulletins";
             var defer =$q.defer();
             var request =$http.post(url);
             request.success(function(data) {
@@ -285,20 +285,15 @@ angular.module('starter.services', [])
         },
 
         getAllCommentsByCommunity : function(communityId){
-            var url = "http://localhost:7080/HuanAnBackend/bulletin/getBulletinComments";
+            var url = BASE_URL + "bulletin/getBulletinComments";
             var defer =$q.defer();
             var param = {"bulletinID":communityId};
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
+                defer.resolve(data);
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject(Messages.getCommentByBulletinId);
             });
             return defer.promise;
         },
@@ -309,15 +304,10 @@ angular.module('starter.services', [])
             var param = {"bulletinID":communityId};
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
+                defer.resolve(data);
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject(Messages.getlikeNumByBulletinId);
             });
             return defer.promise;
         },

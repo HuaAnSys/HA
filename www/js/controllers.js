@@ -1022,7 +1022,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('CommunityDetail',function($scope,$state,$stateParams){
 
-    var a = $stateParams.detail;
+    $scope.detail = $stateParams.detail;
     $scope.hotComments = "";
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
@@ -1033,6 +1033,29 @@ angular.module('starter.controllers', ['starter.services'])
         "border-bottom": "1px solid #c8c7cc"
     }
 
+    function getCommnetsAndLike(){
+        $scope.comments = [];
+        $scope.likeNum = 0;
+        commonService.showLoading();
+        CommunityService.getAllCommentsByCommunity($stateParams.detail.id).then(function(data){
+            if(data.length == 0){
+
+            }else{
+                $scope.comments = data;
+            }
+            CommunityService.getLikeNumByCommunity($stateParams.detail.id).then(function(data){
+                $scope.likeNum = data.num;
+                //gen ju shifou dianzan zuo chu li
+                commonService.hideLoading();
+            },function(error){
+                $scope.showAlert(error);
+                commonService.hideLoading();
+            })
+        },function(error){
+            commonService.hideLoading();
+            $scope.showAlert(error);
+        });
+    }
 
         $scope.commentsDetail = {
             "personIcon":"img/adam.jpg",
