@@ -631,13 +631,13 @@ angular.module('starter.services', [])
 .factory('LoginService', ['$http','$q',function($http, $q) {
 
     return {
-        login: function (data) {
+        login: function (user) {
             var defer = $q.defer();
-            var loginUrl = BASE_URL + 'user/login/phoneNo/' + data.phoneNo + '/pwd/'+data.pwd;
-            var request = $http.post(loginUrl);
+            var loginUrl = BASE_URL + 'user/login/phoneNo/' + user.phoneNo + '/pwd/'+user.pwd;
+            var request = $http.post(loginUrl,user);
             request.success(function (data) {
                 if(data.result=="success"){
-                    defer.resolve(data.result);
+                    defer.resolve(data);
                 }
                 else{
                   defer.reject("Login failed, please try again later.");
@@ -682,7 +682,7 @@ angular.module('starter.services', [])
             var request = $http.post(url,data);
             request.success(function (data) {
                 if(data.result=='success'){
-                    defer.resolve(data.result);
+                    defer.resolve(data);
                 }
                 else{
                   defer.reject("Regist failed, please try again later.");
