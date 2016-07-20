@@ -783,8 +783,8 @@ angular.module('starter.controllers', ['starter.services'])
 
         }
 
-        $scope.goMessageDetail = function(id){
-            $state.go('communityDetail',{"detailId":id});
+        $scope.goMessageDetail = function(message){
+            $state.go('communityDetail',{"detail":message});
         }
 
         function getCommunityByTab(index){
@@ -1020,7 +1020,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('CommunityDetail',function($scope,$state,$stateParams){
 
-    var a = $stateParams.detailId;
+    var a = $stateParams.detail;
     $scope.hotComments = "";
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
@@ -1030,6 +1030,7 @@ angular.module('starter.controllers', ['starter.services'])
         "background-color": "#FFFFFF",
         "border-bottom": "1px solid #c8c7cc"
     }
+
 
         $scope.commentsDetail = {
             "personIcon":"img/adam.jpg",
