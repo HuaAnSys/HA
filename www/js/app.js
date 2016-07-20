@@ -147,7 +147,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
 
   .state('communityDetail', {
-      url: '/communityDetail:tabIndex',
+      url: '/communityDetail:detailId',
       templateUrl: 'templates/communityDetail.html',
       controller: 'CommunityDetail'
   })

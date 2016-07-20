@@ -783,9 +783,8 @@ angular.module('starter.controllers', ['starter.services'])
 
         }
 
-        $scope.goMessageDetail = function(){
-            var index = $ionicTabsDelegate.selectedIndex();
-            $state.go('communityDetail',{"tabIndex":index});
+        $scope.goMessageDetail = function(id){
+            $state.go('communityDetail',{"detailId":id});
         }
 
         function getCommunityByTab(index){
@@ -1021,6 +1020,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('CommunityDetail',function($scope,$state,$stateParams){
 
+    var a = $stateParams.detailId;
     $scope.hotComments = "";
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
