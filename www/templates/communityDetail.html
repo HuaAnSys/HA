@@ -7,11 +7,11 @@
     </ion-header-bar>
     <ion-content>
         <div ng-style="{{divMain}}">
-            <img src="{{commentsDetail.personIcon}}" class="message_icon"/>
-            <span class="message_people">{{commentsDetail.name}}</span>
-            <div class="message_content">{{commentsDetail.detail}}</div>
-            <img src="{{commentsDetail.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
-            <span class="messgae_time">2016-05-05 00:00</span>
+            <img src="{{detail.personIcon}}" class="message_icon"/>
+            <span class="message_people">{{detail.uploaderName}}</span>
+            <div class="message_content">{{detail.content}}</div>
+            <img src="{{detail.picName}}" class="message_picture" width="{{message_picture_width}}"/>
+            <span class="messgae_time">{{detail.uploadTime}}</span>
         </div>
 
         <div class="goodPart">
