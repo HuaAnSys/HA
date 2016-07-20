@@ -788,6 +788,7 @@ angular.module('starter.controllers', ['starter.services'])
         }
 
         function getCommunityByTab(index){
+            commonService.showLoading();
             $scope.bulletions = [];
             console.log("获取第几个tab页数据："+index);
             if(index==1){
@@ -797,6 +798,7 @@ angular.module('starter.controllers', ['starter.services'])
                     }else{
                         angular.forEach(data,function(value ,index){
                             value.picName = "" + value.picName;
+                            value.uploaderName = "数据库管理员";
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
