@@ -8,9 +8,7 @@ angular.module('starter.services', [])
 
   return {
     getDomesticByStatus: function () {
-      //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
-
-        var url = "http://9.110.54.84:7080/HuanAnBackend/housekeepinfo/getHousekeepingInfo";
+        var url = BASE_URL + "housekeepinfo/getHousekeepingInfo";
         var defer =$q.defer();
         var request =$http.get(url);
 
@@ -31,6 +29,59 @@ angular.module('starter.services', [])
     }
     };
 }])
+
+.factory('publishThemeService', ['$http','$q',function($http, $q){
+    return {
+        getPublishTheme: function () {
+            //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
+
+            var url = BASE_URL + "myPersonalInfo/getMyPostedTopic";
+            var defer =$q.defer();
+            var request =$http.get(url);
+
+            //Successful HTTP post request or not
+            request.success(function (result) {
+                console.log(result);
+                //var status = result.success;
+                //if (status == "1") {
+                defer.resolve(result);
+                //} else {
+                //  defer.reject("Get draft list failed, please try again later.");
+                //}
+            });
+            request.error(function () {
+                defer.reject("Get draft list failed, please try again later.");
+            });
+            return defer.promise;
+        }
+    };
+}])
+
+.factory('joinThemeService', ['$http','$q',function($http, $q){   return {
+        getJoinTheme: function () {
+            var url = BASE_URL + "myPersonalInfo/getMyParticipativeTopic";
+            var defer =$q.defer();
+            var request =$http.get(url);
+
+            //Successful HTTP post request or not
+            request.success(function (result) {
+                console.log(result);
+                //var status = result.success;
+                //if (status == "1") {
+                defer.resolve(result);
+                //} else {
+                //  defer.reject("Get draft list failed, please try again later.");
+                //}
+            });
+            request.error(function () {
+                defer.reject("Get draft list failed, please try again later.");
+            });
+            return defer.promise;
+        }
+    };
+}])
+
+
 
 .factory('shoppingCarService', ['$http','$q',function($http, $q){
   // Might use a resource here that returns a JSON array
@@ -272,7 +323,7 @@ angular.module('starter.services', [])
 .factory('CommunityService', ['$http','$q',function($http, $q){
     return {
         getAllBulletins : function(){
-            var url = BASE_URL+ "bulletin/getBulletins";
+            var url = BASE_URL + "bulletin/getBulletins";
             var defer =$q.defer();
             var request =$http.post(url);
             request.success(function(data) {
@@ -285,77 +336,67 @@ angular.module('starter.services', [])
         },
 
         getAllCommentsByCommunity : function(communityId){
-            var url = "http://localhost:7080/HuanAnBackend/bulletin/getBulletinComments";
+            var url = BASE_URL + "bulletin/getBulletinComments";
             var defer =$q.defer();
             var param = {"bulletinID":communityId};
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
+                defer.resolve(data);
             });
-            request.error(function(){
-                defer.reject("fail");
+            request.error(function(error){
+                defer.reject(Messages.getCommentByBulletinId);
             });
             return defer.promise;
         },
 
         getLikeNumByCommunity : function(communityId){
-            var url = "http://localhost:7080/HuanAnBackend/bulletin/getBulletinLike";
+            var url = BASE_URL + "bulletin/getBulletinLike";
             var defer =$q.defer();
             var param = {"bulletinID":communityId};
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject();
-                }
+                defer.resolve(data);
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject(Messages.getlikeNumByBulletinId);
             });
             return defer.promise;
         },
 
-        setLikeByCommunity : function(communityId){
-            var url = "http://localhost:7080/HuanAnBackend/bulletin/setBulletinLike";
+        setLikeByCommunity : function(communityId,userId){
+            var url = BASE_URL + "bulletin/setBulletinLike";
             var defer =$q.defer();
-            var param = {"bulletinID":communityId};
+            var param = {"bulletinID":communityId,"userID":userId};
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
+                if(data.result=="success"){
+                    defer.resolve(data);
                 }else{
-                    defer.reject();
+                    defer.reject("fail");
                 }
+
             });
-            request.error(function(){
-                defer.reject("fail");
+            request.error(function(error){
+                defer.reject(Messages.likeCommunity);
             });
             return defer.promise;
         },
 
-        addCommentsByCommunity : function(communityId){
-            var url = "http://localhost:7080/HuanAnBackend/bulletin/setBulletinComment";
+        addCommentsByCommunity : function(userId,communityId,comments){
+            var url = BASE_URL + "bulletin/setBulletinComment";
             var defer =$q.defer();
-            var param = {"bulletinID":communityId};
+            var param = {"bulletinID":communityId,"userID":userId,"commentDetail":comments};
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
+                var status =data.result;
+                if(status == "success"){
+                    defer.resolve(data);
                 }else{
-                    defer.reject();
+                    defer.reject(Messages.addCommtsByBulletin);
                 }
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject(Messages.addCommtsByBulletin);
             });
             return defer.promise;
         },

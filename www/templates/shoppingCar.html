@@ -5,6 +5,11 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content>
+        <div class="notfound">
+            <div class="not_content">
+                <p><span class="title">购物车空空如也,</span><br /><span class="title">去挑几件好货吧!</span></p>
+            </div>
+        </div>
         <ion-list>
             <ion-item  class="item-checkbox" ng-repeat="shoppingCar in shoppingCarList">
                 <label class="checkbox">
@@ -36,7 +41,7 @@
             </ion-item>
         </ion-list>
     </ion-content>
-    <ion-footer-bar>
+    <ion-footer-bar class="footer_hide">
         <div class="item-checkbox">
             <label class="checkbox">
                 <input type="checkbox" ng-click="checkAllIntents()" ng-model="checkAll">
