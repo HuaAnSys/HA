@@ -49,7 +49,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   })
 
-  .state('tab.PropertyManagement', {
+    .state('tab.PropertyManagement', {
     url: '/PropertyManagement',
     views: {
       'tab-PropertyManagement': {
@@ -206,7 +206,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('selectLocationToPayProperty', {
     url: '/selectLocationToPayProperty',
     templateUrl: 'templates/selectLocationToPayProperty.html',
-    controller: 'selectLocationToPayPropertyCtrl'
+    controller: 'selectLocationToPayPropertyCtrl',
+    params: {type: null},
+    cache:false
   })
 
   .state('showBalanceInPayProperty', {
@@ -226,6 +228,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/relatedRepairs',
     templateUrl: 'templates/relatedRepairs.html',
     controller: 'relatedRepairsCtrl',
+    params: {houseInfo: null},
     cache:false
   })
   .state('newAskForRepair', {
@@ -244,6 +247,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/houseSaleAndRent',
     templateUrl: 'templates/houseSaleAndRent.html',
     controller: 'houseSaleAndRentCtrl',
+    params: {houseInfo: null},
     cache:false
   })
   .state('newAskForSaleOrRent', {
@@ -262,6 +266,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/visitorPassport',
     templateUrl: 'templates/visitorPassport.html',
     controller: 'visitorPassportCtrl',
+    params: {houseInfo: null},
     cache:false
   })
   .state('newVisitorInvite', {

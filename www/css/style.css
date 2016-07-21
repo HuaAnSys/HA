@@ -1100,6 +1100,11 @@ button.registBtn{
     padding-bottom: 15px;
     padding-top: 40px;
 }
+.selectedSiteInfo{
+    display: none;
+    margin-top: 5%;
+    margin-left: 15px;
+}
 
 /*show balance in the pay page*/
 .showBalanceInPayPropertyView .blackAreaShowBalance{

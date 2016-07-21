@@ -1321,7 +1321,7 @@ angular.module('starter.controllers', ['starter.services'])
             pwd: ''
         }
         $scope.login = function() {
-            console.log($scope.user);
+            //console.log($scope.user);
             commonService.showLoading();
             LoginService.login($scope.user).then(function(res) {
                 console.log(res);
@@ -1487,15 +1487,26 @@ angular.module('starter.controllers', ['starter.services'])
         var picHeight=Math.ceil((screenWidth * 164)/375);
         $scope.picHeight=picHeight+'px';
 
-        $scope.gotoPayPropertyFirstPage=function(){
-            $state.go('selectLocationToPayProperty');
+        $scope.gotoSelectHouseInfo=function(type){
+            if(type == 'fee'){
+                $state.go('selectLocationToPayProperty',{type:'fee'});
+            }
+            if(type == 'repair'){
+                $state.go('selectLocationToPayProperty',{type:'repair'});
+            }
+            if(type == 'rent'){
+                $state.go('selectLocationToPayProperty',{type:'rent'});
+            }
+            if(type == 'visit'){
+                $state.go('selectLocationToPayProperty',{type:'visit'});
+            }
         }
-        $scope.gotoRelatedRepairs=function(){
-            $state.go('relatedRepairs');
-        }
-        $scope.gotoHouseSaleAndRent=function(){
-            $state.go('houseSaleAndRent');
-        }
+        //$scope.gotoRelatedRepairs=function(){
+        //    $state.go('relatedRepairs');
+        //}
+        //$scope.gotoHouseSaleAndRent=function(){
+        //    $state.go('houseSaleAndRent');
+        //}
         $scope.showConfirm = function() {
             function onSuccess(result){
                 console.log("Success:"+result);
@@ -1543,52 +1554,54 @@ angular.module('starter.controllers', ['starter.services'])
             //    }
             //});
         }
-        $scope.gotoVisitorPassport=function(){
-            $state.go('visitorPassport');
-        }
+        //$scope.gotoVisitorPassport=function(){
+        //    $state.go('visitorPassport');
+        //}
         $scope.gotoComplaintPage=function(){
             $state.go('complaintPage');
         }
     })
-    .controller('selectLocationToPayPropertyCtrl', function($scope,$state,$ionicHistory) {
-        //$scope.groups = [];
-        for(i=0;i<1;i++){
-            var firstList = [];
-
+    .controller('selectLocationToPayPropertyCtrl', function($scope,$rootScope,$stateParams,$state,commonService,getHouseInfoService) {
+        $scope.site = {
+            group:'',
+            list:''
         };
-        $scope.groups = [{name:'A',
-            childs: [{period: '一',
-                building: 1,
-                unit:1,
-                floor:1,
-                number:101},
-                {period: '二',
-                    building: 2,
-                    unit:2,
-                    floor:2,
-                    number:202} ]},
-            {name:'B',
-                childs:[{period: '一',
-                    building: 1,
-                    unit:1,
-                    floor:1,
-                    number:101},
-                    {period: '二',
-                        building: 2,
-                        unit:2,
-                        floor:2,
-                        number:202}]}
-        ];
-        //$scope.groups[i]push(i + '-' + j);
-        //for (var j=0; j<3; j++) {
-        //    $scope.groups[i].items.push(i + '-' + j);
-        //}
+        $scope.text = {
+            title:'',
+            subject:'',
+            btnText:''
+        }
+        $scope.type = $stateParams.type;
+        if($scope.type == 'fee'){
+            $scope.text.title = '物业费缴纳';
+            $scope.text.subject = '请选择您要缴费的房屋';
+            $scope.text.btnText = '去缴费';
+        }
+        if($scope.type == 'repair'){
+            $scope.text.title = '相关报修';
+            $scope.text.subject = '请选择您要报修的房屋';
+            $scope.text.btnText = '去报修';
+        }
+        if($scope.type == 'rent'){
+            $scope.text.title = '房屋租售';
+            $scope.text.subject = '请选择您要租售的房屋';
+            $scope.text.btnText = '去租售';
+        }
+        if($scope.type == 'visit'){
+            $scope.text.title = '访客邀请';
+            $scope.text.subject = '请选择您要访问的房屋';
+            $scope.text.btnText = '去邀请';
+        }
+        commonService.showLoading();
+        getHouseInfoService.getHouseInfo($rootScope.userId).then(function(data) {
+            $scope.groups = data.result;
+            commonService.hideLoading();
+        }, function(errMsg) {
+            commonService.hideLoading();
+            $scope.showAlert('获取信息失败，请稍后重试');
+            console.log(errMsg);
+        });
 
-
-        /*
-         * if given group is the selected group, deselect it
-         * else, select the given group
-         */
         $scope.toggleGroup = function(group) {
             if ($scope.isGroupShown(group)) {
                 $scope.shownGroup = null;
@@ -1599,14 +1612,28 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.isGroupShown = function(group) {
             return $scope.shownGroup === group;
         }
-        $scope.selectItem = function(list){
+        $scope.selectItem = function(group,list){
+            $('.selectedSiteInfo').css('display','block');
             $scope.shownGroup = null;
+            $scope.site.group = group;
+            $scope.site.list = list;
         }
-        $scope.goShowBalancePage = function(){
-            $state.go('showBalanceInPayProperty');
+        $scope.goNextPage = function(){
+            if($scope.type == 'fee'){
+                $state.go('showBalanceInPayProperty',{houseInfo:$scope.site});
+            }
+            if($scope.type == 'repair'){
+                $state.go('relatedRepairs',{houseInfo:$scope.site});
+            }
+            if($scope.type == 'rent'){
+                $state.go('houseSaleAndRent',{houseInfo:$scope.site});
+            }
+            if($scope.type == 'visit'){
+                $state.go('visitorPassport',{houseInfo:$scope.site});
+            }
         }
         $scope.back=function(){
-            $ionicHistory.goBack();
+            $state.go('tab.PropertyManagement');
         }
     })
 
@@ -1630,10 +1657,10 @@ angular.module('starter.controllers', ['starter.services'])
 
 //Related repairs controllers
     .controller('relatedRepairsCtrl', function($scope,$rootScope,$state,commonService,RelatedRepairsService) {
-        console.log($rootScope.user.phoneNo);
+        console.log($rootScope.userId);
         commonService.showLoading();
-        RelatedRepairsService.getRelatedRepairs($rootScope.user.phoneNo).then(function(data) {
-            $scope.items = data;
+        RelatedRepairsService.getRelatedRepairs($rootScope.userId).then(function(data) {
+            $scope.items = data.result;
             commonService.hideLoading();
         }, function(errMsg) {
             commonService.hideLoading();
@@ -1686,7 +1713,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.submitNewRepair = function() {
 
             commonService.showLoading();
-            var uploadUrl = "http://9.112.87.121:8080/HuanAnBackend/upload/file";
+            var uploadUrl = "http://9.112.87.121:8080/HuanAnBackend/propertyManagement/createNewRepair";
             var filePath = $scope.imageSrc;
             if(filePath == undefined){
                 filePath = "";
@@ -1694,7 +1721,7 @@ angular.module('starter.controllers', ['starter.services'])
             var options = new FileUploadOptions();
             var params = {
                 'content':$scope.comment.detail,
-                'userId' : '2'
+                'userId' : $rootScope.userId
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
@@ -1732,10 +1759,10 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('relatedRepairs');
         }
     })
-    .controller('repairDetailsCtrl', function($scope,$state,$stateParams,commonService,RelatedRepairsService) {
+    .controller('repairDetailsCtrl', function($scope,$rootScope,$state,$stateParams,commonService,RelatedRepairsService) {
         $scope.items = $stateParams.datas;
         commonService.showLoading();
-        RelatedRepairsService.repairDetails($scope.user).then(function(data) {
+        RelatedRepairsService.repairDetails($rootScope.userId).then(function(data) {
             $scope.statusList = data;
             commonService.hideLoading();
         }, function(errMsg) {
@@ -1755,10 +1782,10 @@ angular.module('starter.controllers', ['starter.services'])
     })
 
 //House sale and rent controller
-    .controller('houseSaleAndRentCtrl', function($scope,$state,commonService,HouseSaleAndRentService) {
+    .controller('houseSaleAndRentCtrl', function($scope,$rootScope,$state,commonService,HouseSaleAndRentService) {
         commonService.showLoading();
-        HouseSaleAndRentService.getHouseSaleAndRent($scope.user).then(function(data) {
-            $scope.items = data;
+        HouseSaleAndRentService.getHouseSaleAndRent($rootScope.userId).then(function(data) {
+            $scope.items = data.result;
             commonService.hideLoading();
         }, function(errMsg) {
             commonService.hideLoading();
@@ -1776,7 +1803,7 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newAskForSaleOrRentCtrl', function($scope,$state,$cordovaCamera,commonService,$cordovaFileTransfer) {
+    .controller('newAskForSaleOrRentCtrl', function($scope,$rootScope,$state,$cordovaCamera,commonService,$cordovaFileTransfer) {
         var screenWidth = document.body.scrollWidth - 30;
         var screenHeight = document.body.scrollHeight - 30;
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
@@ -1810,7 +1837,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.submitNewSaleOrRent = function() {
 
             commonService.showLoading();
-            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            var uploadUrl = "http://9.112.87.121:8080/HuanAnBackend/propertyManagement/createNewRentSaleProperty";
             var filePath = $scope.imageSrc;
             if(filePath == undefined){
                 filePath = "";
@@ -1818,7 +1845,7 @@ angular.module('starter.controllers', ['starter.services'])
             var options = new FileUploadOptions();
             var params = {
                 'content':$scope.comment.detail,
-                'userId' : '2'
+                'userId' : $rootScope.userId
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
@@ -1856,12 +1883,12 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('houseSaleAndRent');
         }
     })
-    .controller('houseSaleAndRentDetailsCtrl', function($scope,$state,$stateParams,commonService,HouseSaleAndRentService) {
+    .controller('houseSaleAndRentDetailsCtrl', function($scope,$rootScope,$state,$stateParams,commonService,HouseSaleAndRentService) {
         $scope.items = $stateParams.datas;
         var screenWidth = document.body.scrollWidth;
         $scope.progressDetailContentWidth = screenWidth-15-40-20+'px';
         commonService.showLoading();
-        HouseSaleAndRentService.saleAndRentDetails($scope.user).then(function(data) {
+        HouseSaleAndRentService.saleAndRentDetails($rootScope.userId).then(function(data) {
             $scope.statusList = data;
             commonService.hideLoading();
         }, function(errMsg) {
@@ -1879,9 +1906,9 @@ angular.module('starter.controllers', ['starter.services'])
     })
 
 //Visitor passport page
-    .controller('visitorPassportCtrl', function($scope,$state,commonService,VisitorPassportService) {
+    .controller('visitorPassportCtrl', function($scope,$rootScope,$state,commonService,VisitorPassportService) {
         commonService.showLoading();
-        VisitorPassportService.getVisitorPassport($scope.user).then(function(data) {
+        VisitorPassportService.getVisitorPassport($rootScope.userId).then(function(data) {
             $scope.items = data;
             $scope.getMillisecond = function(data){
                 if(data == ''){
@@ -1910,7 +1937,7 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newVisitorInviteCtrl', function($scope,$state,commonService,VisitorPassportService) {
+    .controller('newVisitorInviteCtrl', function($scope,$rootScope,$state,commonService,VisitorPassportService) {
         $scope.info={
             visitorName:''
         };
@@ -1953,7 +1980,7 @@ angular.module('starter.controllers', ['starter.services'])
 
                 console.log($scope.endTimestamp);
                 //commonService.showLoading();
-                //VisitorPassportService.newVisitorInvites($scope.user,$scope.currentTimestamp,$scope.endTimestamp).then(function(data) {
+                //VisitorPassportService.newVisitorInvites($rootScope.userId,$scope.currentTimestamp,$scope.endTimestamp).then(function(data) {
                 //
                 //    commonService.hideLoading();
                     $state.go('generateQRCode',{QRvisitorName: $scope.info.visitorName,visitorSex: $scope.sexOne,lastDate: $scope.endTimestamp});
@@ -2021,10 +2048,10 @@ angular.module('starter.controllers', ['starter.services'])
         }
     })
 //Complaint and suggestion page
-    .controller('complaintPageCtrl', function($scope,$state,$stateParams ,commonService,ComplaintService) {
+    .controller('complaintPageCtrl', function($scope,$rootScope,$state,$stateParams ,commonService,ComplaintService) {
         commonService.showLoading();
-        ComplaintService.getComplaint($scope.user).then(function(data) {
-            $scope.items = data;
+        ComplaintService.getComplaint($rootScope.userId).then(function(data) {
+            $scope.items = data.result;
             commonService.hideLoading();
         }, function(errMsg) {
             commonService.hideLoading();
@@ -2077,7 +2104,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.submitNewComplaint = function() {
 
             commonService.showLoading();
-            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            var uploadUrl = "http://9.112.87.121:8080/HuanAnBackend/propertyManagement/createNewComplain";
             var filePath = $scope.imageSrc;
             if(filePath == undefined){
                 filePath = "";
@@ -2085,7 +2112,7 @@ angular.module('starter.controllers', ['starter.services'])
             var options = new FileUploadOptions();
             var params = {
                 'content':$scope.comment.detail,
-                'userId' : '2'
+                'userId' : $rootScope.userId
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
@@ -2122,10 +2149,10 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('complaintPage');
         }
     })
-    .controller('complaintDetailsCtrl', function($scope,$state,$stateParams,commonService,ComplaintService) {
+    .controller('complaintDetailsCtrl', function($scope,$rootScope,$state,$stateParams,commonService,ComplaintService) {
         $scope.items = $stateParams.datas;
         commonService.showLoading();
-        ComplaintService.complaintDetails().then(function(data) {
+        ComplaintService.complaintDetails($rootScope.userId).then(function(data) {
             $scope.statusList = data;
             console.log($scope.statusList.length);
             commonService.hideLoading();

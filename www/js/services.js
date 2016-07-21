@@ -695,6 +695,27 @@ angular.module('starter.services', [])
         }
     }
 }])
+
+.factory('getHouseInfoService', ['$http','$q',function($http, $q) {
+
+    return {
+        getHouseInfo: function(user){
+            var defer = $q.defer();
+            var url = BASE_URL + 'myPersonalInfo/getMyProperty';
+            //var request = $http.post(url,user);
+            var request = $http.get('js/houseInfo.json');
+            request.success(function (data) {
+                defer.resolve(data);
+            });
+            request.error(function () {
+                defer.reject("Get related repairs information failed.");
+            });
+            return defer.promise;
+        }
+
+    }
+}])
+
 .factory('RelatedRepairsService', ['$http','$q',function($http, $q) {
 
     return {
@@ -733,7 +754,7 @@ angular.module('starter.services', [])
                 defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get related repairs details failed.");
             });
             return defer.promise;
         }
@@ -750,7 +771,7 @@ angular.module('starter.services', [])
                 defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get sale and rent information failed.");
             });
             return defer.promise;
         },
@@ -775,7 +796,7 @@ angular.module('starter.services', [])
                 defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get sale and rent details failed.");
             });
             return defer.promise;
         }
@@ -793,7 +814,7 @@ angular.module('starter.services', [])
                     defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get visitor information failed.");
             });
             return defer.promise;
         },
@@ -805,7 +826,7 @@ angular.module('starter.services', [])
                     defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Creat new visitor information failed.");
             });
             return defer.promise;
         }
@@ -823,7 +844,7 @@ angular.module('starter.services', [])
                     defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get complaint information failed.");
             });
             return defer.promise;
         },
@@ -848,7 +869,7 @@ angular.module('starter.services', [])
                 defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get complaint details failed.");
             });
             return defer.promise;
         }
