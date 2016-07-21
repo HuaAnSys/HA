@@ -93,17 +93,26 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('shoppingCarCtrl', function($scope, $state, $rootScope, commonService, shoppingCarService, $stateParams) {
+.controller('shoppingCarCtrl', function($scope, $state, $rootScope, $ionicPopup, commonService, shoppingCarService, $stateParams) {
     $scope.itemTotalNum = 0;
     $scope.totalPrice = 0;
     commonService.showLoading();
         var len = 0;
     shoppingCarService.getShoppingCar().then(function(data){
-        $scope.shoppingCarList = data;
-         len = $scope.shoppingCarList.length;
-        commonService.hideLoading();
+        if(data.length>0){
+            $scope.shoppingCarList = data;
+            len = $scope.shoppingCarList.length;
+            commonService.hideLoading();
+        }else{
+            $('#shoppingCar .footer_hide').hide();
+            $('#shoppingCar .notfound').show();
+            commonService.hideLoading();
+        }
+
     }, function(error){
         commonService.hideLoading();
+        $('#shoppingCar .footer_hide').hide();
+        $('#shoppingCar .notfound').show();
         //$scope.showAlert(error);
     });
 
@@ -179,6 +188,94 @@ angular.module('starter.controllers', ['starter.services'])
         }
     };
 
+    //$scope.deleteItem = function(index){
+    //    shoppingCartService.deleteIntent(index).then(function(data){
+    //        $ionicLoading.hide();
+    //        var shoppingCarList = $scope.shoppingCarList.length;
+    //        for(var i=0;i<shoppingCarList;i++){
+    //            if($scope.shoppingCarList[i].cardCode == intentCode){
+    //                $scope.intentsList.splice(i,1);
+    //                break;
+    //            }
+    //        }
+    //    }, function(error){
+    //        $ionicLoading.hide();
+    //        $scope.showAlert(error);
+    //    });
+    //};
+    $scope.deleteItem = function(index){
+        var confirmPopup = $ionicPopup.confirm({
+            title: '确认要删除这个宝贝吗？',
+            buttons: [
+                { text: '取消' },
+                {
+                    text: '<b>确认</b>',
+                    type: 'button-positive',
+                    onTap: function() { return true; }
+                }
+            ]
+        });
+
+        confirmPopup.then(function(res) {
+            if(res) {
+                var shopingCartList = $scope.shoppingCarList;
+                var shoppingCarListLength = shopingCartList.length;
+                var checkStatue = shopingCartList[index].checked;
+                var checkLen = [];
+                //change checkAll
+                if((checkStatue==false || checkStatue==undefined)&&($scope.checkAll==false||$scope.checkAll==undefined)){
+                    var selectAllFlag = false;
+                    for(var i=0;i<shoppingCarListLength;i++){
+                        if(shopingCartList[i].checked == true){
+                            checkLen.push(shopingCartList[i]);
+                        }
+                    }
+                    if(checkLen.length == (shoppingCarListLength - 1)){
+                        selectAllFlag = true;
+                    }
+                    if(selectAllFlag==true){
+                        $scope.checkAll= true;
+                    }else{
+                        $scope.checkAll= false;
+                    }
+                }
+
+                //change price
+                if(checkStatue==true){
+                    console.log($scope.totalPrice);
+                    var total = shopingCartList[index].price*shopingCartList[index].amount;
+                    $scope.totalPrice = $scope.totalPrice - total;
+                }
+
+                //change totalNum
+                var j=0;
+                if(checkStatue==true&&($scope.checkAll==false||$scope.checkAll==undefined)){
+                    for(var i=0;i<shoppingCarListLength;i++){
+                        if(shopingCartList[i].checked == true){
+                            j++;
+                        }
+                    }
+                    $scope.itemTotalNum = j - 1;
+                }else if($scope.checkAll==true){
+                    $scope.itemTotalNum = shoppingCarListLength - 1;
+                }
+
+                $scope.shoppingCarList.splice(index,1);
+
+                if(!$scope.shoppingCarList || $scope.shoppingCarList.length == 0){
+                    $('#shoppingCar .footer_hide').hide();
+                    $('#shoppingCar .notfound').show();
+                }else{
+                    $('#shoppingCar .footer_hide').show();
+                    $('#shoppingCar .notfound').hide();
+                }
+
+            } else {
+                console.log('You are not sure');
+            }
+        });
+
+    };
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');
@@ -204,15 +301,24 @@ angular.module('starter.controllers', ['starter.services'])
 
         commonService.showLoading();
         shoppingCarService.getShoppingCar().then(function(data){
-            $scope.shoppingCarList = data;
-            var shoppingCarListLength = $scope.shoppingCarList.length;
-            $scope.totalPrice = 0;
-            for(var i=0;i<shoppingCarListLength;i++){
-                $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+            if(data.length>0){
+                $scope.shoppingCarList = data;
+                var shoppingCarListLength = $scope.shoppingCarList.length;
+                $scope.totalPrice = 0;
+                for(var i=0;i<shoppingCarListLength;i++){
+                    $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+                }
+                commonService.hideLoading();
+            }else{
+                $('#paymentOrder .payContent').hide();
+                $('#paymentOrder .notfound').show();
+                commonService.hideLoading();
             }
-            commonService.hideLoading();
+
         }, function(error){
             commonService.hideLoading();
+            $('#paymentOrder .payContent').hide();
+            $('#paymentOrder .notfound').show();
             //$scope.showAlert(error);
         });
 
@@ -245,18 +351,27 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('myOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
     commonService.showLoading();
-    shoppingCarService.getShoppingCar().then(function(data){
-        $scope.shoppingCarList = data;
-        var shoppingCarListLength = $scope.shoppingCarList.length;
-        $scope.totalPrice = 0;
-        for(var i=0;i<shoppingCarListLength;i++){
-            $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
-        }
-        commonService.hideLoading();
-    }, function(error){
-        commonService.hideLoading();
-        //$scope.showAlert(error);
-    });
+        shoppingCarService.getShoppingCar().then(function(data){
+            if(data.length>0){
+                $scope.shoppingCarList = data;
+                var shoppingCarListLength = $scope.shoppingCarList.length;
+                $scope.totalPrice = 0;
+                for(var i=0;i<shoppingCarListLength;i++){
+                    $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+                }
+                commonService.hideLoading();
+            }else{
+                $('#myOrder .payContent').hide();
+                $('#myOrder .notfound').show();
+                commonService.hideLoading();
+            }
+
+        }, function(error){
+            commonService.hideLoading();
+            $('#myOrder .payContent').hide();
+            $('#myOrder .notfound').show();
+            //$scope.showAlert(error);
+        });
 
     $scope.deleteOrder = function(){
         var confirmPopup = $ionicPopup.confirm({
@@ -342,7 +457,7 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 
-    .controller('commentCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+.controller('commentCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
     $scope.commentCheck = true;
     $scope.max = 5;
     $scope.ratingVal = 5;
@@ -455,7 +570,7 @@ angular.module('starter.controllers', ['starter.services'])
     };
 })
 
-.controller('publishThemeCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+.controller('publishThemeCtrl', function($scope, $state,  $rootScope, commonService, publishThemeService) {
 
     $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
@@ -489,6 +604,14 @@ angular.module('starter.controllers', ['starter.services'])
         },
     ];
 
+    //commonService.showLoading();
+    //publishThemeService.getPublishTheme().then(function(data){
+    //    $scope.communityNews = data;
+    //    commonService.hideLoading();
+    //}, function(error){
+    //    commonService.hideLoading();
+    //    //$scope.showAlert(error);
+    //});
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');
@@ -496,7 +619,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('joinThemeCtrl', function($scope, $state, $rootScope, $ionicLoading, ShopTypeService, $stateParams) {
+.controller('joinThemeCtrl', function($scope, $state, commonService, joinThemeService) {
 
     $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
@@ -529,6 +652,15 @@ angular.module('starter.controllers', ['starter.services'])
             "descriptionImg":"img/adam.jpg"
         },
     ];
+
+    //commonService.showLoading();
+    //joinThemeService.getJoinTheme().then(function(data){
+    //    $scope.communityNews = data;
+    //    commonService.hideLoading();
+    //}, function(error){
+    //    commonService.hideLoading();
+    //    //$scope.showAlert(error);
+    //});
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');

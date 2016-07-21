@@ -9,7 +9,7 @@ angular.module('starter.services', [])
     getDomesticByStatus: function () {
       //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
 
-        var url = "http://9.110.54.84:7080/HuanAnBackend/housekeepinfo/getHousekeepingInfo";
+        var url = "http://9.112.87.121:8080/HuanAnBackend/housekeepinfo/getHousekeepingInfo";
         var defer =$q.defer();
         var request =$http.get(url);
 
@@ -30,6 +30,70 @@ angular.module('starter.services', [])
     }
     };
 }])
+
+.factory('publishThemeService', ['$http','$q',function($http, $q){
+    // Might use a resource here that returns a JSON array
+
+    // Some fake testing data
+
+    return {
+        getPublishTheme: function () {
+            //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
+
+            var url = "http://9.112.87.121:8080/HuanAnBackend/myPersonalInfo/getMyPostedTopic";
+            var defer =$q.defer();
+            var request =$http.get(url);
+
+            //Successful HTTP post request or not
+            request.success(function (result) {
+                console.log(result);
+                //var status = result.success;
+                //if (status == "1") {
+                defer.resolve(result);
+                //} else {
+                //  defer.reject("Get draft list failed, please try again later.");
+                //}
+            });
+            request.error(function () {
+                defer.reject("Get draft list failed, please try again later.");
+            });
+            return defer.promise;
+        }
+    };
+}])
+
+.factory('joinThemeService', ['$http','$q',function($http, $q){
+    // Might use a resource here that returns a JSON array
+
+    // Some fake testing data
+
+    return {
+        getJoinTheme: function () {
+            //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
+
+            var url = "http://9.112.87.121:8080/HuanAnBackend/myPersonalInfo/getMyParticipativeTopic";
+            var defer =$q.defer();
+            var request =$http.get(url);
+
+            //Successful HTTP post request or not
+            request.success(function (result) {
+                console.log(result);
+                //var status = result.success;
+                //if (status == "1") {
+                defer.resolve(result);
+                //} else {
+                //  defer.reject("Get draft list failed, please try again later.");
+                //}
+            });
+            request.error(function () {
+                defer.reject("Get draft list failed, please try again later.");
+            });
+            return defer.promise;
+        }
+    };
+}])
+
+
 
 .factory('shoppingCarService', ['$http','$q',function($http, $q){
   // Might use a resource here that returns a JSON array
