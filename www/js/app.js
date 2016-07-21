@@ -150,7 +150,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/communityDetail:message',
       templateUrl: 'templates/communityDetail.html',
       controller: 'CommunityDetail',
-      params: {detail: null}
+      params: {detail: null,tabIndex:null}
   })
 
   .state('addCommunity', {
