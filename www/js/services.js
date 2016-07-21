@@ -8,9 +8,7 @@ angular.module('starter.services', [])
 
   return {
     getDomesticByStatus: function () {
-      //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
-
-        var url = "http://9.112.87.121:8080/HuanAnBackend/housekeepinfo/getHousekeepingInfo";
+        var url = BASE_URL + "housekeepinfo/getHousekeepingInfo";
         var defer =$q.defer();
         var request =$http.get(url);
 
@@ -33,15 +31,11 @@ angular.module('starter.services', [])
 }])
 
 .factory('publishThemeService', ['$http','$q',function($http, $q){
-    // Might use a resource here that returns a JSON array
-
-    // Some fake testing data
-
     return {
         getPublishTheme: function () {
             //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
 
-            var url = "http://9.112.87.121:8080/HuanAnBackend/myPersonalInfo/getMyPostedTopic";
+            var url = BASE_URL + "myPersonalInfo/getMyPostedTopic";
             var defer =$q.defer();
             var request =$http.get(url);
 
@@ -63,16 +57,9 @@ angular.module('starter.services', [])
     };
 }])
 
-.factory('joinThemeService', ['$http','$q',function($http, $q){
-    // Might use a resource here that returns a JSON array
-
-    // Some fake testing data
-
-    return {
+.factory('joinThemeService', ['$http','$q',function($http, $q){   return {
         getJoinTheme: function () {
-            //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
-
-            var url = "http://9.112.87.121:8080/HuanAnBackend/myPersonalInfo/getMyParticipativeTopic";
+            var url = BASE_URL + "myPersonalInfo/getMyParticipativeTopic";
             var defer =$q.defer();
             var request =$http.get(url);
 
