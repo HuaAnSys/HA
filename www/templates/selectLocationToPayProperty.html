@@ -1,4 +1,4 @@
-<ion-view view-title="物业费缴纳" id="propertyManagement">
+<ion-view view-title="{{text.title}}" id="propertyManagement">
     <ion-nav-bar align-title="center">
         <ion-nav-buttons side="left" >
             <i class="icon ion-chevron-left arrowP" ng-click="back()"></i>
@@ -8,21 +8,24 @@
         <div class="selectLocationToPayView">
             <ion-list>
                 <ion-item class="bigBlankLine">
-                    请选择需要缴费的房屋
+                    {{text.subject}}
                 </ion-item>
                 <div ng-repeat="group in groups">
                     <ion-item ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
                         {{group.name}}小区{{group.childs[0].period}}期{{group.childs[0].building}}号楼{{group.childs[0].unit}}单元
                         <i class="icon" ng-class="isGroupShown(group) ? 'icon ion-chevron-up' : 'icon ion-chevron-down'"></i>
                     </ion-item>
-                    <ion-item ng-repeat="list in group.childs" class="item-accordion" ng-show="isGroupShown(group)" ng-click="selectItem(list)">
+                    <ion-item ng-repeat="list in group.childs" class="item-accordion" ng-show="isGroupShown(group)" ng-click="selectItem(group,list)">
                     {{group.name}}小区{{list.period}}期{{list.building}}号楼{{list.unit}}单元{{list.floor}}层{{list.number}}号
                     </ion-item>
                 </div>
             </ion-list>
         </div>
+        <div class="selectedSiteInfo">
+            已选择： {{site.group.name}}小区{{site.list.period}}期{{site.list.building}}号楼{{site.list.unit}}单元{{site.list.floor}}层{{site.list.number}}号
+        </div>
         <div class="submitBtn">
-            <button type="submit" class="button button-block" ng-click="goShowBalancePage()">去缴费</button>
+            <button type="submit" class="button button-block" ng-click="goNextPage()">{{text.btnText}}</button>
         </div>
     </ion-content>
 </ion-view>

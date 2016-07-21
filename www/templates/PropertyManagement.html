@@ -4,20 +4,20 @@
             <ion-list>
                 <div style="with:100%;height:{{picHeight}};background: url('./img/propertyManagementPic.jpg') no-repeat;background-size: 100%; "></div>
                 <div class="smallBlankLine"></div>
-                <ion-item ng-click="gotoPayPropertyFirstPage()">
+                <ion-item ng-click="gotoSelectHouseInfo('fee')">
                     <div>
                         <span>物业缴费</span>
                         <i class="icon ion-chevron-right"></i>
                     </div>
                     <!--<div class="rightIcon"></i></div>-->
                 </ion-item>
-                <ion-item ng-click="gotoRelatedRepairs()">
+                <ion-item ng-click="gotoSelectHouseInfo('repair')">
                     <div>
                         <span>相关报修</span>
                         <i class="icon ion-chevron-right"></i>
                     </div>
                 </ion-item>
-                <ion-item ng-click="gotoHouseSaleAndRent()">
+                <ion-item ng-click="gotoSelectHouseInfo('rent')">
                     <div>
                         <span>房屋租售</span>
                         <i class="icon ion-chevron-right"></i>
@@ -30,7 +30,7 @@
                         <i class="icon ion-chevron-right"></i>
                     </div>
                 </ion-item>
-                <ion-item ng-click="gotoVisitorPassport()">
+                <ion-item ng-click="gotoSelectHouseInfo('visit')">
                     <div>
                         <span>访客通行证</span>
                         <i class="icon ion-chevron-right"></i>
