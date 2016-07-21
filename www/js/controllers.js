@@ -916,7 +916,8 @@ angular.module('starter.controllers', ['starter.services'])
         }
 
         $scope.goMessageDetail = function(message){
-            $state.go('communityDetail',{"detail":message});
+            var index = $ionicTabsDelegate.selectedIndex();
+            $state.go('communityDetail',{"detail":message,"tabIndex":index});
         }
 
         function getCommunityByTab(index){
@@ -1152,7 +1153,7 @@ angular.module('starter.controllers', ['starter.services'])
         }
 })
 
-.controller('CommunityDetail',function($scope,$state,$stateParams){
+.controller('CommunityDetail',function($scope,$state,$stateParams,commonService,CommunityService,$rootScope){
 
     $scope.detail = $stateParams.detail;
     $scope.hotComments = "";
@@ -1164,29 +1165,42 @@ angular.module('starter.controllers', ['starter.services'])
         "background-color": "#FFFFFF",
         "border-bottom": "1px solid #c8c7cc"
     }
-
+    getCommnetsAndLike();
     function getCommnetsAndLike(){
         $scope.comments = [];
         $scope.likeNum = 0;
         commonService.showLoading();
-        CommunityService.getAllCommentsByCommunity($stateParams.detail.id).then(function(data){
-            if(data.length == 0){
+        if($stateParams.tabIndex==0){
+            CommunityService.getAllCommentsByCommunity($stateParams.detail.bulletin_id).then(function(data){
+                if(data.length == 0){
 
-            }else{
-                $scope.comments = data;
-            }
-            CommunityService.getLikeNumByCommunity($stateParams.detail.id).then(function(data){
-                $scope.likeNum = data.num;
-                //gen ju shifou dianzan zuo chu li
-                commonService.hideLoading();
+                }else{
+                    $scope.comments = data;
+                }
+                CommunityService.getLikeNumByCommunity($stateParams.detail.id).then(function(data){
+                    $scope.likeNum = data.num;
+                    //gen ju shifou dianzan zuo chu li
+                    commonService.hideLoading();
+                },function(error){
+                    $scope.showAlert(error);
+                    commonService.hideLoading();
+                })
             },function(error){
-                $scope.showAlert(error);
                 commonService.hideLoading();
-            })
-        },function(error){
+                $scope.showAlert(error);
+            });
+        }
+    }
+
+    $scope.setLike = function(){
+        commonService.showLoading();
+        var userId = $rootScope.userId;
+        CommunityService.setLikeByCommunity($stateParams.detail.bulletin_id,userId).then(function(data){
             commonService.hideLoading();
+        },function(error){
             $scope.showAlert(error);
-        });
+            commonService.hideLoading();
+        })
     }
 
         $scope.commentsDetail = {
@@ -1225,9 +1239,13 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.submitComment = function(){
         var say = $scope.hotComments;
-        var a = {"name":"社区管理员","detail":say};
-        $scope.commentsDetail.comments.push(a);
-        $scope.hotComments = "";
+        commonService.showLoading();
+        CommunityService.addCommentsByCommunity($rootScope.userId,$stateParams.detail.bulletin_id,say).then(function(data){
+            commonService.hideLoading();
+        },function(error){
+            $scope.showAlert(error);
+            commonService.hideLoading();
+        })
     }
 })
     
