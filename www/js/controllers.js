@@ -806,6 +806,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('HomeCtrl',function($scope,$state,commonService,homePageService){
         console.log("HomeCtrl");
+//        getAdvsAndProducts();
         $scope.slides = [
             {url:"img/adv_demo.PNG"},
             {url:"img/advertise_a.png"},
@@ -889,6 +890,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('CommunityMainCtrl',function($scope,$state,$stateParams,$ionicTabsDelegate,CommunityService,commonService){
 
+        $scope.bulletions = [];
         $scope.back = function(){
             $state.go('tab.Home');
         }
@@ -901,32 +903,37 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.onTabSelect = function(index){
             var selectedTab = parseInt($stateParams.tabIndex);
             if(index==1&&(selectedTab>-1)&&(selectedTab!=0)){
-//                console.log("第一次进tab页");
+                console.log("第一次进tab页");
                 $stateParams.tabIndex = -1;
                 $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(selectedTab);
             }else if(index==1&&selectedTab==0){
                 $stateParams.tabIndex = -1;
-//                getCommunityByTab(1);
+                getCommunityByTab(1);
             }else{
-//                getCommunityByTab(index);
+                getCommunityByTab(index);
             }
 
         }
 
-        $scope.goMessageDetail = function(){
-            var index = $ionicTabsDelegate.selectedIndex();
-            $state.go('communityDetail',{"tabIndex":index});
+        $scope.goMessageDetail = function(message){
+            $state.go('communityDetail',{"detail":message});
         }
 
         function getCommunityByTab(index){
+            commonService.showLoading();
+            $scope.bulletions = [];
             console.log("获取第几个tab页数据："+index);
             if(index==1){
                 CommunityService.getAllBulletins().then(function(data){
                     if(data.length == 0){
 
                     }else{
-
-
+                        angular.forEach(data,function(value ,index){
+                            value.picName = "" + value.picName;
+                            value.uploaderName = "数据库管理员";
+                            $scope.bulletions.push(value);
+                        });
+                        $scope.bulletions = data;
                     }
                     commonService.hideLoading();
                 },function(error){
@@ -938,8 +945,11 @@ angular.module('starter.controllers', ['starter.services'])
                     if(data.length == 0){
 
                     }else{
-
-
+                        angular.forEach(data,function(value ,index){
+                            value.picName = "" + value.picName;
+                            $scope.bulletions.push(value);
+                        });
+                        $scope.bulletions = data;
                     }
                     commonService.hideLoading();
                 },function(error){
@@ -951,8 +961,11 @@ angular.module('starter.controllers', ['starter.services'])
                     if(data.length == 0){
 
                     }else{
-
-
+                        angular.forEach(data,function(value ,index){
+                            value.picName = "" + value.picName;
+                            $scope.bulletions.push(value);
+                        });
+                        $scope.bulletions = data;
                     }
                     commonService.hideLoading();
                 },function(error){
@@ -962,10 +975,13 @@ angular.module('starter.controllers', ['starter.services'])
             }else{
                 CommunityService.getAllBestMemory().then(function(data){
                     if(data.length == 0){
-
+                        $scope.bulletions = [];
                     }else{
-
-
+                        angular.forEach(data,function(value ,index){
+                            value.picName = "" + value.picName;
+                            $scope.bulletions.push(value);
+                        });
+                        $scope.bulletions = data;
                     }
                     commonService.hideLoading();
                 },function(error){
@@ -980,33 +996,36 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go("addCommunity",{"tabIndex":index});
         }
 
-        $scope.communityNews = [
+        $scope.bulletions = [
             {
                 "personIcon":"img/adam.jpg",
-                "name":"社区管理员",
-                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
-                        "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
-                        "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
-                        "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/community_demo.jpg"
-            },
-            {
-                "personIcon":"img/adam.jpg",
-                "name":"社区管理员",
-                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "uploaderName":"社区管理员",
+                "content":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
                 "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                 "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                 "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/community_demo.jpg"
+                "picName":"img/community_demo.jpg",
+                "uploadTime":"2016-07-05 12:32:20"
             },
             {
                 "personIcon":"img/adam.jpg",
-                "name":"社区管理员",
-                "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "uploaderName":"社区管理员",
+                "content":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
                 "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
                 "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
                 "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-                "descriptionImg":"img/community_demo.jpg"
+                "picName":"img/community_demo.jpg",
+                "uploadTime":"2016-07-05 12:32:20"
+            },
+            {
+                "personIcon":"img/adam.jpg",
+                "uploaderName":"社区管理员",
+                "content":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+                "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+                "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+                "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+                "picName":"img/community_demo.jpg",
+                "uploadTime":"2016-07-05 12:32:20"
             },
         ];
 
@@ -1056,12 +1075,16 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.fileUpload = function(type) {
 
             commonService.showLoading();
-            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            /*            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";*/
+            var uploadUrl = "http://9.110.47.10:8080/HuanAnBackend/actityAlarm/createNewActityAlarm";
             var filePath = $scope.imageSrc;
+            if(filePath == undefined){
+                filePath = "";
+            }
             var options = new FileUploadOptions();
             var params = {
-                'type':type,
-                'content':$scope.comment.detail
+                'content':$scope.comment.detail,
+                'userId' : '1'
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
@@ -1131,6 +1154,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('CommunityDetail',function($scope,$state,$stateParams){
 
+    $scope.detail = $stateParams.detail;
     $scope.hotComments = "";
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
@@ -1139,6 +1163,30 @@ angular.module('starter.controllers', ['starter.services'])
         "padding":"15px",
         "background-color": "#FFFFFF",
         "border-bottom": "1px solid #c8c7cc"
+    }
+
+    function getCommnetsAndLike(){
+        $scope.comments = [];
+        $scope.likeNum = 0;
+        commonService.showLoading();
+        CommunityService.getAllCommentsByCommunity($stateParams.detail.id).then(function(data){
+            if(data.length == 0){
+
+            }else{
+                $scope.comments = data;
+            }
+            CommunityService.getLikeNumByCommunity($stateParams.detail.id).then(function(data){
+                $scope.likeNum = data.num;
+                //gen ju shifou dianzan zuo chu li
+                commonService.hideLoading();
+            },function(error){
+                $scope.showAlert(error);
+                commonService.hideLoading();
+            })
+        },function(error){
+            commonService.hideLoading();
+            $scope.showAlert(error);
+        });
     }
 
         $scope.commentsDetail = {
@@ -1425,21 +1473,27 @@ angular.module('starter.controllers', ['starter.services'])
 /*
     Login and property mangement controllers
  */
-    .controller('loginCtrl', function($scope,$state,$http,$ionicPopup,LoginService) {
+    .controller('loginCtrl', function($scope,$rootScope,$state,$ionicPopup,commonService,LoginService) {
         $scope.user = {
             phoneNo: '',
             pwd: ''
         }
         $scope.login = function() {
-            //LoginService.login($scope.user).then(function(res) {
+            console.log($scope.user);
+            commonService.showLoading();
+            LoginService.login($scope.user).then(function(res) {
+                console.log(res);
+                $rootScope.userId = res.userinfo.id;
+                commonService.hideLoading();
                 $state.go('tab.Home');
-            //}, function(errMsg) {
-            //    var alertPopup = $ionicPopup.alert({
-            //        title: '登录失败',
-            //        template: '账号或密码错误，请重新输入'
-            //    })
-            //    console.log(errMsg);
-            //});
+            }, function(errMsg) {
+                commonService.hideLoading();
+                var alertPopup = $ionicPopup.alert({
+                    title: '登录失败',
+                    template: '账号或密码错误，请重新输入'
+                })
+                console.log(errMsg);
+            });
         }
         $scope.regist=function(){
             $state.go('firstRegistPage');
@@ -1447,9 +1501,6 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.retrievePassword=function(){
             $state.go('firstRetrievePage');
         }
-        //$scope.loginToMainPage=function(){
-        //    $state.go('tab.Home');
-        //}
     })
 
 //Regist account page controllers
@@ -1488,7 +1539,7 @@ angular.module('starter.controllers', ['starter.services'])
             $ionicHistory.goBack();
         }
     })
-    .controller('thirdRegistPageCtrl', function($scope,$state,$ionicHistory,$http,$stateParams,$ionicPopup,commonService,RegistService) {
+    .controller('thirdRegistPageCtrl', function($scope,$state,$ionicHistory,$stateParams,$ionicPopup,commonService,RegistService) {
         $scope.userPhoneNum = $stateParams.phoneNum;
 
         $scope.user = {
@@ -1503,11 +1554,11 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.user.phoneNo = $scope.userPhoneNum;
         $scope.selectSex= function (sex) {
             if(sex=='male'){
-                $scope.user.sex = 'male';
+                $scope.user.sex = 'm';
                 console.log($scope.user.sex);
             }
             else{
-                $scope.user.sex = 'female';
+                $scope.user.sex = 'f';
                 console.log($scope.user.sex);
             }
         }
@@ -1525,28 +1576,28 @@ angular.module('starter.controllers', ['starter.services'])
                 console.log($scope.user);
                 $scope.showAlert('亲，留下您的尊姓大名吧');
             }
-            else if(!isIDCard.test($scope.user.identifierNo) || $scope.user.identifierNo.length<15){
-                $scope.showAlert('亲，身份证不对哟，检查下吧');
-            }
+            //else if(!isIDCard.test($scope.user.identifierNo) || $scope.user.identifierNo.length<15){
+            //    $scope.showAlert('亲，身份证不对哟，检查下吧');
+            //}
             else if( $scope.user.sex == ""){
                 $scope.showAlert('您是帅哥还是美女，选下嘛');
             }
-            else if($scope.user.pwd==''||$scope.user.confirmPassword==''||$scope.user.name==''||$scope.user.identifierNo==''||$scope.user.nickName==''||$scope.user.sex==''){
+            else if($scope.user.pwd==''||$scope.user.confirmPassword==''||$scope.user.name==''||$scope.user.nickName==''||$scope.user.sex==''){
                 $scope.showAlert('您填写的信息不完整呦，填满嘛~');
             }
             else{
-                //commonService.showLoading();
-                //RegistService.regist($scope.user).then(function(res) {
-                //    commonService.hideLoading();
+                commonService.showLoading();
+                RegistService.regist($scope.user).then(function(res) {
+                    commonService.hideLoading();
                     $state.go('login');
-                //}, function(errMsg) {
-                //    commonService.hideLoading();
-                //    var alertPopup = $ionicPopup.alert({
-                //        title: '哎呀，出错了',
-                //        template: '注册失败，请稍后重试'
-                //    })
-                //    console.log(errMsg);
-                //})
+                }, function(errMsg) {
+                    commonService.hideLoading();
+                    var alertPopup = $ionicPopup.alert({
+                        title: '哎呀，出错了',
+                        template: '注册失败，请稍后重试'
+                    })
+                    console.log(errMsg);
+                })
             }
         }
         $scope.back=function(){
@@ -1589,6 +1640,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 //Property management sub page controllers
     .controller('PropertyManagementCtrl', function($scope,$state,$ionicPopup) {
+
         var screenWidth = document.body.scrollWidth;
         var picHeight=Math.ceil((screenWidth * 164)/375);
         $scope.picHeight=picHeight+'px';
@@ -1603,6 +1655,27 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('houseSaleAndRent');
         }
         $scope.showConfirm = function() {
+            function onSuccess(result){
+                console.log("Success:"+result);
+            }
+
+            function onError(result) {
+                console.log("Error:"+result);
+                $ionicPopup.alert({
+                    template: 'OK',
+                    buttons: [
+                        {  text: 'know',
+                            type: 'button-positive'
+                        }
+                    ]
+                });
+            }
+
+            $scope.call = function(){
+                console.log('calling');
+                window.plugins.CallNumber.callNumber(onSuccess, onError, '88888888', true);
+            }
+
             var confirmPopup = $ionicPopup.confirm({
                 //title: 'Consume Ice Cream',
                 template: '<div style="float: left;width: 42px;height: 42px;margin-left: 8px;padding-top: 7px;;border-radius: 50%;background-color: #00C800;"><i class="ion-ios-telephone" style="font-size: 30px;margin-left: 11px;color: #FFFFFF;"></i></div><div style="float: right;font-size: 35px;margin-top: 5px;margin-right: 5px">88888888</div> ',
@@ -1612,7 +1685,7 @@ angular.module('starter.controllers', ['starter.services'])
                 buttons: [
                     { text: '取消' },
                     {
-                        text: '<a href="tel:10086">拨打物业电话</a>',
+                        text: '<a href="tel:10086" ng-click="call()">拨打物业电话</a>',
                         type: 'button-positive',
                         onTap: function(e) {
                             console.log("call");
@@ -1714,9 +1787,10 @@ angular.module('starter.controllers', ['starter.services'])
     })
 
 //Related repairs controllers
-    .controller('relatedRepairsCtrl', function($scope,$state,commonService,RelatedRepairsService) {
+    .controller('relatedRepairsCtrl', function($scope,$rootScope,$state,commonService,RelatedRepairsService) {
+        console.log($rootScope.user.phoneNo);
         commonService.showLoading();
-        RelatedRepairsService.getRelatedRepairs($scope.user).then(function(data) {
+        RelatedRepairsService.getRelatedRepairs($rootScope.user.phoneNo).then(function(data) {
             $scope.items = data;
             commonService.hideLoading();
         }, function(errMsg) {
@@ -1735,7 +1809,7 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newAskForRepairCtrl', function($scope,$state,$cordovaCamera,commonService) {
+    .controller('newAskForRepairCtrl', function($scope,$state,$cordovaCamera,commonService,$cordovaFileTransfer) {
         var screenWidth = document.body.scrollWidth - 30;
         var screenHeight = document.body.scrollHeight - 30;
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
@@ -1767,15 +1841,18 @@ angular.module('starter.controllers', ['starter.services'])
             });
         }
 
-        $scope.submitNewRepair = function(type) {
+        $scope.submitNewRepair = function() {
 
             commonService.showLoading();
-            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+            var uploadUrl = "http://9.112.87.121:8080/HuanAnBackend/upload/file";
             var filePath = $scope.imageSrc;
+            if(filePath == undefined){
+                filePath = "";
+            }
             var options = new FileUploadOptions();
             var params = {
-                'type':type,
-                'content':$scope.comment.detail
+                'content':$scope.comment.detail,
+                'userId' : '2'
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
@@ -1857,7 +1934,7 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newAskForSaleOrRentCtrl', function($scope,$state,$cordovaCamera,commonService) {
+    .controller('newAskForSaleOrRentCtrl', function($scope,$state,$cordovaCamera,commonService,$cordovaFileTransfer) {
         var screenWidth = document.body.scrollWidth - 30;
         var screenHeight = document.body.scrollHeight - 30;
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
@@ -1888,15 +1965,18 @@ angular.module('starter.controllers', ['starter.services'])
 
             });
         }
-        $scope.submitNewSaleOrRent = function(type) {
+        $scope.submitNewSaleOrRent = function() {
 
             commonService.showLoading();
             var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
             var filePath = $scope.imageSrc;
+            if(filePath == undefined){
+                filePath = "";
+            }
             var options = new FileUploadOptions();
             var params = {
-                'type':type,
-                'content':$scope.comment.detail
+                'content':$scope.comment.detail,
+                'userId' : '2'
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
@@ -1979,12 +2059,7 @@ angular.module('starter.controllers', ['starter.services'])
             console.log(errMsg);
         })
         $scope.gotoQRPage=function(data){
-            if(data.status == 'working'){
-                $state.go('generateQRCode',{QRvisitorName: data.name,visitorSex: data.sex});
-            }
-            else{
-                return;
-            }
+                $state.go('generateQRCode',{QRvisitorName: data.name,visitorSex: data.sex,lastDate: data.endDate});
         }
         $scope.gotoNewVisitorInvite=function(){
             $state.go('newVisitorInvite');
@@ -1997,8 +2072,8 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.info={
             visitorName:''
         };
-        $scope.sexOne='男';
-        $scope.sexTwo='女';
+        $scope.sexOne='m';
+        $scope.sexTwo='f';
         $scope.isActive = false;
         $scope.openDropList=function(){
             if($scope.isActive == false){
@@ -2017,21 +2092,29 @@ angular.module('starter.controllers', ['starter.services'])
         }
         $scope.gotoGenerateQR=function(){
             if($scope.info.visitorName !=''){
-                var d = new Date();    //根据时间戳生成的时间对象
-                var date = (d.getFullYear()) + "/" +
-                    (d.getMonth() + 1) + "/" +
-                    (d.getDate()) + " " +
-                    (d.getHours()) + ":" +
-                    (d.getMinutes()) + ":" +
-                    (d.getSeconds());
+                var nowDate = new Date();
+                $scope.currentTime = nowDate.getTime();
+                $scope.endTime = $scope.currentTime + 24*60*60*1000;
+                var endDate = new Date($scope.endTime);
+                $scope.currentTimestamp = (nowDate.getFullYear()) + "/" +
+                    (nowDate.getMonth() + 1) + "/" +
+                    (nowDate.getDate()) + " " +
+                    (nowDate.getHours()) + ":" +
+                    (nowDate.getMinutes()) + ":" +
+                    (nowDate.getSeconds());
+                $scope.endTimestamp = (endDate.getFullYear()) + "/" +
+                    (endDate.getMonth() + 1) + "/" +
+                    (endDate.getDate()) + " " +
+                    (endDate.getHours()) + ":" +
+                    (endDate.getMinutes()) + ":" +
+                    (endDate.getSeconds());
 
+                console.log($scope.endTimestamp);
                 //commonService.showLoading();
-                //VisitorPassportService.newVisitorInvites($scope.user,$scope.timestamp).then(function(data) {
+                //VisitorPassportService.newVisitorInvites($scope.user,$scope.currentTimestamp,$scope.endTimestamp).then(function(data) {
                 //
-                //    $scope.endDate =
-                //      $scope.validity = data;
                 //    commonService.hideLoading();
-                    $state.go('generateQRCode',{QRvisitorName: $scope.info.visitorName,visitorSex: $scope.sexOne});
+                    $state.go('generateQRCode',{QRvisitorName: $scope.info.visitorName,visitorSex: $scope.sexOne,lastDate: $scope.endTimestamp});
                 //}, function(errMsg) {
                 //    commonService.hideLoading();
                 //    $scope.showAlert('生成二维码失败，请稍后重试');
@@ -2050,7 +2133,8 @@ angular.module('starter.controllers', ['starter.services'])
         console.log($ionicHistory.viewHistory());
         $scope.name = $stateParams.QRvisitorName;
         $scope.sex = $stateParams.visitorSex;
-        var nameAndSex = $scope.name + ' '+ $scope.sex;
+        $scope.endTime = $stateParams.lastDate;
+        var nameAndSex = $scope.name + ' '+ $scope.sex + ' ' + $scope.endTime;
         var screenHeight = document.body.scrollHeight;
         var screenWidth = document.body.scrollWidth;
         $scope.whiteAreaHeight=screenHeight*0.92+'px';
@@ -2116,7 +2200,7 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newComplaintPageCtrl', function($scope,$state,$stateParams,$cordovaCamera,commonService,ComplaintService) {
+    .controller('newComplaintPageCtrl', function($scope,$state,$stateParams,$cordovaCamera,commonService,ComplaintService,$cordovaFileTransfer) {
         var screenWidth = document.body.scrollWidth - 30;
         var screenHeight = document.body.scrollHeight - 30;
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
@@ -2148,15 +2232,18 @@ angular.module('starter.controllers', ['starter.services'])
             });
         }
 
-        $scope.submitNewComplaint = function(type) {
+        $scope.submitNewComplaint = function() {
 
             commonService.showLoading();
             var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
             var filePath = $scope.imageSrc;
+            if(filePath == undefined){
+                filePath = "";
+            }
             var options = new FileUploadOptions();
             var params = {
-                'type':type,
-                'content':$scope.comment.detail
+                'content':$scope.comment.detail,
+                'userId' : '2'
             };
             options.params = params;
             document.addEventListener('deviceready', function () {

@@ -147,9 +147,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
 
   .state('communityDetail', {
-      url: '/communityDetail:tabIndex',
+      url: '/communityDetail:message',
       templateUrl: 'templates/communityDetail.html',
-      controller: 'CommunityDetail'
+      controller: 'CommunityDetail',
+      params: {detail: null}
   })
 
   .state('addCommunity', {
@@ -164,7 +165,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
-    controller: 'loginCtrl'
+    controller: 'loginCtrl',
+    cache:false
   })
 
   .state('firstRegistPage', {
@@ -272,7 +274,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/generateQRCode',
     templateUrl: 'templates/generateQRCode.html',
     controller: 'generateQRCodeCtrl',
-    params: {QRvisitorName: null,visitorSex:null},
+    params: {QRvisitorName: null,visitorSex:null,lastDate:null},
     cache:false
   })
 
@@ -357,6 +359,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     cache:false
   })
       // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/Home');
+  $urlRouterProvider.otherwise('/login');
 
 });

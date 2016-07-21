@@ -9,14 +9,14 @@
     <ion-tab title="社区公告" on-select="onTabSelect('1')">
         <ion-scroll direction="y" class="ion_list_in_tabs" ng-style="{{scrollHeight}}">
             <ion-list>
-                <ion-item ng-repeat="new in communityNews">
+                <ion-item ng-repeat="new in bulletions">
                     <img src="{{new.personIcon}}" class="message_icon"/>
-                    <span class="message_people">{{new.name}}</span>
-                    <div class="message_content">{{new.detail}}</div>
-                    <img src="{{new.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
-                    <span class="messgae_time">2016-05-05 00:00</span>
-                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail()"></span>
-                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
+                    <span class="message_people">{{new.uploaderName}}</span>
+                    <div class="message_content">{{new.content}}</div>
+                    <img src="{{new.picName}}" class="message_picture" width="{{message_picture_width}}"/>
+                    <span class="messgae_time">{{new.uploadTime}}</span>
+                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail(new)"></span>
+                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail(new)"></span>
                 </ion-item>
             </ion-list>
         <ion-scroll>
@@ -25,14 +25,14 @@
     <ion-tab title="议事厅" on-select="onTabSelect('2')">
         <ion-scroll direction="y" class="ion_list_in_tabs" ng-style="{{scrollHeight}}">
             <ion-list>
-                <ion-item ng-repeat="new in communityNews">
+                <ion-item ng-repeat="new in bulletions">
                     <img src="{{new.personIcon}}" class="message_icon"/>
-                    <span class="message_people">{{new.name}}</span>
-                    <div class="message_content">{{new.detail}}</div>
-                    <img src="{{new.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
-                    <span class="messgae_time">2016-05-05 00:00</span>
-                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail()"></span>
-                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
+                    <span class="message_people">{{new.uploaderName}}</span>
+                    <div class="message_content">{{new.content}}</div>
+                    <img src="{{new.picName}}" class="message_picture" width="{{message_picture_width}}"/>
+                    <span class="messgae_time">{{new.uploadTime}}</span>
+                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail(new)"></span>
+                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail(new)"></span>
                 </ion-item>
             </ion-list>
             <div class="ion-android-add-circle add_comment_icon" ng-click="addNews()"></div>
@@ -42,14 +42,14 @@
     <ion-tab title="征集令" on-select="onTabSelect('3')">
         <ion-scroll direction="y" class="ion_list_in_tabs" ng-style="{{scrollHeight}}">
             <ion-list>
-                <ion-item ng-repeat="new in communityNews">
+                <ion-item ng-repeat="new in bulletions">
                     <img src="{{new.personIcon}}" class="message_icon"/>
-                    <span class="message_people">{{new.name}}</span>
-                    <div class="message_content">{{new.detail}}</div>
-                    <img src="{{new.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
-                    <span class="messgae_time">2016-05-05 00:00</span>
-                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail()"></span>
-                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
+                    <span class="message_people">{{new.uploaderName}}</span>
+                    <div class="message_content">{{new.content}}</div>
+                    <img src="{{new.picName}}" class="message_picture" width="{{message_picture_width}}"/>
+                    <span class="messgae_time">{{new.uploadTime}}</span>
+                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail(new)"></span>
+                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail(new)"></span>
                 </ion-item>
             </ion-list>
             <div class="ion-android-add-circle add_comment_icon" ng-click="addNews()"></div>
@@ -59,14 +59,14 @@
     <ion-tab title="精彩回顾" on-select="onTabSelect('4')">
         <ion-scroll direction="y" class="ion_list_in_tabs" ng-style="{{scrollHeight}}">
             <ion-list>
-                <ion-item ng-repeat="new in communityNews">
+                <ion-item ng-repeat="new in bulletions">
                     <img src="{{new.personIcon}}" class="message_icon"/>
-                    <span class="message_people">{{new.name}}</span>
-                    <div class="message_content">{{new.detail}}</div>
-                    <img src="{{new.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
-                    <span class="messgae_time">2016-05-05 00:00</span>
-                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail()"></span>
-                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
+                    <span class="message_people">{{new.uploaderName}}</span>
+                    <div class="message_content">{{new.content}}</div>
+                    <img src="{{new.picName}}" class="message_picture" width="{{message_picture_width}}"/>
+                    <span class="messgae_time">{{new.uploadTime}}</span>
+                    <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail(new)"></span>
+                    <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail(new)"></span>
                 </ion-item>
             </ion-list>
             <div class="ion-android-add-circle add_comment_icon" ng-click="addNews()"></div>
