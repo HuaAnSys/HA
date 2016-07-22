@@ -908,9 +908,9 @@ angular.module('starter.controllers', ['starter.services'])
                 $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(selectedTab);
             }else if(index==1&&selectedTab==0){
                 $stateParams.tabIndex = -1;
-                getCommunityByTab(1);
+//                getCommunityByTab(1);
             }else{
-                getCommunityByTab(index);
+//                getCommunityByTab(index);
             }
 
         }
@@ -1165,7 +1165,7 @@ angular.module('starter.controllers', ['starter.services'])
         "background-color": "#FFFFFF",
         "border-bottom": "1px solid #c8c7cc"
     }
-    getCommnetsAndLike();
+//    getCommnetsAndLike();
     function getCommnetsAndLike(){
         $scope.comments = [];
         $scope.likeNum = 0;
@@ -1192,7 +1192,7 @@ angular.module('starter.controllers', ['starter.services'])
         }
     }
 
-    $scope.setLike = function(){
+/*    $scope.setLike = function(){
         commonService.showLoading();
         var userId = $rootScope.userId;
         CommunityService.setLikeByCommunity($stateParams.detail.bulletin_id,userId).then(function(data){
@@ -1201,7 +1201,7 @@ angular.module('starter.controllers', ['starter.services'])
             $scope.showAlert(error);
             commonService.hideLoading();
         })
-    }
+    }*/
 
         $scope.commentsDetail = {
             "personIcon":"img/adam.jpg",
@@ -1237,7 +1237,7 @@ angular.module('starter.controllers', ['starter.services'])
         $state.go('community',{"tabIndex":$stateParams.tabIndex});
     }
 
-    $scope.submitComment = function(){
+/*    $scope.submitComment = function(){
         var say = $scope.hotComments;
         commonService.showLoading();
         CommunityService.addCommentsByCommunity($rootScope.userId,$stateParams.detail.bulletin_id,say).then(function(data){
@@ -1246,7 +1246,7 @@ angular.module('starter.controllers', ['starter.services'])
             $scope.showAlert(error);
             commonService.hideLoading();
         })
-    }
+    }*/
 })
     
     .controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopTypeService, ShopBannerService, ShopProductDetailService, $timeout) {

@@ -1,4 +1,5 @@
 var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
+//var BASE_URL = "http://9.110.54.95:8080/HuanAnBackend/";
 angular.module('starter.services', [])
 
 .factory('DomesticService', ['$http','$q',function($http, $q){
@@ -336,10 +337,9 @@ angular.module('starter.services', [])
         },
 
         getAllCommentsByCommunity : function(communityId){
-            var url = BASE_URL + "bulletin/getBulletinComments";
+            var url = BASE_URL + "bulletin/getBulletinComments/bulletinID/"+communityId;
             var defer =$q.defer();
-            var param = {"bulletinID":communityId};
-            var request =$http.post(url,param);
+            var request =$http.get(url);
             request.success(function(data) {
                 defer.resolve(data);
             });
