@@ -1941,7 +1941,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.items = $stateParams.datas;
         commonService.showLoading();
         RelatedRepairsService.repairDetails($rootScope.userId).then(function(data) {
-            $scope.statusList = data;
+            $scope.statusList = data.result;
             commonService.hideLoading();
         }, function(errMsg) {
             commonService.hideLoading();
@@ -2067,7 +2067,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.progressDetailContentWidth = screenWidth-15-40-20+'px';
         commonService.showLoading();
         HouseSaleAndRentService.saleAndRentDetails($rootScope.userId).then(function(data) {
-            $scope.statusList = data;
+            $scope.statusList = data.result;
             commonService.hideLoading();
         }, function(errMsg) {
             commonService.hideLoading();
@@ -2087,7 +2087,7 @@ angular.module('starter.controllers', ['starter.services'])
     .controller('visitorPassportCtrl', function($scope,$rootScope,$state,commonService,VisitorPassportService) {
         commonService.showLoading();
         VisitorPassportService.getVisitorPassport($rootScope.userId).then(function(data) {
-            $scope.items = data;
+            $scope.items = data.result;
             $scope.getMillisecond = function(data){
                 if(data == ''){
                     $scope.currentTime = new Date().getTime();
@@ -2171,7 +2171,7 @@ angular.module('starter.controllers', ['starter.services'])
                 //commonService.showLoading();
                 //VisitorPassportService.newVisitorInvites($rootScope.userId,$scope.currentTimestamp,$scope.endTimestamp).then(function(data) {
                 //    commonService.hideLoading();
-                    $state.go('generateQRCode',{QRvisitorName: $scope.info.visitorName,visitorSex: $scope.selectSex,lastDate: $scope.endTimestamp});
+                    $state.go('generateQRCode',{QRvisitorName: $scope.info.visitorName,visitorSex: $scope.sexOne,lastDate: $scope.endTimestamp});
                 //}, function(errMsg) {
                 //    commonService.hideLoading();
                 //    $scope.showAlert('生成二维码失败，请稍后重试');
@@ -2341,7 +2341,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.items = $stateParams.datas;
         commonService.showLoading();
         ComplaintService.complaintDetails($rootScope.userId).then(function(data) {
-            $scope.statusList = data;
+            $scope.statusList = data.result;
             console.log($scope.statusList.length);
             commonService.hideLoading();
         }, function(errMsg) {
