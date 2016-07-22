@@ -1832,8 +1832,9 @@ angular.module('starter.controllers', ['starter.services'])
     })
 
 //Related repairs controllers
-    .controller('relatedRepairsCtrl', function($scope,$rootScope,$state,commonService,RelatedRepairsService) {
+    .controller('relatedRepairsCtrl', function($scope,$rootScope,$stateParams,$state,commonService,RelatedRepairsService) {
         console.log($rootScope.userId);
+        $scope.info = $stateParams.houseInfo;
         commonService.showLoading();
         RelatedRepairsService.getRelatedRepairs($rootScope.userId).then(function(data) {
             $scope.items = data.result;
@@ -1844,7 +1845,7 @@ angular.module('starter.controllers', ['starter.services'])
             console.log(errMsg);
         });
         $scope.goNewAskForRepair = function () {
-            $state.go('newAskForRepair');
+            $state.go('newAskForRepair',{houseInfo:$scope.info});
         }
         $scope.goRepairDetails = function (item) {
             $state.go('repairDetails',{datas: item});
@@ -1854,7 +1855,8 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go('tab.PropertyManagement');
         }
     })
-    .controller('newAskForRepairCtrl', function($scope,$state,$cordovaCamera,commonService,$cordovaFileTransfer) {
+    .controller('newAskForRepairCtrl', function($scope,$state,$stateParams,$cordovaCamera,commonService,$cordovaFileTransfer) {
+        $scope.info = $stateParams.houseInfo;
         var screenWidth = document.body.scrollWidth - 30;
         var screenHeight = document.body.scrollHeight - 30;
         $scope.textAreaCols = Math.floor(screenWidth/14)*2;
@@ -1939,7 +1941,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.items = $stateParams.datas;
         commonService.showLoading();
         RelatedRepairsService.repairDetails($rootScope.userId).then(function(data) {
-            $scope.statusList = data;
+            $scope.statusList = data.result;
             commonService.hideLoading();
         }, function(errMsg) {
             commonService.hideLoading();
@@ -2065,7 +2067,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.progressDetailContentWidth = screenWidth-15-40-20+'px';
         commonService.showLoading();
         HouseSaleAndRentService.saleAndRentDetails($rootScope.userId).then(function(data) {
-            $scope.statusList = data;
+            $scope.statusList = data.result;
             commonService.hideLoading();
         }, function(errMsg) {
             commonService.hideLoading();
@@ -2085,7 +2087,7 @@ angular.module('starter.controllers', ['starter.services'])
     .controller('visitorPassportCtrl', function($scope,$rootScope,$state,commonService,VisitorPassportService) {
         commonService.showLoading();
         VisitorPassportService.getVisitorPassport($rootScope.userId).then(function(data) {
-            $scope.items = data;
+            $scope.items = data.result;
             $scope.getMillisecond = function(data){
                 if(data == ''){
                     $scope.currentTime = new Date().getTime();
@@ -2104,7 +2106,13 @@ angular.module('starter.controllers', ['starter.services'])
             console.log(errMsg);
         })
         $scope.gotoQRPage=function(data){
-                $state.go('generateQRCode',{QRvisitorName: data.name,visitorSex: data.sex,lastDate: data.endDate});
+            if(data.sex == 'm'){
+                $scope.selectSex = '男';
+            }
+            if(data.sex == 'f'){
+                $scope.selectSex = '女';
+            }
+                $state.go('generateQRCode',{QRvisitorName: data.name,visitorSex: $scope.selectSex,lastDate: data.endDate});
         }
         $scope.gotoNewVisitorInvite=function(){
             $state.go('newVisitorInvite');
@@ -2117,8 +2125,8 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.info={
             visitorName:''
         };
-        $scope.sexOne='m';
-        $scope.sexTwo='f';
+        $scope.sexOne='男';
+        $scope.sexTwo='女';
         $scope.isActive = false;
         $scope.openDropList=function(){
             if($scope.isActive == false){
@@ -2153,11 +2161,15 @@ angular.module('starter.controllers', ['starter.services'])
                     (endDate.getHours()) + ":" +
                     (endDate.getMinutes()) + ":" +
                     (endDate.getSeconds());
-
+                if($scope.sexOne=='男'){
+                    $scope.selectSex = 'm';
+                }
+                if($scope.sexOne=='女'){
+                    $scope.selectSex = 'f';
+                }
                 console.log($scope.endTimestamp);
                 //commonService.showLoading();
                 //VisitorPassportService.newVisitorInvites($rootScope.userId,$scope.currentTimestamp,$scope.endTimestamp).then(function(data) {
-                //
                 //    commonService.hideLoading();
                     $state.go('generateQRCode',{QRvisitorName: $scope.info.visitorName,visitorSex: $scope.sexOne,lastDate: $scope.endTimestamp});
                 //}, function(errMsg) {
@@ -2329,7 +2341,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.items = $stateParams.datas;
         commonService.showLoading();
         ComplaintService.complaintDetails($rootScope.userId).then(function(data) {
-            $scope.statusList = data;
+            $scope.statusList = data.result;
             console.log($scope.statusList.length);
             commonService.hideLoading();
         }, function(errMsg) {

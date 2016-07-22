@@ -742,7 +742,7 @@ angular.module('starter.services', [])
     return {
         getHouseInfo: function(user){
             var defer = $q.defer();
-            var url = BASE_URL + 'myPersonalInfo/getMyProperty';
+            var url = BASE_URL + 'myPersonalInfo/getMyProperty/' + user;
             //var request = $http.post(url,user);
             var request = $http.get('js/houseInfo.json');
             request.success(function (data) {

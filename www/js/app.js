@@ -215,7 +215,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('showBalanceInPayProperty', {
     url: '/showBalanceInPayProperty',
     templateUrl: 'templates/showBalanceInPayProperty.html',
-    controller: 'showBalanceInPayPropertyCtrl'
+    controller: 'showBalanceInPayPropertyCtrl',
+    params: {type: null},
+    cache:false
   })
 
   .state('confirmStartAndEndDate', {
@@ -235,7 +237,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('newAskForRepair', {
     url: '/newAskForRepair',
     templateUrl: 'templates/newAskForRepair.html',
-    controller: 'newAskForRepairCtrl'
+    controller: 'newAskForRepairCtrl',
+    params: {houseInfo: null},
+    cache:false
   })
   .state('repairDetails', {
     url: '/repairDetails',
