@@ -719,7 +719,7 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('DomesticCtrl', function($scope, $rootScope, $state, commonService, DomesticService) {
         $scope.on_select = function(idx){
         if(idx == 1){
-          $rootScope.domesticTabTitle ="家具保洁";
+          $rootScope.domesticTabTitle ="家居保洁";
         }else if(idx == 2){
           $rootScope.domesticTabTitle ="家庭维修";
         }else if(idx == 3){
@@ -730,7 +730,7 @@ angular.module('starter.controllers', ['starter.services'])
         commonService.showLoading();
         DomesticService.getDomesticByStatus().then(function(data){
             $scope.domesticList = [];
-            for(i=0;i<data.length;i++){
+            for(var i=0;i<data.length;i++){
                 if($rootScope.domesticTabTitle == data[i].category){
                     $scope.domesticList.push(data[i]);
                     //$scope.domesticList[i].picName;
