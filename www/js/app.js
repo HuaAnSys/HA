@@ -49,7 +49,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   })
 
-  .state('tab.PropertyManagement', {
+    .state('tab.PropertyManagement', {
     url: '/PropertyManagement',
     views: {
       'tab-PropertyManagement': {
@@ -150,7 +150,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/communityDetail:message',
       templateUrl: 'templates/communityDetail.html',
       controller: 'CommunityDetail',
-      params: {detail: null}
+      params: {detail: null,tabIndex:null}
   })
 
   .state('addCommunity', {
@@ -207,13 +207,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   .state('selectLocationToPayProperty', {
     url: '/selectLocationToPayProperty',
     templateUrl: 'templates/selectLocationToPayProperty.html',
-    controller: 'selectLocationToPayPropertyCtrl'
+    controller: 'selectLocationToPayPropertyCtrl',
+    params: {type: null},
+    cache:false
   })
 
   .state('showBalanceInPayProperty', {
     url: '/showBalanceInPayProperty',
     templateUrl: 'templates/showBalanceInPayProperty.html',
-    controller: 'showBalanceInPayPropertyCtrl'
+    controller: 'showBalanceInPayPropertyCtrl',
+    params: {type: null},
+    cache:false
   })
 
   .state('confirmStartAndEndDate', {
@@ -227,12 +231,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/relatedRepairs',
     templateUrl: 'templates/relatedRepairs.html',
     controller: 'relatedRepairsCtrl',
+    params: {houseInfo: null},
     cache:false
   })
   .state('newAskForRepair', {
     url: '/newAskForRepair',
     templateUrl: 'templates/newAskForRepair.html',
-    controller: 'newAskForRepairCtrl'
+    controller: 'newAskForRepairCtrl',
+    params: {houseInfo: null},
+    cache:false
   })
   .state('repairDetails', {
     url: '/repairDetails',
@@ -245,6 +252,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/houseSaleAndRent',
     templateUrl: 'templates/houseSaleAndRent.html',
     controller: 'houseSaleAndRentCtrl',
+    params: {houseInfo: null},
     cache:false
   })
   .state('newAskForSaleOrRent', {
@@ -263,6 +271,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/visitorPassport',
     templateUrl: 'templates/visitorPassport.html',
     controller: 'visitorPassportCtrl',
+    params: {houseInfo: null},
     cache:false
   })
   .state('newVisitorInvite', {

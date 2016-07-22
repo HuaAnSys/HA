@@ -1,5 +1,5 @@
 var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
-var BASE_URL = "http://9.110.54.95:8080/HuanAnBackend/";
+//var BASE_URL = "http://9.110.54.95:8080/HuanAnBackend/";
 angular.module('starter.services', [])
 
 .factory('DomesticService', ['$http','$q',function($http, $q){
@@ -338,21 +338,20 @@ angular.module('starter.services', [])
         },
 
         getAllCommentsByCommunity : function(communityId){
-            var url = BASE_URL + "bulletin/getBulletinComments";
+            var url = BASE_URL + "bulletin/getBulletinComments/bulletinID/"+communityId;
             var defer =$q.defer();
-            var param = {"bulletinID":communityId};
-            var request =$http.post(url,param);
+            var request =$http.get(url);
             request.success(function(data) {
                 defer.resolve(data);
             });
-            request.error(function(){
+            request.error(function(error){
                 defer.reject(Messages.getCommentByBulletinId);
             });
             return defer.promise;
         },
 
         getLikeNumByCommunity : function(communityId){
-            var url = "http://localhost:7080/HuanAnBackend/bulletin/getBulletinLike";
+            var url = BASE_URL + "bulletin/getBulletinLike";
             var defer =$q.defer();
             var param = {"bulletinID":communityId};
             var request =$http.post(url,param);
@@ -365,40 +364,40 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        setLikeByCommunity : function(communityId){
-            var url = "http://localhost:7080/HuanAnBackend/bulletin/setBulletinLike";
+        setLikeByCommunity : function(communityId,userId){
+            var url = BASE_URL + "bulletin/setBulletinLike";
             var defer =$q.defer();
-            var param = {"bulletinID":communityId};
+            var param = {"bulletinID":communityId,"userID":userId};
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
+                if(data.result=="success"){
+                    defer.resolve(data);
                 }else{
-                    defer.reject();
+                    defer.reject("fail");
                 }
+
             });
-            request.error(function(){
-                defer.reject("fail");
+            request.error(function(error){
+                defer.reject(Messages.likeCommunity);
             });
             return defer.promise;
         },
 
-        addCommentsByCommunity : function(communityId){
-            var url = "http://localhost:7080/HuanAnBackend/bulletin/setBulletinComment";
+        addCommentsByCommunity : function(userId,communityId,comments){
+            var url = BASE_URL + "bulletin/setBulletinComment";
             var defer =$q.defer();
-            var param = {"bulletinID":communityId};
+            var param = {"bulletinID":communityId,"userID":userId,"commentDetail":comments};
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
+                var status =data.result;
+                if(status == "success"){
+                    defer.resolve(data);
                 }else{
-                    defer.reject();
+                    defer.reject(Messages.addCommtsByBulletin);
                 }
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject(Messages.addCommtsByBulletin);
             });
             return defer.promise;
         },
@@ -738,6 +737,27 @@ angular.module('starter.services', [])
         }
     }
 }])
+
+.factory('getHouseInfoService', ['$http','$q',function($http, $q) {
+
+    return {
+        getHouseInfo: function(user){
+            var defer = $q.defer();
+            var url = BASE_URL + 'myPersonalInfo/getMyProperty/' + user;
+            //var request = $http.post(url,user);
+            var request = $http.get('js/houseInfo.json');
+            request.success(function (data) {
+                defer.resolve(data);
+            });
+            request.error(function () {
+                defer.reject("Get related repairs information failed.");
+            });
+            return defer.promise;
+        }
+
+    }
+}])
+
 .factory('RelatedRepairsService', ['$http','$q',function($http, $q) {
 
     return {
@@ -776,7 +796,7 @@ angular.module('starter.services', [])
                 defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get related repairs details failed.");
             });
             return defer.promise;
         }
@@ -793,7 +813,7 @@ angular.module('starter.services', [])
                 defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get sale and rent information failed.");
             });
             return defer.promise;
         },
@@ -818,7 +838,7 @@ angular.module('starter.services', [])
                 defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get sale and rent details failed.");
             });
             return defer.promise;
         }
@@ -836,7 +856,7 @@ angular.module('starter.services', [])
                     defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get visitor information failed.");
             });
             return defer.promise;
         },
@@ -848,7 +868,7 @@ angular.module('starter.services', [])
                     defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Creat new visitor information failed.");
             });
             return defer.promise;
         }
@@ -866,7 +886,7 @@ angular.module('starter.services', [])
                     defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get complaint information failed.");
             });
             return defer.promise;
         },
@@ -891,7 +911,7 @@ angular.module('starter.services', [])
                 defer.resolve(data);
             });
             request.error(function () {
-                defer.reject("Get related repairs information failed.");
+                defer.reject("Get complaint details failed.");
             });
             return defer.promise;
         }

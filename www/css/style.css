@@ -981,6 +981,9 @@ ion-view[id="communityDetail"]{
 ion-view[id="login"],ion-view[id="regist"],ion-view[id="retrieve"],ion-view[id="propertyManagement"],ion-view[id="relatedRepairs"],ion-view[id="houseSaleAndRent"],ion-view[id="visitorPassport"],ion-view[id="complaintPage"],ion-view[id="newVisitorInvite"],ion-view[id="generateQRCode"]{
     background-color: #EFEFf4;
 }
+ion-view[id="login"] input, ion-view[id="regist"] input,ion-view[id="retrieve"] input,ion-view[id="newVisitorInvite"] input{
+    width: 100%;
+}
 ion-header-bar.bar.bar-header {
     border-bottom: 1px solid #C8C7CC;
 }
@@ -1099,6 +1102,11 @@ button.registBtn{
 .selectLocationToPayView .bigBlankLine{
     padding-bottom: 15px;
     padding-top: 40px;
+}
+.selectedSiteInfo{
+    display: none;
+    margin-top: 5%;
+    margin-left: 15px;
 }
 
 /*show balance in the pay page*/

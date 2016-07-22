@@ -1,0 +1,42 @@
+{
+  "result": [
+    {
+      "name": "A",
+      "childs": [
+        {
+          "period": "一",
+          "building": 1,
+          "unit": 1,
+          "floor": 1,
+          "number": 101
+        },
+        {
+          "period": "二",
+          "building": 2,
+          "unit": 2,
+          "floor": 2,
+          "number": 202
+        }
+      ]
+    },
+    {
+      "name": "B",
+      "childs": [
+        {
+          "period": "一",
+          "building": 1,
+          "unit": 1,
+          "floor": 1,
+          "number": 101
+        },
+        {
+          "period": "二",
+          "building": 2,
+          "unit": 2,
+          "floor": 2,
+          "number": 202
+        }
+      ]
+    }
+  ]
+}
