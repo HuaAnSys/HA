@@ -1075,8 +1075,8 @@ angular.module('starter.controllers', ['starter.services'])
 
         $scope.fileUpload = function(type) {
 
-            commonService.showLoading();
-            /*            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";*/
+/*            commonService.showLoading();
+            *//*            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";*//*
             var uploadUrl = "http://9.110.47.10:8080/HuanAnBackend/actityAlarm/createNewActityAlarm";
             var filePath = $scope.imageSrc;
             if(filePath == undefined){
@@ -1104,7 +1104,7 @@ angular.module('starter.controllers', ['starter.services'])
                         console.log(progress.loaded+"---******--");
                     });
 
-            }, false);
+            }, false);*/
 
         }
 
