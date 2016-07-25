@@ -806,13 +806,13 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('HomeCtrl',function($scope,$state,commonService,homePageService){
         console.log("HomeCtrl");
-//        getAdvsAndProducts();
-        $scope.slides = [
+        getAdvsAndProducts();
+/*        $scope.slides = [
             {url:"img/adv_demo.PNG"},
             {url:"img/advertise_a.png"},
             {url:"img/advertise_b.png"}
-        ];
-
+        ];*/
+        $scope.slides = [];
         $scope.hotProducts = [
             {
              "productImg":"img/a.jpg",
@@ -860,25 +860,24 @@ angular.module('starter.controllers', ['starter.services'])
 
         function getAdvsAndProducts(){
             commonService.showLoading();
-            homePageService.getAdvertisements().then(function(data){
+            homePageService.getAdvAndHot().then(function(data){
                 if(data.length == 0){
                     $scope.slides = [{url:"img/adv_demo.png"}];
                 }else{
-
+                    var len = data.length;
+                    for(var i=0;i<4&&i<len;i++){
+                        var advFlag = data[i].advisedProduct;
+                        if(advFlag=='Y'){
+                            var picUrl = BASE_URL +'pic/'+ data[i].picName;
+                            var adv = {'url':picUrl};
+                            $scope.slides.push(adv);
+                        }else{
+                            continue;
+                        }
+                    }
 
                 }
-                homePageService.getHotProduct().then(function(data){
-                    if(data.length == 0){
-
-                    }else{
-
-
-                    }
-                    commonService.hideLoading();
-                },function(error){
-                    commonService.hideLoading();
-                    $scope.showAlert(error);
-                });
+                commonService.hideLoading();
             },function(error){
                 commonService.hideLoading();
                 $scope.slides = [{url:"img/adv_demo.png"}];

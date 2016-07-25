@@ -1,5 +1,5 @@
-var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
-//var BASE_URL = "http://9.110.54.95:8080/HuanAnBackend/";
+//var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
+var BASE_URL = "http://9.110.54.95:8080/HuanAnBackend/";
 angular.module('starter.services', [])
 
 .factory('DomesticService', ['$http','$q',function($http, $q){
@@ -289,36 +289,19 @@ angular.module('starter.services', [])
 
 .factory('homePageService', ['$http','$q',function($http, $q){
     return {
-        getAdvertisements : function(){
+        getAdvAndHot : function(){
             var url = BASE_URL+"shoppingmall/getHotProducts";
             var defer =$q.defer();
-            var request =$http.post(url);
+            var request =$http.get(url);
             request.success(function(data) {
                 defer.resolve(data);
             });
-            request.error(function(){
+            request.error(function(error){
                 defer.reject(Messages.HOMEADVERSFAIL);
             });
             return defer.promise;
-        },
-
-        getHotProduct : function(){
-            var url = "";
-            var defer =$q.defer();
-            var request =$http.post(url);
-            request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject(Messages.HOMEPRODUCTSFAIL);
-                }
-            });
-            request.error(function(){
-                defer.reject(Messages.HOMEPRODUCTSFAIL);
-            });
-            return defer.promise;
         }
+
     }
 }])
 
