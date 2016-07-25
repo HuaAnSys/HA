@@ -759,13 +759,11 @@ angular.module('starter.controllers', ['starter.services'])
         }else if(idx == 7){
           $rootScope.domesticTabTitle ="纱窗安装管道疏通";
         }
-        console.log($rootScope.domesticTabTitle);
         commonService.showLoading();
           DomesticService.getDomesticByStatus().then(function(data){
               $scope.domesticList = [];
               for(i=0;i<data.length;i++){
                   if($rootScope.domesticTabTitle == data[i].category){
-                      console.log(data[i].type);
                       $scope.domesticList.push(data[i]);
                   }
               }

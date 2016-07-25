@@ -1,5 +1,5 @@
-var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
-//var BASE_URL = "http://9.110.54.95:8080/HuanAnBackend/";
+//var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
+var BASE_URL = "http://9.110.54.95:8080/HuanAnBackend/";
 angular.module('starter.services', [])
 
 .factory('DomesticService', ['$http','$q',function($http, $q){
@@ -10,16 +10,16 @@ angular.module('starter.services', [])
   return {
     getDomesticByStatus: function () {
         //var url = "js/Domestic.json";
-        //var url = BASE_URL + "housekeepinfo/getHousekeepingInfo";
+        var url = BASE_URL + "housekeepinfo/getHousekeepingInfo";
         var defer =$q.defer();
-        //var request =$http.get(url);
-        var request = $http.get('js/Domestic.json');
+        var request =$http.get(url);
+        //var request = $http.get('js/Domestic.json');
       //Successful HTTP post request or not
       request.success(function (result) {
-          console.log(result);
         //var status = result.success;
         //if (status == "1") {
-          defer.resolve(result.data);
+          defer.resolve(result);
+        //  defer.resolve(result);
         //} else {
         //  defer.reject("Get draft list failed, please try again later.");
         //}
