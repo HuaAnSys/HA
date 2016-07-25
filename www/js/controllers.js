@@ -1502,6 +1502,7 @@ angular.module('starter.controllers', ['starter.services'])
             LoginService.login($scope.user).then(function(res) {
                 console.log(res);
                 $rootScope.userId = res.userinfo.id;
+                $rootScope.nickName = res.userinfo.nickName;
                 commonService.hideLoading();
                 $state.go('tab.Home');
             }, function(errMsg) {
@@ -1837,7 +1838,7 @@ angular.module('starter.controllers', ['starter.services'])
         console.log($rootScope.userId);
         $scope.info = $stateParams.houseInfo;
         commonService.showLoading();
-        RelatedRepairsService.getRelatedRepairs($rootScope.userId).then(function(data) {
+        RelatedRepairsService.getRelatedRepairs($rootScope.userId,$scope.info).then(function(data) {
             $scope.items = data.result;
             commonService.hideLoading();
         }, function(errMsg) {

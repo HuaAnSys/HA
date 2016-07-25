@@ -761,10 +761,10 @@ angular.module('starter.services', [])
 .factory('RelatedRepairsService', ['$http','$q',function($http, $q) {
 
     return {
-        getRelatedRepairs: function (user) {
+        getRelatedRepairs: function (user,site) {
             var defer = $q.defer();
             var url = BASE_URL + 'propertyManagement/getClaimedRepairs';
-            var request = $http.post(url,user);
+            var request = $http.post(url,user,site);
             //var request = $http.get('js/propertyManagement.json');
             request.success(function (data) {
                 defer.resolve(data);
