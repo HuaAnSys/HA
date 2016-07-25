@@ -388,7 +388,7 @@ angular.module('starter.services', [])
         getAllDiscussions : function(){
             var url = BASE_URL + "discussionRoom/getDiscussion";
             var defer = $q.defer();
-            var request =$http.post(url);
+            var request =$http.get(url);
             request.success(function(data) {
                 defer.resolve(data);
             });
