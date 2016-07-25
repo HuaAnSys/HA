@@ -804,13 +804,13 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('HomeCtrl',function($scope,$state,commonService,homePageService){
         console.log("HomeCtrl");
-//        getAdvsAndProducts();
-        $scope.slides = [
+        getAdvsAndProducts();
+/*        $scope.slides = [
             {url:"img/adv_demo.PNG"},
             {url:"img/advertise_a.png"},
             {url:"img/advertise_b.png"}
-        ];
-
+        ];*/
+        $scope.slides = [];
         $scope.hotProducts = [
             {
              "productImg":"img/a.jpg",
@@ -858,25 +858,24 @@ angular.module('starter.controllers', ['starter.services'])
 
         function getAdvsAndProducts(){
             commonService.showLoading();
-            homePageService.getAdvertisements().then(function(data){
+            homePageService.getAdvAndHot().then(function(data){
                 if(data.length == 0){
                     $scope.slides = [{url:"img/adv_demo.png"}];
                 }else{
-
+                    var len = data.length;
+                    for(var i=0;i<4&&i<len;i++){
+                        var advFlag = data[i].advisedProduct;
+                        if(advFlag=='Y'){
+                            var picUrl = BASE_URL +'pic/'+ data[i].picName;
+                            var adv = {'url':picUrl};
+                            $scope.slides.push(adv);
+                        }else{
+                            continue;
+                        }
+                    }
 
                 }
-                homePageService.getHotProduct().then(function(data){
-                    if(data.length == 0){
-
-                    }else{
-
-
-                    }
-                    commonService.hideLoading();
-                },function(error){
-                    commonService.hideLoading();
-                    $scope.showAlert(error);
-                });
+                commonService.hideLoading();
             },function(error){
                 commonService.hideLoading();
                 $scope.slides = [{url:"img/adv_demo.png"}];
@@ -1073,8 +1072,8 @@ angular.module('starter.controllers', ['starter.services'])
 
         $scope.fileUpload = function(type) {
 
-            commonService.showLoading();
-            /*            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";*/
+/*            commonService.showLoading();
+            *//*            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";*//*
             var uploadUrl = "http://9.110.47.10:8080/HuanAnBackend/actityAlarm/createNewActityAlarm";
             var filePath = $scope.imageSrc;
             if(filePath == undefined){
@@ -1102,7 +1101,7 @@ angular.module('starter.controllers', ['starter.services'])
                         console.log(progress.loaded+"---******--");
                     });
 
-            }, false);
+            }, false);*/
 
         }
 
@@ -1495,11 +1494,12 @@ angular.module('starter.controllers', ['starter.services'])
             pwd: ''
         }
         $scope.login = function() {
-            //console.log($scope.user);
+            console.log($scope.user);
             commonService.showLoading();
             LoginService.login($scope.user).then(function(res) {
                 console.log(res);
                 $rootScope.userId = res.userinfo.id;
+                $rootScope.nickName = res.userinfo.nickName;
                 commonService.hideLoading();
                 $state.go('tab.Home');
             }, function(errMsg) {
@@ -1716,6 +1716,7 @@ angular.module('starter.controllers', ['starter.services'])
                         type: 'button-positive',
                         onTap: function(e) {
                             console.log("call");
+                            call();
                         }
                     }
                 ]
@@ -1834,7 +1835,7 @@ angular.module('starter.controllers', ['starter.services'])
         console.log($rootScope.userId);
         $scope.info = $stateParams.houseInfo;
         commonService.showLoading();
-        RelatedRepairsService.getRelatedRepairs($rootScope.userId).then(function(data) {
+        RelatedRepairsService.getRelatedRepairs($rootScope.userId,$scope.info).then(function(data) {
             $scope.items = data.result;
             commonService.hideLoading();
         }, function(errMsg) {

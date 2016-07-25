@@ -289,36 +289,19 @@ angular.module('starter.services', [])
 
 .factory('homePageService', ['$http','$q',function($http, $q){
     return {
-        getAdvertisements : function(){
+        getAdvAndHot : function(){
             var url = BASE_URL+"shoppingmall/getHotProducts";
             var defer =$q.defer();
-            var request =$http.post(url);
+            var request =$http.get(url);
             request.success(function(data) {
                 defer.resolve(data);
             });
-            request.error(function(){
+            request.error(function(error){
                 defer.reject(Messages.HOMEADVERSFAIL);
             });
             return defer.promise;
-        },
-
-        getHotProduct : function(){
-            var url = "";
-            var defer =$q.defer();
-            var request =$http.post(url);
-            request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
-                }else{
-                    defer.reject(Messages.HOMEPRODUCTSFAIL);
-                }
-            });
-            request.error(function(){
-                defer.reject(Messages.HOMEPRODUCTSFAIL);
-            });
-            return defer.promise;
         }
+
     }
 }])
 
@@ -761,10 +744,10 @@ angular.module('starter.services', [])
 .factory('RelatedRepairsService', ['$http','$q',function($http, $q) {
 
     return {
-        getRelatedRepairs: function (user) {
+        getRelatedRepairs: function (user,site) {
             var defer = $q.defer();
             var url = BASE_URL + 'propertyManagement/getClaimedRepairs';
-            var request = $http.post(url,user);
+            var request = $http.post(url,user,site);
             //var request = $http.get('js/propertyManagement.json');
             request.success(function (data) {
                 defer.resolve(data);
