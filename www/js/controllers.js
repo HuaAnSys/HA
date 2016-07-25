@@ -811,7 +811,8 @@ angular.module('starter.controllers', ['starter.services'])
             {url:"img/advertise_b.png"}
         ];*/
         $scope.slides = [];
-        $scope.hotProducts = [
+        $scope.hotProducts = [];
+        /*$scope.hotProducts = [
             {
              "productImg":"img/a.jpg",
              "description":"波兰(Mleko)进口纯牛奶",
@@ -832,7 +833,7 @@ angular.module('starter.controllers', ['starter.services'])
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             }
-        ];
+        ];*/
 
 
         var slideHeight = document.body.scrollHeight-47;
@@ -859,7 +860,7 @@ angular.module('starter.controllers', ['starter.services'])
         function getAdvsAndProducts(){
             commonService.showLoading();
             homePageService.getAdvAndHot().then(function(data){
-                if(data.length == 0){
+                if(data==null||data.length == 0){
                     $scope.slides = [{url:"img/adv_demo.png"}];
                 }else{
                     var len = data.length;
@@ -867,12 +868,16 @@ angular.module('starter.controllers', ['starter.services'])
                         var advFlag = data[i].advisedProduct;
                         if(advFlag=='Y'){
                             var picUrl = BASE_URL +'pic/'+ data[i].picName;
-                            var adv = {'url':picUrl};
+                            var adv = {'url':picUrl ,'productId':data[i].productId};
                             $scope.slides.push(adv);
                         }else{
                             continue;
                         }
                     }
+                    angular.forEach(data,function(pro){
+                        pro.picName = BASE_URL +'pic/'+ pro.picName;
+                    });
+                    $scope.hotProducts = data;
 
                 }
                 commonService.hideLoading();
