@@ -719,7 +719,7 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('DomesticCtrl', function($scope, $rootScope, $state, commonService, DomesticService) {
         $scope.on_select = function(idx){
         if(idx == 1){
-          $rootScope.domesticTabTitle ="家具保洁";
+          $rootScope.domesticTabTitle ="家居保洁";
         }else if(idx == 2){
           $rootScope.domesticTabTitle ="家庭维修";
         }else if(idx == 3){
@@ -730,7 +730,7 @@ angular.module('starter.controllers', ['starter.services'])
         commonService.showLoading();
         DomesticService.getDomesticByStatus().then(function(data){
             $scope.domesticList = [];
-            for(i=0;i<data.length;i++){
+            for(var i=0;i<data.length;i++){
                 if($rootScope.domesticTabTitle == data[i].category){
                     $scope.domesticList.push(data[i]);
                     //$scope.domesticList[i].picName;
@@ -908,9 +908,9 @@ angular.module('starter.controllers', ['starter.services'])
                 $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(selectedTab);
             }else if(index==1&&selectedTab==0){
                 $stateParams.tabIndex = -1;
-                getCommunityByTab(1);
+//                getCommunityByTab(1);
             }else{
-                getCommunityByTab(index);
+//                getCommunityByTab(index);
             }
 
         }
@@ -1075,8 +1075,8 @@ angular.module('starter.controllers', ['starter.services'])
 
         $scope.fileUpload = function(type) {
 
-            commonService.showLoading();
-            /*            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";*/
+/*            commonService.showLoading();
+            *//*            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";*//*
             var uploadUrl = "http://9.110.47.10:8080/HuanAnBackend/actityAlarm/createNewActityAlarm";
             var filePath = $scope.imageSrc;
             if(filePath == undefined){
@@ -1104,7 +1104,7 @@ angular.module('starter.controllers', ['starter.services'])
                         console.log(progress.loaded+"---******--");
                     });
 
-            }, false);
+            }, false);*/
 
         }
 
@@ -1165,7 +1165,7 @@ angular.module('starter.controllers', ['starter.services'])
         "background-color": "#FFFFFF",
         "border-bottom": "1px solid #c8c7cc"
     }
-    getCommnetsAndLike();
+//    getCommnetsAndLike();
     function getCommnetsAndLike(){
         $scope.comments = [];
         $scope.likeNum = 0;
@@ -1192,7 +1192,7 @@ angular.module('starter.controllers', ['starter.services'])
         }
     }
 
-    $scope.setLike = function(){
+/*    $scope.setLike = function(){
         commonService.showLoading();
         var userId = $rootScope.userId;
         CommunityService.setLikeByCommunity($stateParams.detail.bulletin_id,userId).then(function(data){
@@ -1201,7 +1201,7 @@ angular.module('starter.controllers', ['starter.services'])
             $scope.showAlert(error);
             commonService.hideLoading();
         })
-    }
+    }*/
 
         $scope.commentsDetail = {
             "personIcon":"img/adam.jpg",
@@ -1237,7 +1237,7 @@ angular.module('starter.controllers', ['starter.services'])
         $state.go('community',{"tabIndex":$stateParams.tabIndex});
     }
 
-    $scope.submitComment = function(){
+/*    $scope.submitComment = function(){
         var say = $scope.hotComments;
         commonService.showLoading();
         CommunityService.addCommentsByCommunity($rootScope.userId,$stateParams.detail.bulletin_id,say).then(function(data){
@@ -1246,7 +1246,7 @@ angular.module('starter.controllers', ['starter.services'])
             $scope.showAlert(error);
             commonService.hideLoading();
         })
-    }
+    }*/
 })
     
     .controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopTypeService, ShopBannerService, ShopProductDetailService, $timeout) {
