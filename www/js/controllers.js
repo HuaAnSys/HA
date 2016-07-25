@@ -1498,20 +1498,20 @@ angular.module('starter.controllers', ['starter.services'])
         }
         $scope.login = function() {
             //console.log($scope.user);
-            commonService.showLoading();
-            LoginService.login($scope.user).then(function(res) {
-                console.log(res);
-                $rootScope.userId = res.userinfo.id;
-                commonService.hideLoading();
+            //commonService.showLoading();
+            //LoginService.login($scope.user).then(function(res) {
+            //    console.log(res);
+            //    $rootScope.userId = res.userinfo.id;
+            //    commonService.hideLoading();
                 $state.go('tab.Home');
-            }, function(errMsg) {
-                commonService.hideLoading();
-                var alertPopup = $ionicPopup.alert({
-                    title: '登录失败',
-                    template: '账号或密码错误，请重新输入'
-                })
-                console.log(errMsg);
-            });
+            //}, function(errMsg) {
+            //    commonService.hideLoading();
+            //    var alertPopup = $ionicPopup.alert({
+            //        title: '登录失败',
+            //        template: '账号或密码错误，请重新输入'
+            //    })
+            //    console.log(errMsg);
+            //});
         }
         $scope.regist=function(){
             $state.go('firstRegistPage');
@@ -1718,6 +1718,7 @@ angular.module('starter.controllers', ['starter.services'])
                         type: 'button-positive',
                         onTap: function(e) {
                             console.log("call");
+                            call();
                         }
                     }
                 ]
