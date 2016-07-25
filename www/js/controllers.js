@@ -814,22 +814,22 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.hotProducts = [];
         /*$scope.hotProducts = [
             {
-             "productImg":"img/a.jpg",
+             "picName":"img/a.jpg",
              "description":"波兰(Mleko)进口纯牛奶",
              "price":"9.9"
             },
             {
-                "productImg":"img/a.jpg",
+                "picName":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             },
             {
-                "productImg":"img/a.jpg",
+                "picName":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             },
             {
-                "productImg":"img/a.jpg",
+                "picName":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             }
@@ -910,9 +910,9 @@ angular.module('starter.controllers', ['starter.services'])
                 $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(selectedTab);
             }else if(index==1&&selectedTab==0){
                 $stateParams.tabIndex = -1;
-//                getCommunityByTab(1);
+                getCommunityByTab(1);
             }else{
-//                getCommunityByTab(index);
+                getCommunityByTab(index);
             }
 
         }
