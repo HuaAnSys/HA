@@ -932,7 +932,8 @@ angular.module('starter.controllers', ['starter.services'])
 
                     }else{
                         angular.forEach(data,function(value ,index){
-                            value.picName = "" + value.picName;
+                            value.personIcon = 'img/admin_img.jpg';
+                            value.picName = BASE_URL +'pic/'+value.picName;
                             value.uploaderName = "数据库管理员";
                             $scope.bulletions.push(value);
                         });
@@ -949,7 +950,7 @@ angular.module('starter.controllers', ['starter.services'])
 
                     }else{
                         angular.forEach(data,function(value ,index){
-                            value.picName = "" + value.picName;
+                            value.picName = BASE_URL +'pic/'+value.picName;
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
@@ -965,7 +966,7 @@ angular.module('starter.controllers', ['starter.services'])
 
                     }else{
                         angular.forEach(data,function(value ,index){
-                            value.picName = "" + value.picName;
+                            value.picName = BASE_URL +'pic/'+value.picName;
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
@@ -981,7 +982,7 @@ angular.module('starter.controllers', ['starter.services'])
                         $scope.bulletions = [];
                     }else{
                         angular.forEach(data,function(value ,index){
-                            value.picName = "" + value.picName;
+                            value.picName = BASE_URL +'pic/'+value.picName;
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
@@ -999,7 +1000,7 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go("addCommunity",{"tabIndex":index});
         }
 
-        $scope.bulletions = [
+/*        $scope.bulletions = [
             {
                 "personIcon":"img/adam.jpg",
                 "uploaderName":"社区管理员",
@@ -1030,7 +1031,7 @@ angular.module('starter.controllers', ['starter.services'])
                 "picName":"img/community_demo.jpg",
                 "uploadTime":"2016-07-05 12:32:20"
             },
-        ];
+        ];*/
 
 
 })
