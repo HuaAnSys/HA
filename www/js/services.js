@@ -333,13 +333,16 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        getLikeNumByCommunity : function(communityId){
-            var url = BASE_URL + "bulletin/getBulletinLike";
+        getLikeNumByCommunity : function(communityId,userID){
+            var url = BASE_URL + "bulletin/getBulletinLike/"+communityId+"/"+userID;
             var defer =$q.defer();
-            var param = {"bulletinID":communityId};
-            var request =$http.post(url,param);
+            var request =$http.get(url);
             request.success(function(data) {
-                defer.resolve(data);
+                if(data.status=='success'){
+                    defer.resolve(data);
+                }else{
+                    defer.reject(Messages.getlikeNumByBulletinId);
+                }
             });
             request.error(function(){
                 defer.reject(Messages.getlikeNumByBulletinId);

@@ -1160,6 +1160,8 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.detail = $stateParams.detail;
     $scope.hotComments = "";
+    $scope.likeNum = 0;
+    $scope.likeOrNot = 'N';
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
     $scope.divMain = {
@@ -1180,8 +1182,9 @@ angular.module('starter.controllers', ['starter.services'])
                 }else{
                     $scope.comments = data;
                 }
-                CommunityService.getLikeNumByCommunity($stateParams.detail.id,$rootScope.userId).then(function(data){
-                    $scope.likeNum = data.num;
+                CommunityService.getLikeNumByCommunity($stateParams.detail.bulletin_id,$rootScope.userId).then(function(data){
+                    $scope.likeNum = data.likeNum;
+                    $scope.likeOrNot = data.likeOrNot;
                     commonService.hideLoading();
                 },function(error){
                     $scope.showAlert(error);
@@ -1213,7 +1216,7 @@ angular.module('starter.controllers', ['starter.services'])
         })
     }*/
 
-        $scope.commentsDetail = {
+/*        $scope.commentsDetail = {
             "personIcon":"img/adam.jpg",
             "name":"社区管理员",
             "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
@@ -1240,7 +1243,7 @@ angular.module('starter.controllers', ['starter.services'])
                 }
             ]
 
-        };
+        };*/
 
 
     $scope.back = function(){
