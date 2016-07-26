@@ -917,11 +917,6 @@ angular.module('starter.controllers', ['starter.services'])
 
         }
 
-        $scope.goMessageDetail = function(message){
-            var index = $ionicTabsDelegate.selectedIndex();
-            $state.go('communityDetail',{"detail":message,"tabIndex":index});
-        }
-
         function getCommunityByTab(index){
             commonService.showLoading();
             $scope.bulletions = [];
@@ -998,6 +993,11 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.addNews = function(){
             var index = $ionicTabsDelegate.selectedIndex();
             $state.go("addCommunity",{"tabIndex":index});
+        }
+
+        $scope.goMessageDetail = function(message){
+            var index = $ionicTabsDelegate.selectedIndex();
+            $state.go('communityDetail',{"detail":message,"tabIndex":index});
         }
 
 /*        $scope.bulletions = [
