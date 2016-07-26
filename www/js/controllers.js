@@ -17,12 +17,11 @@ angular.module('starter.controllers', ['starter.services'])
     }
 })
 
-.controller('AboutMeCtrl', function($scope, $state, $cordovaCamera) {
+.controller('AboutMeCtrl', function($scope, $state, $rootScope, $cordovaCamera) {
         var screenWidth = document.body.scrollWidth;
         var picHeight=Math.ceil((screenWidth * 274)/375);
         $scope.picHeight=picHeight+'px';
         $scope.imageSrc = "img/adam.jpg";
-
         $scope.changePhoto = function () {
             var options = {
                 quality: 100,
@@ -98,7 +97,7 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.totalPrice = 0;
     commonService.showLoading();
         var len = 0;
-    shoppingCarService.getShoppingCar().then(function(data){
+    shoppingCarService.getShoppingCar($rootScope.userId).then(function(data){
         if(data.length>0){
             $scope.shoppingCarList = data;
             len = $scope.shoppingCarList.length;
@@ -685,7 +684,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('editNicknameCtrl', function($scope, $state, $rootScope, $stateParams) {
 
-    $scope.nickName = 'aaa';
+    $scope.nickName = $rootScope.nickName;
 
     $scope.clearInput = function(){
         $('.nickName').val('');
@@ -1246,55 +1245,86 @@ angular.module('starter.controllers', ['starter.services'])
     }*/
 })
     
-    .controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopTypeService, ShopBannerService, ShopProductDetailService, $timeout) {
+.controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, commonService, shopService, ShopBannerService, ShopProductDetailService, $timeout) {
+    $scope.navLists = [
+        {
+            name:"热门商品",
+            type:"hot"
+        },
+        {
+            name:"食品生鲜",
+            type:"b"
+        },
+        {
+            name:"个人化妆",
+            type:"c"
+        },
+        {
+            name:"酒水饮料",
+            type:"d"
+        },
+        {
+            name:"家居用品",
+            type:"e"
+        },
+        {
+            name:"母婴用品",
+            type:"f"
+        },
+        {
+            name:"有机蔬菜",
+            type:"g"
+        },
+        {
+            name:"家政保洁",
+            type:"h"
+        },
+        {
+            name:"精品水果",
+            type:"i"
+        },
+        {
+            name:"景区门票",
+            type:"j"
+        }
 
+    ];
 
+    commonService.showLoading();
+    shopService.getType().then(function(data){
+        $scope.navLists = data;
+        commonService.hideLoading();
+    }, function(error){
+        commonService.hideLoading();
+        //$scope.showAlert(error);
+    });
 
-        $scope.navLists = [
-            {
-                name:"热门商品",
-                type:"hot"
-            },
-            {
-                name:"食品生鲜",
-                type:"b"
-            },
-            {
-                name:"个人化妆",
-                type:"c"
-            },
-            {
-                name:"酒水饮料",
-                type:"d"
-            },
-            {
-                name:"家居用品",
-                type:"e"
-            },
-            {
-                name:"母婴用品",
-                type:"f"
-            },
-            {
-                name:"有机蔬菜",
-                type:"g"
-            },
-            {
-                name:"家政保洁",
-                type:"h"
-            },
-            {
-                name:"精品水果",
-                type:"i"
-            },
-            {
-                name:"景区门票",
-                type:"j"
-            }
+    ShopBannerService.getShopBanner().then(function(data){
+        $scope.ShopBanner = data;
+        $ionicLoading.hide();
+    }, function(error){
+        $ionicLoading.hide();
+        //$scope.showAlert(error);
+    });
 
-        ];
-        ShopBannerService.getShopBanner().then(function(data){
-            $scope.ShopBanner = data;
+    $scope.clickNav = function(type){
+        $scope.navListType = type;
+        console.log(this);
+        commonService.showLoading();
+        shopService.getShopByType(type).then(function(data){
+            $scope.products = data;
+            $timeout(function(){
+                var shopViewContent = $(".shopViewContent").outerHeight();
+                var winHeight = $(window).height();
+                if(shopViewContent > winHeight){
+                    shopViewContent = (shopViewContent + 20);
+                    $("#shopView").css("height", shopViewContent);
+                }else{
+                    $("#shopView").css("height", winHeight);
+                }
+
+                console.log(shopViewContent);
+            })
             $ionicLoading.hide();
         }, function(error){
             $ionicLoading.hide();
@@ -1302,54 +1332,17 @@ angular.module('starter.controllers', ['starter.services'])
         });
 
 
-
-        $scope.clickNav = function(type){
-            $scope.navListType = type;
-
-            console.log(this);
-            $ionicLoading.show({
-                template: '<ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>',
-                noBackdrop: true
-            });
-            ShopTypeService.getShopByType(type).then(function(data){
-                $scope.products = data;
-                $timeout(function(){
-                    var shopViewContent = $(".shopViewContent").outerHeight();
-                    var winHeight = $(window).height();
-                    if(shopViewContent > winHeight){
-                        shopViewContent = (shopViewContent + 20);
-                        $("#shopView").css("height", shopViewContent);
-                    }else{
-                        $("#shopView").css("height", winHeight);
-                    }
-
-
-
-                    console.log(shopViewContent);
-                })
-                $ionicLoading.hide();
-            }, function(error){
-                $ionicLoading.hide();
-                //$scope.showAlert(error);
-            });
-
-
-        };
-        $scope.clickNav("hot");
-        $scope.goProductDetail = function(product){
-            console.log(product);
-            $state.go('ShopProductDetail', {
-                name: product.name,
-                type: product.type,
-                price: product.price
-            });
-        }
-
-
-
-
-
-    })
+    };
+    $scope.clickNav(1);
+    $scope.goProductDetail = function(product){
+        console.log(product);
+        $state.go('ShopProductDetail', {
+            name: product.name,
+            type: product.type,
+            price: product.price
+        });
+    }
+})
     .controller('ShopProductDetailCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
         $scope.back=function(){
             $ionicHistory.goBack();
