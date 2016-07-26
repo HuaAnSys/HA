@@ -810,28 +810,29 @@ angular.module('starter.controllers', ['starter.services'])
             {url:"img/advertise_b.png"}
         ];*/
         $scope.slides = [];
-        $scope.hotProducts = [
+        $scope.hotProducts = [];
+        /*$scope.hotProducts = [
             {
-             "productImg":"img/a.jpg",
+             "picName":"img/a.jpg",
              "description":"波兰(Mleko)进口纯牛奶",
              "price":"9.9"
             },
             {
-                "productImg":"img/a.jpg",
+                "picName":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             },
             {
-                "productImg":"img/a.jpg",
+                "picName":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             },
             {
-                "productImg":"img/a.jpg",
+                "picName":"img/a.jpg",
                 "description":"波兰(Mleko)进口纯牛奶",
                 "price":"9.9"
             }
-        ];
+        ];*/
 
 
         var slideHeight = document.body.scrollHeight-47;
@@ -858,7 +859,7 @@ angular.module('starter.controllers', ['starter.services'])
         function getAdvsAndProducts(){
             commonService.showLoading();
             homePageService.getAdvAndHot().then(function(data){
-                if(data.length == 0){
+                if(data==null||data.length == 0){
                     $scope.slides = [{url:"img/adv_demo.png"}];
                 }else{
                     var len = data.length;
@@ -866,12 +867,16 @@ angular.module('starter.controllers', ['starter.services'])
                         var advFlag = data[i].advisedProduct;
                         if(advFlag=='Y'){
                             var picUrl = BASE_URL +'pic/'+ data[i].picName;
-                            var adv = {'url':picUrl};
+                            var adv = {'url':picUrl ,'productId':data[i].productId};
                             $scope.slides.push(adv);
                         }else{
                             continue;
                         }
                     }
+                    angular.forEach(data,function(pro){
+                        pro.picName = BASE_URL +'pic/'+ pro.picName;
+                    });
+                    $scope.hotProducts = data;
 
                 }
                 commonService.hideLoading();
@@ -904,16 +909,11 @@ angular.module('starter.controllers', ['starter.services'])
                 $ionicTabsDelegate.$getByHandle('communityTabs_handle').select(selectedTab);
             }else if(index==1&&selectedTab==0){
                 $stateParams.tabIndex = -1;
-//                getCommunityByTab(1);
+                getCommunityByTab(1);
             }else{
-//                getCommunityByTab(index);
+                getCommunityByTab(index);
             }
 
-        }
-
-        $scope.goMessageDetail = function(message){
-            var index = $ionicTabsDelegate.selectedIndex();
-            $state.go('communityDetail',{"detail":message,"tabIndex":index});
         }
 
         function getCommunityByTab(index){
@@ -926,7 +926,8 @@ angular.module('starter.controllers', ['starter.services'])
 
                     }else{
                         angular.forEach(data,function(value ,index){
-                            value.picName = "" + value.picName;
+                            value.personIcon = 'img/admin_img.jpg';
+                            value.picName = BASE_URL +'pic/'+value.picName;
                             value.uploaderName = "数据库管理员";
                             $scope.bulletions.push(value);
                         });
@@ -943,7 +944,7 @@ angular.module('starter.controllers', ['starter.services'])
 
                     }else{
                         angular.forEach(data,function(value ,index){
-                            value.picName = "" + value.picName;
+                            value.picName = BASE_URL +'pic/'+value.picName;
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
@@ -959,7 +960,7 @@ angular.module('starter.controllers', ['starter.services'])
 
                     }else{
                         angular.forEach(data,function(value ,index){
-                            value.picName = "" + value.picName;
+                            value.picName = BASE_URL +'pic/'+value.picName;
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
@@ -975,7 +976,7 @@ angular.module('starter.controllers', ['starter.services'])
                         $scope.bulletions = [];
                     }else{
                         angular.forEach(data,function(value ,index){
-                            value.picName = "" + value.picName;
+                            value.picName = BASE_URL +'pic/'+value.picName;
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
@@ -993,7 +994,12 @@ angular.module('starter.controllers', ['starter.services'])
             $state.go("addCommunity",{"tabIndex":index});
         }
 
-        $scope.bulletions = [
+        $scope.goMessageDetail = function(message){
+            var index = $ionicTabsDelegate.selectedIndex();
+            $state.go('communityDetail',{"detail":message,"tabIndex":index});
+        }
+
+/*        $scope.bulletions = [
             {
                 "personIcon":"img/adam.jpg",
                 "uploaderName":"社区管理员",
@@ -1024,7 +1030,7 @@ angular.module('starter.controllers', ['starter.services'])
                 "picName":"img/community_demo.jpg",
                 "uploadTime":"2016-07-05 12:32:20"
             },
-        ];
+        ];*/
 
 
 })
