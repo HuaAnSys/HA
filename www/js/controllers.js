@@ -1168,7 +1168,7 @@ angular.module('starter.controllers', ['starter.services'])
         "background-color": "#FFFFFF",
         "border-bottom": "1px solid #c8c7cc"
     }
-//    getCommnetsAndLike();
+    getCommnetsAndLike();
     function getCommnetsAndLike(){
         $scope.comments = [];
         $scope.likeNum = 0;
@@ -1180,9 +1180,8 @@ angular.module('starter.controllers', ['starter.services'])
                 }else{
                     $scope.comments = data;
                 }
-                CommunityService.getLikeNumByCommunity($stateParams.detail.id).then(function(data){
+                CommunityService.getLikeNumByCommunity($stateParams.detail.id,$rootScope.userId).then(function(data){
                     $scope.likeNum = data.num;
-                    //gen ju shifou dianzan zuo chu li
                     commonService.hideLoading();
                 },function(error){
                     $scope.showAlert(error);
@@ -1192,6 +1191,14 @@ angular.module('starter.controllers', ['starter.services'])
                 commonService.hideLoading();
                 $scope.showAlert(error);
             });
+        }else if($stateParams.tabIndex==1){
+
+
+        }else if($stateParams.tabIndex==2){
+
+
+        }else{
+
         }
     }
 

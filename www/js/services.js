@@ -320,8 +320,8 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        getAllCommentsByCommunity : function(communityId){
-            var url = BASE_URL + "bulletin/getBulletinComments/bulletinID/"+communityId;
+        getAllCommentsByCommunity : function(bulletinID){
+            var url = BASE_URL + "bulletin/getBulletinComments/"+bulletinID;
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function(data) {
