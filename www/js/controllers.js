@@ -1217,6 +1217,19 @@ angular.module('starter.controllers', ['starter.services'])
         })
     }
 
+    $scope.submitComment = function(){
+        var detail = $scope.hotComments;
+        commonService.showLoading();
+        CommunityService.addCommentsByCommunity($rootScope.userId,$stateParams.detail.bulletin_id,detail).then(function(data){
+            $scope.hotComments = "";
+            getCommnetsAndLike();
+            commonService.hideLoading();
+        },function(error){
+            $scope.showAlert(error);
+            commonService.hideLoading();
+        })
+    }
+
 /*        $scope.commentsDetail = {
             "personIcon":"img/adam.jpg",
             "name":"社区管理员",
@@ -1251,16 +1264,6 @@ angular.module('starter.controllers', ['starter.services'])
         $state.go('community',{"tabIndex":$stateParams.tabIndex});
     }
 
-/*    $scope.submitComment = function(){
-        var say = $scope.hotComments;
-        commonService.showLoading();
-        CommunityService.addCommentsByCommunity($rootScope.userId,$stateParams.detail.bulletin_id,say).then(function(data){
-            commonService.hideLoading();
-        },function(error){
-            $scope.showAlert(error);
-            commonService.hideLoading();
-        })
-    }*/
 })
     
     .controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopTypeService, ShopBannerService, ShopProductDetailService, $timeout) {
