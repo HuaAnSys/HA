@@ -354,10 +354,10 @@ angular.module('starter.services', [])
             return defer.promise;
         },*/
 
-        setLikeByCommunity : function(communityId,userId){
+        setLikeByCommunity : function(communityId,userId,likeOrNot){
             var url = BASE_URL + "bulletin/setBulletinLike";
             var defer =$q.defer();
-            var param = {"bulletinID":communityId,"userID":userId};
+            var param = {"bulletinID":communityId,"userID":userId,"likeFlag":likeOrNot};
             var request =$http.post(url,param);
             request.success(function(data) {
                 if(data.result=="success"){

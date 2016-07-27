@@ -1205,16 +1205,17 @@ angular.module('starter.controllers', ['starter.services'])
         }
     }
 
-/*    $scope.setLike = function(){
+     $scope.setLike = function(){
         commonService.showLoading();
         var userId = $rootScope.userId;
-        CommunityService.setLikeByCommunity($stateParams.detail.bulletin_id,userId).then(function(data){
+        CommunityService.setLikeByCommunity($stateParams.detail.bulletin_id,userId,$scope.likeOrNot).then(function(data){
             commonService.hideLoading();
+            getCommnetsAndLike();
         },function(error){
             $scope.showAlert(error);
             commonService.hideLoading();
         })
-    }*/
+    }
 
 /*        $scope.commentsDetail = {
             "personIcon":"img/adam.jpg",
