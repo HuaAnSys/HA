@@ -667,10 +667,22 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('personalInfoCtrl', function($scope, $state, $rootScope, $stateParams) {
+.controller('personalInfoCtrl', function($scope, $state, $rootScope, $stateParams, commonService, personalInfoService) {
     var screenWidth = document.body.scrollWidth;
     var picHeight=Math.ceil((screenWidth * 100)/290);
     $scope.picHeight=picHeight+'px';
+    $scope.houseInfos = [];
+    commonService.showLoading();
+    personalInfoService.getHouse($rootScope.userId).then(function(data){
+        for(var i=0;i<data.length;i++){
+            $scope.houseInfo = data[i].villageName + data[i].phaseNo + data[i].block_num + data[i].unit_num + data[i].floor_num + data[i].door_num;
+            $scope.houseInfos.push($scope.houseInfo);
+        }
+        commonService.hideLoading();
+    }, function(error){
+        commonService.hideLoading();
+        //$scope.showAlert(error);
+    });
 
     $scope.editNickname = function(){
         $state.go('editNickname');
@@ -731,6 +743,7 @@ angular.module('starter.controllers', ['starter.services'])
             $scope.domesticList = [];
             for(var i=0;i<data.length;i++){
                 if($rootScope.domesticTabTitle == data[i].category){
+                    data[i].picName = BASE_URL +'pic/'+data[i].picName;
                     $scope.domesticList.push(data[i]);
                     //$scope.domesticList[i].picName;
                 }
@@ -763,6 +776,7 @@ angular.module('starter.controllers', ['starter.services'])
               $scope.domesticList = [];
               for(i=0;i<data.length;i++){
                   if($rootScope.domesticTabTitle == data[i].category){
+                      data[i].picName = BASE_URL +'pic/'+data[i].picName;
                       $scope.domesticList.push(data[i]);
                   }
               }
@@ -1252,50 +1266,51 @@ angular.module('starter.controllers', ['starter.services'])
 })
     
 .controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, commonService, shopService, ShopBannerService, ShopProductDetailService, $timeout) {
-    $scope.navLists = [
-        {
-            name:"热门商品",
-            type:"hot"
-        },
-        {
-            name:"食品生鲜",
-            type:"b"
-        },
-        {
-            name:"个人化妆",
-            type:"c"
-        },
-        {
-            name:"酒水饮料",
-            type:"d"
-        },
-        {
-            name:"家居用品",
-            type:"e"
-        },
-        {
-            name:"母婴用品",
-            type:"f"
-        },
-        {
-            name:"有机蔬菜",
-            type:"g"
-        },
-        {
-            name:"家政保洁",
-            type:"h"
-        },
-        {
-            name:"精品水果",
-            type:"i"
-        },
-        {
-            name:"景区门票",
-            type:"j"
-        }
-
-    ];
-
+    //$scope.navLists = [
+    //    {
+    //        name:"热门商品",
+    //        type:"hot"
+    //    },
+    //    {
+    //        name:"食品生鲜",
+    //        type:"b"
+    //    },
+    //    {
+    //        name:"个人化妆",
+    //        type:"c"
+    //    },
+    //    {
+    //        name:"酒水饮料",
+    //        type:"d"
+    //    },
+    //    {
+    //        name:"家居用品",
+    //        type:"e"
+    //    },
+    //    {
+    //        name:"母婴用品",
+    //        type:"f"
+    //    },
+    //    {
+    //        name:"有机蔬菜",
+    //        type:"g"
+    //    },
+    //    {
+    //        name:"家政保洁",
+    //        type:"h"
+    //    },
+    //    {
+    //        name:"精品水果",
+    //        type:"i"
+    //    },
+    //    {
+    //        name:"景区门票",
+    //        type:"j"
+    //    }
+    //
+    //];
+    var winWidth = $(window).width();
+    $('.shopViewContent .list').css("width", winWidth-88);
     commonService.showLoading();
     shopService.getType().then(function(data){
         $scope.navLists = data;
@@ -1307,9 +1322,9 @@ angular.module('starter.controllers', ['starter.services'])
 
     ShopBannerService.getShopBanner().then(function(data){
         $scope.ShopBanner = data;
-        $ionicLoading.hide();
+        //$ionicLoading.hide();
     }, function(error){
-        $ionicLoading.hide();
+        //$ionicLoading.hide();
         //$scope.showAlert(error);
     });
 
@@ -1318,85 +1333,81 @@ angular.module('starter.controllers', ['starter.services'])
         console.log(this);
         commonService.showLoading();
         shopService.getShopByType(type).then(function(data){
+            angular.forEach(data,function(product){
+                product.picName = BASE_URL +'pic/'+ product.picName;
+            });
             $scope.products = data;
             $timeout(function(){
                 var shopViewContent = $(".shopViewContent").outerHeight();
+                var shopLeftNav = $(".shopLeftNav").outerHeight();
                 var winHeight = $(window).height();
                 if(shopViewContent > winHeight){
                     shopViewContent = (shopViewContent + 20);
                     $("#shopView").css("height", shopViewContent);
                 }else{
-                    $("#shopView").css("height", winHeight);
+                    $("#shopView").css("height", shopLeftNav);
                 }
 
                 console.log(shopViewContent);
             })
-            $ionicLoading.hide();
+            commonService.hideLoading();
         }, function(error){
-            $ionicLoading.hide();
+            commonService.hideLoading();
             //$scope.showAlert(error);
         });
 
 
     };
     $scope.clickNav(1);
-    $scope.goProductDetail = function(product){
-        console.log(product);
-        $state.go('ShopProductDetail', {
+    $scope.goProductDetail = function(productId){
+        console.log(productId);
+        $state.go('ShopProductDetail', {productId: productId});
+    }
+})
+.controller('ShopProductDetailCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, commonService, ShopProductDetailService, $timeout, $ionicHistory) {
+    var productId = $stateParams.productId;
+    $scope.moveToShop=function(){
+        $state.go('tab.Shop');
+    }
+    $scope.submitOrder=function(product){
+        $state.go('submitOrder', {
             name: product.name,
             type: product.type,
             price: product.price
         });
     }
+    $scope.product = $stateParams;
+    $scope.productDetail = function(productId){
+        commonService.showLoading();
+        ShopProductDetailService.getShopProductDetail(productId).then(function(data){
+            data.picName = BASE_URL +'pic/'+ data.picName;
+            data.kinds = JSON.parse(data.kinds);
+            $scope.productDetailData = data;
+            commonService.hideLoading();
+        }, function(error){
+            commonService.hideLoading();
+            //$scope.showAlert(error);
+        });
+
+    }
+    $scope.productDetail(productId);
+    $scope.productTypeRadio = "";
+    $scope.clicProductTypeRadio = function(item){
+        $scope.itemRadio = item;
+    };
+    $scope.productNumAmount = 1;
+    $scope.buyProduct = function(){
+
+    }
+
+    //Tab 3
+    $scope.clicProductCommentType = function(item){
+        $scope.ProductCommentType = item;
+
+
+    };
+
 })
-    .controller('ShopProductDetailCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
-        $scope.back=function(){
-            $ionicHistory.goBack();
-        }
-        $scope.submitOrder=function(product){
-            $state.go('submitOrder', {
-                name: product.name,
-                type: product.type,
-                price: product.price
-            });
-        }
-        console.log($stateParams);
-        console.log($stateParams.name);
-        console.log($stateParams.type);
-        console.log($stateParams.price);
-        $scope.product = $stateParams;
-        $scope.productDetail = function(product){
-            ShopProductDetailService.getShopProductDetail(product).then(function(data){
-                $scope.productDetailData = data;
-                console.log(data);
-
-                $ionicLoading.hide();
-            }, function(error){
-                $ionicLoading.hide();
-                //$scope.showAlert(error);
-            });
-
-        }
-        $scope.productDetail($stateParams);
-        $scope.productTypeRadio = "";
-        $scope.clicProductTypeRadio = function(item){
-            $scope.itemRadio = item;
-
-
-        };
-        $scope.productNumAmount = 1;
-        $scope.buyProduct = function(){
-
-        }
-
-        //Tab 3
-        $scope.clicProductCommentType = function(item){
-            $scope.ProductCommentType = item;
-
-
-        };
-
-    })
     .controller('submitOrderCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
         $scope.back=function(){
             $ionicHistory.goBack();

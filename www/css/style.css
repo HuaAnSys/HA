@@ -424,6 +424,9 @@ ion-view[id="homeView"] .advertisements{
 }
 
 /* Shop */
+ion-view[id="shop"]{
+    background-color: #EFEFf4;
+}
 #shopView{
     position: relative;
     background-color: #EFEFF4;
@@ -464,6 +467,7 @@ ion-view[id="homeView"] .advertisements{
 }
 .shopViewContent div.list{
     background-color: #FFF;
+    padding: 0px;
 }
 .shopViewContent .item{
     width: 50%;
@@ -541,7 +545,7 @@ ion-view[id="homeView"] .advertisements{
     background-color: #fff;
     padding: 0;
 }
-#productDetailTab1 .productImg img{ display: block; height: 368px; margin: 0 auto;}
+#productDetailTab1 .productImg img{ display: block; width: 100%; margin: 0 auto;}
 
 #ShopProductDetail .has-tabs-top{top: 48px;}
 .productNameAndPrice,

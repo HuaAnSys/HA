@@ -11,10 +11,32 @@ angular.module('starter.services', [])
             var request =$http.get(url);
             //var request = $http.get('js/Domestic.json');
             request.success(function (result) {
+                console.log(result);
                 defer.resolve(result);
             });
             request.error(function () {
                 defer.reject(Messages.getDomestic);
+            });
+            return defer.promise;
+        }
+    };
+}])
+
+.factory('personalInfoService', ['$http','$q',function($http, $q){
+    return {
+        getHouse: function (userId) {
+            var userId = userId;
+            //var url = "js/Domestic.json";
+            var url = BASE_URL + "myPersonalInfo/getMyProperty/"+userId;
+            var defer =$q.defer();
+            var request =$http.get(url);
+            //var request = $http.get('js/Domestic.json');
+            request.success(function (result) {
+                console.log(result);
+                defer.resolve(result);
+            });
+            request.error(function () {
+                defer.reject(Messages.getHouse);
             });
             return defer.promise;
         }
@@ -131,7 +153,7 @@ angular.module('starter.services', [])
                 defer.resolve(result);
             });
             request.error(function () {
-                defer.reject("Get draft list failed, please try again later.");
+                defer.reject(Messages.getShopByType);
             });
             return defer.promise;
         }
@@ -154,52 +176,21 @@ angular.module('starter.services', [])
   };
 }])
 .factory('ShopProductDetailService', ['$http','$q',function($http, $q){
-  // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
-
-  return {
-    getShopProductDetail: function (product) {
-      //var url = SERVICE_CONTEXT + "/smalldata/users/" + id + "/getIntentListByStatus/" + status;
-
-      console.log(product);
+ return {
+    getShopProductDetail: function (productId) {
+      console.log(productId);
+      var url = BASE_URL + "shoppingmall/getProduct";
+      //var request = $http.get('js/ShopProductDetail.json');
       var defer = $q.defer();
-      var request = $http.get('js/ShopProductDetail.json');
-      //if(type=='a'){
-      //  var request = $http.get('js/shopType_a.json');
-      //}else if(type=='b'){
-      //  var request = $http.get('js/shopType_b.json');
-      //}else if(type=='c'){
-      //  var request = $http.get('js/shopType_d.json');
-      //}else if(type=='d'){
-      //  var request = $http.get('js/shopType_d.json');
-      //}else if(type=='e'){
-      //  var request = $http.get('js/shopType_a.json');
-      //}else if(type=='f'){
-      //  var request = $http.get('js/shopType_b.json');
-      //}else if(type=='g'){
-      //  var request = $http.get('js/shopType_c.json');
-      //}else if(type=='h'){
-      //  var request = $http.get('js/shopType_d.json');
-      //}else if(type=='i'){
-      //  var request = $http.get('js/shopType_a.json');
-      //}else if(type=='j'){
-      //  var request = $http.get('js/shopType_b.json');
-      //}else if(type=='hot'){
-      //  var request = $http.get('js/shopTyp_hot.json');
-      //}
-
-      //Successful HTTP post request or not
+      var param = {"productID": productId};
+      var request =$http.post(url,param);
       request.success(function (result) {
-        //var status = result.success;
-        //if (status == "1") {
-        defer.resolve(result.data);
-        //} else {
-        //  defer.reject("Get draft list failed, please try again later.");
-        //}
+          console.log(result);
+        //defer.resolve(result.data);
+        defer.resolve(result[0]);
       });
       request.error(function () {
-        defer.reject("Get draft list failed, please try again later.");
+        defer.reject(Messages.getShopProductDetail);
       });
       return defer.promise;
     }
