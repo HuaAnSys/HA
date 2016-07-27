@@ -320,12 +320,16 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        getAllCommentsByCommunity : function(bulletinID){
-            var url = BASE_URL + "bulletin/getBulletinComments/"+bulletinID;
+        getAllCommentsByCommunity : function(bulletinID,userID){
+            var url = BASE_URL + "bulletin/getBulletinComments/"+bulletinID+"/"+userID;
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function(data) {
-                defer.resolve(data);
+                if(data.status=='success'){
+                    defer.resolve(data);
+                }else{
+                    defer.reject(Messages.getCommentByBulletinId);
+                }
             });
             request.error(function(error){
                 defer.reject(Messages.getCommentByBulletinId);
@@ -333,7 +337,7 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        getLikeNumByCommunity : function(communityId,userID){
+/*        getLikeNumByCommunity : function(communityId,userID){
             var url = BASE_URL + "bulletin/getBulletinLike/"+communityId+"/"+userID;
             var defer =$q.defer();
             var request =$http.get(url);
@@ -348,7 +352,7 @@ angular.module('starter.services', [])
                 defer.reject(Messages.getlikeNumByBulletinId);
             });
             return defer.promise;
-        },
+        },*/
 
         setLikeByCommunity : function(communityId,userId){
             var url = BASE_URL + "bulletin/setBulletinLike";

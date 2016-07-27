@@ -1176,20 +1176,20 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.likeNum = 0;
         commonService.showLoading();
         if($stateParams.tabIndex==0){
-            CommunityService.getAllCommentsByCommunity($stateParams.detail.bulletin_id).then(function(data){
-                if(data.length == 0){
+            CommunityService.getAllCommentsByCommunity($stateParams.detail.bulletin_id,$rootScope.userId).then(function(data){
 
-                }else{
-                    $scope.comments = data;
-                }
-                CommunityService.getLikeNumByCommunity($stateParams.detail.bulletin_id,$rootScope.userId).then(function(data){
+                $scope.comments = data.comments;
+                $scope.likeNum = data.likeNum;
+                $scope.likeOrNot = data.likeOrNot;
+                commonService.hideLoading();
+/*                CommunityService.getLikeNumByCommunity($stateParams.detail.bulletin_id,$rootScope.userId).then(function(data){
                     $scope.likeNum = data.likeNum;
                     $scope.likeOrNot = data.likeOrNot;
                     commonService.hideLoading();
                 },function(error){
                     $scope.showAlert(error);
                     commonService.hideLoading();
-                })
+                })*/
             },function(error){
                 commonService.hideLoading();
                 $scope.showAlert(error);
