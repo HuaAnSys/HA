@@ -423,6 +423,17 @@ ion-view[id="homeView"] .advertisements{
     font-size: 23px;
 }
 
+.message_like_N{
+    float: right;
+    font-size: 23px;
+}
+
+.message_like_Y{
+    float: right;
+    font-size: 23px;
+    color: red;
+}
+
 /* Shop */
 ion-view[id="shop"]{
     background-color: #EFEFf4;

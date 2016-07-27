@@ -15,16 +15,16 @@
         </div>
 
         <div class="goodPart">
-            <span class="goodNum">已有3人点赞</span>
-            <span class="ion-ios-heart-outline message_like" ng-click="setLike()"></span>
+            <span class="goodNum">已有{{likeNum}}人点赞</span>
+            <span  ng-class="{'Y':'ion-heart message_like_Y','N':'ion-heart message_like_N'}[likeOrNot]" ng-click="setLike()"></span>
         </div>
-        <ion-list ng-repeat="comment in commentsDetail.comments">
+        <ion-list ng-repeat="comment in comments">
             <ion-item>
                 <div class="commentTextDesc">
                     <img src="{{commentsDetail.personIcon}}" class="message_icon"/>
-                    <span class="message_people community_detail_good_who">{{comment.name}}</span>
-                    <span class="community_detail_good_time">2016-05-05 00:00</span>
-                    <div>{{comment.detail}}</div>
+                    <span class="message_people community_detail_good_who">{{comment.nickName}}</span>
+                    <span class="community_detail_good_time">{{comment.commentTime}}</span>
+                    <div>{{comment.commentDetail}}</div>
                 </div>
             </ion-item>
         </ion-list>

@@ -1173,6 +1173,8 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.detail = $stateParams.detail;
     $scope.hotComments = "";
+    $scope.likeNum = 0;
+    $scope.likeOrNot = 'N';
     var width = document.body.scrollWidth;
     $scope.message_picture_width = width-30;
     $scope.divMain = {
@@ -1181,45 +1183,67 @@ angular.module('starter.controllers', ['starter.services'])
         "background-color": "#FFFFFF",
         "border-bottom": "1px solid #c8c7cc"
     }
-//    getCommnetsAndLike();
+    getCommnetsAndLike();
     function getCommnetsAndLike(){
         $scope.comments = [];
         $scope.likeNum = 0;
         commonService.showLoading();
         if($stateParams.tabIndex==0){
-            CommunityService.getAllCommentsByCommunity($stateParams.detail.bulletin_id).then(function(data){
-                if(data.length == 0){
+            CommunityService.getAllCommentsByCommunity($stateParams.detail.bulletin_id,$rootScope.userId).then(function(data){
 
-                }else{
-                    $scope.comments = data;
-                }
-                CommunityService.getLikeNumByCommunity($stateParams.detail.id).then(function(data){
-                    $scope.likeNum = data.num;
-                    //gen ju shifou dianzan zuo chu li
+                $scope.comments = data.comments;
+                $scope.likeNum = data.likeNum;
+                $scope.likeOrNot = data.likeOrNot;
+                commonService.hideLoading();
+/*                CommunityService.getLikeNumByCommunity($stateParams.detail.bulletin_id,$rootScope.userId).then(function(data){
+                    $scope.likeNum = data.likeNum;
+                    $scope.likeOrNot = data.likeOrNot;
                     commonService.hideLoading();
                 },function(error){
                     $scope.showAlert(error);
                     commonService.hideLoading();
-                })
+                })*/
             },function(error){
                 commonService.hideLoading();
                 $scope.showAlert(error);
             });
+        }else if($stateParams.tabIndex==1){
+
+
+        }else if($stateParams.tabIndex==2){
+
+
+        }else{
+
         }
     }
 
-/*    $scope.setLike = function(){
+     $scope.setLike = function(){
         commonService.showLoading();
         var userId = $rootScope.userId;
-        CommunityService.setLikeByCommunity($stateParams.detail.bulletin_id,userId).then(function(data){
+        CommunityService.setLikeByCommunity($stateParams.detail.bulletin_id,userId,$scope.likeOrNot).then(function(data){
+            commonService.hideLoading();
+            getCommnetsAndLike();
+        },function(error){
+            $scope.showAlert(error);
+            commonService.hideLoading();
+        })
+    }
+
+    $scope.submitComment = function(){
+        var detail = $scope.hotComments;
+        commonService.showLoading();
+        CommunityService.addCommentsByCommunity($rootScope.userId,$stateParams.detail.bulletin_id,detail).then(function(data){
+            $scope.hotComments = "";
+            getCommnetsAndLike();
             commonService.hideLoading();
         },function(error){
             $scope.showAlert(error);
             commonService.hideLoading();
         })
-    }*/
+    }
 
-        $scope.commentsDetail = {
+/*        $scope.commentsDetail = {
             "personIcon":"img/adam.jpg",
             "name":"社区管理员",
             "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
@@ -1246,23 +1270,13 @@ angular.module('starter.controllers', ['starter.services'])
                 }
             ]
 
-        };
+        };*/
 
 
     $scope.back = function(){
         $state.go('community',{"tabIndex":$stateParams.tabIndex});
     }
 
-/*    $scope.submitComment = function(){
-        var say = $scope.hotComments;
-        commonService.showLoading();
-        CommunityService.addCommentsByCommunity($rootScope.userId,$stateParams.detail.bulletin_id,say).then(function(data){
-            commonService.hideLoading();
-        },function(error){
-            $scope.showAlert(error);
-            commonService.hideLoading();
-        })
-    }*/
 })
     
 .controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, commonService, shopService, ShopBannerService, ShopProductDetailService, $timeout) {

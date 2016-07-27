@@ -249,12 +249,16 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        getAllCommentsByCommunity : function(communityId){
-            var url = BASE_URL + "bulletin/getBulletinComments/bulletinID/"+communityId;
+        getAllCommentsByCommunity : function(bulletinID,userID){
+            var url = BASE_URL + "bulletin/getBulletinComments/"+bulletinID+"/"+userID;
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function(data) {
-                defer.resolve(data);
+                if(data.status=='success'){
+                    defer.resolve(data);
+                }else{
+                    defer.reject(Messages.getCommentByBulletinId);
+                }
             });
             request.error(function(error){
                 defer.reject(Messages.getCommentByBulletinId);
@@ -262,24 +266,27 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        getLikeNumByCommunity : function(communityId){
-            var url = BASE_URL + "bulletin/getBulletinLike";
+/*        getLikeNumByCommunity : function(communityId,userID){
+            var url = BASE_URL + "bulletin/getBulletinLike/"+communityId+"/"+userID;
             var defer =$q.defer();
-            var param = {"bulletinID":communityId};
-            var request =$http.post(url,param);
+            var request =$http.get(url);
             request.success(function(data) {
-                defer.resolve(data);
+                if(data.status=='success'){
+                    defer.resolve(data);
+                }else{
+                    defer.reject(Messages.getlikeNumByBulletinId);
+                }
             });
             request.error(function(){
                 defer.reject(Messages.getlikeNumByBulletinId);
             });
             return defer.promise;
-        },
+        },*/
 
-        setLikeByCommunity : function(communityId,userId){
+        setLikeByCommunity : function(communityId,userId,likeOrNot){
             var url = BASE_URL + "bulletin/setBulletinLike";
             var defer =$q.defer();
-            var param = {"bulletinID":communityId,"userID":userId};
+            var param = {"bulletinID":communityId,"userID":userId,"likeFlag":likeOrNot};
             var request =$http.post(url,param);
             request.success(function(data) {
                 if(data.result=="success"){
