@@ -1,5 +1,4 @@
 <ion-view view-title="ShopProductDetail">
-
     <ion-tabs id="ShopProductDetail" class=" tabs-striped tabs-top" >
         <ion-tab title="商品" >
             <ion-view >
@@ -7,12 +6,12 @@
                     <form name="buyProduct" ng-submit="submitOrder(product)">
                         <div id="productDetailTab1">
                             <div class="productImg">
-                                <img src="{{productDetailData[0].img}}" alt="" />
+                                <img src="{{productDetailData.picName}}" alt="" />
                             </div>
                             <div class="productNameAndPrice">
-                                <span class="productName">{{productDetailData[0].name}}</span>
-                                <span class="productSubName">{{productDetailData[0].subName}}</span>
-                                <span class="productPrice">￥{{productDetailData[0].price}}</span>
+                                <span class="productName">{{productDetailData.productName}}</span>
+                                <!--<span class="productSubName">{{productDetailData[0].subName}}</span>-->
+                                <span class="productPrice">￥{{productDetailData.price}}</span>
                             </div>
 
                             <div class="productType">
@@ -21,7 +20,7 @@
                                 </div>
                                 <div class="productTypeList">
                                     <ion-list>
-                                        <ion-item class="item-radio" ng-class="{active: itemRadio == item}" ng-repeat="item in productDetailData[0].kinds" ng-click="clicProductTypeRadio(item);">
+                                        <ion-item class="item-radio" ng-class="{active: itemRadio == item}" ng-repeat="item in productDetailData.kinds" ng-click="clicProductTypeRadio(item);">
                                             <label class="radio">
                                                 <input type="radio" name="productTypeRadio" data-ng-model="productTypeRadio" data-ng-checked="productTypeRadio == item" />
                                                 {{item}}
@@ -45,7 +44,7 @@
                                         <i class="icon ion-plus-round iconRight" data-ng-click="productNumAmount =  productNumAmount + 1"></i>
                                         <div class="clear"></div>
                                     </div>
-                                    <span class="productNumSpan">件 (库存{{productDetailData[0].inventory}}件)</span>
+                                    <span class="productNumSpan">件 (库存{{productDetailData.quantity}}件)</span>
                                     <div class="clear"></div>
                                 </div>
 
@@ -174,7 +173,7 @@
             </ion-view>
         </ion-tab>
 
-        <a class="tab-item tabLeft" ng-click="back()">
+        <a class="tab-item tabLeft" ng-click="moveToShop()">
             <i class="icon ion-chevron-left"></i>
         </a>
 

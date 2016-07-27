@@ -100,7 +100,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
 
   .state('ShopProductDetail', {
-    url: '/ShopProductDetail?name&type&price',
+    url: '/ShopProductDetail/:productId',
     templateUrl: 'templates/ShopProductDetail.html',
     controller: 'ShopProductDetailCtrl',
     cache:false

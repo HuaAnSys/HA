@@ -1,10 +1,10 @@
-<ion-view view-title="Shop">
+<ion-view view-title="Shop" id="shop">
     <ion-content>
         <div id="shopView">
             <div id="shopLeftNav">
                 <ion-list class="list">
-                    <ion-item class="item" ng-class="{active: navListType == navList.type}" ng-repeat="navList in navLists" ng-click="clickNav(navList.type);">
-                        <span>{{navList.name}}</span>
+                    <ion-item class="item" ng-class="{active: navListType == navList.productCategoryId}" ng-repeat="navList in navLists" ng-click="clickNav(navList.productCategoryId);">
+                        <span>{{navList.productCategoryName}}</span>
                     </ion-item>
                 </ion-list>
             </div>
@@ -14,10 +14,11 @@
                         <img src="{{ShopBanner[0].img}}" alt="" />
                     </div>
                 <ion-list class="list">
-                    <ion-item class="item" ng-repeat="product in products" ng-click="goProductDetail(product)">
+                    <ion-item class="item" ng-repeat="product in products" ng-click="goProductDetail(product.productId)">
                         <div class="productItem">
-                            <img src="{{product.img}}"/>
-                            <span>{{product.name}}</span>
+                            <img ng-src={{product.picName}}>
+                            <!--<img src="{{product.img}}"/>-->
+                            <span>{{product.productName}}</span>
                             <span class="productPrice">￥{{product.price}}</span>
                         </div>
                     </ion-item>

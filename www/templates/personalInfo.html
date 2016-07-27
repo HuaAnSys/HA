@@ -8,22 +8,19 @@
         <div style="height:{{picHeight}}">
             <div class="perImgW">
                 <img src="img/adam.jpg" class="perPhoImg"/>
-                <span class="perNameText">Scarlette Johansson</span>
+                <span class="perNameText">{{nickName}}</span>
             </div>
         </div>
         <ion-list class="perList">
             <div class="smallBlankLine"></div>
             <ion-item class="item item-icon-right" ng-click="editNickname()">
-                <span class="aboutText">Scarlette Johansson</span>
+                <span class="aboutText">{{nickName}}</span>
                 <span class="text-right">修改</span>
                 <i class="icon ion-chevron-right icon-right"></i>
             </ion-item>
             <div class="smallBlankLine"></div>
-            <ion-item class="item" >
-                <span class="aboutText">XX小区一期19号楼1单元12层2号</span>
-            </ion-item>
-            <ion-item class="item" >
-                <span class="aboutText">XX小区二期19号楼1单元12层2号</span>
+            <ion-item class="item" ng-repeat="house in houseInfos">
+                <span class="aboutText">{{house}}</span>
             </ion-item>
         </ion-list>
 

@@ -11,6 +11,14 @@ Messages = {
         getCommentByBulletinId:"获取社区评论失败",
         getlikeNumByBulletinId:"获取社区公告点赞数失败",
         likeCommunity : "为社区公告点赞失败",
-        addCommtsByBulletin : "为社区公告增加评论失败"
+        addCommtsByBulletin : "为社区公告增加评论失败",
+        getDomestic : "获取家政列表失败",
+        getPublishTheme : "获取我发表的主题失败",
+        getJoinTheme : "获取我参与的主题失败",
+        getShoppingCar : "获取我购物车失败",
+        getCategory : "获取商品类别失败",
+        getShopByType : "获取商品失败",
+        getShopProductDetail : "获取商品详细信息失败",
+        getHouse : "获取房屋信息失败"
 		
 };
