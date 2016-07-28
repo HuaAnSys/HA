@@ -92,13 +92,16 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('shoppingCarCtrl', function($scope, $state, $rootScope, $ionicPopup, commonService, shoppingCarService, $stateParams) {
+.controller('shoppingCarCtrl', function($scope, $state, $rootScope, $ionicPopup, commonService, shopService, $stateParams) {
     $scope.itemTotalNum = 0;
     $scope.totalPrice = 0;
+    var len = 0;
     commonService.showLoading();
-        var len = 0;
-    shoppingCarService.getShoppingCar($rootScope.userId).then(function(data){
+    shopService.getShoppingCar($rootScope.userId).then(function(data){
         if(data.length>0){
+            angular.forEach(data,function(shoppingCar){
+                shoppingCar.picName = BASE_URL +'pic/'+ shoppingCar.picName;
+            });
             $scope.shoppingCarList = data;
             len = $scope.shoppingCarList.length;
             commonService.hideLoading();
@@ -112,7 +115,7 @@ angular.module('starter.controllers', ['starter.services'])
         commonService.hideLoading();
         $('#shoppingCar .footer_hide').hide();
         $('#shoppingCar .notfound').show();
-        //$scope.showAlert(error);
+        $scope.showAlert(error);
     });
 
     $scope.checkItem = function(index){
@@ -138,10 +141,10 @@ angular.module('starter.controllers', ['starter.services'])
         }
         //change price
         if(checkStatue==false){
-            var total = shopingCartList[index].price*shopingCartList[index].amount;
+            var total = shopingCartList[index].price*shopingCartList[index].shoppingItem_num;
             $scope.totalPrice = $scope.totalPrice - total;
         }else{
-            var total = shopingCartList[index].price*shopingCartList[index].amount;
+            var total = shopingCartList[index].price*shopingCartList[index].shoppingItem_num;
             $scope.totalPrice = $scope.totalPrice + total;
         }
         //
@@ -178,7 +181,7 @@ angular.module('starter.controllers', ['starter.services'])
                 $scope.shoppingCarList[i].checked = shoppingCarCheckFlag;
             }
             if($scope.shoppingCarList[i].checked == true){
-                $scope.totalPrice += $scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+                $scope.totalPrice += $scope.shoppingCarList[i].price * $scope.shoppingCarList[i].shoppingItem_num;
             }else{
                 $scope.totalPrice = 0;
             }
@@ -242,7 +245,7 @@ angular.module('starter.controllers', ['starter.services'])
                 //change price
                 if(checkStatue==true){
                     console.log($scope.totalPrice);
-                    var total = shopingCartList[index].price*shopingCartList[index].amount;
+                    var total = shopingCartList[index].price*shopingCartList[index].shoppingItem_num;
                     $scope.totalPrice = $scope.totalPrice - total;
                 }
 
@@ -287,7 +290,7 @@ angular.module('starter.controllers', ['starter.services'])
         for(var i=0;i<length;i++){
             var obj = shoppingCarList[i];
             if(obj.checked==true){
-                totle = totle + obj.amount * obj.price;
+                totle = totle + obj.shoppingItem_num * obj.price;
             }
         }
         $scope.totalPrice = totle;
@@ -296,10 +299,10 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('paymentOrderCtrl', function($scope, $state, $rootScope, $ionicPopup, commonService, shoppingCarService, $stateParams) {
+.controller('paymentOrderCtrl', function($scope, $state, $rootScope, $ionicPopup, commonService, shopService, $stateParams) {
 
         commonService.showLoading();
-        shoppingCarService.getShoppingCar().then(function(data){
+        shopService.getShoppingCar().then(function(data){
             if(data.length>0){
                 $scope.shoppingCarList = data;
                 var shoppingCarListLength = $scope.shoppingCarList.length;
@@ -318,7 +321,7 @@ angular.module('starter.controllers', ['starter.services'])
             commonService.hideLoading();
             $('#paymentOrder .payContent').hide();
             $('#paymentOrder .notfound').show();
-            //$scope.showAlert(error);
+            $scope.showAlert(error);
         });
 
         $scope.cancelOrder = function(){
@@ -348,9 +351,9 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('myOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+.controller('myOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shopService, $stateParams) {
     commonService.showLoading();
-        shoppingCarService.getShoppingCar().then(function(data){
+        shopService.getShoppingCar().then(function(data){
             if(data.length>0){
                 $scope.shoppingCarList = data;
                 var shoppingCarListLength = $scope.shoppingCarList.length;
@@ -369,7 +372,7 @@ angular.module('starter.controllers', ['starter.services'])
             commonService.hideLoading();
             $('#myOrder .payContent').hide();
             $('#myOrder .notfound').show();
-            //$scope.showAlert(error);
+            $scope.showAlert(error);
         });
 
     $scope.deleteOrder = function(){
@@ -408,9 +411,9 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('allOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+.controller('allOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shopService, $stateParams) {
     commonService.showLoading();
-    shoppingCarService.getShoppingCar().then(function(data){
+    shopService.getShoppingCar().then(function(data){
         $scope.shoppingCarList = data;
         var shoppingCarListLength = $scope.shoppingCarList.length;
         $scope.totalPrice = 0;
@@ -456,7 +459,7 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 
-.controller('commentCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shoppingCarService, $stateParams) {
+.controller('commentCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shopService, $stateParams) {
     $scope.commentCheck = true;
     $scope.max = 5;
     $scope.ratingVal = 5;
@@ -471,7 +474,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.ratingVal = val;
     }
     commonService.showLoading();
-    shoppingCarService.getShoppingCar().then(function(data){
+    shopService.getShoppingCar().then(function(data){
         $scope.shoppingCarList = data;
         var shoppingCarListLength = $scope.shoppingCarList.length;
         $scope.totalPrice = 0;
@@ -569,7 +572,7 @@ angular.module('starter.controllers', ['starter.services'])
     };
 })
 
-.controller('publishThemeCtrl', function($scope, $state,  $rootScope, commonService, publishThemeService) {
+.controller('publishThemeCtrl', function($scope, $state,  $rootScope, commonService, personalInfoService) {
 
     $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
@@ -603,14 +606,17 @@ angular.module('starter.controllers', ['starter.services'])
         },
     ];
 
-    //commonService.showLoading();
-    //publishThemeService.getPublishTheme().then(function(data){
-    //    $scope.communityNews = data;
-    //    commonService.hideLoading();
-    //}, function(error){
-    //    commonService.hideLoading();
-    //    //$scope.showAlert(error);
-    //});
+    commonService.showLoading();
+    personalInfoService.getPublishTheme($rootScope.userId).then(function(data){
+        anjular.forEach(data, function(pro){
+            pro.picName = BASE_URL +'pic/'+ pro.picName;
+        });
+        $scope.communityNews = data;
+        commonService.hideLoading();
+    }, function(error){
+        commonService.hideLoading();
+        $scope.showAlert(error);
+    });
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');
@@ -618,7 +624,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('joinThemeCtrl', function($scope, $state, commonService, joinThemeService) {
+.controller('joinThemeCtrl', function($scope, $state, $rootScope, commonService, personalInfoService) {
 
     $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
@@ -652,14 +658,17 @@ angular.module('starter.controllers', ['starter.services'])
         },
     ];
 
-    //commonService.showLoading();
-    //joinThemeService.getJoinTheme().then(function(data){
-    //    $scope.communityNews = data;
-    //    commonService.hideLoading();
-    //}, function(error){
-    //    commonService.hideLoading();
-    //    //$scope.showAlert(error);
-    //});
+    commonService.showLoading();
+    personalInfoService.getJoinTheme($rootScope.userId).then(function(data){
+        angular.forEach(data,function(pro){
+            pro.picName = BASE_URL +'pic/'+ pro.picName;
+        });
+        $scope.communityNews = data;
+        commonService.hideLoading();
+    }, function(error){
+        commonService.hideLoading();
+        $scope.showAlert(error);
+    });
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');
@@ -681,7 +690,7 @@ angular.module('starter.controllers', ['starter.services'])
         commonService.hideLoading();
     }, function(error){
         commonService.hideLoading();
-        //$scope.showAlert(error);
+        $scope.showAlert(error);
     });
 
     $scope.editNickname = function(){
@@ -752,7 +761,7 @@ angular.module('starter.controllers', ['starter.services'])
           $rootScope.domesticTabTitle = '';
         }, function(error){
           commonService.hideLoading();
-          //$scope.showAlert(error);
+          $scope.showAlert(error);
         });
       }
       $scope.moveToNextPage = function(){
@@ -784,7 +793,7 @@ angular.module('starter.controllers', ['starter.services'])
               $rootScope.domesticTabTitle = '';
           }, function(error){
           commonService.hideLoading();
-          //$scope.showAlert(error);
+          $scope.showAlert(error);
         });
       };
 
@@ -1279,7 +1288,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
     
-.controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, commonService, shopService, ShopBannerService, ShopProductDetailService, $timeout) {
+.controller('ShopCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, commonService, shopService, homePageService, $timeout) {
     //$scope.navLists = [
     //    {
     //        name:"热门商品",
@@ -1323,22 +1332,53 @@ angular.module('starter.controllers', ['starter.services'])
     //    }
     //
     //];
+    $scope.slides = [];
+    $scope.hotProducts = [];
     var winWidth = $(window).width();
+    var slideHeight = document.body.scrollHeight-47;
+    $scope.slideHeight = slideHeight*0.2+"px";
+    var slideWidth = document.body.scrollWidth;
+    $scope.slideWidth = (slideWidth-88)+"px";
     $('.shopViewContent .list').css("width", winWidth-88);
+
+    getAdvsAndProducts();
+    function getAdvsAndProducts(){
+        commonService.showLoading();
+        homePageService.getAdvAndHot().then(function(data){
+            if(data==null||data.length == 0){
+                $scope.slides = [{url:"img/adv_demo.png"}];
+            }else{
+                var len = data.length;
+                for(var i=0;i<4&&i<len;i++){
+                    var advFlag = data[i].advisedProduct;
+                    if(advFlag=='Y'){
+                        var picUrl = BASE_URL +'pic/'+ data[i].picName;
+                        var adv = {'url':picUrl ,'productId':data[i].productId};
+                        $scope.slides.push(adv);
+                    }else{
+                        continue;
+                    }
+                }
+                angular.forEach(data,function(pro){
+                    pro.picName = BASE_URL +'pic/'+ pro.picName;
+                });
+                $scope.hotProducts = data;
+
+            }
+            commonService.hideLoading();
+        },function(error){
+            commonService.hideLoading();
+            $scope.slides = [{url:"img/adv_demo.png"}];
+            $scope.showAlert(error);
+        });
+    }
+
     commonService.showLoading();
     shopService.getType().then(function(data){
         $scope.navLists = data;
         commonService.hideLoading();
     }, function(error){
         commonService.hideLoading();
-        //$scope.showAlert(error);
-    });
-
-    ShopBannerService.getShopBanner().then(function(data){
-        $scope.ShopBanner = data;
-        //$ionicLoading.hide();
-    }, function(error){
-        //$ionicLoading.hide();
         //$scope.showAlert(error);
     });
 
@@ -1378,7 +1418,7 @@ angular.module('starter.controllers', ['starter.services'])
         $state.go('ShopProductDetail', {productId: productId});
     }
 })
-.controller('ShopProductDetailCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, commonService, ShopProductDetailService, $timeout, $ionicHistory) {
+.controller('ShopProductDetailCtrl', function($scope, $rootScope, $state, $stateParams, commonService, shopService, $timeout, $ionicHistory) {
     var productId = $stateParams.productId;
     $scope.moveToShop=function(){
         $state.go('tab.Shop');
@@ -1393,7 +1433,7 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.product = $stateParams;
     $scope.productDetail = function(productId){
         commonService.showLoading();
-        ShopProductDetailService.getShopProductDetail(productId).then(function(data){
+        shopService.getShopProductDetail(productId).then(function(data){
             data.picName = BASE_URL +'pic/'+ data.picName;
             data.kinds = JSON.parse(data.kinds);
             $scope.productDetailData = data;
@@ -1422,7 +1462,7 @@ angular.module('starter.controllers', ['starter.services'])
     };
 
 })
-    .controller('submitOrderCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+    .controller('submitOrderCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, shopService, $timeout, $ionicHistory) {
         $scope.back=function(){
             $ionicHistory.goBack();
         }
@@ -1440,7 +1480,7 @@ angular.module('starter.controllers', ['starter.services'])
         console.log($stateParams.price);
 
     })
-    .controller('choosePaymentTermsCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+    .controller('choosePaymentTermsCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, shopService, $timeout, $ionicHistory) {
         $scope.back=function(){
             $ionicHistory.goBack();
         }
@@ -1458,7 +1498,7 @@ angular.module('starter.controllers', ['starter.services'])
         console.log($stateParams.price);
 
     })
-    .controller('chooseBankCardCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+    .controller('chooseBankCardCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, shopService, $timeout, $ionicHistory) {
         $scope.back=function(){
             $ionicHistory.goBack();
         }
@@ -1476,7 +1516,7 @@ angular.module('starter.controllers', ['starter.services'])
         console.log($stateParams.price);
 
     })
-    .controller('PaymentTermsResultCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+    .controller('PaymentTermsResultCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, shopService, $timeout, $ionicHistory) {
         $scope.back=function(){
             $ionicHistory.goBack();
         }
@@ -1490,7 +1530,7 @@ angular.module('starter.controllers', ['starter.services'])
         console.log($stateParams.price);
 
     })
-    .controller('bankCardPasswordCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, ShopProductDetailService, $timeout, $ionicHistory) {
+    .controller('bankCardPasswordCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, shopService, $timeout, $ionicHistory) {
         $scope.back=function(){
             $ionicHistory.goBack();
         }

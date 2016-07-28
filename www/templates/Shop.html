@@ -10,9 +10,14 @@
             </div>
 
             <div class="shopViewContent">
-                <div id="shopBanner">
-                        <img src="{{ShopBanner[0].img}}" alt="" />
-                    </div>
+                <!--<div id="shopBanner">-->
+                        <!--<img src="{{ShopBanner[0].img}}" alt="" />-->
+                    <!--</div>-->
+                <ion-slide-box auto-play="true" slide-interval="2500">
+                    <ion-slide ng-repeat="slide in slides" ng-click="moreProduct()">
+                        <img src="{{slide.url}}" height="{{slideHeight}}" width="{{slideWidth}}"/>
+                    </ion-slide>
+                </ion-slide-box>
                 <ion-list class="list">
                     <ion-item class="item" ng-repeat="product in products" ng-click="goProductDetail(product.productId)">
                         <div class="productItem">

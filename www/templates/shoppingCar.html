@@ -17,23 +17,23 @@
                 </label>
                 <div class="shoppingItem">
                     <div class="shoppingImg">
-                        <img class="shopChangeImg"  src="{{shoppingCar.img}}"/>
+                        <img class="shopChangeImg"  src="{{shoppingCar.picName}}"/>
                     </div>
                     <div class="shopText">
                         <div class="shopTextP">
-                          <p>{{shoppingCar.name}}</p>
+                          <p>{{shoppingCar.productName}}</p>
                         </div>
                         <div class="shopTextSpan">
-                            <span>型号：</span><span>{{shoppingCar.type}}</span>
+                            <span>型号：</span><span>{{shoppingCar.shoppingItem_productKind}}</span>
                         </div>
                         <div class="shopTextPrice">
                             <span>{{shoppingCar.price | currency: "￥" }}</span>
                         </div>
                     </div>
                     <div class="shopAmount">
-                        <i class="icon ion-minus-round iconLeft" ng-click="shoppingCar.amount > 1 ? shoppingCar.amount = shoppingCar.amount - 1 : shoppingCar.amount = 1;changeProductNum()"></i>
-                        <input type="number" maxlength="28" ng-model="shoppingCar.amount" ng-change="changeProductNum()">
-                        <i class="icon ion-plus-round iconRight" ng-click="shoppingCar.amount =  shoppingCar.amount + 1;changeProductNum()"></i>
+                        <i class="icon ion-minus-round iconLeft" ng-click="shoppingCar.shoppingItem_num > 1 ? shoppingCar.shoppingItem_num = shoppingCar.shoppingItem_num - 1 : shoppingCar.shoppingItem_num = 1;changeProductNum()"></i>
+                        <input type="number" maxlength="28" ng-model="shoppingCar.shoppingItem_num" ng-change="changeProductNum()">
+                        <i class="icon ion-plus-round iconRight" ng-click="shoppingCar.shoppingItem_num =  shoppingCar.shoppingItem_num + 1;changeProductNum()"></i>
                     </div>
                     <div class="clear"></div>
                 </div>

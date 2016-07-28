@@ -39,14 +39,11 @@ angular.module('starter.services', [])
                 defer.reject(Messages.getHouse);
             });
             return defer.promise;
-        }
-    };
-}])
+        },
 
-.factory('publishThemeService', ['$http','$q',function($http, $q){
-    return {
-        getPublishTheme: function () {
-            var url = BASE_URL + "myPersonalInfo/getMyPostedTopic";
+        getPublishTheme: function (userId) {
+            var userID = userId;
+            var url = BASE_URL + "myPersonalInfo/getMyPostedTopic" + userID;
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function (result) {
@@ -57,14 +54,11 @@ angular.module('starter.services', [])
                 defer.reject(Messages.getPublishTheme);
             });
             return defer.promise;
-        }
-    };
-}])
+        },
 
-.factory('joinThemeService', ['$http','$q',function($http, $q){
-    return {
-        getJoinTheme: function () {
-            var url = BASE_URL + "myPersonalInfo/getMyParticipativeTopic";
+        getJoinTheme: function (userId) {
+            var userID = userId;
+            var url = BASE_URL + "myPersonalInfo/getMyParticipativeTopic" + userID;
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function (result) {
@@ -76,30 +70,8 @@ angular.module('starter.services', [])
             });
             return defer.promise;
         }
-};
-}])
-
-.factory('shoppingCarService', ['$http','$q',function($http, $q){
-    return {
-        getShoppingCar: function (userId) {
-            var userID = userId;
-            //var url = BASE_URL + "myPersonalInfo/getMyShoppingCart/"+ userID;
-            var defer =$q.defer();
-            var request = $http.get('js/shoppingCar.json');
-            //var request =$http.get(url);
-            request.success(function (result) {
-                console.log(result);
-                defer.resolve(result.data);
-                //defer.resolve(result);
-            });
-            request.error(function () {
-                defer.reject(Messages.getShoppingCar);
-            });
-            return defer.promise;
-        }
     };
 }])
-
 
 .factory('shopService', ['$http','$q',function($http, $q){
     return {
@@ -156,46 +128,94 @@ angular.module('starter.services', [])
                 defer.reject(Messages.getShopByType);
             });
             return defer.promise;
+        },
+
+        getShopProductDetail: function (productId) {
+            console.log(productId);
+            var url = BASE_URL + "shoppingmall/getProduct";
+            //var request = $http.get('js/ShopProductDetail.json');
+            var defer = $q.defer();
+            var param = {"productID": productId};
+            var request =$http.post(url,param);
+            request.success(function (result) {
+                console.log(result);
+                //defer.resolve(result.data);
+                defer.resolve(result[0]);
+            });
+            request.error(function () {
+                defer.reject(Messages.getShopProductDetail);
+            });
+            return defer.promise;
+        },
+
+        getShoppingCar: function (userId) {
+            var shoppingcart_userID = userId;
+            var url = BASE_URL + "myPersonalInfo/getMyShoppingCart/" + shoppingcart_userID;
+            var defer =$q.defer();
+            //var request = $http.get('js/shoppingCar.json');
+            var request =$http.get(url);
+            request.success(function (result) {
+                console.log(result);
+                defer.resolve(result);
+                //defer.resolve(result);
+            });
+            request.error(function () {
+                defer.reject(Messages.getShoppingCar);
+            });
+            return defer.promise;
+        },
+
+        getPaymentOrder: function (userId) {
+            var userID = userId;
+            //var url = BASE_URL + "myPersonalInfo/getMyPendingOrder/"+ userID;
+            var defer =$q.defer();
+            var request = $http.get('js/shoppingCar.json');
+            //var request =$http.get(url);
+            request.success(function (result) {
+                console.log(result);
+                defer.resolve(result.data);
+                //defer.resolve(result);
+            });
+            request.error(function () {
+                defer.reject(Messages.getPaymentOrder);
+            });
+            return defer.promise;
+        },
+
+        getMyOrder: function (userId) {
+            var userID = userId;
+            //var url = BASE_URL + "myPersonalInfo/getMyOrder/"+ userID;
+            var defer =$q.defer();
+            var request = $http.get('js/shoppingCar.json');
+            //var request =$http.get(url);
+            request.success(function (result) {
+                console.log(result);
+                defer.resolve(result.data);
+                //defer.resolve(result);
+            });
+            request.error(function () {
+                defer.reject(Messages.getMyOrder);
+            });
+            return defer.promise;
         }
     };
 }])
 
-.factory('ShopBannerService', ['$http','$q',function($http, $q){
-  return {
-    getShopBanner: function () {
-      var defer = $q.defer();
-      var request = $http.get('js/shopBanner.json');
-      request.success(function (result) {
-        defer.resolve(result.data);
-      });
-      request.error(function () {
-        defer.reject("Get draft list failed, please try again later.");
-      });
-      return defer.promise;
-    },
-  };
-}])
-.factory('ShopProductDetailService', ['$http','$q',function($http, $q){
- return {
-    getShopProductDetail: function (productId) {
-      console.log(productId);
-      var url = BASE_URL + "shoppingmall/getProduct";
-      //var request = $http.get('js/ShopProductDetail.json');
-      var defer = $q.defer();
-      var param = {"productID": productId};
-      var request =$http.post(url,param);
-      request.success(function (result) {
-          console.log(result);
-        //defer.resolve(result.data);
-        defer.resolve(result[0]);
-      });
-      request.error(function () {
-        defer.reject(Messages.getShopProductDetail);
-      });
-      return defer.promise;
-    }
-  };
-}])
+//.factory('ShopBannerService', ['$http','$q',function($http, $q){
+//  return {
+//    getShopBanner: function () {
+//      var defer = $q.defer();
+//      var request = $http.get('js/shopBanner.json');
+//      request.success(function (result) {
+//        defer.resolve(result.data);
+//      });
+//      request.error(function () {
+//        defer.reject("Get draft list failed, please try again later.");
+//      });
+//      return defer.promise;
+//    },
+//  };
+//}])
 
 .factory('commonService', function($ionicLoading,$ionicPopup){
 

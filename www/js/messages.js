@@ -19,6 +19,8 @@ Messages = {
         getCategory : "获取商品类别失败",
         getShopByType : "获取商品失败",
         getShopProductDetail : "获取商品详细信息失败",
-        getHouse : "获取房屋信息失败"
+        getHouse : "获取房屋信息失败",
+        getPaymentOrder : "获取代付款订单失败",
+        getMyOrder : "获取我的订单失败"
 		
 };
