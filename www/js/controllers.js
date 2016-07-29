@@ -1236,15 +1236,32 @@ angular.module('starter.controllers', ['starter.services'])
     }
 
      $scope.setLike = function(){
-        commonService.showLoading();
-        var userId = $rootScope.userId;
-        CommunityService.setLikeByCommunity($stateParams.detail.bulletin_id,userId,$scope.likeOrNot).then(function(data){
-            commonService.hideLoading();
-            getCommnetsAndLike();
-        },function(error){
-            $scope.showAlert(error);
-            commonService.hideLoading();
-        })
+         if($stateParams.tabIndex==0){
+             commonService.showLoading();
+             var userId = $rootScope.userId;
+             CommunityService.setLikeByCommunity($stateParams.detail.bulletin_id,userId,$scope.likeOrNot).then(function(data){
+                 commonService.hideLoading();
+                 getCommnetsAndLike();
+             },function(error){
+                 $scope.showAlert(error);
+                 commonService.hideLoading();
+             })
+         }else if($stateParams.tabIndex==1){
+             commonService.showLoading();
+             var userId = $rootScope.userId;
+             CommunityService.setLikeByDiscussion($stateParams.detail.id,userId,$scope.likeOrNot).then(function(data){
+                 commonService.hideLoading();
+                 getCommnetsAndLike();
+             },function(error){
+                 $scope.showAlert(error);
+                 commonService.hideLoading();
+             })
+         }else if($stateParams.tabIndex==2){
+
+         }else if($stateParams.tabIndex==3){
+
+         }
+
     }
 
     $scope.submitComment = function(){
