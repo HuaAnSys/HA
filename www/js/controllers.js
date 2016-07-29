@@ -576,42 +576,42 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
-    $scope.communityNews = [
-        {
-            "personIcon":"img/adam.jpg",
-            "name":"社区管理员",
-            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
-            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
-            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
-            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-            "descriptionImg":"img/adam.jpg"
-        },
-        {
-            "personIcon":"img/adam.jpg",
-            "name":"社区管理员",
-            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
-            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
-            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
-            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-            "descriptionImg":"img/adam.jpg"
-        },
-        {
-            "personIcon":"img/adam.jpg",
-            "name":"社区管理员",
-            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
-            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
-            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
-            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-            "descriptionImg":"img/adam.jpg"
-        },
-    ];
+    //$scope.communityNews = [
+    //    {
+    //        "personIcon":"img/adam.jpg",
+    //        "name":"社区管理员",
+    //        "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+    //        "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+    //        "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+    //        "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+    //        "descriptionImg":"img/adam.jpg"
+    //    },
+    //    {
+    //        "personIcon":"img/adam.jpg",
+    //        "name":"社区管理员",
+    //        "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+    //        "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+    //        "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+    //        "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+    //        "descriptionImg":"img/adam.jpg"
+    //    },
+    //    {
+    //        "personIcon":"img/adam.jpg",
+    //        "name":"社区管理员",
+    //        "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+    //        "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+    //        "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+    //        "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+    //        "descriptionImg":"img/adam.jpg"
+    //    },
+    //];
 
     commonService.showLoading();
     personalInfoService.getPublishTheme($rootScope.userId).then(function(data){
-        anjular.forEach(data, function(pro){
-            pro.picName = BASE_URL +'pic/'+ pro.picName;
+        angular.forEach(data,function(pubTheme){
+            pubTheme.picName = BASE_URL +'pic/'+ pubTheme.picName;
         });
-        $scope.communityNews = data;
+        $scope.pubThemes = data;
         commonService.hideLoading();
     }, function(error){
         commonService.hideLoading();
@@ -620,6 +620,31 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');
+    }
+
+    $scope.goMessageDetail = function(pubTheme){
+        var theme = [];
+        var index;
+        var message ={
+            bulletin_id : '',
+            content : '',
+            picName : '',
+            uploadTime : '',
+            uploaderName : '',
+            personIcon : ''
+        }
+        theme = pubTheme.postedType.split("-");
+        if(theme[1] == "activity"){
+            index = 2;
+        }else if(theme[1] == "discussion"){
+            index = 3;
+        }
+        message.bulletin_id = parseInt(theme[0]);
+        message.content = pubTheme.content;
+        message.picName = pubTheme.picName;
+        message.uploadTime = pubTheme.createTime;
+        message.uploaderName = $rootScope.nickName;
+        $state.go('communityDetail',{"detail":message,"tabIndex":index});
     }
 
 })
@@ -628,42 +653,42 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.message_picture_width = document.body.scrollWidth-30+"px";
 
-    $scope.communityNews = [
-        {
-            "personIcon":"img/adam.jpg",
-            "name":"社区管理员",
-            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
-            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
-            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
-            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-            "descriptionImg":"img/adam.jpg"
-        },
-        {
-            "personIcon":"img/adam.jpg",
-            "name":"社区管理员",
-            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
-            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
-            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
-            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-            "descriptionImg":"img/adam.jpg"
-        },
-        {
-            "personIcon":"img/adam.jpg",
-            "name":"社区管理员",
-            "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
-            "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
-            "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
-            "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
-            "descriptionImg":"img/adam.jpg"
-        },
-    ];
+    //$scope.communityNews = [
+    //    {
+    //        "personIcon":"img/adam.jpg",
+    //        "name":"社区管理员",
+    //        "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+    //        "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+    //        "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+    //        "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+    //        "descriptionImg":"img/adam.jpg"
+    //    },
+    //    {
+    //        "personIcon":"img/adam.jpg",
+    //        "name":"社区管理员",
+    //        "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+    //        "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+    //        "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+    //        "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+    //        "descriptionImg":"img/adam.jpg"
+    //    },
+    //    {
+    //        "personIcon":"img/adam.jpg",
+    //        "name":"社区管理员",
+    //        "detail":"五一到了，大家想好去哪玩了吗？想不想和邻居一起拼车出游呢？社区正在举办" +
+    //        "邻里拼车出游的活动：打算自驾出游有空位的邻居，可以发帖寻人平摊油钱；" +
+    //        "买不到车票的邻里也可以顺路搭车了；不想闲在家里的邻居还可以找人一起结伴玩~" +
+    //        "想参加的邻里，点击顶部活动照片就可以了解更多活动详情哦~",
+    //        "descriptionImg":"img/adam.jpg"
+    //    },
+    //];
 
     commonService.showLoading();
     personalInfoService.getJoinTheme($rootScope.userId).then(function(data){
-        angular.forEach(data,function(pro){
-            pro.picName = BASE_URL +'pic/'+ pro.picName;
+        angular.forEach(data,function(joinTheme){
+            joinTheme.picName = BASE_URL +'pic/'+ joinTheme.picName;
         });
-        $scope.communityNews = data;
+        $scope.joinThemes = data;
         commonService.hideLoading();
     }, function(error){
         commonService.hideLoading();
@@ -674,6 +699,30 @@ angular.module('starter.controllers', ['starter.services'])
         $state.go('tab.AboutMe');
     }
 
+    $scope.goMessageDetail = function(joinTheme){
+        var theme = [];
+        var index;
+        var message ={
+            bulletin_id : '',
+            content : '',
+            picName : '',
+            uploadTime : '',
+            uploaderName : '',
+            personIcon : ''
+        }
+        theme = joinTheme.postedType.split("-");
+        if(theme[1] == "activity"){
+            index = 2;
+        }else if(theme[1] == "discussion"){
+            index = 3;
+        }
+        message.bulletin_id = parseInt(theme[0]);
+        message.content = joinTheme.content;
+        message.picName = joinTheme.picName;
+        message.uploadTime = joinTheme.createTime;
+        message.uploaderName = $rootScope.nickName;
+        $state.go('communityDetail',{"detail":message,"tabIndex":index});
+    }
 })
 
 .controller('personalInfoCtrl', function($scope, $state, $rootScope, $stateParams, commonService, personalInfoService) {

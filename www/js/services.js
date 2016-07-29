@@ -1,5 +1,6 @@
 //var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
 var BASE_URL = "http://9.110.54.95:8080/HuanAnBackend/";
+//var BASE_URL = "http://9.110.52.31:8080/HuanAnBackend/";
 angular.module('starter.services', [])
 
 .factory('DomesticService', ['$http','$q',function($http, $q){
@@ -43,7 +44,7 @@ angular.module('starter.services', [])
 
         getPublishTheme: function (userId) {
             var userID = userId;
-            var url = BASE_URL + "myPersonalInfo/getMyPostedTopic" + userID;
+            var url = BASE_URL + "myPersonalInfo/getMyPostedTopic/" + userID;
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function (result) {
@@ -58,7 +59,7 @@ angular.module('starter.services', [])
 
         getJoinTheme: function (userId) {
             var userID = userId;
-            var url = BASE_URL + "myPersonalInfo/getMyParticipativeTopic" + userID;
+            var url = BASE_URL + "myPersonalInfo/getMyParticipativeTopic/" + userID;
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function (result) {
