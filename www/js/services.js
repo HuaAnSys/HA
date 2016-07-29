@@ -1,5 +1,7 @@
 //var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
 var BASE_URL = "http://9.110.55.112:8080/HuanAnBackend/";
+//var BASE_URL = "http://9.110.52.31:8080/HuanAnBackend/";
+
 angular.module('starter.services', [])
 
 .factory('DomesticService', ['$http','$q',function($http, $q){
@@ -43,7 +45,7 @@ angular.module('starter.services', [])
 
         getPublishTheme: function (userId) {
             var userID = userId;
-            var url = BASE_URL + "myPersonalInfo/getMyPostedTopic" + userID;
+            var url = BASE_URL + "myPersonalInfo/getMyPostedTopic/" + userID;
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function (result) {
@@ -58,7 +60,7 @@ angular.module('starter.services', [])
 
         getJoinTheme: function (userId) {
             var userID = userId;
-            var url = BASE_URL + "myPersonalInfo/getMyParticipativeTopic" + userID;
+            var url = BASE_URL + "myPersonalInfo/getMyParticipativeTopic/" + userID;
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function (result) {
@@ -371,7 +373,7 @@ angular.module('starter.services', [])
                 }
             });
             request.error(function(){
-                defer.reject("获取议事厅评论失败！");
+                defer.reject("获�?�议事厅评论失败�?");
             });
             return defer.promise;
         },
@@ -409,11 +411,11 @@ angular.module('starter.services', [])
                 if(status == "success"){
                     defer.resolve(data);
                 }else{
-                    defer.reject("为议事厅点赞失败！");
+                    defer.reject("为议事厅点赞失败�?");
                 }
             });
             request.error(function(){
-                defer.reject("为议事厅点赞失败！");
+                defer.reject("为议事厅点赞失败�?");
             });
             return defer.promise;
         },
