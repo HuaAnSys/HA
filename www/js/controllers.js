@@ -1266,15 +1266,28 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.submitComment = function(){
         var detail = $scope.hotComments;
-        commonService.showLoading();
-        CommunityService.addCommentsByCommunity($rootScope.userId,$stateParams.detail.bulletin_id,detail).then(function(data){
-            $scope.hotComments = "";
-            getCommnetsAndLike();
-            commonService.hideLoading();
-        },function(error){
-            $scope.showAlert(error);
-            commonService.hideLoading();
-        })
+        if($stateParams.tabIndex==0){
+            commonService.showLoading();
+            CommunityService.addCommentsByCommunity($rootScope.userId,$stateParams.detail.bulletin_id,detail).then(function(data){
+                $scope.hotComments = "";
+                getCommnetsAndLike();
+                commonService.hideLoading();
+            },function(error){
+                $scope.showAlert(error);
+                commonService.hideLoading();
+            })
+        }else if($stateParams.tabIndex==1){
+            commonService.showLoading();
+            CommunityService.addCommentsByDiscussion($rootScope.userId,$stateParams.detail.id,detail).then(function(data){
+                $scope.hotComments = "";
+                getCommnetsAndLike();
+                commonService.hideLoading();
+            },function(error){
+                $scope.showAlert(error);
+                commonService.hideLoading();
+            })
+        }
+
     }
 
 /*        $scope.commentsDetail = {

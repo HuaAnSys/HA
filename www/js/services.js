@@ -418,21 +418,25 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        addCommentsByDiscussion : function(discussionID){
+        addCommentsByDiscussion : function(userID,discussionID,detail){
             var url = BASE_URL + "discussionRoom/setDiscussionComment";
             var defer =$q.defer();
-            var param = {"discussionID":discussionID};
+            var param = {
+                "discussion_roomID":discussionID,
+                "commentDetail":detail,
+                "userID":userID
+            };
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
+                var status =data.result;
+                if(status == "success"){
                     defer.resolve(data.result);
                 }else{
-                    defer.reject();
+                    defer.reject("为议事厅增加评论失败！");
                 }
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject("为议事厅增加评论失败！");
             });
             return defer.promise;
         },
