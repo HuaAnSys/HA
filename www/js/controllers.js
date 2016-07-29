@@ -1197,6 +1197,7 @@ angular.module('starter.controllers', ['starter.services'])
         $scope.likeNum = 0;
         commonService.showLoading();
         if($stateParams.tabIndex==0){
+            $scope.pageName = "社区公告";
             CommunityService.getAllCommentsByCommunity($stateParams.detail.bulletin_id,$rootScope.userId).then(function(data){
 
                 $scope.comments = data.comments;
@@ -1216,6 +1217,7 @@ angular.module('starter.controllers', ['starter.services'])
                 $scope.showAlert(error);
             });
         }else if($stateParams.tabIndex==1){
+            $scope.pageName = "议事厅";
             CommunityService.getAllCommentsByDiscussion($stateParams.detail.id,$rootScope.userId).then(function(data){
                 $scope.comments = data.comments;
                 $scope.likeNum = data.likeNum;
@@ -1226,10 +1228,10 @@ angular.module('starter.controllers', ['starter.services'])
                 $scope.showAlert(error);
             });
         }else if($stateParams.tabIndex==2){
-
+            $scope.pageName = "征集令";
 
         }else{
-
+            $scope.pageName = "精彩回顾";
         }
     }
 
