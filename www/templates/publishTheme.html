@@ -6,14 +6,14 @@
     </ion-nav-bar>
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="new in communityNews">
-                <img src="{{new.descriptionImg}}" class="message_icon"/>
-                <span class="message_people">{{new.name}}</span>
-                <div class="message_content">{{new.detail}}</div>
-                <img src="{{new.descriptionImg}}" class="message_picture" width="{{message_picture_width}}"/>
-                <span class="messgae_time">2016-05-05 00:00</span>
-                <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail()"></span>
-                <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail()"></span>
+            <ion-item ng-repeat="pubTheme in pubThemes">
+                <img src="{{pubTheme.descriptionImg}}" class="message_icon"/>
+                <span class="message_people">{{nickName}}</span>
+                <div class="message_content">{{pubTheme.content}}</div>
+                <img src="{{pubTheme.picName}}" class="message_picture" width="{{message_picture_width}}"/>
+                <span class="messgae_time">{{pubTheme.createTime}}</span>
+                <span class="ion-ios-chatbubble-outline message_leaveMessage" ng-click="goMessageDetail(pubTheme)"></span>
+                <span class="ion-ios-heart-outline message_like" ng-click="goMessageDetail(pubTheme)"></span>
             </ion-item>
         </ion-list>
     </ion-content>
