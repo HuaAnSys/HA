@@ -1,5 +1,5 @@
 //var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
-var BASE_URL = "http://9.110.54.95:8080/HuanAnBackend/";
+var BASE_URL = "http://9.110.55.112:8080/HuanAnBackend/";
 angular.module('starter.services', [])
 
 .factory('DomesticService', ['$http','$q',function($http, $q){
@@ -354,21 +354,24 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        getAllCommentsByDiscussion : function(discussionID){
-            var url = "http://localhost:7080/HuanAnBackend/discussionRoom/getDiscussionComments";
+        getAllCommentsByDiscussion : function(discussionID,userID){
+            var url = BASE_URL + "discussionRoom/getDiscussionComments";
             var defer =$q.defer();
-            var param = {"discussionID":discussionID};
+            var param = {
+                "discussionID":discussionID,
+                "userID":userID
+            };
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
+                var status = data.status;
+                if(status == "success"){
+                    defer.resolve(data);
                 }else{
                     defer.reject();
                 }
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject("获取议事厅评论失败！");
             });
             return defer.promise;
         },
@@ -412,7 +415,7 @@ angular.module('starter.services', [])
         },
 
         addCommentsByDiscussion : function(discussionID){
-            var url = "http://localhost:7080/HuanAnBackend/discussionRoom/setDiscussionComment";
+            var url = BASE_URL + "discussionRoom/setDiscussionComment";
             var defer =$q.defer();
             var param = {"discussionID":discussionID};
             var request =$http.post(url,param);

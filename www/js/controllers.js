@@ -952,6 +952,7 @@ angular.module('starter.controllers', ['starter.services'])
                             value.personIcon = 'img/admin_img.jpg';
                             value.picName = BASE_URL +'pic/'+value.picName;
                             value.uploaderName = "数据库管理员";
+                            value.id = value.bulletin_id;
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
@@ -963,15 +964,13 @@ angular.module('starter.controllers', ['starter.services'])
                 });
             }else if(index==2){
                 CommunityService.getAllDiscussions().then(function(data){
-                    if(data.length == 0){
-
-                    }else{
-                        angular.forEach(data,function(value ,index){
-                            value.picName = BASE_URL +'pic/'+value.picName;
-                            $scope.bulletions.push(value);
-                        });
-                        $scope.bulletions = data;
-                    }
+                    angular.forEach(data,function(value ,index){
+                        value.picName = BASE_URL +'pic/'+value.picName;
+                        value.uploaderName = "张三";
+                        value.id = value.discussionRoomId;
+                        $scope.bulletions.push(value);
+                    });
+                    $scope.bulletions = data;
                     commonService.hideLoading();
                 },function(error){
                     commonService.hideLoading();
@@ -1100,9 +1099,9 @@ angular.module('starter.controllers', ['starter.services'])
 
         $scope.fileUpload = function(type) {
 
-/*            commonService.showLoading();
-            *//*            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";*//*
-            var uploadUrl = "http://9.110.47.10:8080/HuanAnBackend/actityAlarm/createNewActityAlarm";
+            commonService.showLoading();
+            /*            var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";*/
+            var uploadUrl = BASE_URL + "actityAlarm/createNewActityAlarm";
             var filePath = $scope.imageSrc;
             if(filePath == undefined){
                 filePath = "";
@@ -1110,7 +1109,7 @@ angular.module('starter.controllers', ['starter.services'])
             var options = new FileUploadOptions();
             var params = {
                 'content':$scope.comment.detail,
-                'userId' : '1'
+                'userId' : $rootScope.userId
             };
             options.params = params;
             document.addEventListener('deviceready', function () {
@@ -1129,7 +1128,7 @@ angular.module('starter.controllers', ['starter.services'])
                         console.log(progress.loaded+"---******--");
                     });
 
-            }, false);*/
+            }, false);
 
         }
 
@@ -1217,8 +1216,15 @@ angular.module('starter.controllers', ['starter.services'])
                 $scope.showAlert(error);
             });
         }else if($stateParams.tabIndex==1){
-
-
+            CommunityService.getAllCommentsByDiscussion($stateParams.detail.id,$rootScope.userId).then(function(data){
+                $scope.comments = data.comments;
+                $scope.likeNum = data.likeNum;
+                $scope.likeOrNot = data.likeOrNot;
+                commonService.hideLoading();
+            },function(error){
+                commonService.hideLoading();
+                $scope.showAlert(error);
+            });
         }else if($stateParams.tabIndex==2){
 
 
