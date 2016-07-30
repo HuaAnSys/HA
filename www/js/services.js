@@ -1,5 +1,5 @@
 //var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
-var BASE_URL = "http://9.110.55.112:8080/HuanAnBackend/";
+var BASE_URL = "http://192.168.1.33:8080/HuanAnBackend/";
 //var BASE_URL = "http://9.110.52.31:8080/HuanAnBackend/";
 
 angular.module('starter.services', [])
@@ -373,7 +373,7 @@ angular.module('starter.services', [])
                 }
             });
             request.error(function(){
-                defer.reject("获�?�议事厅评论失败�?");
+                defer.reject("获�?�议事厅评论失败�?");
             });
             return defer.promise;
         },
@@ -411,11 +411,11 @@ angular.module('starter.services', [])
                 if(status == "success"){
                     defer.resolve(data);
                 }else{
-                    defer.reject("为议事厅点赞失败�?");
+                    defer.reject("为议事厅点赞失败�?");
                 }
             });
             request.error(function(){
-                defer.reject("为议事厅点赞失败�?");
+                defer.reject("为议事厅点赞失败�?");
             });
             return defer.promise;
         },
@@ -443,7 +443,7 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        getAllCollections : function(){
+        getAllActivityAlarm : function(){
             var url = BASE_URL + "actityAlarm/getAllActityAlarm";
             var defer = $q.defer();
             var request = $http.post(url);

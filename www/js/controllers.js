@@ -1014,8 +1014,9 @@ angular.module('starter.controllers', ['starter.services'])
             }else if(index==2){
                 CommunityService.getAllDiscussions().then(function(data){
                     angular.forEach(data,function(value ,index){
+                        value.personIcon = BASE_URL +'pic/'+value.userPicName;
                         value.picName = BASE_URL +'pic/'+value.picName;
-                        value.uploaderName = "张三";
+                        value.uploaderName = value.nickName;
                         value.id = value.discussionRoomId;
                         $scope.bulletions.push(value);
                     });
@@ -1026,7 +1027,7 @@ angular.module('starter.controllers', ['starter.services'])
                     $scope.showAlert(error);
                 });
             }else if(index==3){
-                CommunityService.getAllCollections().then(function(data){
+                CommunityService.getAllActivityAlarm().then(function(data){
                     if(data.length == 0){
 
                     }else{
