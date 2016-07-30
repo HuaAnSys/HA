@@ -1035,6 +1035,7 @@ angular.module('starter.controllers', ['starter.services'])
                             value.personIcon = BASE_URL +'pic/'+value.userPicName;
                             value.picName = BASE_URL +'pic/'+value.picName;
                             value.uploaderName = value.nickName;
+                            value.id = value.alarm_id;
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
@@ -1253,6 +1254,9 @@ angular.module('starter.controllers', ['starter.services'])
             CommunityService.getAllCommentsByCommunity($stateParams.detail.bulletin_id,$rootScope.userId).then(function(data){
 
                 $scope.comments = data.comments;
+                angular.forEach(data.comments,function(comment,index){
+                    comment.personIcon = BASE_URL +'pic/'+comment.userPicName;
+                });
                 $scope.likeNum = data.likeNum;
                 $scope.likeOrNot = data.likeOrNot;
                 commonService.hideLoading();
@@ -1272,6 +1276,9 @@ angular.module('starter.controllers', ['starter.services'])
             $scope.pageName = "议事厅";
             CommunityService.getAllCommentsByDiscussion($stateParams.detail.id,$rootScope.userId).then(function(data){
                 $scope.comments = data.comments;
+                angular.forEach(data.comments,function(comment,index){
+                    comment.personIcon = BASE_URL +'pic/'+comment.userPicName;
+                });
                 $scope.likeNum = data.likeNum;
                 $scope.likeOrNot = data.likeOrNot;
                 commonService.hideLoading();
@@ -1281,6 +1288,18 @@ angular.module('starter.controllers', ['starter.services'])
             });
         }else if($stateParams.tabIndex==2){
             $scope.pageName = "征集令";
+            CommunityService.getCommentsLikeNumByActivity($stateParams.detail.id,$rootScope.userId).then(function(data){
+                $scope.comments = data.comments;
+                angular.forEach(data.comments,function(comment,index){
+                    comment.personIcon = BASE_URL +'pic/'+comment.userPicName;
+                });
+                $scope.likeNum = data.likeNum;
+                $scope.likeOrNot = data.likeOrNot;
+                commonService.hideLoading();
+            },function(error){
+                commonService.hideLoading();
+                $scope.showAlert(error);
+            });
 
         }else{
             $scope.pageName = "精彩回顾";
@@ -1309,7 +1328,15 @@ angular.module('starter.controllers', ['starter.services'])
                  commonService.hideLoading();
              })
          }else if($stateParams.tabIndex==2){
-
+             commonService.showLoading();
+             var userId = $rootScope.userId;
+             CommunityService.setLikeByActivity($stateParams.detail.id,userId,$scope.likeOrNot).then(function(data){
+                 commonService.hideLoading();
+                 getCommnetsAndLike();
+             },function(error){
+                 $scope.showAlert(error);
+                 commonService.hideLoading();
+             })
          }else if($stateParams.tabIndex==3){
 
          }
@@ -1331,6 +1358,16 @@ angular.module('starter.controllers', ['starter.services'])
         }else if($stateParams.tabIndex==1){
             commonService.showLoading();
             CommunityService.addCommentsByDiscussion($rootScope.userId,$stateParams.detail.id,detail).then(function(data){
+                $scope.hotComments = "";
+                getCommnetsAndLike();
+                commonService.hideLoading();
+            },function(error){
+                $scope.showAlert(error);
+                commonService.hideLoading();
+            })
+        }else if($stateParams.tabIndex==2){
+            commonService.showLoading();
+            CommunityService.addCommentsByActivity($rootScope.userId,$stateParams.detail.id,detail).then(function(data){
                 $scope.hotComments = "";
                 getCommnetsAndLike();
                 commonService.hideLoading();
