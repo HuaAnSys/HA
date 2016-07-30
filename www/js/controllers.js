@@ -1032,7 +1032,9 @@ angular.module('starter.controllers', ['starter.services'])
 
                     }else{
                         angular.forEach(data,function(value ,index){
+                            value.personIcon = BASE_URL +'pic/'+value.userPicName;
                             value.picName = BASE_URL +'pic/'+value.picName;
+                            value.uploaderName = value.nickName;
                             $scope.bulletions.push(value);
                         });
                         $scope.bulletions = data;
