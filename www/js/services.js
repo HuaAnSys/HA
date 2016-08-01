@@ -434,11 +434,11 @@ angular.module('starter.services', [])
                 if(status == "success"){
                     defer.resolve(data.result);
                 }else{
-                    defer.reject("为议事厅增加评论失败！");
+                    defer.reject("为议事厅增加评论失败�?");
                 }
             });
             request.error(function(){
-                defer.reject("为议事厅增加评论失败！");
+                defer.reject("为议事厅增加评论失败�?");
             });
             return defer.promise;
         },
