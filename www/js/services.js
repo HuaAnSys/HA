@@ -1,5 +1,5 @@
 //var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
-var BASE_URL = "http://9.110.55.112:8080/HuanAnBackend/";
+var BASE_URL = "http://192.168.1.33:8080/HuanAnBackend/";
 //var BASE_URL = "http://9.110.52.31:8080/HuanAnBackend/";
 
 angular.module('starter.services', [])
@@ -369,16 +369,16 @@ angular.module('starter.services', [])
                 if(status == "success"){
                     defer.resolve(data);
                 }else{
-                    defer.reject();
+                    defer.reject("获取议事厅评论失败!");
                 }
             });
             request.error(function(){
-                defer.reject("获�?�议事厅评论失败�?");
+                defer.reject("获取议事厅评论失败!");
             });
             return defer.promise;
         },
 
-        getLikeNumByDiscussion : function(discussionID){
+/*        getLikeNumByDiscussion : function(discussionID){
             var url = "http://localhost:7080/HuanAnBackend/discussionRoom/getDiscussionLike";
             var defer =$q.defer();
             var param = {"discussionID":discussionID};
@@ -395,7 +395,7 @@ angular.module('starter.services', [])
                 defer.reject("fail");
             });
             return defer.promise;
-        },
+        },*/
 
         setLikeByDiscussion : function(discussionID,userID,likeFlag){
             var url = BASE_URL + "discussionRoom/setDiscussionLike";
@@ -411,11 +411,11 @@ angular.module('starter.services', [])
                 if(status == "success"){
                     defer.resolve(data);
                 }else{
-                    defer.reject("为议事厅点赞失败�?");
+                    defer.reject("为议事厅点赞失败!");
                 }
             });
             request.error(function(){
-                defer.reject("为议事厅点赞失败�?");
+                defer.reject("为议事厅点赞失败!");
             });
             return defer.promise;
         },
@@ -443,7 +443,7 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        getAllCollections : function(){
+        getAllActivityAlarm : function(){
             var url = BASE_URL + "actityAlarm/getAllActityAlarm";
             var defer = $q.defer();
             var request = $http.post(url);
@@ -456,26 +456,29 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
-        getAllCommentsByCollection : function(actityAlarmID){
-            var url = "http://localhost:7080/HuanAnBackend/actityAlarm/getActityAlarmComments";
+        getCommentsLikeNumByActivity : function(actityAlarmID,userID){
+            var url = BASE_URL + "actityAlarm/getActityAlarmComments";
             var defer =$q.defer();
-            var param = {"actityAlarmID":actityAlarmID};
+            var param = {
+                "activityID":actityAlarmID,
+                "userID":userID
+            };
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
+                var status = data.status;
+                if(status == "success"){
+                    defer.resolve(data);
                 }else{
-                    defer.reject();
+                    defer.reject("获取征集令评论失败！");
                 }
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject("获取征集令评论失败！");
             });
             return defer.promise;
         },
 
-        getLikeNumByCollection : function(actityAlarmID){
+/*        getLikeNumByCollection : function(actityAlarmID){
             var url = "http://localhost:7080/HuanAnBackend/actityAlarm/getActityAlarmLike";
             var defer =$q.defer();
             var param = {"actityAlarmID":actityAlarmID};
@@ -492,42 +495,50 @@ angular.module('starter.services', [])
                 defer.reject("fail");
             });
             return defer.promise;
-        },
+        },*/
 
-        setLikeByCollection : function(actityAlarmID){
-            var url = "http://localhost:7080/HuanAnBackend/actityAlarm/setActityAlarmLike";
+        setLikeByActivity : function(actityAlarmID,userID,likeFlag){
+            var url = BASE_URL + "actityAlarm/setActityAlarmLike";
             var defer =$q.defer();
-            var param = {"actityAlarmID":actityAlarmID};
+            var param = {
+                "activityAlarmId":actityAlarmID,
+                "userID":userID,
+                "likeFlag":likeFlag
+            };
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
-                    defer.resolve(data.result);
+                var status =data.result;
+                if(status == "success"){
+                    defer.resolve(data);
                 }else{
-                    defer.reject();
+                    defer.reject("为征集令点赞失败!");
                 }
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject("为征集令点赞失败!");
             });
             return defer.promise;
         },
 
-        addCommentsByCollection : function(actityAlarmID){
-            var url = "http://localhost:7080/HuanAnBackend/actityAlarm/setActityAlarmComment";
+        addCommentsByActivity : function(userID,actityAlarmID,detail){
+            var url = BASE_URL + "actityAlarm/setActityAlarmComment";
             var defer =$q.defer();
-            var param = {"actityAlarmID":actityAlarmID};
+            var param = {
+                "activity_alarmID":actityAlarmID,
+                "commentDetail":detail,
+                "userID":userID
+            };
             var request =$http.post(url,param);
             request.success(function(data) {
-                var status =data.resultCode;
-                if(status == "1"){
+                var status =data.result;
+                if(status == "success"){
                     defer.resolve(data.result);
                 }else{
-                    defer.reject();
+                    defer.reject("为征集令增加评论失败！");
                 }
             });
             request.error(function(){
-                defer.reject("fail");
+                defer.reject("为征集令增加评论失败！");
             });
             return defer.promise;
         },

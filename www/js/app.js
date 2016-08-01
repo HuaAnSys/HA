@@ -150,7 +150,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       url: '/communityDetail:message',
       templateUrl: 'templates/communityDetail.html',
       controller: 'CommunityDetail',
-      params: {detail: null,tabIndex:null}
+      params: {detail: null,tabIndex:null},
+      cache:false
   })
 
   .state('addCommunity', {
@@ -303,7 +304,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: '/complaintDetails',
     templateUrl: 'templates/complaintDetails.html',
     controller: 'complaintDetailsCtrl',
-    params: {datas: null}
+    params: {datas: null},
+    cache:false
   })
   .state('shoppingCar', {
     url: '/shoppingCar',
