@@ -302,13 +302,16 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('paymentOrderCtrl', function($scope, $state, $rootScope, $ionicPopup, commonService, shopService, $stateParams) {
 
         commonService.showLoading();
-        shopService.getShoppingCar().then(function(data){
+        shopService.getPaymentOrder($rootScope.userId).then(function(data){
             if(data.length>0){
-                $scope.shoppingCarList = data;
-                var shoppingCarListLength = $scope.shoppingCarList.length;
+                angular.forEach(data,function(payOrder){
+                    payOrder.picName = BASE_URL +'pic/'+ payOrder.picName;
+                });
+                $scope.payOrderList = data;
+                var payOrderList = $scope.payOrderList.length;
                 $scope.totalPrice = 0;
-                for(var i=0;i<shoppingCarListLength;i++){
-                    $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+                for(var i=0;i<payOrderList;i++){
+                    $scope.totalPrice +=$scope.payOrderList[i].price * $scope.payOrderList[i].shoppingItem_num;
                 }
                 commonService.hideLoading();
             }else{
@@ -353,13 +356,16 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('myOrderCtrl', function($scope, $state, $rootScope,  $ionicPopup, commonService, shopService, $stateParams) {
     commonService.showLoading();
-        shopService.getShoppingCar().then(function(data){
+        shopService.getMyOrder($rootScope.userId).then(function(data){
             if(data.length>0){
-                $scope.shoppingCarList = data;
-                var shoppingCarListLength = $scope.shoppingCarList.length;
+                angular.forEach(data,function(myOrder){
+                    myOrder.picName = BASE_URL +'pic/'+ myOrder.picName;
+                });
+                $scope.myOrderList = data;
+                var myOrderList = $scope.myOrderList.length;
                 $scope.totalPrice = 0;
-                for(var i=0;i<shoppingCarListLength;i++){
-                    $scope.totalPrice +=$scope.shoppingCarList[i].price * $scope.shoppingCarList[i].amount;
+                for(var i=0;i<myOrderList;i++){
+                    $scope.totalPrice +=$scope.myOrderList[i].price * $scope.myOrderList[i].shoppingItem_num;
                 }
                 commonService.hideLoading();
             }else{
@@ -374,28 +380,6 @@ angular.module('starter.controllers', ['starter.services'])
             $('#myOrder .notfound').show();
             $scope.showAlert(error);
         });
-
-    $scope.deleteOrder = function(){
-        var confirmPopup = $ionicPopup.confirm({
-            title: '确认删除订单？',
-            buttons: [
-                { text: '取消' },
-                {
-                    text: '<b>确认</b>',
-                    type: 'button-positive',
-                    onTap: function() { return true; }
-                }
-            ]
-        });
-
-        confirmPopup.then(function(res) {
-            if(res) {
-                console.log('You are sure');
-            } else {
-                console.log('You are not sure');
-            }
-        });
-    }
 
     $scope.moveToAboutPage = function(){
         $state.go('tab.AboutMe');

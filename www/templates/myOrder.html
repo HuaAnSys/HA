@@ -14,21 +14,19 @@
             <div class="payTop">
                 <i class="icon ion-ios-box-outline payBox"></i>
                 <span class="payText">社区商城自营</span>
-                <i class="icon ion-chevron-right payRight" ></i>
-                <i class="icon ion-ios-trash-outline payTrash" ng-click="deleteOrder()"></i>
             </div>
             <ion-list>
-                <ion-item  ng-repeat="shoppingCar in shoppingCarList">
+                <ion-item  ng-repeat="myOrder in myOrderList">
                     <div class="shoppingItem">
                         <div class="shoppingImg">
-                            <img class="shopChangeImg" src="{{shoppingCar.img}}">
+                            <img class="shopChangeImg" src="{{myOrder.picName}}">
                         </div>
                         <div class="shopText">
                             <div class="shopTextP">
-                                <p>{{shoppingCar.name}}</p>
+                                <p>{{myOrder.productName}}</p>
                             </div>
                             <div class="shopTextSpan">
-                                <span>型号：</span><span>{{shoppingCar.type}}</span>
+                                <span>型号：</span><span>{{myOrder.shoppingItem_productKind}}</span>
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -36,7 +34,7 @@
                 </ion-item>
                 <div class="listBottom">
                     <div class="listBottomSpan">
-                        <span>共</span><span>{{shoppingCarList.length}}</span><span>件商品</span>  <span>实付款：</span> <span>{{totalPrice | currency:"￥"}}</span>
+                        <span>共</span><span>{{myOrderList.length}}</span><span>件商品</span>  <span>实付款：</span> <span>{{totalPrice | currency:"￥"}}</span>
                     </div>
                 </div>
             </ion-list>

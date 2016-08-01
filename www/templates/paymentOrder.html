@@ -18,17 +18,17 @@
                 <span class="payTextRight">等待付款</span>
             </div>
             <ion-list>
-               <ion-item  ng-repeat="shoppingCar in shoppingCarList">
+               <ion-item  ng-repeat="payOrder in payOrderList">
                    <div class="shoppingItem">
                        <div class="shoppingImg">
-                           <img class="shopChangeImg" src="{{shoppingCar.img}}">
+                           <img class="shopChangeImg" src="{{payOrder.picName}}">
                        </div>
                        <div class="shopText">
                            <div class="shopTextP">
-                               <p>{{shoppingCar.name}}</p>
+                               <p>{{payOrder.productName}}</p>
                            </div>
                            <div class="shopTextSpan">
-                               <span>型号：</span><span>{{shoppingCar.type}}</span>
+                               <span>型号：</span><span>{{payOrder.shoppingItem_productKind}}</span>
                            </div>
                        </div>
                        <div class="clear"></div>
@@ -37,7 +37,7 @@
 
                 <div class="listBottom">
                     <div class="listBottomSpan">
-                        <span>共</span><span>{{shoppingCarList.length}}</span><span>件商品</span> <span>实付款：</span> <span>{{totalPrice | currency:"￥"}}</span>
+                        <span>共</span><span>{{payOrderList.length}}</span><span>件商品</span> <span>实付款：</span> <span>{{totalPrice | currency:"￥"}}</span>
                     </div>
                 </div>
             </ion-list>

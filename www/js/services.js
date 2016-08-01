@@ -1,6 +1,6 @@
 //var BASE_URL = "http://9.112.87.121:8080/HuanAnBackend/";
-var BASE_URL = "http://192.168.1.33:8080/HuanAnBackend/";
-//var BASE_URL = "http://9.110.52.31:8080/HuanAnBackend/";
+//var BASE_URL = "http://192.168.1.33:8080/HuanAnBackend/";
+var BASE_URL = "http://9.110.52.31:8080/HuanAnBackend/";
 
 angular.module('starter.services', [])
 
@@ -168,15 +168,14 @@ angular.module('starter.services', [])
         },
 
         getPaymentOrder: function (userId) {
-            var userID = userId;
-            //var url = BASE_URL + "myPersonalInfo/getMyPendingOrder/"+ userID;
+            var shoppingcart_userID = userId;
+            var url = BASE_URL + "myPersonalInfo/getMyPendingOrder/"+ shoppingcart_userID;
             var defer =$q.defer();
-            var request = $http.get('js/shoppingCar.json');
-            //var request =$http.get(url);
+            //var request = $http.get('js/shoppingCar.json');
+            var request =$http.get(url);
             request.success(function (result) {
                 console.log(result);
-                defer.resolve(result.data);
-                //defer.resolve(result);
+                defer.resolve(result);
             });
             request.error(function () {
                 defer.reject(Messages.getPaymentOrder);
@@ -185,15 +184,14 @@ angular.module('starter.services', [])
         },
 
         getMyOrder: function (userId) {
-            var userID = userId;
-            //var url = BASE_URL + "myPersonalInfo/getMyOrder/"+ userID;
+            var shoppingcart_userID = userId;
+            var url = BASE_URL + "myPersonalInfo/getMyOrder/"+ shoppingcart_userID;
             var defer =$q.defer();
-            var request = $http.get('js/shoppingCar.json');
-            //var request =$http.get(url);
+            //var request = $http.get('js/shoppingCar.json');
+            var request =$http.get(url);
             request.success(function (result) {
                 console.log(result);
-                defer.resolve(result.data);
-                //defer.resolve(result);
+                defer.resolve(result);
             });
             request.error(function () {
                 defer.reject(Messages.getMyOrder);
@@ -369,11 +367,11 @@ angular.module('starter.services', [])
                 if(status == "success"){
                     defer.resolve(data);
                 }else{
-                    defer.reject("获取议事厅评论失败!");
+                    defer.reject("获�?�议事厅评论失败!");
                 }
             });
             request.error(function(){
-                defer.reject("获取议事厅评论失败!");
+                defer.reject("获�?�议事厅评论失败!");
             });
             return defer.promise;
         },
@@ -469,11 +467,11 @@ angular.module('starter.services', [])
                 if(status == "success"){
                     defer.resolve(data);
                 }else{
-                    defer.reject("获取征集令评论失败！");
+                    defer.reject("获�?��?集令评论失败�?");
                 }
             });
             request.error(function(){
-                defer.reject("获取征集令评论失败！");
+                defer.reject("获�?��?集令评论失败�?");
             });
             return defer.promise;
         },
@@ -511,11 +509,11 @@ angular.module('starter.services', [])
                 if(status == "success"){
                     defer.resolve(data);
                 }else{
-                    defer.reject("为征集令点赞失败!");
+                    defer.reject("为�?集令点赞失败!");
                 }
             });
             request.error(function(){
-                defer.reject("为征集令点赞失败!");
+                defer.reject("为�?集令点赞失败!");
             });
             return defer.promise;
         },
@@ -534,11 +532,11 @@ angular.module('starter.services', [])
                 if(status == "success"){
                     defer.resolve(data.result);
                 }else{
-                    defer.reject("为征集令增加评论失败！");
+                    defer.reject("为�?集令增加评论失败�?");
                 }
             });
             request.error(function(){
-                defer.reject("为征集令增加评论失败！");
+                defer.reject("为�?集令增加评论失败�?");
             });
             return defer.promise;
         },
