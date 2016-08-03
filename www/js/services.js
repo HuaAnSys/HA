@@ -167,6 +167,27 @@ angular.module('starter.services', [])
             return defer.promise;
         },
 
+        removeShoppingItem: function (shoppingItem_id) {
+            var shoppingItem_id = shoppingItem_id;
+            var url = BASE_URL + "shoppingmall/removeProductFromCart/" + shoppingItem_id;
+            var defer =$q.defer();
+            //var request = $http.get('js/shoppingCar.json');
+            var request =$http.delete(url);
+            request.success(function (result) {
+                if(result.result=="success"){
+                    defer.resolve(result);
+                    console.log("success");
+                }else{
+                    defer.reject(Messages.removeShoppingItem);
+                    console.log("fail");
+                }
+            });
+            request.error(function () {
+                defer.reject(Messages.removeShoppingItem);
+            });
+            return defer.promise;
+        },
+
         getPaymentOrder: function (userId) {
             var shoppingcart_userID = userId;
             var url = BASE_URL + "myPersonalInfo/getMyPendingOrder/"+ shoppingcart_userID;
@@ -179,6 +200,22 @@ angular.module('starter.services', [])
             });
             request.error(function () {
                 defer.reject(Messages.getPaymentOrder);
+            });
+            return defer.promise;
+        },
+
+        cancelPaymentOrder: function (userId,orderId) {
+            var userID = userId;
+            var orderID = orderId;
+            var url = BASE_URL + "myPersonalInfo/cancelMyPendingOrder/userID/" + userID + "/orderID/" + orderID;
+            var defer =$q.defer();
+            var request =$http.delete(url);
+            request.success(function (result) {
+                if(result.result=="success"){
+                    defer.resolve(result);
+                }else{
+                    defer.reject(Messages.cancelPaymentOrder);
+                }
             });
             return defer.promise;
         },

@@ -190,22 +190,7 @@ angular.module('starter.controllers', ['starter.services'])
         }
     };
 
-    //$scope.deleteItem = function(index){
-    //    shoppingCartService.deleteIntent(index).then(function(data){
-    //        $ionicLoading.hide();
-    //        var shoppingCarList = $scope.shoppingCarList.length;
-    //        for(var i=0;i<shoppingCarList;i++){
-    //            if($scope.shoppingCarList[i].cardCode == intentCode){
-    //                $scope.intentsList.splice(i,1);
-    //                break;
-    //            }
-    //        }
-    //    }, function(error){
-    //        $ionicLoading.hide();
-    //        $scope.showAlert(error);
-    //    });
-    //};
-    $scope.deleteItem = function(index){
+    $scope.deleteItem = function(index,shoppingItem_id){
         var confirmPopup = $ionicPopup.confirm({
             title: '确认要删除这个宝贝吗？',
             buttons: [
@@ -261,16 +246,29 @@ angular.module('starter.controllers', ['starter.services'])
                 }else if($scope.checkAll==true){
                     $scope.itemTotalNum = shoppingCarListLength - 1;
                 }
+                commonService.showLoading();
+                shopService.removeShoppingItem(shoppingItem_id).then(function(data){
+                    for(var i=0;i<$scope.shoppingCarList.length;i++){
+                        if($scope.shoppingCarList[i].shoppingItem_id == shoppingItem_id){
+                            $scope.shoppingCarList.splice(i,1);
+                            break;
+                        }
+                    }
+                    if(!$scope.shoppingCarList || $scope.shoppingCarList.length == 0){
+                        $('#shoppingCar .footer_hide').hide();
+                        $('#shoppingCar .notfound').show();
 
-                $scope.shoppingCarList.splice(index,1);
-
-                if(!$scope.shoppingCarList || $scope.shoppingCarList.length == 0){
+                    }else{
+                        $('#shoppingCar .footer_hide').show();
+                        $('#shoppingCar .notfound').hide();
+                    }
+                    commonService.hideLoading();
+                }, function(error){
+                    commonService.hideLoading();
                     $('#shoppingCar .footer_hide').hide();
                     $('#shoppingCar .notfound').show();
-                }else{
-                    $('#shoppingCar .footer_hide').show();
-                    $('#shoppingCar .notfound').hide();
-                }
+                    $scope.showAlert(error);
+                });
 
             } else {
                 console.log('You are not sure');
@@ -327,21 +325,33 @@ angular.module('starter.controllers', ['starter.services'])
             $scope.showAlert(error);
         });
 
-        $scope.cancelOrder = function(){
+        $scope.cancelOrder = function(orderId){
         var confirmPopup = $ionicPopup.confirm({
             title: '确认取消订单？',
             buttons: [
                 { text: '取消' },
                 {
                     text: '<b>确认</b>',
-                    type: 'button-positive'
+                    type: 'button-positive',
+                    onTap: function() { return true; }
                 }
             ]
         });
 
         confirmPopup.then(function(res) {
             if(res) {
-                console.log('You are sure');
+                commonService.showLoading();
+                shopService.cancelPaymentOrder($rootScope.userId,orderId).then(function(data){
+                    commonService.hideLoading();
+                    $('#paymentOrder .payContent').hide();
+                    $('#paymentOrder .notfound').show();
+
+                }, function(error){
+                    commonService.hideLoading();
+                    $('#paymentOrder .payContent').hide();
+                    $('#paymentOrder .notfound').show();
+                    $scope.showAlert(error);
+                });
             } else {
                 console.log('You are not sure');
             }

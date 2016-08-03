@@ -1566,6 +1566,7 @@ ion-view[view-title='购物车']{
 
 .shopChangeImg{
     width:100px;
+    height: 100px;
 }
 
 .shopText{
