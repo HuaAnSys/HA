@@ -1716,17 +1716,24 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单'], ion
     background-color: #EFEFF4;
 }
 
-#paymentOrder .item, #myOrder .item{
-    padding: 10px;
+#paymentOrder .itemOut{
+    padding: 0px;
     border-color: #fff;
-    background-color: #F9F9F9;;
-    margin: 0px 0px 1px;
+    /*background-color: #F9F9F9;*/
+    margin: 0px 0px 6px;
+}
+
+#paymentOrder .itemIn{
+    padding: 0px;
+    margin: 0 0 4px 0;
+    background-color: #F9F9F9;
+    border: none;
 }
 
 .payContent{
-    background-color: #fff;
+    background-color: #EFEFF4;
     margin-top: 10px;
-    border: 1px solid #C8C7CC;
+    /*border: 1px solid #C8C7CC;*/
 }
 
 .payTop{
@@ -1762,9 +1769,10 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单'], ion
     font-size: 14px;
 }
 
-#paymentOrder .shoppingItem, #myOrder .shoppingItem{
+#paymentOrder .shoppingItem{
     width:100%;
     min-width:320px;
+    padding: 5px;
 }
 
 #paymentOrder .shoppingImg, #myOrder .shoppingImg{
@@ -1791,6 +1799,28 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单'], ion
     color: #444;
 }
 
+
+#myOrder .item{
+    padding: 0px;
+    border-color: #fff;
+    /*background-color: #F9F9F9;*/
+    margin: 0px 0px 6px;
+}
+
+#myOrder .payContent{
+    background-color: #EFEFF4;
+    margin-top: 10px;
+    /*border: 1px solid #C8C7CC;*/
+}
+
+#myOrder .shoppingItem{
+    width:100%;
+    min-width:320px;
+    position: relative;
+    background-color: #F9F9F9;
+    padding: 5px;
+}
+
 .listBottom{
     height: 40px;
 }
@@ -1807,7 +1837,7 @@ ion-view[view-title='待付款订单'], ion-view[view-title='我的订单'], ion
 
 .payBottom{
     height: 40px;
-    border-style: solid none;
+    border-style: solid none none;
     border-width: 1px;
     border-color: #C8C7CC;
 }

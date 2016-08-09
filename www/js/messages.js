@@ -23,6 +23,7 @@ Messages = {
         getPaymentOrder : "获取代付款订单失败",
         getMyOrder : "获取我的订单失败",
         removeShoppingItem : "删除购物车商品失败",
-        cancelPaymentOrder : "取消代付款订单失败"
+        cancelPaymentOrder : "取消代付款订单失败",
+        updateUserInfo : "更改用户信息失败"
 		
 };

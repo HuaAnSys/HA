@@ -11,41 +11,46 @@
             </div>
         </div>
         <div class="payContent">
-            <div class="payTop">
-                <i class="icon ion-ios-box-outline payBox"></i>
-                <span class="payText">社区商城自营</span>
-                <i class="icon ion-chevron-right payRight" ></i>
-                <span class="payTextRight">等待付款</span>
-            </div>
             <ion-list>
-               <ion-item  ng-repeat="payOrder in payOrderList">
-                   <div class="shoppingItem">
-                       <div class="shoppingImg">
-                           <img class="shopChangeImg" src="{{payOrder.picName}}">
-                       </div>
-                       <div class="shopText">
-                           <div class="shopTextP">
-                               <p>{{payOrder.productName}}</p>
-                           </div>
-                           <div class="shopTextSpan">
-                               <span>型号：</span><span>{{payOrder.shoppingItem_productKind}}</span>
-                           </div>
-                       </div>
-                       <div class="clear"></div>
-                   </div>
-               </ion-item>
-
-                <div class="listBottom">
-                    <div class="listBottomSpan">
-                        <span>共</span><span>{{payOrderList.length}}</span><span>件商品</span> <span>实付款：</span> <span>{{totalPrice | currency:"￥"}}</span>
+                <ion-item class="itemOut" ng-repeat="payOrder in payOrderList">
+                    <div class="payTop">
+                        <i class="icon ion-ios-box-outline payBox"></i>
+                        <span class="payText">社区商城自营</span>
+                        <i class="icon ion-chevron-right payRight" ></i>
+                        <span class="payTextRight">等待付款</span>
                     </div>
-                </div>
-            </ion-list>
-            <div class="payBottom">
-                <button class="button buttonLeft" data-ng-click="cancelOrder(payOrderList[0].shoopingItem_order_id)">取消订单</button>
-                <button class="button buttonRight" data-ng-click="submit()">去支付</button>
+                    <ion-list>
+                        <ion-item class="itemIn" ng-repeat="payItem in payOrder">
+                            <div class="shoppingItem">
+                                <div class="shoppingImg">
+                                    <img class="shopChangeImg" src="{{payItem.picName}}">
+                                </div>
+                                <div class="shopText">
+                                    <div class="shopTextP">
+                                        <p>{{payItem.productName}}</p>
+                                    </div>
+                                    <div class="shopTextSpan">
+                                        <span>型号：</span><span>{{payItem.shoppingItem_productKind}}</span>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </ion-item>
 
-            </div>
+                        <div class="listBottom">
+                            <div class="listBottomSpan">
+                                <span>共</span><span>{{payOrder.length}}</span><span>件商品</span> <span>实付款：</span> <span>{{payOrder.totalPrice | currency:"￥"}}</span>
+                            </div>
+                        </div>
+                    </ion-list>
+                    <div class="payBottom">
+                        <button class="button buttonLeft" data-ng-click="cancelOrder(payOrder[0].shoopingItem_order_id)">取消订单</button>
+                        <button class="button buttonRight" data-ng-click="submit()">去支付</button>
+
+                    </div>
+                </ion-item>
+            </ion-list>
+
         </div>
 
     </ion-content>

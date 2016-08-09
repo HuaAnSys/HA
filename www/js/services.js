@@ -71,6 +71,27 @@ angular.module('starter.services', [])
                 defer.reject(Messages.getJoinTheme);
             });
             return defer.promise;
+        },
+
+        updateNickName: function(userId,nickName){
+            var userID = userId;
+            var param = {"nickName" : nickName};
+            var url = BASE_URL + "user/updateNickName/userId/" + userID;
+            var defer =$q.defer();
+            var request =$http.post(url,param);
+            request.success(function (result) {
+                if(result.result=="success"){
+                    defer.resolve(result);
+                    console.log("success");
+                }else{
+                    defer.reject(Messages.updateUserInfo);
+                    console.log("fail");
+                }
+            });
+            request.error(function () {
+                defer.reject(Messages.updateUserInfo);
+            });
+            return defer.promise;
         }
     };
 }])
@@ -82,6 +103,7 @@ angular.module('starter.services', [])
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function (result) {
+                console.log(result);
                 defer.resolve(result);
             });
             request.error(function () {
@@ -311,6 +333,7 @@ angular.module('starter.services', [])
             var defer =$q.defer();
             var request =$http.get(url);
             request.success(function(data) {
+                console.log(data);
                 if(data.status=='success'){
                     defer.resolve(data);
                 }else{

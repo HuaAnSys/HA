@@ -11,12 +11,13 @@
             </div>
         </div>
         <div class="payContent">
-            <div class="payTop">
-                <i class="icon ion-ios-box-outline payBox"></i>
-                <span class="payText">社区商城自营</span>
-            </div>
+
             <ion-list>
                 <ion-item  ng-repeat="myOrder in myOrderList">
+                    <div class="payTop">
+                        <i class="icon ion-ios-box-outline payBox"></i>
+                        <span class="payText">社区商城自营</span>
+                    </div>
                     <div class="shoppingItem">
                         <div class="shoppingImg">
                             <img class="shopChangeImg" src="{{myOrder.picName}}">
@@ -31,18 +32,20 @@
                         </div>
                         <div class="clear"></div>
                     </div>
-                </ion-item>
-                <div class="listBottom">
-                    <div class="listBottomSpan">
-                        <span>共</span><span>{{myOrderList.length}}</span><span>件商品</span>  <span>实付款：</span> <span>{{totalPrice | currency:"￥"}}</span>
+                    <div class="listBottom">
+                        <div class="listBottomSpan">
+                            <span>共</span><span>1</span><span>件商品</span>  <span>实付款：</span> <span>{{myOrder.totalPrice | currency:"￥"}}</span>
+                        </div>
                     </div>
-                </div>
-            </ion-list>
-            <div class="payBottom">
-                <button class="button buttonLeft" ng-click="comment()">评价</button>
-                <button class="button buttonRight" ng-click="buyAgain()">再次购买</button>
+                    <div class="payBottom">
+                        <button class="button buttonLeft" ng-click="comment()">评价</button>
+                        <button class="button buttonRight" ng-click="buyAgain()">再次购买</button>
 
-            </div>
+                    </div>
+                </ion-item>
+
+            </ion-list>
+
         </div>
 
     </ion-content>

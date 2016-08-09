@@ -40,8 +40,14 @@ angular.module('starter.controllers', ['starter.services'])
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.showAddImgFlag = false;
                 $scope.imageSrc = imageURI;
-                var uploadUrl = "http://9.110.54.253:8080/HuanAnBackend/upload/file";
+
+                commonService.showLoading();
+                var userID = $rootScope.userId;
+                var uploadUrl = BASE_URL + "/updateUserInfo/userId/" + userID;
                 var filePath = $scope.imageSrc;
+                if(filePath == undefined){
+                    filePath = "";
+                }
                 document.addEventListener('deviceready', function () {
                     $cordovaFileTransfer.upload(uploadUrl, filePath)
                         .then(function (result) {
@@ -298,34 +304,43 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 .controller('paymentOrderCtrl', function($scope, $state, $rootScope, $ionicPopup, commonService, shopService, $stateParams) {
-
+        $scope.payOrderList = [];
+        var payItemList = [];
         commonService.showLoading();
         shopService.getPaymentOrder($rootScope.userId).then(function(data){
-            if(data.length>0){
-                angular.forEach(data,function(payOrder){
-                    payOrder.picName = BASE_URL +'pic/'+ payOrder.picName;
-                });
+            var payListCount=0;
+            for(var key in data){
+                payListCount++;
+            }
+            if(payListCount>0){
                 $scope.payOrderList = data;
-                var payOrderList = $scope.payOrderList.length;
-                $scope.totalPrice = 0;
-                for(var i=0;i<payOrderList;i++){
-                    $scope.totalPrice +=$scope.payOrderList[i].price * $scope.payOrderList[i].shoppingItem_num;
+
+                for(var key in $scope.payOrderList){
+                    payItemList = $scope.payOrderList[key];
+                    angular.forEach(payItemList,function(payItem){
+                        payItem.picName = BASE_URL +'pic/'+ payItem.picName;
+                    });
+                    var totalPrice = 0;
+                    for(var i=0;i<payItemList.length;i++){
+                        totalPrice += payItemList[i].price * payItemList[i].shoppingItem_num;
+                    }
+                    $scope.payOrderList[key].totalPrice = totalPrice;
                 }
                 commonService.hideLoading();
+
             }else{
-                $('#paymentOrder .payContent').hide();
                 $('#paymentOrder .notfound').show();
                 commonService.hideLoading();
             }
 
         }, function(error){
             commonService.hideLoading();
-            $('#paymentOrder .payContent').hide();
             $('#paymentOrder .notfound').show();
             $scope.showAlert(error);
         });
 
         $scope.cancelOrder = function(orderId){
+            console.log(orderId);
         var confirmPopup = $ionicPopup.confirm({
             title: '确认取消订单？',
             buttons: [
@@ -343,12 +358,14 @@ angular.module('starter.controllers', ['starter.services'])
                 commonService.showLoading();
                 shopService.cancelPaymentOrder($rootScope.userId,orderId).then(function(data){
                     commonService.hideLoading();
-                    $('#paymentOrder .payContent').hide();
-                    $('#paymentOrder .notfound').show();
-
+                    if(!$scope.payOrderList || $scope.payOrderList.length == 0){
+                        $('#paymentOrder .notfound').show();
+                    }else{
+                        $('#paymentOrder .notfound').hide();
+                    }
+                    $state.reload();
                 }, function(error){
                     commonService.hideLoading();
-                    $('#paymentOrder .payContent').hide();
                     $('#paymentOrder .notfound').show();
                     $scope.showAlert(error);
                 });
@@ -373,9 +390,9 @@ angular.module('starter.controllers', ['starter.services'])
                 });
                 $scope.myOrderList = data;
                 var myOrderList = $scope.myOrderList.length;
-                $scope.totalPrice = 0;
                 for(var i=0;i<myOrderList;i++){
-                    $scope.totalPrice +=$scope.myOrderList[i].price * $scope.myOrderList[i].shoppingItem_num;
+                    $scope.myOrderList[i].totalPrice =$scope.myOrderList[i].price * $scope.myOrderList[i].shoppingItem_num;
+                console.log($scope.myOrderList[i].totalPrice);
                 }
                 commonService.hideLoading();
             }else{
@@ -746,7 +763,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('editNicknameCtrl', function($scope, $state, $rootScope, $stateParams) {
+.controller('editNicknameCtrl', function($scope, $state, $rootScope, $stateParams, personalInfoService, commonService) {
 
     $scope.nickName = $rootScope.nickName;
 
@@ -760,8 +777,6 @@ angular.module('starter.controllers', ['starter.services'])
     }
 
     function valid(){
-        $scope.nickName = $('.nickName').val();
-        console.log($scope.nickName);
         if($scope.nickName == '' || $scope.nickName == undefined){
             $scope.showAlert("用户名不能为空");
             return false;
@@ -772,7 +787,15 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.save = function(){
         if(valid()){
             console.log($scope.nickName);
-            $state.go('personalInfo');
+            commonService.showLoading();
+            personalInfoService.updateNickName($rootScope.userId, $scope.nickName).then(function(data){
+                $rootScope.nickName = $scope.nickName;
+                commonService.hideLoading();
+                $state.go('personalInfo');
+            }, function(error){
+                commonService.hideLoading();
+                $scope.showAlert(error);
+            });
         }
     }
 
